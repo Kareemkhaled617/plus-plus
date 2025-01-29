@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/screen/home_screen/widgets/product_item.dart';
+import 'package:plus/components/product_item.dart';
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
 

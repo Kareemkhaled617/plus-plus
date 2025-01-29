@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plus/screen/brands_screen/brands_screen.dart';
 import 'package:plus/utils/common_widgets.dart';
-
 import '../../generated/assets.dart';
 import '../home_screen/home_screen.dart';
 

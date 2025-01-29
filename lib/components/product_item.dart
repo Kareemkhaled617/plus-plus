@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/components/custom_button.dart';
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
+import 'package:plus/utils/size_config.dart';
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;
@@ -59,22 +59,30 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: AppFonts.heading1
-                            .copyWith(fontWeight: FontWeight.w600),
+                        style: AppFonts.heading1.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         stockInfo,
-                        style: AppFonts.bodyText
-                            .copyWith(fontSize: 18, color: AppColors.brown),
+                        style: AppFonts.bodyText.copyWith(
+                          fontSize: 12,
+                          color: AppColors.brown,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 50,
-                  ),
+                  SizedBox(width: getProportionateScreenWidth(20)),
                   Text(
                     price,
-                    style: AppFonts.heading1.copyWith(fontSize: 18),
+                    style: AppFonts.heading1.copyWith(fontSize: 14),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -90,8 +98,10 @@ class ProductCard extends StatelessWidget {
                   "Add To Cart".tr,
                   style: AppFonts.bodyText.copyWith(
                       color: AppColors.white,
-                      fontSize: 18,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,

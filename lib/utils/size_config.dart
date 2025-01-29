@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class SizeConfig {
@@ -11,8 +12,8 @@ class SizeConfig {
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
     orientation = _mediaQueryData.orientation;
-    print('width $screenWidth');
-    print('height $screenHeight');
+    log('width $screenWidth');
+    log('height $screenHeight');
   }
 }
 
@@ -26,3 +27,9 @@ double getProportionateScreenWidth(double inputWidth) {
 
   return (inputWidth / 375.0) * screenWidth;
 }
+
+double getResponsiveFontSize(double fontSize) {
+  double screenWidth = SizeConfig.screenWidth;
+  return (fontSize / 375.0) * screenWidth;
+}
+

@@ -12,4 +12,5 @@ class AppColors {
   static const yallowAccent = Color(0xFFFFC337);
   static const brown = Color(0xFFD0491F);
   static const white = Colors.white;
+  static const lightLavender = Color(0xffF6F5FF);
 }

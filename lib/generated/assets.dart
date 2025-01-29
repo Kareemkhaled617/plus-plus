@@ -11,5 +11,6 @@ class Assets {
   static const String tempBanner = 'assets/temp/banner.png';
   static const String tempDsd = 'assets/temp/dsd.png';
   static const String tempImg = 'assets/temp/img.png';
-
+  static const String iconsBack = 'assets/icons/back.png';
+  static const String iconsSearch = 'assets/icons/search.png';
 }

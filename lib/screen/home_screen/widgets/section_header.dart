@@ -23,10 +23,10 @@ class SectionHeader extends StatelessWidget {
           Row(
             children: [
               Text('Welcome sara ! ',
-                  style: AppFonts.headline1.copyWith(color: AppColors.white)),
+                  style: AppFonts.heading2.copyWith(color: AppColors.white)),
               Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                padding: EdgeInsets.symmetric(vertical: 6, ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: AppColors.white,

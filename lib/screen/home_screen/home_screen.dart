@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/screen/brands_screen/brands_screen.dart';
 import 'package:plus/screen/home_screen/widgets/best_seller.dart';
 import 'package:plus/screen/home_screen/widgets/category_item.dart';
 import 'package:plus/screen/home_screen/widgets/circular_image_slider.dart';
 import 'package:plus/screen/home_screen/widgets/prescription.dart';
-import 'package:plus/screen/home_screen/widgets/product_item.dart';
+import 'package:plus/components/product_item.dart';
 import 'package:plus/screen/home_screen/widgets/ready_for_winter.dart';
 import 'package:plus/screen/home_screen/widgets/section_header.dart';
 import 'package:plus/screen/home_screen/widgets/special_brands.dart';
+import 'package:plus/utils/common_widgets.dart';
 import '../../components/disclaimer_box.dart';
 import '../../generated/assets.dart';
 import '../../utils/app_colors.dart';
@@ -25,8 +27,9 @@ class HomeScreen extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(Assets.imagesBackground), fit: BoxFit.cover)),
+          image: DecorationImage(
+              image: AssetImage(Assets.imagesBackground), fit: BoxFit.cover),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -143,7 +146,10 @@ class HomeScreen extends StatelessWidget {
                               style: AppFonts.heading2,
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(
+                                    BrandsScreen());
+                              },
                               child: Text(
                                 'View all'.tr,
                                 style: AppFonts.heading2
@@ -154,22 +160,24 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10),
-                      SpecialBrand(categories: [
-                        {'title': 'Medicine', 'imageUrl': Assets.tempImg},
-                        {'title': 'Skin care', 'imageUrl': Assets.tempImg},
-                        {'title': 'Hair care', 'imageUrl': Assets.tempImg},
-                        {'title': 'Baby care', 'imageUrl': Assets.tempImg},
-                        {
-                          'title': 'Animals Supplies',
-                          'imageUrl': Assets.tempImg
-                        },
-                        {'title': 'Daily care', 'imageUrl': Assets.tempImg},
-                        {
-                          'title': 'Medicine Supplies',
-                          'imageUrl': Assets.tempImg
-                        },
-                        {'title': 'Make up', 'imageUrl': Assets.tempImg},
-                      ]),
+                      SpecialBrand(
+                        categories: [
+                          {'title': 'Medicine', 'imageUrl': Assets.tempImg},
+                          {'title': 'Skin care', 'imageUrl': Assets.tempImg},
+                          {'title': 'Hair care', 'imageUrl': Assets.tempImg},
+                          {'title': 'Baby care', 'imageUrl': Assets.tempImg},
+                          {
+                            'title': 'Animals Supplies',
+                            'imageUrl': Assets.tempImg
+                          },
+                          {'title': 'Daily care', 'imageUrl': Assets.tempImg},
+                          {
+                            'title': 'Medicine Supplies',
+                            'imageUrl': Assets.tempImg
+                          },
+                          {'title': 'Make up', 'imageUrl': Assets.tempImg},
+                        ],
+                      ),
                     ],
                   ),
                 ),

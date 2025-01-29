@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:plus/utils/app_colors.dart';
+import 'package:plus/utils/app_fonts.dart';
+import '../generated/assets.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String hintText;
@@ -24,7 +27,14 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
-        border: OutlineInputBorder(),
+        hintStyle: AppFonts.hintText,
+        filled: true,
+        fillColor: AppColors.lightLavender,
+        prefixIcon: Image.asset(Assets.iconsSearch),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none
+        ),
         contentPadding: EdgeInsets.symmetric(
           vertical: 15,
           horizontal: 10,
