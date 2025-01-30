@@ -26,7 +26,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -44,7 +44,7 @@ class ProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40,
+                height: 50,
               ),
               Image.asset(
                 imageUrl,
@@ -115,7 +115,7 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 0,
-            right: 0,
+            right: -14,
             child: IconButton(
               icon: Icon(Icons.favorite_border, color: Colors.red),
               onPressed: onFavorite,

@@ -2,18 +2,20 @@
 class Assets {
   Assets._();
 
+  static const String iconsBack = 'assets/icons/back.png';
   static const String iconsHi = 'assets/icons/hi.png';
+  static const String iconsPin = 'assets/icons/pin.png';
+  static const String iconsPrescription = 'assets/icons/prescription.png';
+  static const String iconsSearch = 'assets/icons/search.png';
   static const String iconsStar = 'assets/icons/star.png';
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesLocation = 'assets/images/location.png';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesPrescription = 'assets/images/prescription.png';
+  static const String imagesPrescriptionDone = 'assets/images/prescription_done.png';
   static const String tempBanner = 'assets/temp/banner.png';
   static const String tempDsd = 'assets/temp/dsd.png';
-  static const String tempImg = 'assets/temp/prescription.png';
-  static const String iconsBack = 'assets/icons/back.png';
-  static const String iconsSearch = 'assets/icons/search.png';
-  static const String iconsPrescription = 'assets/icons/prescription.png';
-  static const String iconsPin = 'assets/icons/pin.png';
-  static const String imagesPrescriptionDone = 'assets/images/prescription_done.png';
+  static const String tempImg = 'assets/temp/img.png';
+  static const String tempImg1 = 'assets/temp/img_1.png';
+
 }

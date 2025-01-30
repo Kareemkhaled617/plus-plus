@@ -32,14 +32,13 @@ class PrescriptionCompletedScreen extends StatelessWidget {
               height: 12,
             ),
             Text(
-            AppKeys.yourRequestHasBeenReceived.tr,
+              AppKeys.yourRequestHasBeenReceived.tr,
               style: AppFonts.bodyText.copyWith(fontSize: 12),
             ),
-
-            SizedBox(height: 120,),
-
+            SizedBox(
+              height: 120,
+            ),
             ElevatedButton(
-
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 padding: EdgeInsets.symmetric(horizontal: 15),

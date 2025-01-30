@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/components/custom_text_form_field.dart';
 import 'package:plus/screen/brands_screen/widgets/brands_list_item.dart';
+import 'package:plus/utils/app_colors.dart';
+import 'package:plus/utils/app_colors.dart';
 import '../../generated/assets.dart';
 import '../../utils/app_fonts.dart';
 
@@ -26,9 +28,9 @@ class BrandsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         title: Text(
           "Brands".tr,
           style: AppFonts.heading3,
@@ -39,7 +41,7 @@ class BrandsScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Column(
           children: [
             CustomTextFormField(
@@ -58,7 +60,7 @@ class BrandsScreen extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 20.0,
-                  crossAxisSpacing: 16.0,
+                  crossAxisSpacing: 30.0,
                   childAspectRatio: 1.3,
                 ),
                 itemCount: categories.length,
