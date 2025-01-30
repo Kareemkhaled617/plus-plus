@@ -28,7 +28,9 @@ class HomeScreen extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(Assets.imagesBackground), fit: BoxFit.cover),
+            image: AssetImage(Assets.imagesBackground),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,8 +149,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.to(
-                                    BrandsScreen());
+                                Get.to(BrandsScreen());
                               },
                               child: Text(
                                 'View all'.tr,

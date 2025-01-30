@@ -46,6 +46,7 @@ class BrandsScreen extends StatelessWidget {
               hintText: "Search for the brands".tr,
               controller: TextEditingController(),
               keyboardType: TextInputType.text,
+              prefixIcon: Image.asset(Assets.iconsSearch),
             ),
             SizedBox(
               height: 12,

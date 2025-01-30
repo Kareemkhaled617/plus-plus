@@ -17,7 +17,7 @@ class AppFonts {
   static const TextStyle hintText = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
-    color: AppColors.grey,
+    color: AppColors.greyWithShade,
   );
   static const TextStyle heading1 = TextStyle(
     fontSize: 22,

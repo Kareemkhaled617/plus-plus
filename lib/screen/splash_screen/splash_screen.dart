@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:plus/screen/brands_screen/brands_screen.dart';
+import 'package:plus/screen/home_screen/home_screen.dart';
+import 'package:plus/screen/home_screen/widgets/prescription.dart';
+import 'package:plus/screen/prescription_completed/prescription_completed_screen.dart';
+import 'package:plus/screen/prescription_screen/prescription_screen.dart';
+import 'package:plus/screen/search_screen/search_screen.dart';
 import 'package:plus/utils/common_widgets.dart';
 import '../../generated/assets.dart';
-import '../home_screen/home_screen.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -28,7 +32,7 @@ class SplashScreen extends StatelessWidget {
             Assets.imagesLogo,
           ),
           onEnd: () {
-            CommonWidgets.navigateWithFade(HomeScreen());
+            CommonWidgets.navigateWithFade(PrescriptionScreen());
           },
         ),
       ),

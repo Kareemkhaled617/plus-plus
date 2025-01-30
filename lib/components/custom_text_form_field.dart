@@ -9,6 +9,14 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
   final bool obscureText;
+  final bool isMaxLines;
+  final Color? fillColor;
+  final Function(String)? onFieldSubmitted;
+  final Function(String)? onChanged;
+  final Function()? onEditingComplete;
+  final FocusNode? focusNode;
+  final Widget? prefixIcon;
+  final TextStyle? hintStyle;
 
   const CustomTextFormField({
     required this.hintText,
@@ -17,6 +25,13 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     super.key,
+    this.onFieldSubmitted,
+    this.onEditingComplete,
+    this.focusNode,
+    this.onChanged,
+    this.isMaxLines = false,
+    this.fillColor,
+    this.prefixIcon, this.hintStyle ,
   });
 
   @override
@@ -25,15 +40,20 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,
+      focusNode: focusNode,
+      onChanged: onChanged,
+      maxLines: isMaxLines ? 4 : 1,
+      onEditingComplete: onEditingComplete,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: AppFonts.hintText,
+        hintStyle: hintStyle?? AppFonts.hintText,
         filled: true,
-        fillColor: AppColors.lightLavender,
-        prefixIcon: Image.asset(Assets.iconsSearch),
+        fillColor: fillColor ?? AppColors.lightLavender,
+        prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none
+          borderSide: BorderSide.none,
         ),
         contentPadding: EdgeInsets.symmetric(
           vertical: 15,
