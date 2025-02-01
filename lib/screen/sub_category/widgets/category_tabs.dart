@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_fonts.dart';
+
 class CategoryTabs extends StatelessWidget {
   const CategoryTabs({
     super.key,
@@ -26,28 +27,29 @@ class CategoryTabs extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           items.length,
-              (index) {
+          (index) {
             bool isSelected = index == selectedIndex;
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: ChoiceChip(
                 showCheckmark: false,
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 label: Text(
                   items[index],
                   style: AppFonts.heading3.copyWith(
                     fontSize: 14,
-                    color: isSelected ? AppColors.primary : Colors.black,
+                    color: isSelected ? AppColors.primary : Colors.grey.withOpacity(.6),
                   ),
                 ),
                 selected: isSelected,
                 selectedColor: selectedColor,
-                backgroundColor: backgroundColor,
+                backgroundColor: isSelected ? backgroundColor : AppColors.grey.withOpacity(.3),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                   side: BorderSide(
                     color: isSelected
                         ? AppColors.primary
-                        : AppColors.grey.withOpacity(0.3),
+                        : AppColors.grey.withOpacity(.1),
                   ),
                 ),
                 onSelected: (selected) => onSelected(index),

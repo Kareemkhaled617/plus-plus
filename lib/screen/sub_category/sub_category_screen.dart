@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus/screen/product_details_screen/product_details_screen.dart';
 import 'package:plus/screen/sub_category/widgets/category_tabs.dart';
 import 'package:plus/utils/app_colors.dart';
 
@@ -8,7 +10,9 @@ import '../../generated/assets.dart';
 import '../../utils/app_fonts.dart';
 
 class SubCategoryScreen extends StatefulWidget {
-  const SubCategoryScreen({super.key});
+  const SubCategoryScreen({super.key, required this.title});
+
+  final String title;
 
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
@@ -18,28 +22,26 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   int _selectedCategory = 0;
   int _selectedSubcategory = 0;
 
-  // Main Categories
   final List<String> categories = [
     "ALL",
     "Diapers and cosmetics",
     "Mother care"
   ];
 
-  // Subcategories for each category
   final Map<int, List<String>> subcategories = {
-    0: [], // For ALL
-    1: ["Diapers", "Lotions", "Powders"], // For "Diapers and cosmetics"
-    2: ["Feeding", "Bathing", "Clothing"], // For "Mother care"
+    0: [],
+    1: ["Diapers", "Lotions", "Powders"],
+    2: ["Feeding", "Bathing", "Clothing"],
   };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         title: Text(
-          "Baby Care",
+          widget.title,
           style: AppFonts.heading3,
         ),
         leading: AppBarBackButton(),
@@ -48,14 +50,13 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         padding: const EdgeInsets.only(top: 8.0),
         child: Column(
           children: [
-            // Categories Widget
             CategoryTabs(
               items: categories,
               selectedIndex: _selectedCategory,
               onSelected: (index) {
                 setState(() {
                   _selectedCategory = index;
-                  _selectedSubcategory = 0; // Reset subcategory on change
+                  _selectedSubcategory = 0;
                 });
               },
             ),
@@ -86,13 +87,22 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   ),
                   itemCount: 10, // Adjust count dynamically
                   itemBuilder: (context, index) {
-                    return ProductCard(
-                      imageUrl: Assets.tempDsd,
-                      title: "Evy Baby",
-                      stockInfo: "Suncream",
-                      price: "45 L.E",
-                      onAddToCart: () {},
-                      onFavorite: () {},
+                    return InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => ProductDetailsScreen(),
+                          transition: Transition.fadeIn,
+                          duration: const Duration(milliseconds: 500),
+                        );
+                      },
+                      child: ProductCard(
+                        imageUrl: Assets.tempDsd,
+                        title: "Evy Baby",
+                        stockInfo: "Suncream",
+                        price: "45 L.E",
+                        onAddToCart: () {},
+                        onFavorite: () {},
+                      ),
                     );
                   },
                 ),
