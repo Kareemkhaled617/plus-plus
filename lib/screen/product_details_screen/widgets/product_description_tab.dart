@@ -27,7 +27,7 @@ class ProductDescriptionTab extends StatelessWidget {
 
           Text(
             "Contributes to a range of functions within the body thanks to Chemist Direct Zinc! With 15 mg of Zinc to support fertility, vision, the immune system, and cognitive function. Suitable for vegetarians and vegans. Free from Nuts, Gluten, and Soya.",
-            style: TextStyle(fontSize: 12, color: AppColors.greyWithShade.withOpacity(.5)),
+            style: TextStyle(fontSize: 14, color: AppColors.greyWithShade.withOpacity(.5)),
           ),
           SizedBox(height: 16),
           Text(

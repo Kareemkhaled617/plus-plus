@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plus/screen/product_details_screen/widgets/product_benefit_item.dart';
 import 'package:plus/screen/product_details_screen/widgets/product_brand_item.dart';
 import 'package:plus/screen/product_details_screen/widgets/product_description_tab.dart';
@@ -37,18 +38,18 @@ class _ProductTabsState extends State<ProductDescriptionAndBrandSection>
               topRight: Radius.circular(8),
             ), // Optional rounded corners for the indicator(8),
           ),
+          dividerColor: AppColors.white,
           labelColor: AppColors.white,
           unselectedLabelColor: AppColors.black,
           indicatorSize: TabBarIndicatorSize.tab,
           tabs: [
-            Tab(text: "Product Description"),
-            Tab(text: "Brand"),
+            Tab(text: "Product Description".tr),
+            Tab(text: "Brand".tr),
           ],
         ),
         SizedBox(height: 16),
         SizedBox(
-          height: MediaQuery.of(context).size.height *
-              0.4, // Set height to prevent overflow
+          height: MediaQuery.of(context).size.height * 0.4,
           child: TabBarView(
             controller: _tabController,
             children: [
@@ -60,5 +61,4 @@ class _ProductTabsState extends State<ProductDescriptionAndBrandSection>
       ],
     );
   }
-
 }

@@ -1,49 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../components/custom_button.dart';
-import '../../components/custom_text_form_field.dart';
-import '../../utils/validators.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:plus/screen/home_screen/home_screen.dart';
+import 'package:plus/utils/app_colors.dart';
 
-class OtpScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _otpController = TextEditingController();
+import '../../utils/common_widgets.dart';
 
-  OtpScreen({super.key});
+class OTPVerificationScreen extends StatefulWidget {
+  const OTPVerificationScreen({super.key});
+
+  @override
+  _OTPVerificationScreenState createState() => _OTPVerificationScreenState();
+}
+
+class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
+  TextEditingController otpController = TextEditingController();
+  bool isButtonEnabled = false;
+  int countdown = 60;
+
+  @override
+  void initState() {
+    super.initState();
+    startCountdown();
+  }
+
+  void startCountdown() {
+    Future.delayed(Duration(seconds: 1), () {
+      if (countdown > 0) {
+        setState(() {
+          countdown--;
+        });
+        startCountdown();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Enter the OTP sent to your mobile".tr,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 50),
+            Text(
+              "Nice! let’s verify your mobile number".tr,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w900,
               ),
-              SizedBox(height: 20),
-              CustomTextFormField(
-                hintText: "Enter OTP".tr,
-                controller: _otpController,
+            ),
+            SizedBox(height: 10),
+            Text(
+              "   OTP Code Sent On Your Mobile Number.",
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.primary,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "+20123456789",
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(height: 30),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30),
+              child: PinCodeTextField(
+                length: 4,
+                obscureText: false,
+                animationType: AnimationType.fade,
+                controller: otpController,
                 keyboardType: TextInputType.number,
-                validator: Validators.validateOtp,
-              ),
-              SizedBox(height: 20),
-              CustomButton(
-                text: "Submit".tr,
-                onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    // Proceed with verification
-                  }
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(12),
+                  fieldHeight: 50,
+                  fieldWidth: 50,
+                  activeFillColor: Colors.white,
+                  inactiveColor: Colors.grey,
+                  selectedColor: Colors.blue,
+                ),
+                animationDuration: Duration(milliseconds: 300),
+                onChanged: (value) {
+                  setState(() {
+                    isButtonEnabled = value.length == 4;
+                  });
                 },
+                appContext: context,
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 30),
+            Center(
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        isButtonEnabled ? Colors.blueAccent : Colors.grey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: isButtonEnabled
+                      ? () {
+                          CommonWidgets.navigateWithFade(HomeScreen());
+                        }
+                      : null,
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                "00:${countdown.toString().padLeft(2, '0')}",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: GestureDetector(
+                onTap: countdown == 0 ? () {} : null,
+                child: Text(
+                  "Resend Activation Code".tr,
+                  style: TextStyle(
+                    color: countdown == 0 ? Colors.blueAccent : Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

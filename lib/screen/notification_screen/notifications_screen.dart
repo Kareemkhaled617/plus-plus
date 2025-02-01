@@ -70,7 +70,8 @@ class NotificationScreen extends StatelessWidget {
         leading: AppBarBackButton(),
         actions: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            margin: EdgeInsets.only(right: 20),
             decoration: BoxDecoration(
                 color: AppColors.deepRed,
                 borderRadius: BorderRadius.circular(4)),
@@ -88,14 +89,12 @@ class NotificationScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: ListView.builder(
           itemCount: notificationItems.length,
           itemBuilder: (context, index) {
             var item = notificationItems[index];
-
             if (item is String) {
-              // Render Date Header
               return NotificationHeaderSection(dataTime: item);
             } else {
               // Render Notification Item

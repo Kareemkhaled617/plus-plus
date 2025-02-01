@@ -61,7 +61,7 @@ class BrandsScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 20.0,
                   crossAxisSpacing: 30.0,
-                  childAspectRatio: 1.3,
+                  childAspectRatio: 1.2,
                 ),
                 itemCount: categories.length,
                 itemBuilder: (context, index) {

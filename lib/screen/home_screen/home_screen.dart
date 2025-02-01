@@ -21,33 +21,34 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.imagesBackground),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SectionHeader(),
-            SizedBox(
-              height: 20,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Assets.imagesBackground),
+              fit: BoxFit.cover,
             ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(46),
-                      topRight: Radius.circular(46)),
-                  color: AppColors.white,
+          ),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SectionHeader(),
+                SizedBox(
+                  height: 20,
                 ),
-                child: SingleChildScrollView(
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(46),
+                        topRight: Radius.circular(46)),
+                    color: AppColors.white,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,18 +72,19 @@ class HomeScreen extends StatelessWidget {
                             ' pharmacy and under its full medical supervision.',
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           'Categories'.tr,
                           textAlign: TextAlign.start,
-                          style: AppFonts.heading1,
+                          style: AppFonts.heading1.copyWith(
+                              fontSize: 20, fontWeight: FontWeight.w600),
                         ),
                       ),
                       SizedBox(
-                        height: 14,
+                        height: 20,
                       ),
                       CategoryGrid(categories: [
                         {'title': 'Medicine', 'imageUrl': Assets.tempDsd},
@@ -105,7 +107,8 @@ class HomeScreen extends StatelessWidget {
                         child: Text(
                           'Add your prescription here'.tr,
                           textAlign: TextAlign.start,
-                          style: AppFonts.heading1,
+                          style: AppFonts.heading2.copyWith(
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
                       ),
                       SizedBox(
@@ -113,18 +116,16 @@ class HomeScreen extends StatelessWidget {
                       ),
                       Prescription(),
                       SizedBox(
-                        height: 16,
+                        height: 20,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           'PLUS PLUS Offers'.tr,
                           textAlign: TextAlign.start,
-                          style: AppFonts.heading1,
+                          style: AppFonts.heading2.copyWith(
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
-                      ),
-                      SizedBox(
-                        height: 12,
                       ),
                       CircularImageSlider(
                         imageUrls: [
@@ -153,14 +154,14 @@ class HomeScreen extends StatelessWidget {
                               },
                               child: Text(
                                 'View all'.tr,
-                                style: AppFonts.heading2
-                                    .copyWith(color: AppColors.primary),
+                                style: AppFonts.heading2.copyWith(
+                                    color: AppColors.primary, fontSize: 16),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
                       SpecialBrand(
                         categories: [
                           {'title': 'Medicine', 'imageUrl': Assets.tempImg},
@@ -181,10 +182,31 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                )
+              ],
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: AppColors.white,
+          onPressed: () {},
+          label: Row(
+            children: [
+              Text(
+                'Contact us',
+                style: AppFonts.bodyText
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-            )
-          ],
+              SizedBox(
+                width: 10,
+              ),
+              Image(
+                image: AssetImage(Assets.iconsWhatsapp),
+                width: 50,
+                height: 50,
+              )
+            ],
+          ),
         ),
       ),
     );

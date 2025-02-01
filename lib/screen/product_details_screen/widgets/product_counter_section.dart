@@ -5,7 +5,9 @@ import '../../../utils/app_colors.dart';
 
 class ProductCounterSection extends StatefulWidget {
   const ProductCounterSection({super.key, this.plusIconSize = 20});
+
   final double? plusIconSize;
+
   @override
   State<ProductCounterSection> createState() => _ProductCounterSectionState();
 }
@@ -16,9 +18,11 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.lightLavender,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
+      elevation: 0,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -39,14 +43,14 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
             },
           ),
           SizedBox(
-            width: 15,
+            width: 20,
           ),
           Text(
             counter.toString(),
-            style: AppFonts.heading3,
+            style: AppFonts.heading2,
           ),
           SizedBox(
-            width: 12,
+            width: 20,
           ),
           InkWell(
             onTap: () {
@@ -59,6 +63,7 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
               radius: widget.plusIconSize,
               child: const Icon(
                 Icons.add,
+                size: 20,
                 color: AppColors.white,
               ),
             ),

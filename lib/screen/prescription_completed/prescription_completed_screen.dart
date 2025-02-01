@@ -12,7 +12,7 @@ class PrescriptionCompletedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 100),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 100),
         child: Column(
           children: [
             Image.asset(
@@ -26,6 +26,7 @@ class PrescriptionCompletedScreen extends StatelessWidget {
               "${AppKeys.thankYou.tr}, Khaled",
               style: AppFonts.heading3.copyWith(
                 color: AppColors.primary,
+                fontSize: 22
               ),
             ),
             SizedBox(
@@ -33,7 +34,7 @@ class PrescriptionCompletedScreen extends StatelessWidget {
             ),
             Text(
               AppKeys.yourRequestHasBeenReceived.tr,
-              style: AppFonts.bodyText.copyWith(fontSize: 12),
+              style: AppFonts.bodyText.copyWith(fontSize: 16),
             ),
             SizedBox(
               height: 120,

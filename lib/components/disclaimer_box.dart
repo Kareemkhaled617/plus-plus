@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
 
 class DisclaimerBox extends StatelessWidget {
@@ -21,9 +22,8 @@ class DisclaimerBox extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10.0),
       margin: EdgeInsets.symmetric(horizontal: 20),
-
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: AppColors.categoryBackground,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -38,17 +38,19 @@ class DisclaimerBox extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 text: message,
-                style: AppFonts.bodyText,
+                style: AppFonts.bodyText.copyWith(fontSize: 14),
                 children: [
                   TextSpan(
                     text: highlightedText,
                     style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.bold),
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
                     recognizer: TapGestureRecognizer()..onTap = onHighlightTap,
                   ),
                   TextSpan(
                     text: message1,
-                    style: AppFonts.bodyText,
+                    style: AppFonts.bodyText.copyWith(fontSize: 14),
                   ),
                 ],
               ),

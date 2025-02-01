@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/screen/products_screen/products_screen.dart';
+import 'package:plus/utils/app_colors.dart';
 
 class BrandsListItem extends StatelessWidget {
   const BrandsListItem({
@@ -14,11 +15,12 @@ class BrandsListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // To Navigate To Product Details Screen
-        Get.to(ProductsScreen(gradientColors: [
-          Color(0xffB0C5FF), // Light Blue
-          Color(0xFF4625F2).withOpacity(.6), // Dark Purple
-        ],));
+        Get.to(ProductsScreen(
+          gradientColors: [
+            AppColors.white,
+            AppColors.white,
+          ], title: 'Vaseline',
+        ));
       },
       child: Card(
         color: Colors.white,

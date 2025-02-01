@@ -8,7 +8,7 @@ class AuthController extends GetxController {
   }
 
   void sendCode() {
-    // Logic to send the verification code
+
   }
 
   void verifyOtp(String otp) {

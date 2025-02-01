@@ -6,6 +6,8 @@ import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
 
 import '../../../generated/assets.dart';
+import '../../product_details_screen/product_details_screen.dart';
+import '../../products_screen/products_screen.dart';
 
 class ReadyForWinter extends StatelessWidget {
   const ReadyForWinter({super.key});
@@ -14,16 +16,18 @@ class ReadyForWinter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
+      margin: EdgeInsets.only(left: 20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFFB2DFDB), // Mint Green
-            Color(0xFFE64A19).withOpacity(.3), // Burnt Orange
+            Color(0xFFB2DFDB),
+            Color(0xFFE64A19).withOpacity(.3),
           ],
         ),
-        borderRadius: BorderRadius.circular(20), // Optional rounded corners
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
       ),
       child: Column(
         children: [
@@ -32,10 +36,19 @@ class ReadyForWinter extends StatelessWidget {
             children: [
               Text(
                 'Ready for winter'.tr,
-                style: AppFonts.heading2.copyWith(color: AppColors.brown),
+                style: AppFonts.heading2
+                    .copyWith(color: AppColors.brown, fontSize: 18),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(ProductsScreen(
+                    gradientColors: [
+                      Color(0xFFB2DFDB),
+                      Color(0xFFE64A19).withOpacity(.3),
+                    ],
+                    title: 'Ready for winter',
+                  ));
+                },
                 child: Text(
                   'View all'.tr,
                   style: AppFonts.heading2.copyWith(color: AppColors.brown),
@@ -52,13 +65,22 @@ class ReadyForWinter extends StatelessWidget {
               children: [
                 ...List.generate(
                   7,
-                  (index) => ProductCard(
-                    imageUrl: Assets.tempDsd,
-                    title: "Evy Baby",
-                    stockInfo: "68 in stock",
-                    price: "45 L.E",
-                    onAddToCart: () {},
-                    onFavorite: () {},
+                  (index) => InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => ProductDetailsScreen(),
+                        transition: Transition.fadeIn,
+                        duration: const Duration(milliseconds: 500),
+                      );
+                    },
+                    child: ProductCard(
+                      imageUrl: Assets.tempDsd,
+                      title: "Evy Baby",
+                      stockInfo: "68 in stock",
+                      price: "45 L.E",
+                      onAddToCart: () {},
+                      onFavorite: () {},
+                    ),
                   ),
                 )
               ],

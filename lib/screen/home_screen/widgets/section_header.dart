@@ -19,17 +19,16 @@ class SectionHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 80,
+            height: 20,
           ),
           Row(
             children: [
               Text('Welcome sara ! ',
-                  style: AppFonts.heading2.copyWith(color: AppColors.white)),
+                  style: AppFonts.heading1
+                      .copyWith(color: AppColors.white, fontSize: 24)),
               Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 6,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: AppColors.white,
@@ -46,7 +45,7 @@ class SectionHeader extends StatelessWidget {
                     SizedBox(
                       width: 6,
                     ),
-                    Text('1.972 ', style: AppFonts.heading2),
+                    Text('1.972 ', style: AppFonts.bodyText),
                   ],
                 ),
               ),
@@ -58,7 +57,7 @@ class SectionHeader extends StatelessWidget {
                   Get.to(NotificationScreen());
                 },
                 child: Icon(
-                  Icons.notifications_active_outlined,
+                  Icons.notifications_none_rounded,
                   color: AppColors.white,
                   size: 30,
                 ),
@@ -79,8 +78,8 @@ class SectionHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("Cairo- Elgash street",
-                      style: AppFonts.heading1
-                          .copyWith(color: AppColors.white, fontSize: 20)),
+                      style: AppFonts.bodyText
+                          .copyWith(color: AppColors.white, fontSize: 20,fontWeight: FontWeight.w800)),
                   Text("We don’t deliver here !",
                       style: AppFonts.bodyText.copyWith(
                           color: AppColors.yellowAccent, fontSize: 18)),

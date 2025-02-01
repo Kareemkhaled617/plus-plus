@@ -28,12 +28,11 @@ class ProductDetailsHeader extends StatelessWidget {
             ),
           ],
         ),
-        // Discount percent
         Stack(
           children: [
             Icon(
               Icons.bookmark,
-              color: AppColors.deepRed,
+              color: AppColors.red,
               size: 35,
             ),
             Positioned(
@@ -56,7 +55,7 @@ class ProductDetailsHeader extends StatelessWidget {
           child: InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(50),

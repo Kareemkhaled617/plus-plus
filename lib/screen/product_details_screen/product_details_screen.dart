@@ -9,6 +9,7 @@ import 'package:plus/screen/product_details_screen/widgets/product_types_section
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
 import 'package:plus/utils/app_keys.dart';
+import 'package:plus/utils/size_config.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -35,7 +36,7 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
             Text(
               AppKeys.whatDoYouNeed.tr,
-              style: AppFonts.heading3.copyWith(fontSize: 14),
+              style: AppFonts.heading2.copyWith(fontSize: getResponsiveFontSize(15)),
             ),
             ProductTypesSection(),
             SizedBox(
@@ -50,15 +51,13 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
             ProductPriceSection(),
             SizedBox(
-              height: 16,
+              height: 20,
             ),
             ProductDescriptionAndBrandSection(),
             Align(
               alignment: Alignment.center,
               child: ElevatedButton.icon(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 label: Icon(
                   Icons.shopping_cart_outlined,
                   size: 26,
@@ -68,7 +67,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   AppKeys.addToCart.tr,
                   style: AppFonts.bodyText.copyWith(
                       color: AppColors.white,
-                      fontSize: 12,
+                      fontSize: getResponsiveFontSize(16),
                       fontWeight: FontWeight.w700),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

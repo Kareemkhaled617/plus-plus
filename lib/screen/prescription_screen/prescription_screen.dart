@@ -37,8 +37,7 @@ class PrescriptionScreen extends StatelessWidget {
                 SizedBox(height: 30),
                 UploadPrescriptionWidget(
                   onTap: () {
-                    /// TODO: Add image picker here to select image
-                    /// TODO: Create a bottom sheet to select image from gallery or camera
+
                   },
                 ),
                 SizedBox(height: 20),

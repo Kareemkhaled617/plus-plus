@@ -72,7 +72,7 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
                             border: Border.all(
                               color: selectedIndex == index
                                   ? AppColors.blue
-                                  : AppColors.greyWithShade.withOpacity(.3),
+                                  : AppColors.greyWithShade.withOpacity(0),
                               width: selectedIndex == index ? 2 : 1,
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -80,6 +80,7 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
                           child: Image.asset(
                             imageUrls[index],
                             height: 50,
+                            width: 50,
                           ),
                         ),
                       ),

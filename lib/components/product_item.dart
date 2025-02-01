@@ -25,18 +25,11 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
       margin: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-          ),
-        ],
       ),
       child: Stack(
         children: [
@@ -61,7 +54,7 @@ class ProductCard extends StatelessWidget {
                         title,
                         style: AppFonts.heading1.copyWith(
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                          fontSize: getResponsiveFontSize(16),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -69,7 +62,7 @@ class ProductCard extends StatelessWidget {
                       Text(
                         stockInfo,
                         style: AppFonts.bodyText.copyWith(
-                          fontSize: 12,
+                          fontSize: getResponsiveFontSize(13),
                           color: AppColors.brown,
                         ),
                         maxLines: 1,
@@ -77,10 +70,11 @@ class ProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: getProportionateScreenWidth(20)),
+                  SizedBox(width: getProportionateScreenWidth(40)),
                   Text(
                     price,
-                    style: AppFonts.heading1.copyWith(fontSize: 14),
+                    style: AppFonts.heading1
+                        .copyWith(fontSize: getResponsiveFontSize(15)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -98,7 +92,7 @@ class ProductCard extends StatelessWidget {
                   "Add To Cart".tr,
                   style: AppFonts.bodyText.copyWith(
                       color: AppColors.white,
-                      fontSize: 12,
+                      fontSize: getResponsiveFontSize(15),
                       fontWeight: FontWeight.w700),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

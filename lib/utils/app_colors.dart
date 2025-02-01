@@ -16,7 +16,8 @@ class AppColors {
   static const white = Colors.white;
   static const lightLavender = Color(0xffF6F5FF);
   static const blue = Colors.blue;
-static const babyBlue = Color(0xffB0C5FF);
+  static const babyBlue = Color(0xffB0C5FF);
+  static const categoryBackground = Color(0xFFF6F5FF);
   static const black = Colors.black;
 
 }

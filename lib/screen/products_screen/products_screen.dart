@@ -3,18 +3,22 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plus/components/app_bar_back_button.dart';
 import 'package:plus/screen/product_details_screen/product_details_screen.dart';
+import 'package:plus/utils/common_widgets.dart';
 import '../../generated/assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../components/product_item.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen(
-      {super.key, required this.gradientColors, this.category});
+      {super.key,
+      required this.gradientColors,
+      this.category,
+      required this.title});
 
-  /// Two Colors light and dark for Gradient Background
   final List<Color> gradientColors;
 
   final dynamic category;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,53 +27,47 @@ class ProductsScreen extends StatelessWidget {
         backgroundColor:
             gradientColors.isEmpty ? Colors.white : gradientColors[0],
         title: Text(
-          "Vaseline",
-          style: AppFonts.heading3,
+          title,
+          style: AppFonts.heading2,
         ),
         leading: AppBarBackButton(),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: gradientColors.isEmpty
-                    ? null
-                    : LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: gradientColors,
-                      ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8,
-                    childAspectRatio: .65,
-                  ),
-                  itemCount: 10, // Adjust count dynamically
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Get.to(ProductDetailsScreen());
-                      },
-                      child: ProductCard(
-                        imageUrl: Assets.tempDsd,
-                        title: "Evy Baby",
-                        stockInfo: "Suncream",
-                        price: "45 L.E",
-                        onAddToCart: () {},
-                        onFavorite: () {},
-                      ),
-                    );
-                  },
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: gradientColors.isEmpty
+              ? null
+              : LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: gradientColors,
                 ),
-              ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              childAspectRatio: .65,
             ),
+            itemCount: 10, // Adjust count dynamically
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  CommonWidgets.navigateWithFade(ProductDetailsScreen());
+                },
+                child: ProductCard(
+                  imageUrl: Assets.tempDsd,
+                  title: "Evy Baby",
+                  stockInfo: "Suncream",
+                  price: "45 L.E",
+                  onAddToCart: () {},
+                  onFavorite: () {},
+                ),
+              );
+            },
           ),
-        ],
+        ),
       ),
     );
   }

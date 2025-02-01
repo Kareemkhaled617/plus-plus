@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plus/utils/app_colors.dart';
+import 'package:plus/utils/app_fonts.dart';
 
 class CategoryGrid extends StatelessWidget {
   final List<Map<String, String>> categories;
@@ -12,17 +13,17 @@ class CategoryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 240,
+      height: 260,
       margin: EdgeInsets.symmetric(horizontal: 20),
-
       child: GridView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
+        physics: BouncingScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 20.0,
           crossAxisSpacing: 16.0,
-          childAspectRatio: 1.4,
+          childAspectRatio: 1.66,
         ),
         itemCount: categories.length,
         itemBuilder: (context, index) {
@@ -31,11 +32,11 @@ class CategoryGrid extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(.3),
-                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.categoryBackground,
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(14.0),
                   child:
                       Image.asset(category['imageUrl']!, fit: BoxFit.contain),
                 ),
@@ -43,11 +44,10 @@ class CategoryGrid extends StatelessWidget {
               SizedBox(height: 8),
               Text(
                 category['title']!,
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: AppFonts.bodyText.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary),
                 textAlign: TextAlign.center,
               ),
             ],
