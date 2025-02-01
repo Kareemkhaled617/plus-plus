@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus/screen/cart/cart_screen.dart';
 import 'package:plus/screen/home_screen/home_screen.dart';
 import 'package:plus/screen/home_screen/widgets/prescription.dart';
 import 'package:plus/screen/prescription_completed/prescription_completed_screen.dart';
@@ -32,7 +33,7 @@ class SplashScreen extends StatelessWidget {
             Assets.imagesLogo,
           ),
           onEnd: () {
-            CommonWidgets.navigateWithFade(PrescriptionScreen());
+            CommonWidgets.navigateWithFade(CartScreen());
           },
         ),
       ),

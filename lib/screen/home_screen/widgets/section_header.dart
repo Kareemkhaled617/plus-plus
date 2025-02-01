@@ -83,7 +83,7 @@ class SectionHeader extends StatelessWidget {
                           .copyWith(color: AppColors.white, fontSize: 20)),
                   Text("We don’t deliver here !",
                       style: AppFonts.bodyText.copyWith(
-                          color: AppColors.yallowAccent, fontSize: 18)),
+                          color: AppColors.yellowAccent, fontSize: 18)),
                 ],
               ),
             ],

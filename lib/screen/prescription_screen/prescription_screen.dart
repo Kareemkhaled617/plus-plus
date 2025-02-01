@@ -15,8 +15,9 @@ class PrescriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         title: Text(AppKeys.prescription.tr, style: AppFonts.heading3),
         leading: AppBarBackButton(),
       ),

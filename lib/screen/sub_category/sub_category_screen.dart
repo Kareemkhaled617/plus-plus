@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus/screen/sub_category/widgets/tabs_list_item.dart';
+import 'package:plus/screen/sub_category/widgets/category_tabs.dart';
 import 'package:plus/utils/app_colors.dart';
 
 import '../../components/app_bar_back_button.dart';
