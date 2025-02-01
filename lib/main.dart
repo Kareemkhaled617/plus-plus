@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/screen/splash_screen/splash_screen.dart';
+import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/size_config.dart';
 
 void main() {
@@ -16,6 +17,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Plus Plus',
+      theme: ThemeData(
+        primaryColor: AppColors.primary,
+        unselectedWidgetColor: AppColors.greyWithShade,
+      ),
       home: const SplashScreen(),
     );
   }

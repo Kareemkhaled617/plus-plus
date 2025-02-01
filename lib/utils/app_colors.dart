@@ -11,9 +11,12 @@ class AppColors {
   static const greyWithShade = Color(0xff7c7c7c);
   static const red = Color(0xFFFF5722);
   static const deepRed = Color(0xFFD0491F);
-  static const yallowAccent = Color(0xFFFFC337);
+  static const yellowAccent = Color(0xFFFFC337);
   static const brown = Color(0xFFD0491F);
   static const white = Colors.white;
   static const lightLavender = Color(0xffF6F5FF);
+  static const blue = Colors.blue;
+static const babyBlue = Color(0xffB0C5FF);
+  static const black = Colors.black;
 
 }
