@@ -9,7 +9,10 @@ import '../../notification_screen/notifications_screen.dart';
 class SectionHeader extends StatelessWidget {
   const SectionHeader({
     super.key,
+    this.isProfileSection = false,
   });
+
+  final bool isProfileSection;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +27,13 @@ class SectionHeader extends StatelessWidget {
           Row(
             children: [
               Text('Welcome sara ! ',
-                  style: AppFonts.heading1
-                      .copyWith(color: AppColors.white, fontSize: 24)),
+                  style: AppFonts.heading1.copyWith(
+                      color:
+                          isProfileSection ? AppColors.black : AppColors.white,
+                      fontSize: 21)),
               Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: AppColors.white,
@@ -45,7 +50,10 @@ class SectionHeader extends StatelessWidget {
                     SizedBox(
                       width: 6,
                     ),
-                    Text('1.972 ', style: AppFonts.bodyText),
+                    Text('1.972 ',
+                        style: AppFonts.bodyText.copyWith(
+                          color: AppColors.black,
+                        )),
                   ],
                 ),
               ),
@@ -58,7 +66,7 @@ class SectionHeader extends StatelessWidget {
                 },
                 child: Icon(
                   Icons.notifications_none_rounded,
-                  color: AppColors.white,
+                  color: isProfileSection ? AppColors.primary : AppColors.white,
                   size: 30,
                 ),
               )
@@ -69,7 +77,10 @@ class SectionHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.location_on_outlined, color: AppColors.white),
+              Icon(
+                Icons.location_on_outlined,
+                color: isProfileSection ? AppColors.black : AppColors.white,
+              ),
               SizedBox(
                 width: 10,
               ),
@@ -77,12 +88,23 @@ class SectionHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Cairo- Elgash street",
-                      style: AppFonts.bodyText
-                          .copyWith(color: AppColors.white, fontSize: 20,fontWeight: FontWeight.w800)),
-                  Text("We don’t deliver here !",
+                  Text(
+                    "Cairo- Elgash street",
+                    style: AppFonts.bodyText.copyWith(
+                        color: isProfileSection
+                            ? AppColors.black
+                            : AppColors.white,
+                        fontSize: isProfileSection ? 12 : 18,
+                        fontWeight: FontWeight.w800),
+                  ),
+                  if (!isProfileSection)
+                    Text(
+                      "We don’t deliver here !",
                       style: AppFonts.bodyText.copyWith(
-                          color: AppColors.yellowAccent, fontSize: 18)),
+                        color: AppColors.yellowAccent,
+                        fontSize: 16,
+                      ),
+                    ),
                 ],
               ),
             ],

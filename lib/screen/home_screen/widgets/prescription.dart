@@ -26,7 +26,7 @@ class Prescription extends StatelessWidget {
               'You can order the prescription by uploading a picture or listing your needs from the pharmacy'
                   .tr,
               style: AppFonts.bodyText
-                  .copyWith(color: AppColors.white, fontSize: 18),
+                  .copyWith(color: AppColors.white, fontSize: 14),
             ),
           ),
           SizedBox(

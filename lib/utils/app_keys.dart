@@ -44,4 +44,12 @@ class AppKeys {
   static var add = "Add";
   static const addCoupon = "Add the coupon";
 
+  static const offers = "Offers";
+  static const profile = "Profile";
+
+  static const favourite = "Favourite";
+  static const history = "History";
+
+
+
 }

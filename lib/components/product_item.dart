@@ -70,7 +70,7 @@ class ProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: getProportionateScreenWidth(40)),
+                  SizedBox(width: getProportionateScreenWidth(20)),
                   Text(
                     price,
                     style: AppFonts.heading1

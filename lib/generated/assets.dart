@@ -20,6 +20,22 @@ class Assets {
   static const String tempBanner = 'assets/temp/banner.png';
   static const String tempCream = 'assets/temp/cream.png';
   static const String tempDsd = 'assets/temp/dsd.png';
-  static const String tempImg = 'assets/temp/img_1.png';
-  static const String tempImg1 = 'assets/temp/img_1.png';
+  static const String tempImg = 'assets/temp/temp_img.png';
+  static const String tempImg1 = 'assets/temp/temp_img1.png';
+
+  static const iconsSelectedHome = 'assets/icons/selected_home.png';
+  static const iconsSelectedCart = 'assets/icons/selected_cart.png';
+  static const iconsSelectedProfile = 'assets/icons/selected_profile.png';
+  static const iconsSelectedOffers = 'assets/icons/selected_offers.png';
+
+  static const iconsUnSelectedSearch = 'assets/icons/unselected_search.png';
+  static const iconsSelectedSearch = 'assets/icons/selected_search.png';
+  static const iconsUnselectedHome = 'assets/icons/unselected_home.png';
+  static const iconsUnselectedCart = 'assets/icons/unselected_cart.png';
+  static const iconsUnselectedProfile = 'assets/icons/unselected_profile.png';
+  static const iconsUnselectedOffers = 'assets/icons/unselected_offers.png';
+  static const imagesFavouriteCardBg = 'assets/images/favourite_card_bg.png';
+  static const imagesHistoryCardBg = 'assets/images/history_card_bg.png';
+  static const iconsFacebook = "assets/icons/facebook.png";
+  static const iconsInstagram = "assets/icons/instagram.png";
 }

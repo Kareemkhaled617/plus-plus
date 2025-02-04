@@ -59,8 +59,8 @@ class CategoryGrid extends StatelessWidget {
                 Text(
                   category['title']!,
                   style: AppFonts.bodyText.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
                       color: AppColors.primary),
                   textAlign: TextAlign.center,
                 ),
