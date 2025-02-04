@@ -20,7 +20,7 @@ class AppKeys {
       "Your request has been received, and the medical team will contact you.";
 
   static const whatDoYouNeed = "Determine what you need ?";
-  static const price  = "Price";
+  static const price = "Price";
   static const productDescription = "Product Description";
   static const brand = "Brand";
   static const quantity = "Quantity";
@@ -28,7 +28,7 @@ class AppKeys {
   static const addToCart = "Add to cart";
   static const noProducts = "No Products";
   static const goFindProducts = "Go find the product you like !";
-  static var cart  = "Cart";
+  static var cart = "Cart";
   static const relatedProducts = "Related Products";
   static const viewAll = "View All";
 
@@ -49,7 +49,8 @@ class AppKeys {
 
   static const favourite = "Favourite";
   static const history = "History";
-
-
+  static const noFavouriteProducts = "There are No Favourite Products";
+  static const noOrdersPlaced = "No orders Placed yet ";
+  static const placeYourFirstOrder = "Place Your first order now";
 
 }

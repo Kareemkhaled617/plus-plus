@@ -28,9 +28,13 @@ class ProductCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
       margin: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.greyWithShade.withOpacity(.8),
+                spreadRadius: .1)
+          ]),
       child: Stack(
         children: [
           Column(

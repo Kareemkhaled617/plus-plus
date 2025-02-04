@@ -5,16 +5,21 @@ import '../../../utils/app_colors.dart';
 import '../../../utils/app_fonts.dart';
 
 class ProfileTotalActivitiesCard extends StatelessWidget {
-  const ProfileTotalActivitiesCard({super.key, required this.title, required this.image});
+  const ProfileTotalActivitiesCard(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.onTap});
+
   final String title;
-  final String image ;
+  final String image;
 
-
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Stack(
         children: [
           Container(

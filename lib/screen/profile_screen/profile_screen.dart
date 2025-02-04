@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/screen/history_screen/order_history_screen.dart';
 import 'package:plus/screen/home_screen/widgets/section_header.dart';
 import 'package:plus/screen/profile_screen/widget/profile_all_properties.dart';
-import 'package:plus/screen/profile_screen/widget/profile_property_card.dart';
 import 'package:plus/screen/profile_screen/widget/profile_total_activities_card.dart';
 import 'package:plus/utils/app_keys.dart';
 import '../../generated/assets.dart';
-import '../../utils/app_colors.dart';
 import '../../utils/app_fonts.dart';
+import '../favourite_screen/favourite_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -33,6 +33,11 @@ class ProfileScreen extends StatelessWidget {
                         child: ProfileTotalActivitiesCard(
                           title: AppKeys.favourite.tr,
                           image: Assets.imagesFavouriteCardBg,
+                          onTap: () {
+                            Get.to(
+                              () => const FavouriteScreen(),
+                            );
+                          },
                         ),
                       ),
                       SizedBox(width: 12),
@@ -40,6 +45,9 @@ class ProfileScreen extends StatelessWidget {
                         child: ProfileTotalActivitiesCard(
                           title: AppKeys.history.tr,
                           image: Assets.imagesHistoryCardBg,
+                          onTap: () {
+                            Get.to(OrderHistoryScreen());
+                          },
                         ),
                       ),
                     ],
@@ -58,32 +66,31 @@ class ProfileScreen extends StatelessWidget {
                       style: AppFonts.heading3,
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: Image.asset(
                           Assets.iconsFacebook,
                           width: 40,
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: Image.asset(
-                        Assets.iconsInstagram,
-                        width: 40,
-                      ),
+                          Assets.iconsInstagram,
+                          width: 40,
+                        ),
                       )
                     ],
                   ),
-                  SizedBox(height: 20,),
-
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             )

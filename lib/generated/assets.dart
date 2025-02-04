@@ -38,4 +38,6 @@ class Assets {
   static const imagesHistoryCardBg = 'assets/images/history_card_bg.png';
   static const iconsFacebook = "assets/icons/facebook.png";
   static const iconsInstagram = "assets/icons/instagram.png";
+  static const imagesEmptyFavourite = "assets/images/empty_favourite.png";
+  static const imagesEmptyHistory = "assets/images/empty_history.png";
 }
