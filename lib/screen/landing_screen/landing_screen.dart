@@ -36,6 +36,7 @@ class _LandingScreenState extends State<LandingScreen> {
         onTap: (value) {
           selectedIndex = value;
           setState(() {});
+
         },
         items: [
           BottomNavigationBarItem(
