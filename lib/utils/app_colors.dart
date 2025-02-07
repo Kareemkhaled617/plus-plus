@@ -19,5 +19,5 @@ class AppColors {
   static const babyBlue = Color(0xffB0C5FF);
   static const categoryBackground = Color(0xFFF6F5FF);
   static const black = Colors.black;
-
+  static const whiteSmoke = Color(0xffF3F3F3);
 }

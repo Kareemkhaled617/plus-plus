@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:plus/screen/landing_screen/landing_screen.dart';
 import 'package:plus/utils/common_widgets.dart';
 import '../../generated/assets.dart';
-import '../login_screen/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
             Assets.imagesLogo,
           ),
           onEnd: () {
-            CommonWidgets.navigateWithFade(LoginScreen());
+            CommonWidgets.navigateWithFade(const LandingScreen());
           },
         ),
       ),

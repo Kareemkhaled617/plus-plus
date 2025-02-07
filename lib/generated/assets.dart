@@ -2,43 +2,42 @@
 class Assets {
   Assets._();
 
-  static const String assetsTempImg1 = 'assets/temp/img_1.png';
   static const String iconsBack = 'assets/icons/back.png';
-  static const String iconsFacebook = 'assets/icons/facebook.png';
   static const String iconsHi = 'assets/icons/hi.png';
-  static const String iconsInstagram = 'assets/icons/instagram.png';
+  static const String iconsWhatsapp = 'assets/icons/whatsapp.png';
   static const String iconsPin = 'assets/icons/pin.png';
   static const String iconsPrescription = 'assets/icons/prescription.png';
   static const String iconsSearch = 'assets/icons/search.png';
-  static const String iconsSelectedCart = 'assets/icons/selected_cart.png';
-  static const String iconsSelectedHome = 'assets/icons/selected_home.png';
-  static const String iconsSelectedOffers = 'assets/icons/selected_offers.png';
-  static const String iconsSelectedProfile = 'assets/icons/selected_profile.png';
-  static const String iconsSelectedSearch = 'assets/icons/selected_search.png';
   static const String iconsShare = 'assets/icons/share.png';
   static const String iconsStar = 'assets/icons/star.png';
-  static const String iconsUnselectedCart = 'assets/icons/unselected_cart.png';
-  static const String iconsUnselectedHome = 'assets/icons/unselected_home.png';
-  static const String iconsUnselectedOffers = 'assets/icons/unselected_offers.png';
-  static const String iconsUnselectedProfile = 'assets/icons/unselected_profile.png';
-  static const String iconsUnselectedSearch = 'assets/icons/unselected_search.png';
-  static const String iconsWhatsapp = 'assets/icons/whatsapp.png';
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesCart = 'assets/images/cart.png';
-  static const String imagesEmptyFavourite = 'assets/images/empty_favourite.png';
-  static const String imagesEmptyHistory = 'assets/images/empty_history.png';
-  static const String imagesFavouriteCardBg = 'assets/images/favourite_card_bg.png';
-  static const String imagesHistoryCardBg = 'assets/images/history_card_bg.png';
   static const String imagesLocation = 'assets/images/location.png';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesPrescription = 'assets/images/prescription.png';
-  static const String imagesPrescriptionDone = 'assets/images/prescription_done.png';
+  static const String imagesPrescriptionDone =
+      'assets/images/prescription_done.png';
   static const String tempBanner = 'assets/temp/banner.png';
   static const String tempCream = 'assets/temp/cream.png';
   static const String tempDsd = 'assets/temp/dsd.png';
-  static const String tempImg = 'assets/temp/img.png';
-  static const String tempImg1 = 'assets/temp/img_1.png';
-  static const String tempTempImg = 'assets/temp/temp_img.png';
-  static const String tempTempImg1 = 'assets/temp/temp_img_1.png';
+  static const String tempImg = 'assets/temp/temp_img.png';
+  static const String tempImg1 = 'assets/temp/temp_img1.png';
 
+  static const iconsSelectedHome = 'assets/icons/selected_home.png';
+  static const iconsSelectedCart = 'assets/icons/selected_cart.png';
+  static const iconsSelectedProfile = 'assets/icons/selected_profile.png';
+  static const iconsSelectedOffers = 'assets/icons/selected_offers.png';
+
+  static const iconsUnSelectedSearch = 'assets/icons/unselected_search.png';
+  static const iconsSelectedSearch = 'assets/icons/selected_search.png';
+  static const iconsUnselectedHome = 'assets/icons/unselected_home.png';
+  static const iconsUnselectedCart = 'assets/icons/unselected_cart.png';
+  static const iconsUnselectedProfile = 'assets/icons/unselected_profile.png';
+  static const iconsUnselectedOffers = 'assets/icons/unselected_offers.png';
+  static const imagesFavouriteCardBg = 'assets/images/favourite_card_bg.png';
+  static const imagesHistoryCardBg = 'assets/images/history_card_bg.png';
+  static const iconsFacebook = "assets/icons/facebook.png";
+  static const iconsInstagram = "assets/icons/instagram.png";
+  static const imagesEmptyFavourite = "assets/images/empty_favourite.png";
+  static const imagesEmptyHistory = "assets/images/empty_history.png";
 }
