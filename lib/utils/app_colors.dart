@@ -20,4 +20,6 @@ class AppColors {
   static const categoryBackground = Color(0xFFF6F5FF);
   static const black = Colors.black;
   static const whiteSmoke = Color(0xffF3F3F3);
+  static const deepOrange = Color(0xffD0491F);
+  static const green   = Colors.green;
 }

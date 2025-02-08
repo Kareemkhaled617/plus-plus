@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/screen/history_screen/order_history_screen.dart';
 import 'package:plus/screen/home_screen/widgets/section_header.dart';
 import 'package:plus/screen/profile_screen/widget/profile_all_properties.dart';
 import 'package:plus/screen/profile_screen/widget/profile_total_activities_card.dart';
@@ -8,6 +7,7 @@ import 'package:plus/utils/app_keys.dart';
 import '../../generated/assets.dart';
 import '../../utils/app_fonts.dart';
 import '../favourite_screen/favourite_screen.dart';
+import '../order_history_screen/order_history_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
