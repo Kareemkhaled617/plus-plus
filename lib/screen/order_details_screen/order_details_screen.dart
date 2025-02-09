@@ -34,7 +34,7 @@ class OrderDetailsScreen extends StatelessWidget {
               // Rewards Section
               RewardsSection(),
               SizedBox(height: 20),
-          
+
               // General Info Section
               GeneralInfoSection(),
               SizedBox(height: 20),
