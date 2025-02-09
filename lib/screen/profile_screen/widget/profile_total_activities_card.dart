@@ -47,7 +47,6 @@ class ProfileTotalActivitiesCard extends StatelessWidget {
                     )
                   ],
                 ),
-                Spacer(),
               ],
             ),
           ),

@@ -30,7 +30,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         title: Text(
           AppKeys.orderHistory.tr,
           style: AppFonts.heading3,
@@ -48,10 +50,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                   height: 40,
                   child: TabBar(
                     controller: tabController,
-                    labelStyle: TextStyle(color: AppColors.primary,fontWeight: FontWeight.w500),
+                    labelStyle: TextStyle(
+                        color: AppColors.primary, fontWeight: FontWeight.w500),
                     indicatorColor: AppColors.primary,
                     indicatorSize: TabBarIndicatorSize.tab,
-                    unselectedLabelStyle: TextStyle(color: Colors.grey,fontWeight: FontWeight.w500),
+                    unselectedLabelStyle: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.w500),
                     tabs: [
                       Text(AppKeys.coming.tr),
                       Text(AppKeys.completed.tr),
@@ -63,10 +67,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                   child: TabBarView(
                     controller: tabController,
                     children: [
-
-                      Expanded(child: OrdersList()),
-                      Expanded(child: OrdersList()),
-                      Expanded(child: OrdersList()),
+                      OrdersList(),
+                      OrdersList(),
+                      OrdersList(),
                     ],
                   ),
                 )

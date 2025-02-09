@@ -23,9 +23,7 @@ class FavouriteScreen extends StatelessWidget {
         ),
         leading: AppBarBackButton(),
       ),
-      body: favouriteList.isEmpty
-          ? FavouriteEmptyBody()
-          : ProductsGrid(),
+      body: favouriteList.isEmpty ? FavouriteEmptyBody() : ProductsGrid(),
     );
   }
 }

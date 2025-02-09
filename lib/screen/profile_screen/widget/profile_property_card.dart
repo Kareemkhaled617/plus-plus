@@ -6,10 +6,10 @@ class ProfilePropertyCard extends StatelessWidget {
   const ProfilePropertyCard({
     super.key,
     required this.title,
-     this.subtitle,
+    this.subtitle,
     required this.icon,
     required this.onTap,
-     this.iconColor = AppColors.black,
+    this.iconColor = AppColors.black,
   });
 
   final String title;
@@ -21,19 +21,24 @@ class ProfilePropertyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      SizedBox(height: 3,),
+      SizedBox(
+        height: 3,
+      ),
       ListTile(
+
         title: Text(
           title,
           style: AppFonts.heading3.copyWith(fontSize: 14),
         ),
-        subtitle: subtitle == null ? null :  Text(
-          subtitle!,
-          style: AppFonts.bodyText.copyWith(
-            fontSize: 12,
-            color: AppColors.greyWithShade.withOpacity(.5),
-          ),
-        ),
+        subtitle: subtitle == null
+            ? null
+            : Text(
+                subtitle!,
+                style: AppFonts.bodyText.copyWith(
+                  fontSize: 12,
+                  color: AppColors.greyWithShade.withOpacity(.5),
+                ),
+              ),
         trailing: IconButton(
             onPressed: () {},
             icon: Icon(
@@ -42,7 +47,7 @@ class ProfilePropertyCard extends StatelessWidget {
               size: 20,
             )),
         leading: Container(
-          padding: EdgeInsets.all(4),
+          padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
             border: Border.all(color: iconColor),
             borderRadius: BorderRadius.all(Radius.circular(10)),

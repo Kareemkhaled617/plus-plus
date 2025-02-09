@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
 import 'package:plus/utils/app_keys.dart';
 
@@ -23,8 +24,8 @@ class RecentSearchSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                AppKeys.recentSearch.tr,
-                style: AppFonts.hintText.copyWith(fontSize: 14),
+                AppKeys.recentSearch .tr,
+                style: AppFonts.hintText.copyWith(fontSize: 14,color: AppColors.grey),
               ),
             ],
           ),
@@ -38,7 +39,7 @@ class RecentSearchSection extends StatelessWidget {
             runSpacing: 8,
             children: recentSearches.map((search) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(20),

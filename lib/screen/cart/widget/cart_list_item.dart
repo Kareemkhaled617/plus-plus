@@ -83,14 +83,14 @@ class CartListItem extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 4,
-          right: 4,
+          top: 0,
+          right: 0,
           child: GestureDetector(
             onTap: () {
-              // Handle remove action
+
             },
             child: Container(
-              padding: EdgeInsets.only(left: 4, top: 4, right: 4, bottom: 4),
+              padding: EdgeInsets.only(left: 6, top: 6, right: 6, bottom: 6),
               decoration: BoxDecoration(
                 borderRadius: BorderRadiusDirectional.only(
                     topEnd: Radius.circular(10),
@@ -98,7 +98,7 @@ class CartListItem extends StatelessWidget {
                 color: AppColors.primary,
               ),
               child: Icon(
-                Icons.delete_outline,
+                Icons.delete_outline_rounded,
                 color: AppColors.white,
                 size: 24,
               ),

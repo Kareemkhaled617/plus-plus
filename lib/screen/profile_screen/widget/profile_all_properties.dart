@@ -18,7 +18,7 @@ class ProfileAllProperties extends StatelessWidget {
         ProfilePropertyCard(
           title: "Account",
           subtitle: "Personal Information",
-          icon: Icons.person,
+          icon: Icons.person_2_rounded,
           iconColor: AppColors.primary,
           onTap: () {},
         ),

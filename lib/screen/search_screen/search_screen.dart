@@ -44,17 +44,19 @@ class _SearchScreenState extends State<SearchScreen> {
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          FocusScope.of(context).unfocus(); // Hide keyboard when tapping outside
+          FocusScope.of(context)
+              .unfocus(); // Hide keyboard when tapping outside
         },
-        child: Column(
-          children: [
-            // Search Bar & Suggestions
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              // Search Bar & Suggestions
+              Column(
                 children: [
                   SearchAndSuggestionSection(
-                    controller: searchController, // Use controller
+                    controller: searchController,
+                    // Use controller
                     suggestions: SearchScreen.suggestions,
                     searchQuery: searchQuery,
                     onHintSelected: (selected) {
@@ -72,9 +74,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         showResults = false; // Hide results while typing
                       });
                     },
-
                   ),
-
+                  SizedBox(
+                    height: 20,
+                  ),
                   // Show recent searches when not typing & search field empty
                   if (!isSearching && searchQuery.isEmpty)
                     RecentSearchSection(
@@ -90,14 +93,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                 ],
               ),
-            ),
 
-            // Show products when searching is finished
-            if (showResults)
-              Expanded(
-                child: SearchedProductsSection(),
-              ),
-          ],
+              if (showResults)
+                Expanded(
+                  child: SearchedProductsSection(),
+                ),
+            ],
+          ),
         ),
       ),
     );

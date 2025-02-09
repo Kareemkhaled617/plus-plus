@@ -21,7 +21,7 @@ class CouponSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.card_giftcard, color: Colors.orange),
+              Icon(Icons.percent, color: Colors.orange),
               const SizedBox(width: 8),
                Text(
                 AppKeys.addCoupon.tr,

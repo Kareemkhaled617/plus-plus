@@ -26,7 +26,7 @@ class OrderCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.blue.shade100,
+                color: AppColors.babyBlue,
                 borderRadius: BorderRadius.circular(50),
               ),
               child: Icon(Icons.inventory, color: AppColors.primary, size: 30),
