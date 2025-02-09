@@ -52,5 +52,29 @@ class AppKeys {
   static const noFavouriteProducts = "There are No Favourite Products";
   static const noOrdersPlaced = "No orders Placed yet ";
   static const placeYourFirstOrder = "Place Your first order now";
-
+  static const orderHistory = "Order History";
+  static const coming = "Coming";
+  static const completed = "Completed";
+  static const cancelled = "Cancelled";
+  static const viewMyRewards = "View my rewards";
+  static const youEarned = "You've earned";
+  static const points = "points";
+  static const redeem = "Redeem them on your faves to save extra on your next order.";
+  static const viewDetails = "View Details";
+  static const orderDetails = "Order Details";
+  static const paymentInfo = "Payment Info";
+  static const discountApplied = "Discount is Applied";
+  static const paymentMethod = "Payment Method";
+  static const subtotal = "Subtotal";
+  static const delivery = "Delivery";
+  static const total = "Total";
+  static const le = "L.E";
+  static const shippedFrom = "Shipped from";
+  static const deliveryExpected = "Delivery expected within";
+  static const hours = "hours";
+  static const received = "Received";
+  static const preparing = "Preparing";
+  static const shipped = "Shipped";
+  static const delivered = "Delivered";
+  static const cancelOrder = "Cancel Order";
 }

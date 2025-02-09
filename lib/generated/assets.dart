@@ -40,4 +40,9 @@ class Assets {
   static const iconsInstagram = "assets/icons/instagram.png";
   static const imagesEmptyFavourite = "assets/images/empty_favourite.png";
   static const imagesEmptyHistory = "assets/images/empty_history.png";
+  static const imagesEarnedPoint = "assets/images/earned_point.png";
+  static const iconsVisa = "assets/icons/visa.png";
+  static const iconsOffers = "assets/icons/offers.png";
+  static const imagesOrderTracking = "assets/images/order_tracking.png";
+
 }
