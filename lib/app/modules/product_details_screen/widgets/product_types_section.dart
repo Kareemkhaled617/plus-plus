@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_fonts.dart';
+
+class ProductTypesSection extends StatefulWidget {
+  const ProductTypesSection({super.key});
+
+  @override
+  State<ProductTypesSection> createState() => _ProductTypesSectionState();
+}
+
+class _ProductTypesSectionState extends State<ProductTypesSection> {
+  final choices = ["Package", "Stripe", "Ampoule"];
+  String selected = "Package";
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: choices.map((choice) {
+        return RadioMenuButton<String>(
+          value: choice,
+          groupValue: selected,
+          onChanged: (value) {
+            if (value != null) {
+              setState(() {
+                selected = value;
+              });
+            }
+          },
+          toggleable: false,
+          child: Text(
+            choice,
+            style: AppFonts.heading3.copyWith(
+              fontSize: 14,
+              color: selected == choice ? AppColors.black : Colors.grey,
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
