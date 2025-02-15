@@ -15,7 +15,7 @@ class CartListItem extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(10),

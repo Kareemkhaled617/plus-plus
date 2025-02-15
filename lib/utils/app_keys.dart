@@ -77,4 +77,32 @@ class AppKeys {
   static const shipped = "Shipped";
   static const delivered = "Delivered";
   static const cancelOrder = "Cancel Order";
+  static const discount = "Discount";
+  static const exclusiveOffers = "Exclusive offers from ";
+  static const returnText = "Return";
+  static const noOffersAtMoment = "There are no offers to show at the moment.";
+  static const selectOffers = "Select the brand of the offer" ;
+
+  static const yourPoints = "Your Points";
+
+  static const pointsExpiryDate = "Latest update";
+
+  static const howToEarnPoints = "How to earn points?";
+
+  static var pointHistory = "Point History";
+
+  static var result = "Result";
+
+  static var fullName = "Full Name";
+
+  static var phoneNumber = "Phone Number";
+
+  static var save = "Save";
+
+  static var account = "Account";
+
+  static var addressDirectory = "Address Directory";
+
+
+
 }

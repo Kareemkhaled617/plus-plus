@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:plus/components/product_item.dart';
-
-import '../generated/assets.dart';
-import '../screen/product_details_screen/product_details_screen.dart';
-import '../utils/common_widgets.dart';
+import '../../../generated/assets.dart';
+import '../../product_details_screen/product_details_screen.dart';
+import '../../../utils/common_widgets.dart';
 
 class ProductsGrid extends StatelessWidget {
-  const ProductsGrid({super.key,  this.products});
-  final List<dynamic>? products ;
+  const ProductsGrid({super.key, this.products});
+
+  final List<dynamic>? products;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,14 +16,16 @@ class ProductsGrid extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 12,
+          mainAxisSpacing: 14,
           childAspectRatio: .65,
         ),
         itemCount: 10, // Adjust count dynamically
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              CommonWidgets.navigateWithFade(ProductDetailsScreen());
+              CommonWidgets.navigateWithFade(
+                ProductDetailsScreen(),
+              );
             },
             child: ProductCard(
               imageUrl: Assets.tempDsd,

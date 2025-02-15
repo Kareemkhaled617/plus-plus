@@ -20,49 +20,51 @@ class ProfilePropertyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      SizedBox(
-        height: 3,
-      ),
-      ListTile(
-
-        title: Text(
-          title,
-          style: AppFonts.heading3.copyWith(fontSize: 14),
+    return InkWell(
+      onTap: onTap,
+      child: Column(children: [
+        SizedBox(
+          height: 3,
         ),
-        subtitle: subtitle == null
-            ? null
-            : Text(
-                subtitle!,
-                style: AppFonts.bodyText.copyWith(
-                  fontSize: 12,
-                  color: AppColors.greyWithShade.withOpacity(.5),
+        ListTile(
+          title: Text(
+            title,
+            style: AppFonts.heading3.copyWith(fontSize: 14),
+          ),
+          subtitle: subtitle == null
+              ? null
+              : Text(
+                  subtitle!,
+                  style: AppFonts.bodyText.copyWith(
+                    fontSize: 12,
+                    color: AppColors.greyWithShade.withOpacity(.5),
+                  ),
                 ),
-              ),
-        trailing: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.arrow_forward_ios,
+          trailing: IconButton(
+              onPressed: onTap,
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                color: iconColor,
+                size: 20,
+              )),
+          leading: Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              border: Border.all(color: iconColor),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Icon(
+              icon,
               color: iconColor,
               size: 20,
-            )),
-        leading: Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            border: Border.all(color: iconColor),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-          child: Icon(
-            icon,
-            color: iconColor,
-            size: 20,
+            ),
           ),
         ),
-      ),
-      Divider(
-        thickness: .5,
-        color: AppColors.greyWithShade.withOpacity(.2),
-      ),
-    ]);
+        Divider(
+          thickness: .5,
+          color: AppColors.greyWithShade.withOpacity(.2),
+        ),
+      ]),
+    );
   }
 }

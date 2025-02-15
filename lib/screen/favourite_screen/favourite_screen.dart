@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/components/app_bar_back_button.dart';
-import 'package:plus/components/products_grid.dart';
+import 'package:plus/screen/home_screen/widgets/products_grid.dart';
 import 'package:plus/screen/favourite_screen/widgets/favourite_empty_body.dart';
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_keys.dart';

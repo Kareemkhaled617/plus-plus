@@ -7,20 +7,25 @@ class BrandsListItem extends StatelessWidget {
   const BrandsListItem({
     super.key,
     required this.category,
+    this.onTap,
   });
 
+  final void Function()? onTap;
   final dynamic category;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.to(ProductsScreen(
-          gradientColors: [
-            AppColors.white,
-            AppColors.white,
-          ], title: 'Vaseline',
-        ));
+      onTap: onTap ?? () {
+        Get.to(
+          ProductsScreen(
+            gradientColors: [
+              AppColors.white,
+              AppColors.white,
+            ],
+            title: 'Vaseline',
+          ),
+        );
       },
       child: Card(
         color: Colors.white,

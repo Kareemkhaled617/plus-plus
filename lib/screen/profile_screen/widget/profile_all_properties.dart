@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus/account_screen/account_screen.dart';
+import 'package:plus/address_directory/address_directory.dart';
 import 'package:plus/screen/profile_screen/widget/profile_property_card.dart';
+import 'package:plus/utils/app_keys.dart';
+import 'package:plus/utils/common_widgets.dart';
 
 import '../../../utils/app_colors.dart';
 
@@ -10,25 +15,27 @@ class ProfileAllProperties extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
         Divider(
           thickness: .5,
           color: AppColors.greyWithShade.withOpacity(.2),
         ),
         ProfilePropertyCard(
-          title: "Account",
+          title: AppKeys.account.tr,
           subtitle: "Personal Information",
           icon: Icons.person_2_rounded,
           iconColor: AppColors.primary,
-          onTap: () {},
+          onTap: () {
+            Get.to(AccountScreen());
+          },
         ),
         ProfilePropertyCard(
-          title: "Address directory",
+          title: AppKeys.addressDirectory.tr,
           subtitle: "Shipping Information",
           icon: Icons.pin_drop_outlined,
-          onTap: () {},
+          onTap: () {
+            Get.to(const AddressDirectory());
+          },
         ),
-
         ProfilePropertyCard(
           title: "My Prescriptions",
           icon: Icons.event_note_outlined,
@@ -44,10 +51,6 @@ class ProfileAllProperties extends StatelessWidget {
           icon: Icons.share_outlined,
           onTap: () {},
         ),
-
-
-
-
         ProfilePropertyCard(
           title: "Terms of Service",
           icon: Icons.security_rounded,
@@ -69,7 +72,6 @@ class ProfileAllProperties extends StatelessWidget {
           iconColor: AppColors.red,
           onTap: () {},
         ),
-
       ],
     );
   }

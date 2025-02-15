@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/screen/order_details_screen/widget/rewards_section.dart';
+import 'package:plus/screen/rewards_screen/points_screen.dart';
 import 'package:plus/utils/size_config.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/app_colors.dart';
@@ -32,29 +34,35 @@ class SectionHeader extends StatelessWidget {
                           isProfileSection ? AppColors.black : AppColors.white,
                       fontSize: 21)),
               Spacer(),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: AppColors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image(
-                      image: AssetImage(Assets.iconsStar),
-                      width: getProportionateScreenHeight(22),
-                      height: getProportionateScreenHeight(22),
-                    ),
-                    SizedBox(
-                      width: 6,
-                    ),
-                    Text('1.972 ',
-                        style: AppFonts.bodyText.copyWith(
-                          color: AppColors.black,
-                        )),
-                  ],
+              InkWell(
+                onTap: () {
+
+                  Get.to(RewardsScreen());
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: AppColors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage(Assets.iconsStar),
+                        width: getProportionateScreenHeight(22),
+                        height: getProportionateScreenHeight(22),
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text('1.972 ',
+                          style: AppFonts.bodyText.copyWith(
+                            color: AppColors.black,
+                          )),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(

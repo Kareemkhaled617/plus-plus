@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/components/custom_text_form_field.dart';
-import 'package:plus/screen/brands_screen/widgets/brands_list_item.dart';
+import 'package:plus/components/brands_list_item.dart';
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_colors.dart';
 import '../../generated/assets.dart';

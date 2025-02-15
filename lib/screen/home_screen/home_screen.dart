@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/screen/brands_screen/brands_screen.dart';
 import 'package:plus/screen/home_screen/widgets/best_seller.dart';
-import 'package:plus/screen/home_screen/widgets/category_item.dart';
+import 'package:plus/components/category_item.dart';
 import 'package:plus/screen/home_screen/widgets/circular_image_slider.dart';
 import 'package:plus/screen/home_screen/widgets/prescription.dart';
-import 'package:plus/components/product_item.dart';
 import 'package:plus/screen/home_screen/widgets/ready_for_winter.dart';
 import 'package:plus/screen/home_screen/widgets/section_header.dart';
 import 'package:plus/screen/home_screen/widgets/special_brands.dart';
-import 'package:plus/utils/common_widgets.dart';
 import '../../components/disclaimer_box.dart';
 import '../../generated/assets.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_fonts.dart';
-import '../../utils/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

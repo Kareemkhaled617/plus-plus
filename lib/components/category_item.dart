@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
-import 'package:plus/utils/common_widgets.dart';
-
-import '../../sub_category/sub_category_screen.dart';
+import '../screen/sub_category/sub_category_screen.dart';
 
 class CategoryGrid extends StatelessWidget {
   final List<Map<String, String>> categories;
 
-  const CategoryGrid({
-    required this.categories,
-    super.key,
-  });
+  const CategoryGrid({required this.categories, super.key});
 
   @override
   Widget build(BuildContext context) {

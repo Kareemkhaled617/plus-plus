@@ -5,8 +5,8 @@ import '../generated/assets.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String hintText;
-  final TextEditingController controller;
-  final TextInputType keyboardType;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final bool obscureText;
   final bool isMaxLines;
@@ -16,12 +16,13 @@ class CustomTextFormField extends StatelessWidget {
   final Function()? onEditingComplete;
   final FocusNode? focusNode;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextStyle? hintStyle;
 
   const CustomTextFormField({
     required this.hintText,
-    required this.controller,
-    required this.keyboardType,
+    this.controller,
+    this.keyboardType,
     this.validator,
     this.obscureText = false,
     super.key,
@@ -31,7 +32,9 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.isMaxLines = false,
     this.fillColor,
-    this.prefixIcon, this.hintStyle ,
+    this.prefixIcon,
+    this.hintStyle,
+    this.suffixIcon,
   });
 
   @override
@@ -47,8 +50,9 @@ class CustomTextFormField extends StatelessWidget {
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: hintStyle?? AppFonts.hintText,
+        hintStyle: hintStyle ?? AppFonts.hintText,
         filled: true,
+        suffixIcon: suffixIcon,
         fillColor: fillColor ?? AppColors.categoryBackground,
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(

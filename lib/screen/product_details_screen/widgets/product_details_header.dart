@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus/components/offers_percent_widget.dart';
 
 import '../../../components/app_bar_back_button.dart';
 import '../../../utils/app_colors.dart';
@@ -28,27 +29,7 @@ class ProductDetailsHeader extends StatelessWidget {
             ),
           ],
         ),
-        Stack(
-          children: [
-            Icon(
-              Icons.bookmark,
-              color: AppColors.red,
-              size: 35,
-            ),
-            Positioned(
-              top: 10,
-              right: 12,
-              child: Text(
-                "-10",
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 8,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          ],
-        ),
+        OffersPercentWidget(percent: "-10",),
         Spacer(),
         Padding(
           padding: const EdgeInsets.all(8.0),

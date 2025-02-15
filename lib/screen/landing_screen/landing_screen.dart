@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plus/generated/assets.dart';
 import 'package:plus/screen/cart/cart_screen.dart';
 import 'package:plus/screen/home_screen/home_screen.dart';
+import 'package:plus/screen/offers_screen/offers_screen.dart';
 import 'package:plus/screen/profile_screen/profile_screen.dart';
 import 'package:plus/screen/search_screen/search_screen.dart';
 import 'package:plus/utils/app_keys.dart';
@@ -20,7 +21,7 @@ class _LandingScreenState extends State<LandingScreen> {
     HomeScreen(),
     SearchScreen(),
     CartScreen(),
-    Center(child: Text("Profile Screen")),
+    OffersScreen(),
     ProfileScreen(),
   ];
 

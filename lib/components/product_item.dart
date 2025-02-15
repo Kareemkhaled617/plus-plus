@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/components/offers_percent_widget.dart';
 import 'package:plus/utils/app_colors.dart';
 import 'package:plus/utils/app_fonts.dart';
 import 'package:plus/utils/size_config.dart';
@@ -11,6 +12,7 @@ class ProductCard extends StatelessWidget {
   final String price;
   final VoidCallback onAddToCart;
   final VoidCallback onFavorite;
+  final bool isOffer;
 
   const ProductCard({
     required this.imageUrl,
@@ -19,6 +21,7 @@ class ProductCard extends StatelessWidget {
     required this.price,
     required this.onAddToCart,
     required this.onFavorite,
+    this.isOffer = false,
     super.key,
   });
 
@@ -32,8 +35,9 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-                color: AppColors.greyWithShade.withOpacity(.8),
-                spreadRadius: .1)
+              color: AppColors.greyWithShade.withOpacity(.8),
+              spreadRadius: .1,
+            )
           ]),
       child: Stack(
         children: [
@@ -119,6 +123,12 @@ class ProductCard extends StatelessWidget {
               onPressed: onFavorite,
             ),
           ),
+          if (isOffer)
+            Positioned(
+              top: 0,
+              left: 0,
+              child: OffersPercentWidget(),
+            ),
         ],
       ),
     );

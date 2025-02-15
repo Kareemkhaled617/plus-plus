@@ -2,32 +2,29 @@
 class Assets {
   Assets._();
 
-  static const String iconsBack = 'assets/icons/back.png';
-  static const String iconsHi = 'assets/icons/hi.png';
-  static const String iconsWhatsapp = 'assets/icons/whatsapp.png';
-  static const String iconsPin = 'assets/icons/pin.png';
-  static const String iconsPrescription = 'assets/icons/prescription.png';
-  static const String iconsSearch = 'assets/icons/search.png';
-  static const String iconsShare = 'assets/icons/share.png';
-  static const String iconsStar = 'assets/icons/star.png';
-  static const String imagesBackground = 'assets/images/background.png';
-  static const String imagesCart = 'assets/images/cart.png';
-  static const String imagesLocation = 'assets/images/location.png';
-  static const String imagesLogo = 'assets/images/logo.png';
-  static const String imagesPrescription = 'assets/images/prescription.png';
-  static const String imagesPrescriptionDone =
-      'assets/images/prescription_done.png';
-  static const String tempBanner = 'assets/temp/banner.png';
-  static const String tempCream = 'assets/temp/cream.png';
-  static const String tempDsd = 'assets/temp/dsd.png';
-  static const String tempImg = 'assets/temp/temp_img.png';
-  static const String tempImg1 = 'assets/temp/temp_img1.png';
-
+  static const iconsBack = 'assets/icons/back.png';
+  static const iconsHi = 'assets/icons/hi.png';
+  static const iconsWhatsapp = 'assets/icons/whatsapp.png';
+  static const iconsPin = 'assets/icons/pin.png';
+  static const iconsPrescription = 'assets/icons/prescription.png';
+  static const iconsSearch = 'assets/icons/search.png';
+  static const iconsShare = 'assets/icons/share.png';
+  static const iconsStar = 'assets/icons/star.png';
+  static const imagesBackground = 'assets/images/background.png';
+  static const imagesCart = 'assets/images/cart.png';
+  static const imagesLocation = 'assets/images/location.png';
+  static const imagesLogo = 'assets/images/logo.png';
+  static const imagesPrescription = 'assets/images/prescription.png';
+  static const imagesPrescriptionDone = 'assets/images/prescription_done.png';
+  static const tempBanner = 'assets/temp/banner.png';
+  static const tempCream = 'assets/temp/cream.png';
+  static const tempDsd = 'assets/temp/dsd.png';
+  static const tempImg = 'assets/temp/temp_img.png';
+  static const tempImg1 = 'assets/temp/temp_img1.png';
   static const iconsSelectedHome = 'assets/icons/selected_home.png';
   static const iconsSelectedCart = 'assets/icons/selected_cart.png';
   static const iconsSelectedProfile = 'assets/icons/selected_profile.png';
   static const iconsSelectedOffers = 'assets/icons/selected_offers.png';
-
   static const iconsUnSelectedSearch = 'assets/icons/unselected_search.png';
   static const iconsSelectedSearch = 'assets/icons/selected_search.png';
   static const iconsUnselectedHome = 'assets/icons/unselected_home.png';
@@ -43,6 +40,12 @@ class Assets {
   static const imagesEarnedPoint = "assets/images/earned_point.png";
   static const iconsVisa = "assets/icons/visa.png";
   static const iconsOffers = "assets/icons/offers.png";
+  static const tempOffers = "assets/temp/offers.png";
+  static const tempOffers2 = "assets/temp/offers_2.png";
   static const imagesOrderTracking = "assets/images/order_tracking.png";
-
+  static const iconsNoOffers = "assets/icons/no_offers.png";
+  static const tempLargeBanner = "assets/temp/large_banner.png";
+  static const iconsOffersPercent = "assets/icons/offers_percent.png";
+  static const iconsCoin = "assets/icons/coin.png";
+  static const iconsEdit = "assets/icons/edit.png";
 }
