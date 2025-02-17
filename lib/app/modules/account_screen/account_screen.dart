@@ -1,11 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/core/widgets/custom_button.dart';
-
 import 'package:plus/generated/assets.dart';
-
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
@@ -74,7 +73,7 @@ class AccountScreen extends StatelessWidget {
                   ),
                   initialCountryCode: 'EG',
                   onChanged: (phone) {
-                    print(phone.completeNumber);
+                    log(phone.completeNumber);
                   },
                 ),
                 SizedBox(

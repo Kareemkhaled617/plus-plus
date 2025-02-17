@@ -50,7 +50,11 @@ class CustomTextFormField extends StatelessWidget {
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: hintStyle ?? AppFonts.hintText,
+        hintStyle: hintStyle ??
+            AppFonts.hintText.copyWith(
+              fontWeight: FontWeight.w500,
+              color: AppColors.grey.withOpacity(.4),
+            ),
         filled: true,
         suffixIcon: suffixIcon,
         fillColor: fillColor ?? AppColors.categoryBackground,

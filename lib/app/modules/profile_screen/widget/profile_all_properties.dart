@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:plus/app/core/theme/app_fonts.dart';
+import 'package:plus/app/core/utils/common_widgets.dart';
+import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
+import 'package:plus/app/core/widgets/custom_button.dart';
+import 'package:plus/app/modules/all_prescription/all_prescription_screen.dart';
+import 'package:plus/app/modules/profile_screen/widget/logout_bottom_sheet_content.dart';
 import 'package:plus/app/modules/profile_screen/widget/profile_property_card.dart';
-
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../account_screen/account_screen.dart';
@@ -39,7 +43,9 @@ class ProfileAllProperties extends StatelessWidget {
         ProfilePropertyCard(
           title: "My Prescriptions".tr,
           icon: Icons.event_note_outlined,
-          onTap: () {},
+          onTap: () {
+            Get.to(AllPrescriptionScreen());
+          },
         ),
         ProfilePropertyCard(
           title: "App Evaluations".tr,
@@ -70,7 +76,12 @@ class ProfileAllProperties extends StatelessWidget {
           title: "Logout".tr,
           icon: Icons.logout,
           iconColor: AppColors.red,
-          onTap: () {},
+          onTap: () {
+            showCustomBottomSheet(
+              context,
+              LogoutBottomSheetContent(),
+            );
+          },
         ),
       ],
     );

@@ -14,11 +14,11 @@ class RewardsPointsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(Assets.imagesBackground),
-          fit: BoxFit.cover,
+          image: AssetImage(Assets.imagesPointsCardBg),
+          fit: BoxFit.fitWidth,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -47,9 +47,8 @@ class RewardsPointsCard extends StatelessWidget {
           ),
           SizedBox(height: 4),
           Container(
-            padding: EdgeInsets.all(4),
+            padding: EdgeInsets.all(6),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
               color: AppColors.white,
             ),
             child: Row(

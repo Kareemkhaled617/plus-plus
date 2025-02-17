@@ -79,7 +79,6 @@ class ReadyForWinter extends StatelessWidget {
                       title: "Evy Baby",
                       stockInfo: "68 in stock",
                       price: "45 L.E",
-                      onAddToCart: () {},
                       onFavorite: () {},
                     ),
                   ),

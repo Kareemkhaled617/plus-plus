@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void showCustomBottomSheet(context, Widget content) {
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (context) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16),
