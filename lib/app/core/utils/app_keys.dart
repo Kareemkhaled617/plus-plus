@@ -59,7 +59,8 @@ class AppKeys {
   static const viewMyRewards = "View my rewards";
   static const youEarned = "You've earned";
   static const points = "points";
-  static const redeem = "Redeem them on your faves to save extra on your next order.";
+  static const redeem =
+      "Redeem them on your faves to save extra on your next order.";
   static const viewDetails = "View Details";
   static const orderDetails = "Order Details";
   static const paymentInfo = "Payment Info";
@@ -81,7 +82,7 @@ class AppKeys {
   static const exclusiveOffers = "Exclusive offers from ";
   static const returnText = "Return";
   static const noOffersAtMoment = "There are no offers to show at the moment.";
-  static const selectOffers = "Select the brand of the offer" ;
+  static const selectOffers = "Select the brand of the offer";
 
   static const yourPoints = "Your Points";
 
@@ -102,6 +103,21 @@ class AppKeys {
   static var account = "Account";
 
   static var addressDirectory = "Address Directory";
+
+  static var confirmYourLocation = "Confirm Your Location";
+  static var accessLocation = "Confirm Location";
+
+
+  static var accessLocationDescription =
+      "Move the pin to highlight the correct location we can do a better experience for you.";
+
+  static var searchForLocation = "Search for your location";
+
+  static var setAs = "Set as";
+
+  static var saveAddress = "Save Address";
+
+  static var weAddedYourAddress = "We added your address";
 
 
 

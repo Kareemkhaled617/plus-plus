@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 
-
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final bool isEnabled;
+  final Size? miniSize;
 
   const CustomButton({
     required this.text,
     required this.onPressed,
     this.isEnabled = true,
     super.key,
+    this.miniSize,
   });
 
   @override
@@ -22,7 +23,7 @@ class CustomButton extends StatelessWidget {
       onPressed: isEnabled ? onPressed : null,
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(vertical: 15),
-        minimumSize: Size(220, 56),
+        minimumSize: miniSize ?? Size(220, 56),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

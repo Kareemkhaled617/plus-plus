@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/common_widgets.dart';
 
 import 'package:plus/generated/assets.dart';
 
@@ -8,6 +9,7 @@ import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
 import '../../core/widgets/app_bar_back_button.dart';
 
+import '../access_location/access_location_screen.dart';
 import 'address_card.dart';
 
 class AddressDirectory extends StatelessWidget {
@@ -29,7 +31,6 @@ class AddressDirectory extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-
             SizedBox(
               height: 12,
             ),
@@ -42,7 +43,10 @@ class AddressDirectory extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+
+          CommonWidgets.navigateOffWithFade(AccessLocationScreen());
+        },
         backgroundColor: AppColors.primary,
         child: Icon(
           Icons.add,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../modules/cart/cart_screen.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 import '../utils/size_config.dart';
@@ -11,7 +12,7 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String stockInfo;
   final String price;
-  final VoidCallback onAddToCart;
+  final VoidCallback? onAddToCart;
   final VoidCallback onFavorite;
   final bool isOffer;
 
@@ -20,7 +21,7 @@ class ProductCard extends StatelessWidget {
     required this.title,
     required this.stockInfo,
     required this.price,
-    required this.onAddToCart,
+     this.onAddToCart,
     required this.onFavorite,
     this.isOffer = false,
     super.key,
@@ -91,7 +92,9 @@ class ProductCard extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton.icon(
-                onPressed: onAddToCart,
+                onPressed: onAddToCart ?? () {
+                  Get.to(CartScreen());
+                },
                 label: Icon(
                   Icons.shopping_cart_outlined,
                   size: 26,

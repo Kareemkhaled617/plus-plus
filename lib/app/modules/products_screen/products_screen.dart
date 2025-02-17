@@ -63,7 +63,6 @@ class ProductsScreen extends StatelessWidget {
                   title: "Evy Baby",
                   stockInfo: "Suncream",
                   price: "45 L.E",
-                  onAddToCart: () {},
                   onFavorite: () {},
                 ),
               );

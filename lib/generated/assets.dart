@@ -48,4 +48,5 @@ class Assets {
   static const iconsOffersPercent = "assets/icons/offers_percent.png";
   static const iconsCoin = "assets/icons/coin.png";
   static const iconsEdit = "assets/icons/edit.png";
+  static const imagesAccessLocationDone = "assets/images/access_location_done.png";
 }
