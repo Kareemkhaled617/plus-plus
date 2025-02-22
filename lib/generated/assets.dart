@@ -22,6 +22,7 @@ class Assets {
   static const tempImg = 'assets/temp/temp_img.png';
   static const tempImg1 = 'assets/temp/temp_img1.png';
   static const iconsSelectedHome = 'assets/icons/selected_home.png';
+  static const iconsHome = 'assets/icons/home.png';
   static const iconsSelectedCart = 'assets/icons/selected_cart.png';
   static const iconsSelectedProfile = 'assets/icons/selected_profile.png';
   static const iconsSelectedOffers = 'assets/icons/selected_offers.png';
@@ -49,4 +50,5 @@ class Assets {
   static const iconsCoin = "assets/icons/coin.png";
   static const iconsEdit = "assets/icons/edit.png";
   static const imagesAccessLocationDone = "assets/images/access_location_done.png";
+  static const imagesPointsCardBg = "assets/images/points_card_bg.png";
 }

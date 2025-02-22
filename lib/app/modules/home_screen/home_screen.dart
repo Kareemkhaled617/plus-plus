@@ -6,6 +6,7 @@ import 'package:plus/app/modules/home_screen/widgets/prescription.dart';
 import 'package:plus/app/modules/home_screen/widgets/ready_for_winter.dart';
 import 'package:plus/app/modules/home_screen/widgets/section_header.dart';
 import 'package:plus/app/modules/home_screen/widgets/special_brands.dart';
+import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
@@ -149,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.to(BrandsScreen());
+                               Navigator.pushNamed(context, AppRoutes.brandsScreen);
                               },
                               child: Text(
                                 'View all'.tr,

@@ -119,6 +119,9 @@ class AppKeys {
 
   static var weAddedYourAddress = "We added your address";
 
+  static var apply = "Apply";
+  static const addTheCouponHere = "Add the coupon here";
+
 
 
 }

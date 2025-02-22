@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Plus Plus',
       initialRoute: AppRoutes.splash,
-      getPages: AppRoutes.routes,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
       theme: ThemeData(
         fontFamily: 'Roboto',
         primaryColor: AppColors.primary,

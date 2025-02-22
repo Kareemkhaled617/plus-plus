@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
@@ -27,7 +28,9 @@ class BestSeller extends StatelessWidget {
           ],
         ),
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+          topLeft: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+        ),
       ),
       child: Column(
         children: [
@@ -41,13 +44,14 @@ class BestSeller extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(ProductsScreen(
-                    gradientColors: [
-                      Color(0xFFB0C5FF).withOpacity(.3),
-                      Color(0xFF4A00E0).withOpacity(.4),
-                    ],
-                    title: 'Best seller'.tr,
-                  ));
+                  Navigator.pushNamed(context, AppRoutes.productsScreen,
+                      arguments: {
+                        "gradientColors": [
+                          Color(0xFFB0C5FF).withOpacity(.3),
+                          Color(0xFF4A00E0).withOpacity(.4),
+                        ],
+                        "title": 'Best seller'.tr,
+                      });
                 },
                 child: Text(
                   'View all'.tr,
@@ -68,11 +72,10 @@ class BestSeller extends StatelessWidget {
                   (index) => InkWell(
                     onTap: () {
                       Get.to(
-                            () => ProductDetailsScreen(),
+                        () => ProductDetailsScreen(),
                         transition: Transition.fadeIn,
                         duration: const Duration(milliseconds: 500),
                       );
-
                     },
                     child: ProductCard(
                       imageUrl: Assets.tempDsd,

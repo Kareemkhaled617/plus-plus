@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../routes/app_routes.dart';
 import '../../products_screen/products_screen.dart';
 
 class SpecialBrand extends StatelessWidget {
@@ -33,12 +34,14 @@ class SpecialBrand extends StatelessWidget {
           final category = categories[index];
           return InkWell(
             onTap: () {
-              Get.to(ProductsScreen(
-                gradientColors: [
-                  AppColors.white,
-                  AppColors.white,
-                ], title: 'Vaseline',
-              ));
+              Navigator.pushNamed(context, AppRoutes.productsScreen,
+                  arguments: {
+                    "gradientColors": [
+                      AppColors.white,
+                      AppColors.white,
+                    ],
+                    "title": 'Vaseline',
+                  });
             },
             child: Container(
               decoration: BoxDecoration(

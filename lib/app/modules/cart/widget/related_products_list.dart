@@ -7,6 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../../core/widgets/product_item.dart';
+import '../../../routes/app_routes.dart';
 
 
 class RelatedProductsList extends StatelessWidget {
@@ -23,12 +24,24 @@ class RelatedProductsList extends StatelessWidget {
               style: AppFonts.heading2,
             ),
             Spacer(),
-            Text(
-              AppKeys.viewAll.tr,
-              style: AppFonts.bodyText.copyWith(
-                  color: AppColors.primary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.productsScreen,
+                    arguments: {
+                      "gradientColors": [
+                        AppColors.white,
+                        AppColors.white
+                      ],
+                      "title": 'Related Products'.tr,
+                    });
+              },
+              child: Text(
+                AppKeys.viewAll.tr,
+                style: AppFonts.bodyText.copyWith(
+                    color: AppColors.primary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),

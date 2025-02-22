@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/modules/cart/widget/cart_empty_body.dart';
 import 'package:plus/app/modules/cart/widget/cart_list_item.dart';
 import 'package:plus/app/modules/cart/widget/checkout_summary.dart';
 import 'package:plus/app/modules/cart/widget/related_products_list.dart';
-
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
@@ -54,12 +52,18 @@ class CartScreen extends StatelessWidget {
                       ),
                       Text(
                         AppKeys.cartProducts.tr,
-                        style: AppFonts.heading1,
+                        style: AppFonts.heading1.copyWith(fontSize: 18),
                       ),
                       SizedBox(
                         height: 12,
                       ),
-                      CartListItem(),
+                      Column(
+                        children: [
+                          CartListItem(),
+                          SizedBox(height: 20,),
+                          CartListItem(),
+                        ],
+                      ),
                       SizedBox(height: 16),
                       CheckoutSummary(),
                       SizedBox(

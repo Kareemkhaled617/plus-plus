@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 
+import '../../../core/widgets/custom_button.dart';
 import '../../product_details_screen/widgets/product_counter_section.dart';
 
 class CartListItem extends StatelessWidget {
@@ -88,7 +90,7 @@ class CartListItem extends StatelessWidget {
           right: 0,
           child: GestureDetector(
             onTap: () {
-
+              showCustomBottomSheet(context, buildDeleteItemDialogContent());
             },
             child: Container(
               padding: EdgeInsets.only(left: 6, top: 6, right: 6, bottom: 6),
@@ -106,6 +108,55 @@ class CartListItem extends StatelessWidget {
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  buildDeleteItemDialogContent() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 20,),
+        Text(
+          "Are you sure you want to delete item ?".tr,
+          style: AppFonts.heading3.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.w800
+          ),
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomButton(
+                onPressed: () {},
+                text: "Sure".tr,
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.red),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text(
+                    "Cancel".tr,
+                    style: AppFonts.bodyText.copyWith(color: AppColors.red),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

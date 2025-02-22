@@ -9,7 +9,6 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
 
-
 class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
 
@@ -20,7 +19,7 @@ class RewardsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,10 +61,9 @@ class RewardsScreen extends StatelessWidget {
                       child: Text(
                         "12 ${AppKeys.result.tr}",
                         style: TextStyle(
-                          color: AppColors.primary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
+                            color: AppColors.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal),
                       ),
                     ),
                   ],

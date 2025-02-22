@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
@@ -36,8 +37,7 @@ class SectionHeader extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
-
-                  Get.to(RewardsScreen());
+                 Navigator.pushNamed(context, AppRoutes.rewards);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
@@ -70,7 +70,7 @@ class SectionHeader extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(NotificationScreen());
+                  Navigator.pushNamed(context, AppRoutes.notification);
                 },
                 child: Icon(
                   Icons.notifications_none_rounded,

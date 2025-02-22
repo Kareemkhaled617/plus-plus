@@ -7,6 +7,7 @@ import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/widgets/product_item.dart';
+import '../../../routes/app_routes.dart';
 import '../../product_details_screen/product_details_screen.dart';
 import '../../products_screen/products_screen.dart';
 
@@ -42,13 +43,14 @@ class ReadyForWinter extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(ProductsScreen(
-                    gradientColors: [
-                      Color(0xFFB2DFDB),
-                      Color(0xFFE64A19).withOpacity(.3),
-                    ],
-                    title: 'Ready for winter',
-                  ));
+                  Navigator.pushNamed(context, AppRoutes.productsScreen,
+                      arguments: {
+                        "gradientColors": [
+                          Color(0xFFB2DFDB),
+                          Color(0xFFE64A19).withOpacity(.3),
+                        ],
+                        "title": 'Ready for winter'.tr,
+                      });
                 },
                 child: Text(
                   'View all'.tr,

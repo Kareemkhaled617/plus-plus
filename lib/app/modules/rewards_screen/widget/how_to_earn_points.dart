@@ -16,7 +16,7 @@ class HowToEarnPoints extends StatelessWidget {
       contentPadding: EdgeInsets.symmetric(horizontal: 8),
       title: Text(
         AppKeys.howToEarnPoints.tr,
-        style: AppFonts.heading3.copyWith(fontSize: 14),
+        style: AppFonts.heading3.copyWith(fontSize: 14,fontWeight: FontWeight.bold),
       ),
       trailing: Icon(Icons.arrow_forward_ios, size: 20),
       onTap: () {

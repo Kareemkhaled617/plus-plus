@@ -95,7 +95,7 @@ class OffersBannerSection extends StatelessWidget {
             BrandsListItem(
               category: categories[0],
               onTap: () {
-                Get.toNamed(AppRoutes.viewOffersScreen);
+                Get.toNamed(AppRoutes.viewOffers);
               },
             ),
             BrandsListItem(

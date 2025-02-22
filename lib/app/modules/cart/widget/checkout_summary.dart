@@ -24,10 +24,9 @@ class CheckoutSummary extends StatelessWidget {
         CartPriceItem(title: "Delivery", price: "50 L.E"),
         SizedBox(height: 10,),
         CartPriceItem(title: "Total", price: "300 L.E", isTotal: true),
-        const SizedBox(height: 12),
-        const SizedBox(height: 12),
+        const SizedBox(height: 60),
         CouponSection(),
-        const SizedBox(height: 12),
+        const SizedBox(height: 30),
         CartDeliverySection(),
         const SizedBox(height: 20),
         Align(

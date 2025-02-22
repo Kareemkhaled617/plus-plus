@@ -18,7 +18,7 @@ class EarningInfoCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.greyWithShade.withOpacity(.2))),
+          border: Border.all(color: AppColors.greyWithShade.withOpacity(.1))),
       child: Padding(
         padding: EdgeInsets.all(12),
         child: Row(
@@ -34,10 +34,11 @@ class EarningInfoCard extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                SizedBox(height: 10,),
                 Text(
                   isEarning ? "Earn" : "Payment #SK234412",
                   style: AppFonts.bodyText.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 14,
                   ),
                 ),
@@ -51,8 +52,10 @@ class EarningInfoCard extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.grey.withOpacity(.8),
                     fontSize: 12,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
+                SizedBox(height: 10,),
                 Row(
                   children: [
                     Image.asset(Assets.iconsCoin, width: 16, height: 16),
