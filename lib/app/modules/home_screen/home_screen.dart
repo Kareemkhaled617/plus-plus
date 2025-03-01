@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/modules/home_screen/widgets/best_seller.dart';
 import 'package:plus/app/modules/home_screen/widgets/circular_image_slider.dart';
 import 'package:plus/app/modules/home_screen/widgets/prescription.dart';
@@ -77,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Categories'.tr,
+                          AppKeys.categories.tr,
                           textAlign: TextAlign.start,
                           style: AppFonts.heading1.copyWith(
                               fontSize: 20, fontWeight: FontWeight.w600),
@@ -105,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Add your prescription here'.tr,
+                          AppKeys.addYourPrescription.tr,
                           textAlign: TextAlign.start,
                           style: AppFonts.heading2.copyWith(
                               fontSize: 20, fontWeight: FontWeight.w500),
@@ -121,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'PLUS PLUS Offers'.tr,
+                          'PLUS PLUS ${AppKeys.offers.tr}',
                           textAlign: TextAlign.start,
                           style: AppFonts.heading2.copyWith(
                               fontSize: 20, fontWeight: FontWeight.w500),
@@ -145,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Special brands'.tr,
+                             AppKeys.specialBrands.tr,
                               style: AppFonts.heading2,
                             ),
                             InkWell(
@@ -153,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                                Navigator.pushNamed(context, AppRoutes.brandsScreen);
                               },
                               child: Text(
-                                'View all'.tr,
+                                AppKeys.viewAll.tr,
                                 style: AppFonts.heading2.copyWith(
                                     color: AppColors.primary, fontSize: 16),
                               ),
@@ -193,7 +194,7 @@ class HomeScreen extends StatelessWidget {
           label: Row(
             children: [
               Text(
-                'Contact us',
+                AppKeys.contactUs.tr,
                 style: AppFonts.bodyText
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
               ),

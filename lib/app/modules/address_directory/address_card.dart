@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
@@ -23,7 +25,7 @@ class AddressCard extends StatelessWidget {
         ),
         child: ListTile(
           title: Text(
-            "Home",
+            AppKeys.home.tr,
             style: AppFonts.heading3,
           ),
           subtitle: Text(

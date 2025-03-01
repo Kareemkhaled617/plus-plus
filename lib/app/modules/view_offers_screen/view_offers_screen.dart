@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/modules/view_offers_screen/widget/brands_dropdown.dart';
 import 'package:plus/generated/assets.dart';
-
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../home_screen/widgets/products_grid.dart';
@@ -46,7 +46,7 @@ class ViewOffersScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              "Through two hours, Dont miss the chance !".tr,
+                              AppKeys.dontMissOfferChance.tr,
                               style: AppFonts.bodyText.copyWith(
                                   fontSize: 13, fontWeight: FontWeight.w600),
                             ),

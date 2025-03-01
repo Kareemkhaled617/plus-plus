@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
@@ -14,14 +15,14 @@ class LogoutBottomSheetContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Logout".tr,
+          AppKeys.logout.tr,
           style: AppFonts.heading3
               .copyWith(fontSize: 21)
               .copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
         Text(
-          "Are you sure you want to logout?".tr,
+          AppKeys.logoutDescription.tr,
           style: AppFonts.bodyText.copyWith(
             fontSize: 14,
             color: AppColors.grey,
@@ -35,7 +36,7 @@ class LogoutBottomSheetContent extends StatelessWidget {
             Expanded(
               child: CustomButton(
                 onPressed: () {},
-                text: "Logout".tr,
+                text: AppKeys.logout.tr,
               ),
             ),
             SizedBox(
@@ -52,7 +53,7 @@ class LogoutBottomSheetContent extends StatelessWidget {
                     Get.back();
                   },
                   child: Text(
-                    "Cancel".tr,
+                    AppKeys.cancel.tr,
                     style: AppFonts.bodyText
                         .copyWith(color: AppColors.red),
                   ),

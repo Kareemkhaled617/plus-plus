@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
+import '../../../core/utils/app_keys.dart';
 import '../../../core/widgets/product_item.dart';
 import '../../../routes/app_routes.dart';
 import '../../product_details_screen/product_details_screen.dart';
@@ -37,7 +38,7 @@ class ReadyForWinter extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Ready for winter'.tr,
+                AppKeys.readyForWinter.tr,
                 style: AppFonts.heading2
                     .copyWith(color: AppColors.brown, fontSize: 18),
               ),
@@ -53,7 +54,7 @@ class ReadyForWinter extends StatelessWidget {
                       });
                 },
                 child: Text(
-                  'View all'.tr,
+                  AppKeys.viewAll.tr,
                   style: AppFonts.heading2.copyWith(color: AppColors.brown),
                 ),
               ),

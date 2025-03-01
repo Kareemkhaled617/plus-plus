@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/generated/assets.dart';
-
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../../routes/app_routes.dart';
-
 
 class CartDeliverySection extends StatelessWidget {
   const CartDeliverySection({super.key});
@@ -20,7 +18,7 @@ class CartDeliverySection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Text(
+          Text(
             AppKeys.deliveryTo.tr,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
@@ -33,11 +31,15 @@ class CartDeliverySection extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Image.asset(Assets.iconsHome,width: 30,height: 30,),
+                Image.asset(
+                  Assets.iconsHome,
+                  width: 30,
+                  height: 30,
+                ),
                 const SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
+                  children: [
                     Text(
                       AppKeys.home.tr,
                       style: AppFonts.heading3,
@@ -49,7 +51,8 @@ class CartDeliverySection extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                const Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.primary),
+                const Icon(Icons.arrow_forward_ios,
+                    size: 18, color: AppColors.primary),
               ],
             ),
           ),

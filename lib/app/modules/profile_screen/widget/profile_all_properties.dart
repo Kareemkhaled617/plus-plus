@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/theme/app_fonts.dart';
-import 'package:plus/app/core/utils/common_widgets.dart';
 import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
-import 'package:plus/app/core/widgets/custom_button.dart';
 import 'package:plus/app/modules/all_prescription/all_prescription_screen.dart';
 import 'package:plus/app/modules/profile_screen/widget/logout_bottom_sheet_content.dart';
 import 'package:plus/app/modules/profile_screen/widget/profile_property_card.dart';
@@ -25,7 +22,7 @@ class ProfileAllProperties extends StatelessWidget {
         ),
         ProfilePropertyCard(
           title: AppKeys.account.tr,
-          subtitle: "Personal Information".tr,
+          subtitle: AppKeys.personalInfo.tr,
           icon: Icons.person_2_rounded,
           iconColor: AppColors.primary,
           onTap: () {
@@ -34,46 +31,46 @@ class ProfileAllProperties extends StatelessWidget {
         ),
         ProfilePropertyCard(
           title: AppKeys.addressDirectory.tr,
-          subtitle: "Shipping Information".tr,
+          subtitle: AppKeys.shippingInfo.tr,
           icon: Icons.pin_drop_outlined,
           onTap: () {
             Get.to(const AddressDirectory());
           },
         ),
         ProfilePropertyCard(
-          title: "My Prescriptions".tr,
+          title: AppKeys.myPrescriptions.tr,
           icon: Icons.event_note_outlined,
           onTap: () {
             Get.to(AllPrescriptionScreen());
           },
         ),
         ProfilePropertyCard(
-          title: "App Evaluations".tr,
+          title: AppKeys.appEvaluation.tr,
           icon: Icons.star,
           onTap: () {},
         ),
         ProfilePropertyCard(
-          title: "Share Application".tr,
+          title: AppKeys.shareApp.tr,
           icon: Icons.share_outlined,
           onTap: () {},
         ),
         ProfilePropertyCard(
-          title: "Terms of Service".tr,
+          title: AppKeys.termsAndConditions.tr,
           icon: Icons.security_rounded,
           onTap: () {},
         ),
         ProfilePropertyCard(
-          title: "Privacy Policy".tr,
+          title: AppKeys.privacyPolicy.tr,
           icon: Icons.privacy_tip_outlined,
           onTap: () {},
         ),
         ProfilePropertyCard(
-          title: "Language".tr,
+          title: AppKeys.language.tr,
           icon: Icons.language_outlined,
           onTap: () {},
         ),
         ProfilePropertyCard(
-          title: "Logout".tr,
+          title: AppKeys.logout.tr,
           icon: Icons.logout,
           iconColor: AppColors.red,
           onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../../generated/assets.dart';
@@ -29,7 +30,7 @@ class SectionHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              Text('Welcome sara ! ',
+              Text('${AppKeys.welcome} sara ! ',
                   style: AppFonts.heading1.copyWith(
                       color:
                           isProfileSection ? AppColors.black : AppColors.white,
@@ -107,7 +108,7 @@ class SectionHeader extends StatelessWidget {
                   ),
                   if (!isProfileSection)
                     Text(
-                      "We don’t deliver here !",
+                     AppKeys.weDontHaveDeliveryHere.tr,
                       style: AppFonts.bodyText.copyWith(
                         color: AppColors.yellowAccent,
                         fontSize: 16,

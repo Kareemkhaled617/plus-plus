@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
+import '../../../generated/assets.dart';
 import 'controller/location_controller.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/utils/app_sizes.dart';
@@ -34,7 +36,7 @@ class LocationScreen extends StatelessWidget {
                   Icon(Icons.error, color: Colors.red, size: 60),
                   SizedBox(height: AppSizes.paddingSmall(context)),
                   Text(
-                    "Sorry!".tr,
+                    AppKeys.sorry.tr,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -60,10 +62,10 @@ class LocationScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/location_enabled.png'),
+                  Image.asset(Assets.imagesLocationEnabled, height: 200),
                   SizedBox(height: AppSizes.paddingMedium(context)),
                   Text(
-                    "Locating your location...".tr,
+                    AppKeys.locatingLocation.tr,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -79,7 +81,7 @@ class LocationScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/location_disabled.png'),
+                Image.asset( Assets.imagesLocationDisabled),
                 SizedBox(height: AppSizes.paddingMedium(context)),
                 Text(
                   "Enable Location Services".tr,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
@@ -12,7 +14,7 @@ class GeneralInfoSection extends StatelessWidget {
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("General info", style: AppFonts.heading3),
+        Text(AppKeys.generalInfo.tr, style: AppFonts.heading3),
         SizedBox(height: 16,),
         Container(
           decoration: BoxDecoration(
@@ -28,7 +30,7 @@ class GeneralInfoSection extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Order ID",
+                    Text(AppKeys.orderId.tr,
                         style: AppFonts.heading3.copyWith(fontSize: 13)),
                     Text("247-96024",
                         style: AppFonts.heading3.copyWith(
@@ -40,7 +42,7 @@ class GeneralInfoSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Order date",
+                      AppKeys.orderDate.tr,
                       style: AppFonts.heading3.copyWith(fontSize: 13),
                     ),
                     Text(

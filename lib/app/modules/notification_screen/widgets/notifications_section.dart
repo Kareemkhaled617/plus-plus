@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
 
 import '../../../core/theme/app_colors.dart';
@@ -27,7 +29,7 @@ class NotificationHeaderSection extends StatelessWidget {
               // Todo Call Api To mark all as Read
             },
             child: Text(
-              "Mark all as read",
+              AppKeys.markAllAsRead.tr,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: AppFonts.heading3.copyWith(fontSize: 14),

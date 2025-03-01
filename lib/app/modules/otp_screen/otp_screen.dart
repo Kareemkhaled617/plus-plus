@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/utils/app_keys.dart';
 import '../../core/utils/common_widgets.dart';
 import '../home_screen/home_screen.dart';
 
@@ -10,7 +11,7 @@ class OTPVerificationScreen extends StatefulWidget {
   const OTPVerificationScreen({super.key});
 
   @override
-  _OTPVerificationScreenState createState() => _OTPVerificationScreenState();
+  State<OTPVerificationScreen> createState() => _OTPVerificationScreenState();
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
@@ -45,7 +46,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
           children: [
             SizedBox(height: 50),
             Text(
-              "Nice! let’s verify your mobile number".tr,
+              AppKeys.verifyOtp.tr,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w900,
@@ -53,7 +54,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
             ),
             SizedBox(height: 10),
             Text(
-              "   OTP Code Sent On Your Mobile Number.",
+              AppKeys.otpCodeSent.tr,
               style: TextStyle(
                 fontSize: 14,
                 color: AppColors.primary,
@@ -117,7 +118,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         }
                       : null,
                   child: Text(
-                    "Submit",
+                    AppKeys.submit.tr,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
@@ -135,7 +136,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
               child: GestureDetector(
                 onTap: countdown == 0 ? () {} : null,
                 child: Text(
-                  "Resend Activation Code".tr,
+                  AppKeys.resendCode.tr,
                   style: TextStyle(
                     color: countdown == 0 ? Colors.blueAccent : Colors.grey,
                     fontWeight: FontWeight.bold,

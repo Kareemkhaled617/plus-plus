@@ -122,6 +122,112 @@ class AppKeys {
   static var apply = "Apply";
   static const addTheCouponHere = "Add the coupon here";
 
+  static const dontMissOfferChance = "Through two hours, Dont miss the chance !";
+
+  static var welcomeToYourRewards = "Welcome to the reward program ";
+
+  static const followUs = "You can follow us on :";
+
+  static var logout = "Logout";
+
+  static var logoutDescription = "Are you sure you want to logout?";
+
+  static var cancel = "Cancel";
+
+  static var language = "Language";
+
+  static var privacyPolicy = "Privacy Policy";
+
+  static var termsAndConditions = "Terms and Conditions";
+
+  static var shareApp = "Share Application";
+
+  static var appEvaluation = "App Evaluation";
+
+  static var myPrescriptions = "My Prescriptions";
+
+  static var shippingInfo = "Shipping Information";
+
+  static var personalInfo = "Personal Information";
+
+  static var verifyOtp = "Nice! let’s verify your mobile number";
+
+  static var otpCodeSent = "   OTP Code Sent On Your Mobile Number.";
+
+  static var resendCode =    "Resend Activation Code";
+
+  static var generalInfo = "General info";
+
+  static var orderId = "Order ID";
+
+  static var orderDate = "Order Date";
+
+  static var shippingDetails = "Shipping Details";
+
+  static var markAllAsRead = "Mark all as read";
+
+  static var whatsYourNumber = "What’s your mobile number?";
+
+  static var youWillReceiveCode = "You Will Receive An Sms With A Verification Code Mobile Number";
+
+  static var sendCode = "Send Code";
+
+  static var iAgreeTo = "I agree to the ";
+
+  static String terms = "terms";
+
+  static var and = "and";
+
+  static var conditions = "conditions";
+
+  static var sorry = "Sorry!";
+
+  static var locatingLocation =  "Locating your location...";
+
+  static var here = "Here";
+
+  static var youCanOrderPrescription  = 'You can order the prescription by uploading a picture or listing your needs from the pharmacy';
+
+  static var readyForWinter = 'Ready for winter?';
+
+  static var welcome = 'Welcome';
+
+  static var weDontHaveDeliveryHere =  "We don’t deliver here !";
+
+  static var contactUs = 'Contact Us';
+
+  static var specialBrands = 'Special Brands';
+
+  static var addYourPrescription = 'Add your prescription here';
+
+  static var categories = 'Categories';
+
+  static var youWantToDelete =   "Are you sure you want to delete item ?";
+
+  static var sure  = "Sure";
+
+  static var searchForBrand = "Search for the brand";
+
+  static var brands = "Brands";
+
+  static var allPrescriptions = "All Prescriptions";
+
+  static var recordsAddedByYou = "Records added by you";
+
+  static var all = "All";
+
+  static var pending = "Pending...";
+
+  static var location = "Location";
+
+  static var street = "Street";
+
+  static var theBuilding = "The Building";
+
+  static var floor = "Floor";
+
+  static var theApartment = "The Apartment";
+
 
 
 }

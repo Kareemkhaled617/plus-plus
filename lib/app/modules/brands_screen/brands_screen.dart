@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/core/widgets/brands_list_item.dart';
 
 import '../../../generated/assets.dart';
@@ -33,7 +34,7 @@ class BrandsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          "Brands".tr,
+          AppKeys.brands.tr,
           style: AppFonts.heading3,
         ),
         leading: InkWell(
@@ -46,7 +47,7 @@ class BrandsScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
-              hintText: "Search for the brands".tr,
+              hintText: AppKeys.searchForBrand.tr,
               controller: TextEditingController(),
               keyboardType: TextInputType.text,
               prefixIcon: Image.asset(Assets.iconsSearch),

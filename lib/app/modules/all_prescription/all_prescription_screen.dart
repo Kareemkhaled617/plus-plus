@@ -5,6 +5,8 @@ import 'package:plus/app/core/theme/app_fonts.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/core/widgets/custom_button.dart';
 
+import '../../core/utils/app_keys.dart';
+
 class AllPrescriptionScreen extends StatelessWidget {
   const AllPrescriptionScreen({super.key});
 
@@ -17,7 +19,7 @@ class AllPrescriptionScreen extends StatelessWidget {
         elevation: 0,
         leading: AppBarBackButton(),
         title: Text(
-          "All Prescription".tr,
+          AppKeys.allPrescriptions.tr,
           style: AppFonts.heading1.copyWith(fontSize: 20),
         ),
       ),
@@ -84,13 +86,13 @@ class PrescriptionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Records added by you".tr,
+                  AppKeys.recordsAddedByYou.tr,
                   style: AppFonts.heading3
                       .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "1 Prescription".tr,
+                  "1 ${AppKeys.prescription.tr}",
                   style: AppFonts.bodyText
                       .copyWith(fontSize: 12, color: AppColors.grey),
                 ),
@@ -109,7 +111,7 @@ class PrescriptionCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  "Pending...".tr,
+                  AppKeys.pending.tr,
                   style: AppFonts.bodyText
                       .copyWith(fontSize: 12, color: AppColors.red),
                 ),
@@ -129,7 +131,7 @@ class PrescriptionCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     )),
                   child: Text(
-                    "View".tr,
+                    AppKeys.all.tr,
                     style: AppFonts.bodyText.copyWith(color: AppColors.white,fontSize: 12),
                   ))
             ],

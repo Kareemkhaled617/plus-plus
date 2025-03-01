@@ -118,7 +118,7 @@ class CartListItem extends StatelessWidget {
       children: [
         SizedBox(height: 20,),
         Text(
-          "Are you sure you want to delete item ?".tr,
+        AppKeys.youWantToDelete.tr,
           style: AppFonts.heading3.copyWith(
             fontSize: 16,
             fontWeight: FontWeight.w800
@@ -132,7 +132,7 @@ class CartListItem extends StatelessWidget {
             Expanded(
               child: CustomButton(
                 onPressed: () {},
-                text: "Sure".tr,
+                text: AppKeys.sure.tr,
               ),
             ),
             SizedBox(
@@ -149,7 +149,7 @@ class CartListItem extends StatelessWidget {
                     Get.back();
                   },
                   child: Text(
-                    "Cancel".tr,
+                    AppKeys.cancel.tr,
                     style: AppFonts.bodyText.copyWith(color: AppColors.red),
                   ),
                 ),

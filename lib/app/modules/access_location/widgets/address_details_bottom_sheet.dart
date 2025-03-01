@@ -41,23 +41,27 @@ class AddressDetailsBottomSheet extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
                 child: Image.asset(Assets.iconsEdit),
               ),
-              hintText: 'Location',
+              hintText: AppKeys.location.tr,
               fillColor: AppColors.babyBlue,
             ),
             SizedBox(height: 12),
 
             /// Other Address Fields
             CustomTextFormField(
-                hintText: "Street", fillColor: AppColors.babyBlue),
+              hintText: AppKeys.street.tr,
+              fillColor: AppColors.babyBlue,
+            ),
             SizedBox(height: 12),
             CustomTextFormField(
-                hintText: "The Building", fillColor: AppColors.babyBlue),
+              hintText: AppKeys.theBuilding.tr,
+              fillColor: AppColors.babyBlue,
+            ),
             SizedBox(height: 12),
             CustomTextFormField(
-                hintText: "Floor", fillColor: AppColors.babyBlue),
+                hintText: AppKeys.floor.tr, fillColor: AppColors.babyBlue),
             SizedBox(height: 12),
             CustomTextFormField(
-                hintText: "The Apartment", fillColor: AppColors.babyBlue),
+                hintText: AppKeys.theApartment.tr, fillColor: AppColors.babyBlue),
             SizedBox(height: 12),
 
             /// Destination Selection
@@ -99,12 +103,11 @@ class AddressDetailsBottomSheet extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-
                         CustomButton(
                           text: AppKeys.addressDirectory.tr,
                           onPressed: () {
                             Get.back();
-                           Get.off(AddressDirectory());
+                            Get.off(AddressDirectory());
                           },
                         )
                       ],

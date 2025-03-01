@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
@@ -24,7 +25,7 @@ class Prescription extends StatelessWidget {
           SizedBox(
             width: 250,
             child: Text(
-              'You can order the prescription by uploading a picture or listing your needs from the pharmacy'
+              AppKeys.youCanOrderPrescription
                   .tr,
               style: AppFonts.bodyText
                   .copyWith(color: AppColors.white, fontSize: 14),
@@ -43,7 +44,7 @@ class Prescription extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Here'.tr,
+                  AppKeys.here.tr,
                   textAlign: TextAlign.start,
                   style: AppFonts.heading1
                       .copyWith(color: AppColors.primary, fontSize: 18),

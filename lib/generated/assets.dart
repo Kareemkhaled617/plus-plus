@@ -51,4 +51,8 @@ class Assets {
   static const iconsEdit = "assets/icons/edit.png";
   static const imagesAccessLocationDone = "assets/images/access_location_done.png";
   static const imagesPointsCardBg = "assets/images/points_card_bg.png";
+
+  static String imagesLocationEnabled = 'assets/images/location_enabled.png';
+
+  static String imagesLocationDisabled = 'assets/images/location_disabled.png';
 }

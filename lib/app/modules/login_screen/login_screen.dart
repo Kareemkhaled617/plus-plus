@@ -4,6 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/utils/app_keys.dart';
 import '../otp_screen/otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
               fit: BoxFit.cover,
             ),
             Text(
-              "What’s your mobile number ?".tr,
+              AppKeys.whatsYourNumber.tr,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 10),
             Text(
-              "You Will Receive An Sms With A Verification Code Mobile Number"
+              AppKeys.youWillReceiveCode
                   .tr,
               style: TextStyle(
                 fontSize: 14,
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   },
                   child: Text(
-                    "Send Code".tr,
+                    AppKeys.sendCode.tr,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
@@ -99,22 +100,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   },
                 ),
-                Text("I Agree To The "),
+                Text(AppKeys.iAgreeTo.tr),
                 GestureDetector(
                   onTap: () {},
                   child: Text(
-                    "Terms",
+                    AppKeys.terms,
                     style: TextStyle(
                       color: Colors.blueAccent,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                Text(" And "),
+                Text(AppKeys.and.tr),
                 GestureDetector(
                   onTap: () {},
                   child: Text(
-                    "Conditions",
+                    AppKeys.conditions.tr,
                     style: TextStyle(
                       color: Colors.blueAccent,
                       fontWeight: FontWeight.bold,

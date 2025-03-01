@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                   Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
-                      "You can follow us on :".tr,
+                      AppKeys.followUs.tr,
                       style: AppFonts.heading3,
                     ),
                   ),
