@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/modules/profile_screen/widget/profile_all_properties.dart';
 import 'package:plus/app/modules/profile_screen/widget/profile_total_activities_card.dart';
+import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../generated/assets.dart';
 import '../../core/theme/app_fonts.dart';
@@ -35,9 +36,7 @@ class ProfileScreen extends StatelessWidget {
                           title: AppKeys.favourite.tr,
                           image: Assets.imagesFavouriteCardBg,
                           onTap: () {
-                            Get.to(
-                              () => const FavouriteScreen(),
-                            );
+                            Get.toNamed(AppRoutes.favouriteScreen);
                           },
                         ),
                       ),
@@ -47,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                           title: AppKeys.history.tr,
                           image: Assets.imagesHistoryCardBg,
                           onTap: () {
-                            Get.to(OrderHistoryScreen());
+                            Get.toNamed(AppRoutes.orderHistory);
                           },
                         ),
                       ),

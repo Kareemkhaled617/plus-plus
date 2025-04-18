@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/modules/order_history_screen/widget/history_empty_body.dart';
+import 'package:plus/app/modules/order_history_screen/widget/order_card.dart';
 import 'package:plus/app/modules/order_history_screen/widget/orders_list.dart';
-
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
-
+import 'controller/order_controller.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({super.key});
@@ -18,15 +18,14 @@ class OrderHistoryScreen extends StatefulWidget {
 
 class _OrderHistoryScreenState extends State<OrderHistoryScreen>
     with SingleTickerProviderStateMixin {
-  late final TabController? tabController;
+  late final TabController tabController;
+  final orderController = Get.find<OrderController>();
 
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
-
-  final List<String> orders = ["Order1", "Order2", "Order3"];
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +35,17 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
         backgroundColor: AppColors.white,
         title: Text(
           AppKeys.orderHistory.tr,
-          style: AppFonts.heading3,
+          style: AppFonts.heading2,
         ),
         leading: AppBarBackButton(),
       ),
-      body: orders.isEmpty
+      body: Obx(() => orderController.completedOrders.isEmpty &&
+              orderController.comingOrders.isEmpty &&
+              orderController.canceledOrders.isEmpty
           ? HistoryEmptyBody()
           : Column(
               children: [
-                SizedBox(
-                  height: 16,
-                ),
+                SizedBox(height: 16),
                 SizedBox(
                   height: 40,
                   child: TabBar(
@@ -67,15 +66,15 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                 Expanded(
                   child: TabBarView(
                     controller: tabController,
-                    children: [
-                      OrdersList(),
-                      OrdersList(),
-                      OrdersList(),
+                    children: const [
+                      OrdersList(status: OrderStatus.coming),
+                      OrdersList(status: OrderStatus.completed),
+                      OrdersList(status: OrderStatus.canceled),
                     ],
                   ),
                 )
               ],
-            ),
+            )),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus/app/core/widgets/loader.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
@@ -36,11 +37,16 @@ class CustomButton extends StatelessWidget {
         disabledForegroundColor: Colors.grey.withOpacity(0.38),
         disabledBackgroundColor: Colors.grey.withOpacity(0.12),
       ),
-      child: Text(
-        text,
-        style: AppFonts.bodyText
-            .copyWith(fontWeight: FontWeight.bold, color: AppColors.white),
-      ),
+      child: isEnabled
+          ? Text(
+              text,
+              style: AppFonts.bodyText.copyWith(
+                  fontWeight: FontWeight.bold, color: AppColors.white),
+            )
+          : SizedBox(
+              height: 30,
+              child: AppLoader(),
+            ),
     );
   }
 }

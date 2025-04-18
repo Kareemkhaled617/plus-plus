@@ -1,51 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/utils/common_widgets.dart';
-
-import 'package:plus/generated/assets.dart';
-
+import 'package:plus/app/core/widgets/loader.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
-import '../../core/utils/app_keys.dart';
 import '../../core/widgets/app_bar_back_button.dart';
-
-import '../access_location/access_location_screen.dart';
+import '../../core/utils/app_keys.dart';
+import '../../routes/app_routes.dart';
 import 'address_card.dart';
+import 'controllor/address_controller.dart';
 
 class AddressDirectory extends StatelessWidget {
   const AddressDirectory({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<AddressController>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         leading: AppBarBackButton(),
         backgroundColor: AppColors.white,
-        title: Text(
-          AppKeys.addressDirectory.tr,
-          style: AppFonts.heading3,
-        ),
+        title: Text(AppKeys.addressDirectory.tr, style: AppFonts.heading1),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 12,
-            ),
-            AddressCard(),
-            SizedBox(
-              height: 12,
-            ),
-            AddressCard(),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(child: AppLoader());
+        }
 
-          CommonWidgets.navigateOffWithFade(AccessLocationScreen());
+        if (controller.addresses.isEmpty) {
+          return Center(child: Text("No addresses found"));
+        }
+
+        return ListView.separated(
+          padding: const EdgeInsets.all(12),
+          itemCount: controller.addresses.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          itemBuilder: (context, index) {
+            final address = controller.addresses[index];
+            return AddressCard(address: address);
+          },
+        );
+      }),
+      floatingActionButton: FloatingActionButton(
+        shape: CircleBorder(),
+        onPressed: () {
+          Get.toNamed(AppRoutes.accessLocationScreen,
+              arguments: {'edit': false});
         },
         backgroundColor: AppColors.primary,
         child: Icon(

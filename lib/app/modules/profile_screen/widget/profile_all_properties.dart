@@ -4,10 +4,12 @@ import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
 import 'package:plus/app/modules/all_prescription/all_prescription_screen.dart';
 import 'package:plus/app/modules/profile_screen/widget/logout_bottom_sheet_content.dart';
 import 'package:plus/app/modules/profile_screen/widget/profile_property_card.dart';
+import 'package:plus/app/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../account_screen/account_screen.dart';
 import '../../address_directory/address_directory.dart';
+import 'change_lang_bottom_sheet.dart';
 
 class ProfileAllProperties extends StatelessWidget {
   const ProfileAllProperties({super.key});
@@ -24,9 +26,9 @@ class ProfileAllProperties extends StatelessWidget {
           title: AppKeys.account.tr,
           subtitle: AppKeys.personalInfo.tr,
           icon: Icons.person_2_rounded,
-          iconColor: AppColors.primary,
+          iconColor: AppColors.black,
           onTap: () {
-            Get.to(AccountScreen());
+            Get.toNamed(AppRoutes.accountScreen);
           },
         ),
         ProfilePropertyCard(
@@ -34,14 +36,14 @@ class ProfileAllProperties extends StatelessWidget {
           subtitle: AppKeys.shippingInfo.tr,
           icon: Icons.pin_drop_outlined,
           onTap: () {
-            Get.to(const AddressDirectory());
+            Get.toNamed(AppRoutes.addressDirectory);
           },
         ),
         ProfilePropertyCard(
           title: AppKeys.myPrescriptions.tr,
           icon: Icons.event_note_outlined,
           onTap: () {
-            Get.to(AllPrescriptionScreen());
+            Get.toNamed(AppRoutes.allPrescription);
           },
         ),
         ProfilePropertyCard(
@@ -67,7 +69,7 @@ class ProfileAllProperties extends StatelessWidget {
         ProfilePropertyCard(
           title: AppKeys.language.tr,
           icon: Icons.language_outlined,
-          onTap: () {},
+          onTap: () => showLanguageBottomSheet(),
         ),
         ProfilePropertyCard(
           title: AppKeys.logout.tr,

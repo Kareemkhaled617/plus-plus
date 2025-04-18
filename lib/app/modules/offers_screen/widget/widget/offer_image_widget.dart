@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../generated/assets.dart';
-
+import '../../../../core/widgets/cached_image.dart';
 
 class OfferImageWidget extends StatelessWidget {
-  const OfferImageWidget({super.key, this.image, this.onTap, this.isCenter = false});
+  const OfferImageWidget(
+      {super.key, this.image, this.onTap, this.isCenter = false});
 
   final String? image;
 
@@ -15,10 +16,13 @@ class OfferImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap ?? () {},
-      child: Image.asset(
-        image??Assets.tempOffers,
-        fit: BoxFit.contain,
-        height: isCenter ? 200 : 150,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 2.0,
+        ),
+        child: CachedImage(
+          imageUrl: image!,
+        ),
       ),
     );
   }

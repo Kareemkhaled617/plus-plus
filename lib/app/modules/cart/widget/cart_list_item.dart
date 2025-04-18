@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/size_config.dart';
+import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
-
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
-
 import '../../../core/widgets/custom_button.dart';
+import '../../../routes/app_routes.dart';
 import '../../product_details_screen/widgets/product_counter_section.dart';
+import '../controller/cart_controller.dart';
+import '../../../domain/entities/product_entity.dart';
 
 class CartListItem extends StatelessWidget {
-  const CartListItem({super.key});
+  final ProductEntity product;
+
+  const CartListItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
+    CartController cartController = Get.find<CartController>();
     return Stack(
       children: [
         Container(
@@ -30,55 +36,73 @@ class CartListItem extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                Assets.tempCream,
-                width: 100,
-                height: 144,
-                fit: BoxFit.contain,
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.productDetails, arguments: {
+                    'productId': product.id,
+                  });
+                },
+                child: CachedImage(
+                  imageUrl: product.imageUrl,
+                  width: 100,
+                  height: 144,
+                  fit: BoxFit.contain,
+                ),
               ),
               SizedBox(width: 20),
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30),
-                  Text(
-                    "La ROCHE-POSAY",
-                    style: AppFonts.heading1.copyWith(fontSize: 14),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    width: getProportionateScreenWidth(120),
+                    child: Text(
+                      product.name,
+                      maxLines: 2,
+                      style: AppFonts.heading1.copyWith(fontSize: 14),
+                    ),
                   ),
                   Text(
-                    "face wash gel",
+                    product.brandName,
                     style: AppFonts.heading1
                         .copyWith(fontSize: 12, color: AppColors.red),
                   ),
                   SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Text(
-                        "1 ${AppKeys.peace.tr}",
-                        style: AppFonts.heading1.copyWith(
-                          fontSize: 14,
-                          color: AppColors.primary,
+                  Obx(() {
+                    return Row(
+                      children: [
+                        Text(
+                          "${cartController.getProductCount(product.id)} ${AppKeys.peace.tr}",
+                          style: AppFonts.heading1.copyWith(
+                            fontSize: 14,
+                            color: AppColors.primary,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 100),
-                      Text(
-                        "250 L.E",
-                        style: AppFonts.heading1
-                            .copyWith(fontSize: 12, color: AppColors.red),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      ProductCounterSection(plusIconSize: 16),
-                      SizedBox(width: 4),
-                      Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.black,
-                      )
-                    ],
+                        SizedBox(width: getProportionateScreenWidth(60)),
+                        product.isSelected
+                            ? Text(
+                                "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                                style: AppFonts.heading1.copyWith(
+                                    fontSize: 14,
+                                    color: AppColors.red,
+                                    fontWeight: FontWeight.w700),
+                              )
+                            : Text(
+                                "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                                style: AppFonts.heading1.copyWith(
+                                    fontSize: 14,
+                                    color: AppColors.red,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                      ],
+                    );
+                  }),
+                  SizedBox(height: 10),
+                  ProductCounterSection(
+                    plusIconSize: 16,
+                    controller: cartController,
+                    productEntity: product,
+                    isSelected: product.isSelected,
                   )
                 ],
               )
@@ -90,14 +114,16 @@ class CartListItem extends StatelessWidget {
           right: 0,
           child: GestureDetector(
             onTap: () {
-              showCustomBottomSheet(context, buildDeleteItemDialogContent());
+              showCustomBottomSheet(context,
+                  buildDeleteItemDialogContent(cartController, product));
             },
             child: Container(
-              padding: EdgeInsets.only(left: 6, top: 6, right: 6, bottom: 6),
+              padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
                 borderRadius: BorderRadiusDirectional.only(
-                    topEnd: Radius.circular(10),
-                    bottomStart: Radius.circular(10)),
+                  topEnd: Radius.circular(10),
+                  bottomStart: Radius.circular(10),
+                ),
                 color: AppColors.primary,
               ),
               child: Icon(
@@ -108,36 +134,58 @@ class CartListItem extends StatelessWidget {
             ),
           ),
         ),
+        Positioned(
+          top: 0,
+          left: 0,
+          child: Container(
+            padding: EdgeInsets.all(6),
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadiusDirectional.only(
+                topEnd: Radius.circular(10),
+                bottomStart: Radius.circular(10),
+              ),
+            ),
+            child: Image.asset(
+              product.discountType == 'discount'
+                  ? 'assets/icons/discount.png'
+                  : product.offerType == 'buy_one_get_two'
+                      ? 'assets/icons/2by1.png'
+                      : 'assets/icons/1by1.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  buildDeleteItemDialogContent() {
+  buildDeleteItemDialogContent(
+      CartController controller, ProductEntity product) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20,),
+        SizedBox(height: 20),
         Text(
-        AppKeys.youWantToDelete.tr,
-          style: AppFonts.heading3.copyWith(
-            fontSize: 16,
-            fontWeight: FontWeight.w800
-          ),
+          AppKeys.youWantToDelete.tr,
+          style: AppFonts.heading3
+              .copyWith(fontSize: 16, fontWeight: FontWeight.w800),
         ),
-        SizedBox(
-          height: 40,
-        ),
+        SizedBox(height: 40),
         Row(
           children: [
             Expanded(
               child: CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.removeAllProductFromCart(product.id);
+                  controller.addToCartApi();
+                  Get.back();
+                },
                 text: AppKeys.sure.tr,
               ),
             ),
-            SizedBox(
-              width: 8,
-            ),
+            SizedBox(width: 8),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(

@@ -29,7 +29,7 @@ class ProfilePropertyCard extends StatelessWidget {
         ListTile(
           title: Text(
             title,
-            style: AppFonts.heading3.copyWith(fontSize: 14),
+            style: AppFonts.heading1.copyWith(fontSize: 16),
           ),
           subtitle: subtitle == null
               ? null

@@ -7,6 +7,7 @@ import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/size_config.dart';
+import '../../account_screen/controller/account_controller.dart';
 import '../../notification_screen/notifications_screen.dart';
 import '../../rewards_screen/points_screen.dart';
 
@@ -20,8 +21,9 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AccountController controller = Get.find<AccountController>();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -30,7 +32,7 @@ class SectionHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              Text('${AppKeys.welcome} sara ! ',
+              Text('${AppKeys.welcome.tr} sara ! ',
                   style: AppFonts.heading1.copyWith(
                       color:
                           isProfileSection ? AppColors.black : AppColors.white,
@@ -38,7 +40,7 @@ class SectionHeader extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
-                 Navigator.pushNamed(context, AppRoutes.rewards);
+                  Get.toNamed(AppRoutes.rewards);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
@@ -58,10 +60,18 @@ class SectionHeader extends StatelessWidget {
                       SizedBox(
                         width: 6,
                       ),
-                      Text('1.972 ',
-                          style: AppFonts.bodyText.copyWith(
-                            color: AppColors.black,
-                          )),
+                      FutureBuilder(
+                          future: controller.fetchPoints(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(controller.points.value.toString(),
+                                  style: AppFonts.bodyText.copyWith(
+                                    color: AppColors.black,
+                                  ));
+                            } else {
+                              return Container();
+                            }
+                          })
                     ],
                   ),
                 ),
@@ -108,7 +118,7 @@ class SectionHeader extends StatelessWidget {
                   ),
                   if (!isProfileSection)
                     Text(
-                     AppKeys.weDontHaveDeliveryHere.tr,
+                      AppKeys.weDontHaveDeliveryHere.tr,
                       style: AppFonts.bodyText.copyWith(
                         color: AppColors.yellowAccent,
                         fontSize: 16,

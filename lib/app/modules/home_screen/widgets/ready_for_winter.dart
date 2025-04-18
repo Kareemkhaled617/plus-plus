@@ -63,32 +63,32 @@ class ReadyForWinter extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...List.generate(
-                  7,
-                  (index) => InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => ProductDetailsScreen(),
-                        transition: Transition.fadeIn,
-                        duration: const Duration(milliseconds: 500),
-                      );
-                    },
-                    child: ProductCard(
-                      imageUrl: Assets.tempDsd,
-                      title: "Evy Baby",
-                      stockInfo: "68 in stock",
-                      price: "45 L.E",
-                      onFavorite: () {},
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [
+          //       ...List.generate(
+          //         7,
+          //         (index) => InkWell(
+          //           onTap: () {
+          //             Get.to(
+          //               () => ProductDetailsScreen(),
+          //               transition: Transition.fadeIn,
+          //               duration: const Duration(milliseconds: 500),
+          //             );
+          //           },
+          //           child: ProductCard(
+          //             imageUrl: Assets.tempDsd,
+          //             title: "Evy Baby",
+          //             stockInfo: "68 in stock",
+          //             price: "45 L.E",
+          //             onFavorite: () {}, id: 1,
+          //           ),
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );

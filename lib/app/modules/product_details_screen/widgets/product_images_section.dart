@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
-
+import '../../../core/widgets/cached_image.dart';
+import '../controller/product_controller.dart';
 
 class ProductImagesSection extends StatefulWidget {
-  const ProductImagesSection({super.key});
+  const ProductImagesSection({super.key, required this.controller});
+
+  final ProductDetailsController controller;
 
   @override
   State<ProductImagesSection> createState() => _ProductImagesSectionState();
@@ -14,11 +17,6 @@ class ProductImagesSection extends StatefulWidget {
 class _ProductImagesSectionState extends State<ProductImagesSection> {
   final PageController _pageController = PageController();
   int selectedIndex = 0;
-  final List<String> imageUrls = [
-    Assets.tempCream,
-    Assets.tempCream,
-    Assets.tempCream,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +34,11 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
                       selectedIndex = index;
                     });
                   },
-                  itemCount: imageUrls.length,
+                  itemCount: widget.controller.product.value!.bodyImages.length,
                   itemBuilder: (context, index) {
-                    return Image.asset(
-                      imageUrls[index],
+                    return CachedImage(
+                      imageUrl:
+                          widget.controller.product.value!.bodyImages[index],
                     );
                   },
                 ),
@@ -57,7 +56,7 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    imageUrls.length,
+                    widget.controller.product.value!.bodyImages.length,
                     (index) => GestureDetector(
                       onTap: () {
                         _pageController.animateToPage(
@@ -79,10 +78,11 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Image.asset(
-                            imageUrls[index],
+                          child: CachedImage(
                             height: 50,
                             width: 50,
+                            imageUrl: widget
+                                .controller.product.value!.bodyImages[index],
                           ),
                         ),
                       ),
@@ -95,12 +95,12 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
         ),
 
         SizedBox(width: 16),
-        
+
         // Indicator
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
-            imageUrls.length,
+            widget.controller.product.value!.bodyImages.length,
             (index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Container(

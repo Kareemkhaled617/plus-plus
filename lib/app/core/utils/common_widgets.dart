@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CommonWidgets {
+
+ static String formatPaymentMethod(String method) {
+    return method
+        .split('_')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ');
+  }
   /// Navigation with Fade Animation using GetX
   static void navigateWithFade(Widget destination) {
     Get.to(

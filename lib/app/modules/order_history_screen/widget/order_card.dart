@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
-
+import '../../../domain/entities/order_entity.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key, this.order, this.status, this.onTap });
+  const OrderCard({super.key, required this.order, this.status, this.onTap});
 
   final Function()? onTap;
-  final dynamic order;
+  final OrderEntity order;
   final OrderStatus? status;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap?? (){},
+      onTap: onTap ?? () {},
       child: Container(
         margin: EdgeInsets.all(8),
         padding: EdgeInsets.all(8),
@@ -41,18 +41,18 @@ class OrderCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Order sk468098",
+                    "Order ${order.orderNumber}",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Tuesday 14 December",
+                    order.createdAt,
                     style: AppFonts.hintText.copyWith(fontSize: 12),
                   ),
-                  Text(
-                    "1 order",
-                    style: AppFonts.hintText.copyWith(fontSize: 12),
-                  ),
+                  // Text(
+                  //   order.,
+                  //   style: AppFonts.hintText.copyWith(fontSize: 12),
+                  // ),
                 ],
               ),
             ),
@@ -76,7 +76,7 @@ class OrderCard extends StatelessWidget {
                 ),
                 SizedBox(width: 12),
                 IconButton(
-                  onPressed: onTap ?? (){},
+                  onPressed: onTap ?? () {},
                   icon: Icon(
                     Icons.arrow_forward_ios,
                     color: AppColors.primary,

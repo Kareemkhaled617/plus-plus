@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+2
 
 
 environment:
@@ -30,18 +30,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get:
+  get: ^4.7.2
   permission_handler:
   intl_phone_field:
   pin_code_fields:
   cupertino_icons: ^1.0.8
   google_maps_flutter: ^2.10.0
   geolocator: ^13.0.2
-
+  dio:
+  connectivity_plus:
+  dartz:
+  cached_network_image:
+  lottie:
+  image_picker:
+  flutter_secure_storage: ^9.2.4
+  video_player:
+  chewie:
+  carousel_slider: ^5.0.0
+  place_picker_google: ^0.0.14
+  intl:
+  shimmer:
+  url_launcher:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_launcher_icons:
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -51,7 +64,10 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -80,6 +96,9 @@ flutter:
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto-Regular.ttf
+    - family: NotoSansArabic
+      fonts:
+        - asset: assets/fonts/NotoSansArabic-Light.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
@@ -87,4 +106,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/temp/
+    - assets/animation/
+    - assets/intro/
+    - shorebird.yaml
 

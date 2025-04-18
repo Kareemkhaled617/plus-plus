@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:plus/app/modules/account_screen/controller/account_controller.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 
-
 class RewardsPointsCard extends StatelessWidget {
   const RewardsPointsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<AccountController>();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
@@ -37,7 +37,7 @@ class RewardsPointsCard extends StatelessWidget {
               Image.asset(Assets.iconsCoin, width: 24, height: 24),
               SizedBox(width: 4),
               Text(
-                "1,972",
+                controller.points.value.toString(),
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -55,7 +55,7 @@ class RewardsPointsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "${AppKeys.pointsExpiryDate.tr} 10 December 2024",
+                  "${AppKeys.pointsExpiryDate.tr} ${controller.pointsList.last.date}",
                   style: AppFonts.bodyText.copyWith(
                       color: AppColors.black,
                       fontSize: 12,

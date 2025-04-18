@@ -15,6 +15,7 @@ class Assets {
   static const imagesLocation = 'assets/images/location.png';
   static const imagesLogo = 'assets/images/logo.png';
   static const imagesPrescription = 'assets/images/prescription.png';
+  static const imagesPrescriptionAr = 'assets/images/prescription_ar.png';
   static const imagesPrescriptionDone = 'assets/images/prescription_done.png';
   static const tempBanner = 'assets/temp/banner.png';
   static const tempCream = 'assets/temp/cream.png';
@@ -49,7 +50,8 @@ class Assets {
   static const iconsOffersPercent = "assets/icons/offers_percent.png";
   static const iconsCoin = "assets/icons/coin.png";
   static const iconsEdit = "assets/icons/edit.png";
-  static const imagesAccessLocationDone = "assets/images/access_location_done.png";
+  static const imagesAccessLocationDone =
+      "assets/images/access_location_done.png";
   static const imagesPointsCardBg = "assets/images/points_card_bg.png";
 
   static String imagesLocationEnabled = 'assets/images/location_enabled.png';

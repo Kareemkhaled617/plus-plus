@@ -1,25 +1,17 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/theme/app_colors.dart';
 import 'package:plus/app/modules/search_screen/widgets/recent_search_section.dart';
 import 'package:plus/app/modules/search_screen/widgets/search_and_suggestion_section.dart';
 import 'package:plus/app/modules/search_screen/widgets/searched_products_section.dart';
 
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
-
+import '../../core/widgets/loader.dart';
+import 'controller/recent_search_controller.dart';
+import 'controller/search_controller.dart';
 
 class SearchScreen extends StatefulWidget {
-  static List<String> suggestions = [
-    "Panadol",
-    "Dolipran",
-    "Paracetamol",
-    "Ibuprofen",
-    "Dolo-650",
-    "Aspirin",
-    "Dolorol"
-  ];
-
   const SearchScreen({super.key});
 
   @override
@@ -34,6 +26,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final recentController = Get.find<RecentSearchController>();
+    final controller = Get.find<SearchProductController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,63 +37,107 @@ class _SearchScreenState extends State<SearchScreen> {
             fontWeight: FontWeight.w700,
           ),
         ),
+        leading: Container(),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          FocusScope.of(context)
-              .unfocus(); // Hide keyboard when tapping outside
+          FocusScope.of(context).unfocus();
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             children: [
-              // Search Bar & Suggestions
               Column(
                 children: [
-                  SearchAndSuggestionSection(
-                    controller: searchController,
-                    // Use controller
-                    suggestions: SearchScreen.suggestions,
-                    searchQuery: searchQuery,
-                    onHintSelected: (selected) {
-                      setState(() {
-                        searchQuery = selected;
-                        searchController.text = selected; // Update text field
-                        showResults = true;
-                        isSearching = false;
-                      });
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        searchQuery = value;
-                        isSearching = value.isNotEmpty;
-                        showResults = false; // Hide results while typing
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  // Show recent searches when not typing & search field empty
+                  Obx(() {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: SearchAndSuggestionSection(
+                            controller: searchController,
+                            suggestions: recentController.recentSearches
+                                .map((recent) => recent.searchTerm)
+                                .toList(),
+                            searchQuery: searchQuery,
+                            onHintSelected: (selected) {
+
+                              setState(() {
+                                searchQuery = selected;
+                                searchController.text = selected;
+                                showResults = true;
+                                isSearching = false;
+                                controller.searchProducts(
+                                    searchQuery); // 🔄 Trigger search
+                              });
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                searchQuery = value;
+                                isSearching = value.isNotEmpty;
+                                showResults = false;
+                              });
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.search,
+                            color: AppColors.primary,
+                          ),
+                          onPressed: () {
+                            showResults = true;
+                            isSearching = false;
+
+                            controller.searchProducts(searchQuery);
+                            setState(() {});
+                          },
+                        )
+                      ],
+                    );
+                  }),
+                  const SizedBox(height: 20),
                   if (!isSearching && searchQuery.isEmpty)
-                    RecentSearchSection(
-                      recentSearches: SearchScreen.suggestions,
-                      onTap: (search) {
-                        log("Tapped: $search");
-                        setState(() {
-                          searchQuery = search;
-                          searchController.text = search;
-                          showResults = true;
-                        });
-                      },
-                    ),
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return const Center(child: AppLoader());
+                      }
+
+                      if (recentController.recentSearches.isEmpty) {
+                        return Center(
+                            child: Text("No recent searches available".tr));
+                      }
+
+                      return RecentSearchSection(
+                        recentSearches: recentController.recentSearches,
+                        onTap: (search ) {
+                          setState(() {
+                            searchQuery = search;
+                            searchController =
+                                TextEditingController(text: search);
+                            showResults = true;
+                            controller.searchProducts(
+                                searchQuery); // 🔄 Trigger search
+                          });
+                        },
+                      );
+                    }),
                 ],
               ),
-
               if (showResults)
                 Expanded(
-                  child: SearchedProductsSection(),
+                  child: Obx(() {
+                    if (controller.isLoading.value) {
+                      return const Center(child: AppLoader());
+                    }
+                    if (controller.searchResults.isEmpty) {
+                      return Container();
+                    }
+
+                    return SearchedProductsSection(
+                      products: controller.searchResults,
+                    );
+                  }),
                 ),
             ],
           ),

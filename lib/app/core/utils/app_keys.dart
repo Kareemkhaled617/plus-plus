@@ -1,13 +1,23 @@
 class AppKeys {
   static const notification = "Notification";
+  static const pharmacyPartnerInfo =
+      "Products are displayed, sold and delivered on behalf of our pharmacy partner";
+
   static const newText = "New";
+  static const next = "Next";
+  static const yes = "Yes";
+  static const no = "No";
   static const howCanHelpYou = "How can we help you?";
   static const search = "Search";
+  static const view = "View";
+  static const requiredField = "Required Field";
   static const recentSearch = "Recent Searches";
   static const prescription = "Prescription";
+  static const selectTheLanguage = "Select the Language";
+  static const communicate = "Communicate when available ";
   static const uploadPrescription =
       "Upload a photo of your Prescription or product";
-  static const aboutThePhoto = "About the photo";
+  static const aboutThePhoto = "     About the photo ......";
   static const or = "or";
   static const typeYourOrder = "Type your order";
   static const typeYourOrderHint =
@@ -26,6 +36,7 @@ class AppKeys {
   static const quantity = "Quantity";
   static const benefits = "Benefits";
   static const addToCart = "Add to cart";
+  static const removeToCart = "Product In cart";
   static const noProducts = "No Products";
   static const goFindProducts = "Go find the product you like !";
   static var cart = "Cart";
@@ -45,6 +56,7 @@ class AppKeys {
   static const addCoupon = "Add the coupon";
 
   static const offers = "Offers";
+  static const pOffers = "PLUS PLUS Offers";
   static const profile = "Profile";
 
   static const favourite = "Favourite";
@@ -106,7 +118,7 @@ class AppKeys {
 
   static var confirmYourLocation = "Confirm Your Location";
   static var accessLocation = "Confirm Location";
-
+  static var unAvailable = "unAvailable";
 
   static var accessLocationDescription =
       "Move the pin to highlight the correct location we can do a better experience for you.";
@@ -122,7 +134,8 @@ class AppKeys {
   static var apply = "Apply";
   static const addTheCouponHere = "Add the coupon here";
 
-  static const dontMissOfferChance = "Through two hours, Dont miss the chance !";
+  static const dontMissOfferChance =
+      "Through two hours, Dont miss the chance !";
 
   static var welcomeToYourRewards = "Welcome to the reward program ";
 
@@ -154,7 +167,7 @@ class AppKeys {
 
   static var otpCodeSent = "   OTP Code Sent On Your Mobile Number.";
 
-  static var resendCode =    "Resend Activation Code";
+  static var resendCode = "Resend Activation Code";
 
   static var generalInfo = "General info";
 
@@ -168,7 +181,8 @@ class AppKeys {
 
   static var whatsYourNumber = "What’s your mobile number?";
 
-  static var youWillReceiveCode = "You Will Receive An Sms With A Verification Code Mobile Number";
+  static var youWillReceiveCode =
+      "You Will Receive An Sms With A Verification Code Mobile Number";
 
   static var sendCode = "Send Code";
 
@@ -182,17 +196,18 @@ class AppKeys {
 
   static var sorry = "Sorry!";
 
-  static var locatingLocation =  "Locating your location...";
+  static var locatingLocation = "Locating your location...";
 
   static var here = "Here";
 
-  static var youCanOrderPrescription  = 'You can order the prescription by uploading a picture or listing your needs from the pharmacy';
+  static var youCanOrderPrescription =
+      'You can order the prescription by uploading a picture or listing your needs from the pharmacy';
 
   static var readyForWinter = 'Ready for winter?';
 
   static var welcome = 'Welcome';
 
-  static var weDontHaveDeliveryHere =  "We don’t deliver here !";
+  static var weDontHaveDeliveryHere = "We don’t deliver here !";
 
   static var contactUs = 'Contact Us';
 
@@ -202,9 +217,9 @@ class AppKeys {
 
   static var categories = 'Categories';
 
-  static var youWantToDelete =   "Are you sure you want to delete item ?";
+  static var youWantToDelete = "Are you sure you want to delete item ?";
 
-  static var sure  = "Sure";
+  static var sure = "Sure";
 
   static var searchForBrand = "Search for the brand";
 
@@ -227,7 +242,4 @@ class AppKeys {
   static var floor = "Floor";
 
   static var theApartment = "The Apartment";
-
-
-
 }

@@ -27,11 +27,12 @@ class OffersScreen extends StatelessWidget {
                     TextSpan(
                       text: "${AppKeys.exclusiveOffers.tr} ",
                       style: AppFonts.heading3.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18
                       ),
                       children: [
                         TextSpan(
-                          text: "PLUS PLUS 🔥",
+                          text: "PLUS PLUS   🔥",
                           style: AppFonts.heading3.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold,

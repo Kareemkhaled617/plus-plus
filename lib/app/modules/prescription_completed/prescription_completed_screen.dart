@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/modules/home_screen/home_screen.dart';
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
-
+import '../../core/widgets/custom_button.dart';
+import '../landing_screen/landing_screen.dart';
 
 class PrescriptionCompletedScreen extends StatelessWidget {
   const PrescriptionCompletedScreen({super.key});
@@ -12,53 +14,40 @@ class PrescriptionCompletedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 100),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               Assets.imagesPrescriptionDone,
-              width: 200,
+              width: 300,
             ),
             SizedBox(
               height: 60,
             ),
             Text(
               "${AppKeys.thankYou.tr}, Khaled",
-              style: AppFonts.heading3.copyWith(
-                color: AppColors.primary,
-                fontSize: 22
-              ),
+              style: AppFonts.heading3
+                  .copyWith(color: AppColors.primary, fontSize: 22),
             ),
             SizedBox(
               height: 12,
             ),
             Text(
               AppKeys.yourRequestHasBeenReceived.tr,
+              textAlign: TextAlign.center,
               style: AppFonts.bodyText.copyWith(fontSize: 16),
             ),
             SizedBox(
               height: 120,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                minimumSize: Size(180, 43),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+            CustomButton(
+              text: AppKeys.done.tr,
               onPressed: () {
-                Navigator.pop(context);
+                Get.offAll(LandingScreen());
               },
-              child: Text(
-                AppKeys.done.tr,
-                style: AppFonts.heading3.copyWith(
-                  color: Colors.white,
-                  fontSize: 14,
-                ),
-              ),
             ),
           ],
         ),

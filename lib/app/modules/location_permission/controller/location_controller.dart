@@ -18,14 +18,14 @@ class LocationController extends GetxController {
         if (result.isGranted) {
           isLocationEnabled.value = true;
         } else {
-          errorMessage.value = 'You Should Allow your location first.';
+          errorMessage.value = 'You Should Allow your location first.'.tr;
         }
       } else if (status.isPermanentlyDenied) {
         openAppSettings();
-        errorMessage.value = 'Please enable location from app settings.';
+        errorMessage.value = 'Please enable location from app settings.'.tr;
       }
     } catch (e) {
-      errorMessage.value = 'An error occurred while accessing location.';
+      errorMessage.value = 'An error occurred while accessing location.'.tr;
     } finally {
       isLoading.value = false;
     }

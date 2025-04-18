@@ -9,13 +9,15 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
 import '../../core/widgets/custom_text_form_field.dart';
-
+import 'controller/account_controller.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<AccountController>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -23,18 +25,18 @@ class AccountScreen extends StatelessWidget {
         backgroundColor: AppColors.white,
         title: Text(
           AppKeys.account.tr,
-          style: AppFonts.heading3,
+          style: AppFonts.heading1,
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   AppKeys.fullName.tr,
-                  style: AppFonts.heading3.copyWith(
+                  style: AppFonts.heading2.copyWith(
                     fontSize: 14,
                   ),
                 ),
@@ -42,15 +44,18 @@ class AccountScreen extends StatelessWidget {
                   height: 4,
                 ),
                 CustomTextFormField(
-                  hintText: "Abdelaziz.Ahmed",
-                  suffixIcon: Image.asset(Assets.iconsEdit),
-                ),
+                    hintText: "name..",
+                    controller: controller.nameController,
+                    suffixIcon: Icon(
+                      Icons.edit_document,
+                      color: AppColors.red,
+                    )),
                 SizedBox(
                   height: 21,
                 ),
                 Text(
                   AppKeys.phoneNumber.tr,
-                  style: AppFonts.heading3.copyWith(
+                  style: AppFonts.heading2.copyWith(
                     fontSize: 14,
                   ),
                 ),
@@ -60,10 +65,9 @@ class AccountScreen extends StatelessWidget {
                 IntlPhoneField(
                   decoration: InputDecoration(
                     filled: true,
-                    suffixIcon: Image.asset(
-                      Assets.iconsEdit,
-                      width: 12,
-                      height: 12,
+                    suffixIcon: Icon(
+                      Icons.edit_document,
+                      color: AppColors.red,
                     ),
                     fillColor: Colors.blue.shade50.withOpacity(.3),
                     border: OutlineInputBorder(
@@ -81,10 +85,15 @@ class AccountScreen extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.center,
-                  child: CustomButton(
-                    text: AppKeys.save.tr,
-                    onPressed: () {},
-                  ),
+                  child: Obx(() {
+                    return CustomButton(
+                      text: AppKeys.save.tr,
+                      isEnabled: !controller.isLoading.value,
+                      onPressed: () {
+                        controller.updateAccount();
+                      },
+                    );
+                  }),
                 )
               ],
             ),

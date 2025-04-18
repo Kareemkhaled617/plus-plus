@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
-import 'package:plus/app/modules/home_screen/widgets/best_seller.dart';
+import 'package:plus/app/modules/home_screen/widgets/section_page.dart';
+import 'package:plus/app/modules/home_screen/widgets/product_section.dart';
+import 'package:plus/app/modules/home_screen/widgets/category_page.dart';
 import 'package:plus/app/modules/home_screen/widgets/circular_image_slider.dart';
 import 'package:plus/app/modules/home_screen/widgets/prescription.dart';
 import 'package:plus/app/modules/home_screen/widgets/ready_for_winter.dart';
@@ -12,10 +14,10 @@ import 'package:plus/app/routes/app_routes.dart';
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
+import '../../core/utils/size_config.dart';
 import '../../core/widgets/category_item.dart';
 import '../../core/widgets/disclaimer_box.dart';
 import '../brands_screen/brands_screen.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,190 +27,178 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background,
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Assets.imagesBackground),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SectionHeader(),
-                SizedBox(
-                  height: 20,
+        body: Stack(
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Assets.imagesBackground),
+                  fit: BoxFit.cover,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(46),
-                        topRight: Radius.circular(46)),
-                    color: AppColors.white,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircularImageSlider(
-                        imageUrls: [
-                          Assets.tempBanner,
-                          Assets.tempBanner,
-                          Assets.tempBanner,
-                        ],
+              ),
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SectionHeader(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(46),
+                            topRight: Radius.circular(46)),
+                        color: AppColors.white,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      DisclaimerBox(
-                        message:
-                            'Products are displayed, sold and delivered on behalf of our pharmacy partner ',
-                        highlightedText: 'El Lewaa Elteby',
-                        onHighlightTap: () {},
-                        message1:
-                            ' pharmacy and under its full medical supervision.',
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          AppKeys.categories.tr,
-                          textAlign: TextAlign.start,
-                          style: AppFonts.heading1.copyWith(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      CategoryGrid(categories: [
-                        {'title': 'Medicine', 'imageUrl': Assets.tempDsd},
-                        {'title': 'Skin care', 'imageUrl': Assets.tempDsd},
-                        {'title': 'Hair care', 'imageUrl': Assets.tempDsd},
-                        {'title': 'Baby care', 'imageUrl': Assets.tempDsd},
-                        {
-                          'title': 'Animals Supplies',
-                          'imageUrl': Assets.tempDsd
-                        },
-                        {'title': 'Daily care', 'imageUrl': Assets.tempDsd},
-                        {
-                          'title': 'Medicine Supplies',
-                          'imageUrl': Assets.tempDsd
-                        },
-                        {'title': 'Make up', 'imageUrl': Assets.tempDsd},
-                      ]),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          AppKeys.addYourPrescription.tr,
-                          textAlign: TextAlign.start,
-                          style: AppFonts.heading2.copyWith(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Prescription(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'PLUS PLUS ${AppKeys.offers.tr}',
-                          textAlign: TextAlign.start,
-                          style: AppFonts.heading2.copyWith(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      CircularImageSlider(
-                        imageUrls: [
-                          Assets.tempBanner,
-                          Assets.tempBanner,
-                          Assets.tempBanner,
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      BestSeller(),
-                      SizedBox(height: 16),
-                      ReadyForWinter(),
-                      SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                             AppKeys.specialBrands.tr,
-                              style: AppFonts.heading2,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          CircularImageSlider(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          DisclaimerBox(
+                            message: AppKeys.pharmacyPartnerInfo.tr,
+                            highlightedText: ' El Lewaa Elteby  ',
+                            onHighlightTap: () {},
+                            message1:
+                                "Pharmacy and under its full medical supervision."
+                                    .tr,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              AppKeys.categories.tr,
+                              textAlign: TextAlign.start,
+                              style: AppFonts.heading1.copyWith(
+                                  fontSize: getResponsiveFontSize(17),
+                                  fontWeight: FontWeight.w700),
                             ),
-                            InkWell(
-                              onTap: () {
-                               Navigator.pushNamed(context, AppRoutes.brandsScreen);
-                              },
-                              child: Text(
-                                AppKeys.viewAll.tr,
-                                style: AppFonts.heading2.copyWith(
-                                    color: AppColors.primary, fontSize: 16),
-                              ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CategoryPage(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              AppKeys.addYourPrescription.tr,
+                              textAlign: TextAlign.start,
+                              style: AppFonts.heading1.copyWith(
+                                  fontSize: getResponsiveFontSize(17),
+                                  fontWeight: FontWeight.w700),
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      SpecialBrand(
-                        categories: [
-                          {'title': 'Medicine', 'imageUrl': Assets.tempImg},
-                          {'title': 'Skin care', 'imageUrl': Assets.tempImg},
-                          {'title': 'Hair care', 'imageUrl': Assets.tempImg},
-                          {'title': 'Baby care', 'imageUrl': Assets.tempImg},
-                          {
-                            'title': 'Animals Supplies',
-                            'imageUrl': Assets.tempImg
-                          },
-                          {'title': 'Daily care', 'imageUrl': Assets.tempImg},
-                          {
-                            'title': 'Medicine Supplies',
-                            'imageUrl': Assets.tempImg
-                          },
-                          {'title': 'Make up', 'imageUrl': Assets.tempImg},
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Prescription(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              AppKeys.pOffers.tr,
+                              textAlign: TextAlign.start,
+                              style: AppFonts.heading1.copyWith(
+                                  fontSize: getResponsiveFontSize(17),
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          CircularImageSlider1(),
+                          SizedBox(height: 16),
+                          SectionPage(),
+                          SizedBox(
+                            height: 40,
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                )
-              ],
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: AppColors.white,
-          onPressed: () {},
-          label: Row(
-            children: [
-              Text(
-                AppKeys.contactUs.tr,
-                style: AppFonts.bodyText
-                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                width: 128,
+                margin: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      // Soft shadow
+                      blurRadius: 13,
+                      // Smooth blur effect
+                      offset: Offset(8, 16),
+                      // Moves shadow slightly down and right
+                      spreadRadius: 2, // Optional: Makes shadow larger
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      AppKeys.contactUs.tr,
+                      style: AppFonts.bodyText.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Image(
+                      image: AssetImage(Assets.iconsWhatsapp),
+                      width: 30,
+                      height: 30,
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Image(
-                image: AssetImage(Assets.iconsWhatsapp),
-                width: 50,
-                height: 50,
-              )
-            ],
-          ),
+            )
+          ],
         ),
+        // floatingActionButton: FloatingActionButton.extended(
+        //   backgroundColor: AppColors.white,
+        //   onPressed: () {},
+        //   label: Row(
+        //     children: [
+        //       Text(
+        //         AppKeys.contactUs.tr,
+        //         style: AppFonts.bodyText
+        //             .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+        //       ),
+        //       SizedBox(
+        //         width: 10,
+        //       ),
+        //       Image(
+        //         image: AssetImage(Assets.iconsWhatsapp),
+        //         width: 50,
+        //         height: 50,
+        //       )
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

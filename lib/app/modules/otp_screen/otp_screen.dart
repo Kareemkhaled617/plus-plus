@@ -1,58 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../../core/theme/app_colors.dart';
 import '../../core/utils/app_keys.dart';
 import '../../core/utils/common_widgets.dart';
-import '../home_screen/home_screen.dart';
+import 'controller/otp_controller.dart';
 
-class OTPVerificationScreen extends StatefulWidget {
+class OTPVerificationScreen extends StatelessWidget {
   const OTPVerificationScreen({super.key});
 
   @override
-  State<OTPVerificationScreen> createState() => _OTPVerificationScreenState();
-}
-
-class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
-  TextEditingController otpController = TextEditingController();
-  bool isButtonEnabled = false;
-  int countdown = 60;
-
-  @override
-  void initState() {
-    super.initState();
-    startCountdown();
-  }
-
-  void startCountdown() {
-    Future.delayed(Duration(seconds: 1), () {
-      if (countdown > 0) {
-        setState(() {
-          countdown--;
-        });
-        startCountdown();
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final OTPController controller = Get.find<OTPController>();
+
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Text(
               AppKeys.verifyOtp.tr,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w900,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               AppKeys.otpCodeSent.tr,
               style: TextStyle(
@@ -60,18 +35,18 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 color: AppColors.primary,
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "+20123456789",
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.grey,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: 30),
+            const SizedBox(height: 20),
+            Obx(() => Text(
+                  controller.phoneNumber.value,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )),
+            const SizedBox(height: 30),
+
+            /// **OTP Input**
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30),
@@ -79,7 +54,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 length: 4,
                 obscureText: false,
                 animationType: AnimationType.fade,
-                controller: otpController,
+                controller: controller.otpTextController,
                 keyboardType: TextInputType.number,
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
@@ -90,58 +65,70 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   inactiveColor: Colors.grey,
                   selectedColor: Colors.blue,
                 ),
-                animationDuration: Duration(milliseconds: 300),
+                animationDuration: const Duration(milliseconds: 300),
                 onChanged: (value) {
-                  setState(() {
-                    isButtonEnabled = value.length == 4;
-                  });
+                  controller.validateOTP(value);
                 },
                 appContext: context,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
+
+            /// **Submit Button**
             Center(
-              child: SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        isButtonEnabled ? Colors.blueAccent : Colors.grey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              child: Obx(() => SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: controller.isButtonEnabled.value
+                            ? AppColors.primary
+                            : Colors.grey,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: controller.isButtonEnabled.value &&
+                              controller.isLoading.value == false
+                          ? () => controller.verifyOtp()
+                          : null,
+                      child: controller.isLoading.value
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : Text(
+                              AppKeys.submit.tr,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16),
+                            ),
                     ),
-                  ),
-                  onPressed: isButtonEnabled
-                      ? () {
-                          CommonWidgets.navigateWithFade(HomeScreen());
-                        }
-                      : null,
-                  child: Text(
-                    AppKeys.submit.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-              ),
+                  )),
             ),
-            SizedBox(height: 20),
+
+            const SizedBox(height: 20),
+
+            /// **Countdown Timer**
             Center(
-              child: Text(
-                "00:${countdown.toString().padLeft(2, '0')}",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
+              child: Obx(() => Text(
+                    "00:${controller.countdown.value.toString().padLeft(2, '0')}",
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  )),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+
+            /// **Resend Code**
             Center(
               child: GestureDetector(
-                onTap: countdown == 0 ? () {} : null,
-                child: Text(
-                  AppKeys.resendCode.tr,
-                  style: TextStyle(
-                    color: countdown == 0 ? Colors.blueAccent : Colors.grey,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                onTap: controller.countdown.value == 0
+                    ? () => controller.resendCode()
+                    : null,
+                child: Obx(() => Text(
+                      AppKeys.resendCode.tr,
+                      style: TextStyle(
+                        color: controller.countdown.value == 0
+                            ? Colors.blueAccent
+                            : Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
               ),
             ),
           ],

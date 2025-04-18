@@ -12,54 +12,56 @@ class ProductsInOffersSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * .4,
-          width: double.infinity,
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) => InkWell(
-              onTap: () {
-                Get.to(const ProductDetailsScreen());
-              },
-              child: ProductCard(
-                isOffer: true,
-                imageUrl: Assets.tempDsd,
-                title: "Evy Baby",
-                stockInfo: "Suncream",
-                price: "45 L.E",
-                onFavorite: () {},
-              ),
-            ),
-          ),
-        ),
+        // SizedBox(
+        //   height: MediaQuery.of(context).size.height * .4,
+        //   width: double.infinity,
+        //   child: ListView.builder(
+        //     shrinkWrap: true,
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: 10,
+        //     itemBuilder: (context, index) => InkWell(
+        //       onTap: () {
+        //         Get.to(const ProductDetailsScreen());
+        //       },
+        //       child: ProductCard(
+        //         isOffer: true,
+        //         imageUrl: Assets.tempDsd,
+        //         title: "Evy Baby",
+        //         stockInfo: "Suncream",
+        //         price: "45 L.E",
+        //         onFavorite: () {},
+        //         id: 1,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         SizedBox(
           height: 20,
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * .4,
-          width: double.infinity,
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) => InkWell(
-              onTap: () {
-                Get.to(const ProductDetailsScreen());
-              },
-              child: ProductCard(
-                isOffer: true,
-                imageUrl: Assets.tempDsd,
-                title: "Evy Baby",
-                stockInfo: "Suncream",
-                price: "45 L.E",
-                onAddToCart: () {},
-                onFavorite: () {},
-              ),
-            ),
-          ),
-        )
+        // SizedBox(
+        //   height: MediaQuery.of(context).size.height * .4,
+        //   width: double.infinity,
+        //   child: ListView.builder(
+        //     shrinkWrap: true,
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: 10,
+        //     itemBuilder: (context, index) => InkWell(
+        //       onTap: () {
+        //         Get.to(const ProductDetailsScreen());
+        //       },
+        //       child: ProductCard(
+        //         isOffer: true,
+        //         imageUrl: Assets.tempDsd,
+        //         title: "Evy Baby",
+        //         stockInfo: "Suncream",
+        //         price: "45 L.E",
+        //         onAddToCart: () {},
+        //         onFavorite: () {},
+        //         id: 1,
+        //       ),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

@@ -1,31 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/controller/favorite_controller.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
+import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/favourite_screen/widgets/favourite_empty_body.dart';
-
+import '../home_screen/widgets/products_grid.dart';
+import 'controller/favourite_controller.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
-
-import '../home_screen/widgets/products_grid.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> favouriteList = ["Product1"];
+    final controller = Get.find<FavouriteController>();
+    controller.fetchFavourites();
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
-        title: Text(
-          AppKeys.favourite.tr,
-          style: AppFonts.heading3,
-        ),
-        leading: AppBarBackButton(),
+        title: Text(AppKeys.favourite.tr, style: AppFonts.heading1),
+        leading: const AppBarBackButton(),
       ),
-      body: favouriteList.isEmpty ? FavouriteEmptyBody() : ProductsGrid(),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return const Center(child: AppLoader());
+        }
+        if (controller.errorMessage.isNotEmpty) {
+          return Center(child: Text(controller.errorMessage.value));
+        }
+        if (controller.favourites.isEmpty) {
+          return const FavouriteEmptyBody();
+        }
+
+        return ProductsGrid(products: controller.favourites);
+      }),
     );
   }
 }

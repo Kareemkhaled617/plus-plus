@@ -6,7 +6,6 @@ import '../../../../generated/assets.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 
-
 class SearchAndSuggestionSection extends StatefulWidget {
   const SearchAndSuggestionSection({
     super.key,
@@ -17,7 +16,7 @@ class SearchAndSuggestionSection extends StatefulWidget {
     this.onHintSelected,
   });
 
-  final TextEditingController controller; // External controller
+  final TextEditingController controller;
   final List<String> suggestions;
   final String searchQuery;
   final Function(String)? onChanged;
@@ -28,7 +27,8 @@ class SearchAndSuggestionSection extends StatefulWidget {
       _SearchAndSuggestionSectionState();
 }
 
-class _SearchAndSuggestionSectionState extends State<SearchAndSuggestionSection> {
+class _SearchAndSuggestionSectionState
+    extends State<SearchAndSuggestionSection> {
   late TextEditingController _internalController;
 
   @override
@@ -45,8 +45,9 @@ class _SearchAndSuggestionSectionState extends State<SearchAndSuggestionSection>
           return const Iterable<String>.empty();
         }
         return widget.suggestions.where(
-              (option) =>
-              option.toLowerCase().contains(textEditingValue.text.toLowerCase()),
+          (option) => option
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase()),
         );
       },
       onSelected: (String selection) {
@@ -56,12 +57,14 @@ class _SearchAndSuggestionSectionState extends State<SearchAndSuggestionSection>
         widget.onHintSelected?.call(selection);
       },
       fieldViewBuilder: (
-          context,
-          textFieldController,
-          focusNode,
-          onFieldSubmitted,
-          ) {
-        textFieldController.text = _internalController.text; // Keep it in sync
+        context,
+        textFieldController,
+        focusNode,
+        onFieldSubmitted,
+      ) {
+        if (textFieldController.text.isEmpty) {
+          textFieldController.text = _internalController.text;
+        }
 
         return CustomTextFormField(
           controller: textFieldController,

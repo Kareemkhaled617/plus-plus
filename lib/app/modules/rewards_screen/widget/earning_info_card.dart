@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:plus/app/domain/entities/point_entity.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 
-
 class EarningInfoCard extends StatelessWidget {
-  const EarningInfoCard({super.key, required this.isEarning});
+  const EarningInfoCard({super.key, required this.point});
 
-  final bool isEarning;
+  final PointEntity point;
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +28,17 @@ class EarningInfoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Yesterday, 4:32 AM",
+                  point.date,
                   style: AppFonts.bodyText.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
-                  isEarning ? "Earn" : "Payment #SK234412",
+                  point.positive ? "Earn" : "Payment ${point.orderNumber}",
                   style: AppFonts.bodyText.copyWith(
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
@@ -48,23 +50,25 @@ class EarningInfoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "#SK234412",
+                  point.orderNumber,
                   style: TextStyle(
-                    color: AppColors.grey.withOpacity(.8),
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold
-                  ),
+                      color: AppColors.grey.withOpacity(.8),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     Image.asset(Assets.iconsCoin, width: 16, height: 16),
                     SizedBox(width: 4),
                     Text(
-                      isEarning ? "+12" : "-50",
+                      point.positive ? "+12" : "-50",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: isEarning ? AppColors.primary : AppColors.red,
+                        color:
+                            point.positive ? AppColors.primary : AppColors.red,
                       ),
                     ),
                   ],

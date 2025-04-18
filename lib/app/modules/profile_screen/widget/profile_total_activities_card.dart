@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
-
-
 
 class ProfileTotalActivitiesCard extends StatelessWidget {
   const ProfileTotalActivitiesCard(
@@ -31,35 +30,33 @@ class ProfileTotalActivitiesCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Column(
-                  children: [
-                    Text(
-                      title,
-                      style: AppFonts.heading1
-                          .copyWith(color: AppColors.black, fontSize: 14),
-                    ),
-                    Text(
-                      "2 Products",
-                      style: AppFonts.bodyText.copyWith(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                      ),
-                    )
-                  ],
+                Text(
+                  title,
+                  style: AppFonts.heading1
+                      .copyWith(color: AppColors.black, fontSize: 16),
                 ),
               ],
             ),
           ),
-          Positioned(
-            top: -60,
-            right: -50,
-            child: Image.asset(
-              image,
-              height: 190,
-              width: 190,
-            ),
-          ),
+          Get.locale!.languageCode == "en"
+              ? Positioned(
+                  top: -60,
+                  right: -50,
+                  child: Image.asset(
+                    image,
+                    height: 190,
+                    width: 190,
+                  ),
+                )
+              : Positioned(
+                  top: -70,
+                  left: -50,
+                  child: Image.asset(
+                    image,
+                    height: 190,
+                    width: 190,
+                  ),
+                ),
         ],
       ),
     );

@@ -1,0 +1,2 @@
+C:/Users/Karee/StudioProjects/plus/android/app/.cxx/Debug/s3kg463n/x86/CMakeFiles/edit_cache.dir
+C:/Users/Karee/StudioProjects/plus/android/app/.cxx/Debug/s3kg463n/x86/CMakeFiles/rebuild_cache.dir

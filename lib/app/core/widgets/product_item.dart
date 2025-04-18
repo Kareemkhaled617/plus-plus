@@ -1,139 +1,318 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:plus/app/core/utils/app_keys.dart';
+import '../../controller/favorite_controller.dart';
+import '../../domain/entities/product_entity.dart';
 import '../../modules/cart/cart_screen.dart';
+import '../../modules/cart/controller/cart_controller.dart';
+import '../../modules/favourite_screen/controller/favourite_controller.dart';
+import '../../routes/app_routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 import '../utils/size_config.dart';
+import 'cached_image.dart';
 import 'offers_percent_widget.dart';
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;
+  final int id;
   final String title;
   final String stockInfo;
   final String price;
+  final ProductEntity productEntity;
   final VoidCallback? onAddToCart;
   final VoidCallback onFavorite;
   final bool isOffer;
 
   const ProductCard({
     required this.imageUrl,
+    required this.id,
     required this.title,
     required this.stockInfo,
     required this.price,
-     this.onAddToCart,
+    this.onAddToCart,
     required this.onFavorite,
     this.isOffer = false,
     super.key,
+    required this.productEntity,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-      margin: EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
+    FavoriteController favoriteController = Get.find<FavoriteController>();
+    final controller = Get.find<FavouriteController>();
+    CartController cartController = Get.find<CartController>();
+
+    return InkWell(
+      onTap: () {
+        Get.toNamed(AppRoutes.productDetails, arguments: {
+          'productId': id,
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        width: getProportionateScreenWidth(170),
+        height: getProportionateScreenHeight(230),
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
               color: AppColors.greyWithShade.withOpacity(.8),
               spreadRadius: .1,
-            )
-          ]),
-      child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              Image.asset(
-                imageUrl,
-                fit: BoxFit.contain,
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: AppFonts.heading1.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize: getResponsiveFontSize(16),
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        stockInfo,
-                        style: AppFonts.bodyText.copyWith(
-                          fontSize: getResponsiveFontSize(13),
-                          color: AppColors.brown,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: getProportionateScreenWidth(20)),
-                  Text(
-                    price,
-                    style: AppFonts.heading1
-                        .copyWith(fontSize: getResponsiveFontSize(15)),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              ElevatedButton.icon(
-                onPressed: onAddToCart ?? () {
-                  Get.to(CartScreen());
-                },
-                label: Icon(
-                  Icons.shopping_cart_outlined,
-                  size: 26,
-                  color: AppColors.white,
-                ),
-                icon: Text(
-                  "Add To Cart".tr,
-                  style: AppFonts.bodyText.copyWith(
-                      color: AppColors.white,
-                      fontSize: getResponsiveFontSize(15),
-                      fontWeight: FontWeight.w700),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: 0,
-            right: -14,
-            child: IconButton(
-              icon: Icon(Icons.favorite_border, color: Colors.red),
-              onPressed: onFavorite,
             ),
-          ),
-          if (isOffer)
-            Positioned(
-              top: 0,
-              left: 0,
-              child: OffersPercentWidget(),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: getProportionateScreenHeight(30),
+                ),
+                CachedImage(
+                  height: 60,
+                  fit: BoxFit.contain,
+                  imageUrl: imageUrl,
+                ),
+
+                SizedBox(height: getProportionateScreenHeight(10)),
+
+                /// **Price & Stock (Space Between)**
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: AppFonts.heading1.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontSize: getResponsiveFontSize(16),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            stockInfo,
+                            style: AppFonts.bodyText.copyWith(
+                                fontSize: getResponsiveFontSize(13),
+                                color: AppColors.brown,
+                                fontWeight: FontWeight.w700),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    productEntity.discountType == 'discount'
+                        ? Column(
+                            children: [
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Text(
+                                    price,
+                                    style: AppFonts.bodyText.copyWith(
+                                        fontSize: getResponsiveFontSize(10),
+                                        color: AppColors.red,
+                                        fontWeight: FontWeight.w700),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Transform.rotate(
+                                    angle: 45 * (3.14159265359 / 180),
+                                    // Convert degrees to radians
+                                    child: Container(
+                                      height: 2,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: AppColors.red,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                (productEntity.price -
+                                        (productEntity.price *
+                                            (productEntity.discountValue /
+                                                100)))
+                                    .toStringAsFixed(2),
+                                style: AppFonts.bodyText.copyWith(
+                                    fontSize: getResponsiveFontSize(13),
+                                    fontWeight: FontWeight.w700),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          )
+                        : Text(
+                            price,
+                            style: AppFonts.bodyText.copyWith(
+                                fontSize: getResponsiveFontSize(13),
+                                fontWeight: FontWeight.w700),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                  ],
+                ),
+
+                const SizedBox(height: 14),
+
+                /// **Add To Cart Button**
+                Obx(() {
+                  return ElevatedButton.icon(
+                    onPressed: productEntity.stock == 0
+                        ? null
+                        : () {
+                            if (cartController
+                                .isProductInCart(productEntity.id)) {
+                              Get.snackbar(
+                                  'PLUS', 'Product already in cart'.tr);
+                            } else {
+                              cartController.addToCart(productEntity,
+                                  isSelect: false);
+                            }
+                          },
+                    label: Icon(
+                      cartController.isProductInCart(id)
+                          ? Icons.shopping_cart_rounded
+                          : Icons.shopping_cart_outlined,
+                      size: 24,
+                      color: Colors.white,
+                    ),
+                    icon: cartController.isProductInCart(id)
+                        ? Text(
+                            AppKeys.removeToCart.tr,
+                            style: AppFonts.bodyText.copyWith(
+                              color: Colors.white,
+                              fontSize: getResponsiveFontSize(14),
+                              fontWeight: FontWeight.w700,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : Text(
+                            AppKeys.addToCart.tr,
+                            style: AppFonts.bodyText.copyWith(
+                              color: Colors.white,
+                              fontSize: getResponsiveFontSize(14),
+                              fontWeight: FontWeight.w700,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: cartController.isProductInCart(id)
+                          ? AppColors.primary.withOpacity(.2)
+                          : AppColors.primary,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  );
+                }),
+              ],
             ),
-        ],
+            Get.locale == Locale('ar')
+                ? Positioned(
+                    top: -14,
+                    left: -12,
+                    child: Obx(() {
+                      return Row(
+                        children: [
+                          productEntity.stock == 0
+                              ? Text(
+                                  'Unavailable',
+                                  style: AppFonts.bodyText.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.red),
+                                )
+                              : productEntity.discountType == 'discount'
+                                  ? Text(
+                                      '${productEntity.discountValue} % OFF',
+                                      style: AppFonts.bodyText.copyWith(
+                                          fontSize: getResponsiveFontSize(12),
+                                          fontWeight: FontWeight.w800,
+                                          color: AppColors.red),
+                                    )
+                                  : Container(),
+                          SizedBox(
+                            width: getProportionateScreenWidth(50),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                                favoriteController.isProductFavorite(id)
+                                    ? Icons.favorite_rounded
+                                    : Icons.favorite_border,
+                                color: Colors.red),
+                            onPressed: () {
+                              favoriteController.addProductToFavorites(id);
+                              controller.fetchFavourites();
+                            },
+                          ),
+                        ],
+                      );
+                    }),
+                  )
+                : Positioned(
+                    top: -14,
+                    right: -12,
+                    child: Obx(() {
+                      return Row(
+                        children: [
+                          productEntity.stock == 0
+                              ? Text(
+                                  'Unavailable',
+                                  style: AppFonts.bodyText.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.red),
+                                )
+                              : productEntity.discountType == 'discount'
+                                  ? Text(
+                                      '${productEntity.discountValue} % OFF',
+                                      style: AppFonts.bodyText.copyWith(
+                                          fontSize: getResponsiveFontSize(12),
+                                          fontWeight: FontWeight.w800,
+                                          color: AppColors.red),
+                                    )
+                                  : Container(),
+                          SizedBox(
+                            width: getProportionateScreenWidth(50),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                                favoriteController.isProductFavorite(id)
+                                    ? Icons.favorite_rounded
+                                    : Icons.favorite_border,
+                                color: Colors.red),
+                            onPressed: () {
+                              favoriteController.addProductToFavorites(id);
+                              controller.fetchFavourites();
+                            },
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+          ],
+        ),
       ),
     );
   }

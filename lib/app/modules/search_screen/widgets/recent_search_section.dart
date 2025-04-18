@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/widgets/loader.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
-
+import '../../../domain/entities/recent_search_entity.dart';
+import '../controller/recent_search_controller.dart';
 
 class RecentSearchSection extends StatelessWidget {
   const RecentSearchSection({
@@ -14,10 +16,11 @@ class RecentSearchSection extends StatelessWidget {
   });
 
   final Function(String)? onTap;
-  final List<String> recentSearches;
+  final List<RecentSearchEntity> recentSearches;
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,16 +29,15 @@ class RecentSearchSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                AppKeys.recentSearch .tr,
-                style: AppFonts.hintText.copyWith(fontSize: 14,color: AppColors.grey),
+                AppKeys.recentSearch.tr,
+                style: AppFonts.hintText
+                    .copyWith(fontSize: 14, color: AppColors.grey),
               ),
             ],
           ),
           SizedBox(
             height: 20,
           ),
-
-          /// **Recent Search Chips**
           Wrap(
             spacing: 16,
             runSpacing: 8,
@@ -47,15 +49,15 @@ class RecentSearchSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: InkWell(
-                    onTap: () => onTap!(search),
+                    onTap: () => onTap!(search.searchTerm),
                     child: Text(
-                      search,
+                      search.searchTerm,
                       style: AppFonts.bodyText.copyWith(
                           fontSize: 14, color: Colors.grey.withOpacity(.8)),
                     )),
               );
             }).toList(),
-          ),
+          )
         ],
       ],
     );

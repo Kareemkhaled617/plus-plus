@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'app/binding/app_binding.dart';
+import 'app/core/service/localization_service.dart';
+import 'app/core/storage/secure_storage_helper.dart';
 import 'app/core/theme/app_colors.dart';
 import 'app/core/utils/size_config.dart';
+import 'app/modules/home_screen/shimmer/HomePageShimmer.dart';
 import 'app/modules/splash_screen/splash_screen.dart';
+import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  String? savedLang = await SecureStorageHelper().getData("language");
+
+  runApp(MyApp(
+    initialLocale: savedLang != null
+        ? Locale(savedLang)
+        : LocalizationService.defaultLocale,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Locale initialLocale;
+
+  const MyApp({super.key, required this.initialLocale});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +33,18 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Plus Plus',
-      initialRoute: AppRoutes.splash,
-      onGenerateRoute: AppRoutes.onGenerateRoute,
+      initialRoute: AppRoutes.videoPlayer,
+      getPages: AppPages.pages,
+      locale: initialLocale,
+      fallbackLocale: LocalizationService.fallbackLocale,
+      translations: LocalizationService(),
       theme: ThemeData(
-        fontFamily: 'Roboto',
+        fontFamily:
+            initialLocale.languageCode == 'en' ? 'Roboto' : 'NotoSansArabic',
         primaryColor: AppColors.primary,
         unselectedWidgetColor: AppColors.greyWithShade,
       ),
-      home: const SplashScreen(),
+      // home: HomePageShimmer(),
     );
   }
 }

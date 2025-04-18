@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
 
+import '../../../core/storage/secure_storage_helper.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/widgets/custom_button.dart';
+import '../../../routes/app_routes.dart';
 
 class LogoutBottomSheetContent extends StatelessWidget {
   const LogoutBottomSheetContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -35,7 +37,10 @@ class LogoutBottomSheetContent extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                onPressed: () {},
+                onPressed: () async {
+                 await SecureStorageHelper().clearAll();
+                  Get.offAllNamed(AppRoutes.login);
+                },
                 text: AppKeys.logout.tr,
               ),
             ),
@@ -54,8 +59,7 @@ class LogoutBottomSheetContent extends StatelessWidget {
                   },
                   child: Text(
                     AppKeys.cancel.tr,
-                    style: AppFonts.bodyText
-                        .copyWith(color: AppColors.red),
+                    style: AppFonts.bodyText.copyWith(color: AppColors.red),
                   ),
                 ),
               ),

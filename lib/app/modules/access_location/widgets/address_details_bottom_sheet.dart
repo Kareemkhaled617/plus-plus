@@ -7,32 +7,38 @@ import 'package:plus/app/core/utils/common_widgets.dart';
 import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
 import 'package:plus/app/core/widgets/custom_button.dart';
 import 'package:plus/app/core/widgets/custom_text_form_field.dart';
+import 'package:plus/app/modules/access_location/controller/location_controller.dart';
 import 'package:plus/app/modules/access_location/widgets/destination_selection.dart';
 import 'package:plus/app/modules/address_directory/address_directory.dart';
 
 import '../../../../generated/assets.dart';
-import 'package:flutter/material.dart';
 
 class AddressDetailsBottomSheet extends StatelessWidget {
-  AddressDetailsBottomSheet({super.key});
-
-  final TextEditingController locationController =
-      TextEditingController(text: "Cairo, El-Gash street build 4");
+  const AddressDetailsBottomSheet({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final locationController = Get.put(LocationController());
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(height: 21),
 
             /// Location Input
             CustomTextFormField(
-              controller: locationController,
+              controller: locationController.addressController,
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return 'Please enter your location';
+              //   }
+              // },
               prefixIcon: Icon(
                 Icons.location_on,
                 color: AppColors.red,
@@ -49,19 +55,26 @@ class AddressDetailsBottomSheet extends StatelessWidget {
             /// Other Address Fields
             CustomTextFormField(
               hintText: AppKeys.street.tr,
+              controller: locationController.streetController,
               fillColor: AppColors.babyBlue,
             ),
             SizedBox(height: 12),
             CustomTextFormField(
               hintText: AppKeys.theBuilding.tr,
+              controller: locationController.buildingController,
               fillColor: AppColors.babyBlue,
             ),
             SizedBox(height: 12),
             CustomTextFormField(
-                hintText: AppKeys.floor.tr, fillColor: AppColors.babyBlue),
+              hintText: AppKeys.floor.tr,
+              fillColor: AppColors.babyBlue,
+              controller: locationController.floorController,
+            ),
             SizedBox(height: 12),
             CustomTextFormField(
-                hintText: AppKeys.theApartment.tr, fillColor: AppColors.babyBlue),
+                hintText: AppKeys.theApartment.tr,
+                controller: locationController.apartmentController,
+                fillColor: AppColors.babyBlue),
             SizedBox(height: 12),
 
             /// Destination Selection
@@ -71,50 +84,52 @@ class AddressDetailsBottomSheet extends StatelessWidget {
             /// Save Button
             Align(
               alignment: Alignment.center,
-              child: CustomButton(
-                text: AppKeys.saveAddress.tr,
-                onPressed: () {
-                  Get.back();
-                  showCustomBottomSheet(
-                    context,
-                    Column(
-                      children: [
-                        Image.asset(
-                          Assets.imagesAccessLocationDone,
-                          height: 200,
-                          width: 180,
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Text(
-                          AppKeys.thankYou.tr,
-                          style: AppFonts.heading3.copyWith(fontSize: 18),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "Ali ${AppKeys.weAddedYourAddress.tr}",
-                          style: AppFonts.heading3.copyWith(
-                            fontSize: 18,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        CustomButton(
-                          text: AppKeys.addressDirectory.tr,
-                          onPressed: () {
-                            Get.back();
-                            Get.off(AddressDirectory());
-                          },
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
+              child: Obx(() {
+                return CustomButton(
+                  text: AppKeys.saveAddress.tr,
+                  isEnabled: !locationController.isLoadingUpdate.value,
+                  onPressed: () async {
+                    await locationController.updateAddress();
+                    showCustomBottomSheet(
+                        context,
+                        Column(
+                          children: [
+                            Image.asset(
+                              Assets.imagesAccessLocationDone,
+                              height: 200,
+                              width: 180,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Text(
+                              AppKeys.thankYou.tr,
+                              style: AppFonts.heading3.copyWith(fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              AppKeys.weAddedYourAddress.tr,
+                              style: AppFonts.heading3.copyWith(
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            CustomButton(
+                              text: AppKeys.addressDirectory.tr,
+                              onPressed: () {
+                                Get.back();
+                                Get.back();
+                              },
+                            )
+                          ],
+                        ));
+                  },
+                );
+              }),
             ),
             SizedBox(height: 12),
           ],
