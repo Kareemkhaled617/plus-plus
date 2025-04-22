@@ -8,6 +8,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/size_config.dart';
 import '../../account_screen/controller/account_controller.dart';
+import '../../address_directory/controllor/address_controller.dart';
 import '../../notification_screen/notifications_screen.dart';
 import '../../rewards_screen/points_screen.dart';
 
@@ -22,6 +23,8 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AccountController controller = Get.find<AccountController>();
+    final addressController = Get.find<AddressController>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
@@ -32,7 +35,7 @@ class SectionHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              Text('${AppKeys.welcome.tr} sara ! ',
+              Text('${AppKeys.welcome.tr}  ! ',
                   style: AppFonts.heading1.copyWith(
                       color:
                           isProfileSection ? AppColors.black : AppColors.white,
@@ -103,29 +106,53 @@ class SectionHeader extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Cairo- Elgash street",
-                    style: AppFonts.bodyText.copyWith(
-                        color: isProfileSection
-                            ? AppColors.black
-                            : AppColors.white,
-                        fontSize: isProfileSection ? 12 : 18,
-                        fontWeight: FontWeight.w800),
-                  ),
-                  if (!isProfileSection)
-                    Text(
-                      AppKeys.weDontHaveDeliveryHere.tr,
-                      style: AppFonts.bodyText.copyWith(
-                        color: AppColors.yellowAccent,
-                        fontSize: 16,
+              Obx(() {
+                if (addressController.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (addressController.address.value != null) {
+                  final address = addressController.address.value!;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: Get.width - 80,
+                        child: Text(
+                          address.address.address,
+                          maxLines: 3,
+                          style: AppFonts.bodyText.copyWith(
+                              color: isProfileSection
+                                  ? AppColors.black
+                                  : AppColors.white,
+                              fontSize: isProfileSection ? 12 : 14,
+                              fontWeight: FontWeight.w800),
+                        ),
                       ),
-                    ),
-                ],
-              ),
+                      if (!isProfileSection)
+                        address.availableForDelivery
+                            ? Container()
+                            : Text(
+                                AppKeys.weDontHaveDeliveryHere.tr,
+                                style: AppFonts.bodyText.copyWith(
+                                  color: AppColors.yellowAccent,
+                                  fontSize: 16,
+                                ),
+                              ),
+                    ],
+                  );
+                } else {
+                  return InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.accessLocationScreen,
+                          arguments: {'edit': false});
+                    },
+                    child: Center(
+                        child: Text('No address available'.tr,
+                            style: AppFonts.bodyText
+                                .copyWith(color: Colors.white))),
+                  );
+                }
+              }),
             ],
           ),
         ],

@@ -9,6 +9,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../account_screen/account_screen.dart';
 import '../../address_directory/address_directory.dart';
+import '../../privacy_policy/privacy_policy_screen.dart';
 import 'change_lang_bottom_sheet.dart';
 
 class ProfileAllProperties extends StatelessWidget {
@@ -64,7 +65,9 @@ class ProfileAllProperties extends StatelessWidget {
         ProfilePropertyCard(
           title: AppKeys.privacyPolicy.tr,
           icon: Icons.privacy_tip_outlined,
-          onTap: () {},
+          onTap: () {
+            showPrivacyPolicyBottomSheet(context);
+          },
         ),
         ProfilePropertyCard(
           title: AppKeys.language.tr,

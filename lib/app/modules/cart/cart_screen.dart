@@ -7,6 +7,7 @@ import 'package:plus/app/modules/cart/widget/related_products_list.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
+import '../../routes/app_routes.dart';
 import '../cart/controller/cart_controller.dart';
 
 class CartScreen extends StatelessWidget {
@@ -46,13 +47,54 @@ class CartScreen extends StatelessWidget {
                           children: cartController.cartItems
                               .map((product) => Padding(
                                     padding: const EdgeInsets.only(bottom: 20),
-                                    child: CartListItem(product: product),
+                                    child: CartListItem(
+                                      product: product,
+                                      fromCart: true,
+                                    ),
                                   ))
                               .toList(),
                         ),
                         SizedBox(height: 16),
-                        CheckoutSummary(),
+                        CheckoutSummary(
+                          fromCart: true,
+                        ),
                         SizedBox(height: 16),
+                        const SizedBox(height: 20),
+                        Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              if (cartController.selectedAddress.value != null) {
+                                Get.toNamed(AppRoutes.checkOutScreen);
+                              } else {
+                                Get.snackbar("Address Empty".tr, "please select address".tr,
+                                    snackPosition: SnackPosition.TOP,
+                                    colorText: Colors.black);
+                              }
+                            },
+                            label: Icon(
+                              Icons.shopping_cart_outlined,
+                              size: 26,
+                              color: AppColors.white,
+                            ),
+                            icon: Text(
+                              AppKeys.checkout.tr,
+                              style: AppFonts.heading3.copyWith(
+                                color: AppColors.white,
+                                fontSize: 16,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

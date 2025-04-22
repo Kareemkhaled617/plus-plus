@@ -18,7 +18,7 @@ class PrescriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<PrescriptionController>();
+    final controller = Get.find<AddPrescriptionController>();
 
     return Scaffold(
       backgroundColor: AppColors.white,

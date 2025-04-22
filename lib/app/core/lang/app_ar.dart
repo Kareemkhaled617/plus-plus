@@ -206,5 +206,42 @@ const Map<String, String> arEG = {
   "unAvailable": "غير متاح",
   "No": "لا",
   "Yes": "نعم",
-  "The product has been added to the cart successfully.":"تمت إضافة المنتج إلى السلة بنجاح"
+  "The product has been added to the cart successfully.":
+      "تمت إضافة المنتج إلى السلة بنجاح",
+  "Coupon Discount": "خصم الكوبون",
+  "Applied Coupon": "تم تطبيق الكوبون",
+  "Choose your delivery address": "اختر عنوان التوصيل الخاص بك",
+  "No addresses found": "لا توجد عناوين حالياً",
+  "Order Summary": "ملخص الطلب",
+  "Address Empty": "لا يوجد عناوين",
+  "please select address": "يرجى اختيار عنوان",
+  "Payment details": "تفاصيل الدفع",
+  "Use": "استخدام",
+  "0 Point": "٠ نقطة",
+  "Insert number of point": "أدخل عدد النقاط",
+  "Use Your Point": "استخدم نقاطك",
+  "Pay Now !": "ادفع الآن!",
+  "Select Payment": "اختر طريقة الدفع",
+  "Pay with your card /credit card": "ادفع ببطاقتك البنكية / بطاقة الائتمان",
+  "Visa on delivery": "الدفع عند الاستلام بالفيزا",
+  "Cash on delivery": "الدفع نقداً عند الاستلام",
+  "Continue Shopping": "متابعة التسوق",
+  "We might contact you for tracking and confirming your order":
+      "قد نتواصل معك لتتبع وتأكيد طلبك",
+  "We have received your order": "تم استلام طلبك",
+  "Thank you!": "شكراً لك!",
+  "Contact via WhatsApp": "تواصل عبر واتساب",
+  "Contact Information": "معلومات التواصل",
+  "No address available": "لا يوجد عنوان متاح",
+  'Unavailable': "غير متوفر",
+  "Product In cart": "المنتج في السلة",
+  "howToEarnPoints": "كيفية كسب النقاط",
+  "intro":
+      "النقاط هي عملة برنامج المكافآت. من حيث كيفية الحصول عليها، فهناك طريقتان.",
+  "online":
+      "الأولى عبر الإنترنت، وهي من خلال الشراء من التطبيق. مع كل منتج تشتريه، تحصل على نقاط.",
+  "offline":
+      "الثانية من خلال الصيدلية، حيث يجب إدخال رقم الهاتف لتجميع النقاط.\nفي حالة إرجاع المنتج، سيتم حذف النقاط التي تم الحصول عليها عند شرائه.",
+  "policy":
+      "لا يمكن الشراء باستخدام النقاط، ولكن سيتم خصم القيمة المقابلة للنقاط من إجمالي الفاتورة."
 };

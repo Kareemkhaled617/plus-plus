@@ -36,7 +36,7 @@ class ProductDescriptionTab extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            "Benefits",
+            "Benefits".tr,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 8),

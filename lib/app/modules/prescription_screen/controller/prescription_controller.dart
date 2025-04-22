@@ -7,10 +7,10 @@ import '../../../domain/usecases/upload_prescription_usecase.dart';
 import '../../../core/errors/failure.dart';
 import '../../../routes/app_routes.dart';
 
-class PrescriptionController extends GetxController {
+class AddPrescriptionController extends GetxController {
   final UploadPrescriptionUseCase uploadPrescriptionUseCase;
 
-  PrescriptionController(this.uploadPrescriptionUseCase);
+  AddPrescriptionController(this.uploadPrescriptionUseCase);
 
   var formKey = GlobalKey<FormState>();
   var isLoading = false.obs;

@@ -9,13 +9,26 @@ import '../../routes/app_routes.dart';
 import 'address_card.dart';
 import 'controllor/address_controller.dart';
 
-class AddressDirectory extends StatelessWidget {
+class AddressDirectory extends StatefulWidget {
   const AddressDirectory({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.find<AddressController>();
+  State<AddressDirectory> createState() => _AddressDirectoryState();
+}
 
+class _AddressDirectoryState extends State<AddressDirectory> {
+  final controller = Get.find<AddressController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.fetchAddresses();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -27,11 +40,9 @@ class AddressDirectory extends StatelessWidget {
         if (controller.isLoading.value) {
           return Center(child: AppLoader());
         }
-
         if (controller.addresses.isEmpty) {
-          return Center(child: Text("No addresses found"));
+          return Center(child: Text("No addresses found".tr));
         }
-
         return ListView.separated(
           padding: const EdgeInsets.all(12),
           itemCount: controller.addresses.length,

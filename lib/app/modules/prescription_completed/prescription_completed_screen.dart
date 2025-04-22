@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/modules/home_screen/home_screen.dart';
+import 'package:plus/app/routes/app_routes.dart';
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
@@ -28,7 +29,7 @@ class PrescriptionCompletedScreen extends StatelessWidget {
               height: 60,
             ),
             Text(
-              "${AppKeys.thankYou.tr}, Khaled",
+              AppKeys.thankYou.tr,
               style: AppFonts.heading3
                   .copyWith(color: AppColors.primary, fontSize: 22),
             ),
@@ -46,7 +47,7 @@ class PrescriptionCompletedScreen extends StatelessWidget {
             CustomButton(
               text: AppKeys.done.tr,
               onPressed: () {
-                Get.offAll(LandingScreen());
+                Get.offAllNamed(AppRoutes.landingScreen);
               },
             ),
           ],

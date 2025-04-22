@@ -58,24 +58,24 @@ class HowToEarnPoints extends StatelessWidget {
 
           // Step 1: Introduction
           _buildBulletText(
-            "Points are the currency of the rewards program. In terms of how to obtain them, they are through two methods.",
+            "intro".tr,
           ),
 
           // Step 2: Online
           _buildBulletText(
-            "The first is online, which is through purchasing from the application. With every product you buy, you get points.",
+            "online".tr,
             highlight: "The first is online",
           ),
 
           // Step 3: Offline
           _buildBulletText(
-            "The second is offline, which is through the pharmacy store, where you must enter the phone number to collect points,\nIn the event that the user returns the product, the points he obtained when purchasing this product will be deleted.",
+            "offline".tr,
             highlight: "The second is offline",
           ),
 
           // Step 4: Purchase policy
           _buildBulletText(
-            "It is not possible to purchase using points, but the equivalent value of the points will be deducted from the total bill.",
+            "policy".tr ,
           ),
         ],
       ),

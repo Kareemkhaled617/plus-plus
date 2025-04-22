@@ -16,6 +16,11 @@ class AccessLocationScreen extends StatelessWidget {
     final args = Get.arguments ?? {};
     final isEdit = args['edit'] ?? false;
     final address = args['address'] ?? {};
+    print(isEdit);
+    print(isEdit);
+    print(isEdit);
+    print(address);
+    print(address);
     final initialLatLng = isEdit
         ? LatLng(
             double.tryParse(address['lat'].toString()) ?? 0.0,
@@ -41,7 +46,7 @@ class AccessLocationScreen extends StatelessWidget {
                           LatLng(result.latLng!.latitude,
                               result.latLng!.longitude),
                           result);
-                      Navigator.of(context).pop();
+                      Get.back();
                     },
                     enableNearbyPlaces: false,
                     showSearchInput: true,
@@ -57,8 +62,7 @@ class AccessLocationScreen extends StatelessWidget {
                       autofocus: false,
                       textDirection: TextDirection.ltr,
                     ),
-                    searchInputDecorationConfig:
-                         SearchInputDecorationConfig(
+                    searchInputDecorationConfig: SearchInputDecorationConfig(
                       hintText: "Search for a building, street or ...".tr,
                     ),
                     selectedPlaceWidgetBuilder: (ctx, state, result) {

@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../data/models/package_type_model.dart';
 import '../../../data/models/product_model.dart';
+import '../../../domain/entities/address_entity.dart';
 import '../../../domain/entities/cart_entity.dart';
 import '../../../domain/entities/product_entity.dart';
 import '../../../domain/usecases/add_to_cart_usecase.dart';
+import '../../../domain/usecases/get_cart_usecase.dart';
 import '../../../domain/usecases/remove_from_cart_usecase.dart';
 
 class CartController extends GetxController {
@@ -16,11 +18,18 @@ class CartController extends GetxController {
   var itemCounts = <int, int>{}.obs;
   final AddToCartUseCase addToCartUseCase;
   final RemoveFromCartUseCase removeFromCartUseCase;
+  final GetCartUseCase getCartUseCase;
+
   final TextEditingController copounController = TextEditingController();
   final RxString copounText = ''.obs;
   Rxn<CartEntity> updatedCart = Rxn<CartEntity>();
+  Rxn<AddressEntity> selectedAddress = Rxn<AddressEntity>();
+  final isLoading = true.obs;
 
-  CartController(this.addToCartUseCase, this.removeFromCartUseCase);
+  void selectAddress(AddressEntity address) {
+    selectedAddress.value = address;
+  }
+  CartController(this.addToCartUseCase, this.removeFromCartUseCase, this.getCartUseCase);
 
   @override
   void onInit() {
@@ -31,26 +40,38 @@ class CartController extends GetxController {
     loadCartFromCache();
   }
 
-  final isLoading = true.obs;
 
-  // Future<void> addToCartApi() async {
-  //   isLoading.value = true;
-  //
-  //   final success = await addToCartUseCase(
-  //     productIds: [11, 12, 13],
-  //     quantityIds: [2, 3, 4],
-  //     packageTypeIds: [null, null, null],
-  //   );
-  //
-  //   isLoading.value = false;
-  //
-  //   if (success) {
-  //     Get.snackbar("Success", "تمت إضافة المنتج إلى السلة بنجاح");
-  //   } else {
-  //     Get.snackbar("Error", "فشل في إضافة المنتج إلى السلة");
-  //   }
-  // }
+
+  Future<void> fetchCart() async {
+    isLoading.value = true;
+
+    final result = await getCartUseCase();
+    result.fold(
+          (failure) {
+        isLoading.value = false;
+        log("Error: ${failure.message}");
+      },
+          (cartList) {
+        // تحويل CartRequestEntity إلى ProductModel
+        final products = cartList.map((item) => ProductModel.fromCartEntity(item)).toList();
+
+        cartItems.assignAll(products);
+
+        for (var item in cartList) {
+          itemCounts[item.product.id] = item.quantity;
+        }
+
+        saveCartToCache();
+        isLoading.value = false;
+      },
+    );
+  }
+
+
   Future<void> addToCartApi() async {
+    if (cartItems.isEmpty) {
+      return;
+    }
     isLoading.value = true;
 
     // 🧠 توليد البيانات من cartItems

@@ -3,7 +3,6 @@ import 'package:plus/app/modules/favourite_screen/binding/favourite_binding.dart
 import 'package:plus/app/modules/login_screen/binding/auth_binding.dart';
 
 import '../binding/app_binding.dart';
-import '../binding/prescription_binding.dart';
 import '../binding/product_binding.dart';
 import '../binding/sup_category_binding.dart';
 import '../modules/access_location/access_location_screen.dart';
@@ -16,7 +15,10 @@ import '../modules/all_prescription/bindind/prescription_binding.dart';
 import '../modules/brands_screen/binding/brand_binding.dart';
 import '../modules/brands_screen/brands_screen.dart';
 
+import '../modules/cart/binding/cart_binding.dart';
 import '../modules/cart/cart_screen.dart';
+import '../modules/check_out_screen/binding/order_request_binding.dart';
+import '../modules/check_out_screen/check_out_screen.dart';
 import '../modules/favourite_screen/favourite_screen.dart';
 import '../modules/home_screen/home_screen.dart';
 import '../modules/landing_screen/landing_screen.dart';
@@ -30,7 +32,9 @@ import '../modules/order_history_screen/order_history_screen.dart';
 import '../modules/otp_screen/binding/otp_binding.dart';
 import '../modules/otp_screen/otp_screen.dart';
 import '../modules/prescription_completed/prescription_completed_screen.dart';
+import '../modules/prescription_screen/binding/prescription_binding.dart';
 import '../modules/prescription_screen/prescription_screen.dart';
+import '../modules/privacy_policy/binding/privacy_policy_binding.dart';
 import '../modules/product_details_screen/binding/product_binding.dart';
 import '../modules/product_details_screen/product_details_screen.dart';
 import '../modules/products_screen/binding/all_product_binding.dart';
@@ -68,7 +72,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-      binding: AuthBinding(),
+      bindings: [AuthBinding(),PrivacyPolicyBinding()],
     ),
     GetPage(
       name: AppRoutes.home,
@@ -83,7 +87,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.favouriteScreen,
       page: () => FavouriteScreen(),
-      binding: FavouriteBinding(),
+      binding: FavoriteBinding(),
     ),
     GetPage(
       name: AppRoutes.rewards,
@@ -126,7 +130,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.otp,
       page: () => OTPVerificationScreen(),
-      binding: OTPBinding(),
+      bindings: [OTPBinding(), CartBinding(),FavoriteBinding()],
     ),
     GetPage(
         name: AppRoutes.prescription,
@@ -164,5 +168,9 @@ class AppPages {
         name: AppRoutes.orderDetailsScreen,
         page: () => OrderDetailsScreen(),
         binding: OrderDetailsBinding()),
+    GetPage(
+        name: AppRoutes.checkOutScreen,
+        page: () => CheckOutScreen(),
+        binding: CheckoutBinding()),
   ];
 }

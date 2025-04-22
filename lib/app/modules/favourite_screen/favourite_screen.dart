@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/controller/favorite_controller.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/favourite_screen/widgets/favourite_empty_body.dart';
 import '../home_screen/widgets/products_grid.dart';
-import 'controller/favourite_controller.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
+import 'controller/favorite_controller.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<FavouriteController>();
+    final controller = Get.find<FavoriteController>();
     controller.fetchFavourites();
     return Scaffold(
       backgroundColor: AppColors.white,

@@ -129,7 +129,7 @@ class CouponSection extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               CustomButton(
-                text: AppKeys.apply,
+                text: AppKeys.apply.tr,
                 onPressed: () {
                   controller.addToCartApi();
                   Get.back();

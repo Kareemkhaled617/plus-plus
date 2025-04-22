@@ -37,22 +37,22 @@ class RelatedProductsList extends StatelessWidget {
                 style: AppFonts.heading2,
               ),
               Spacer(),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.productsScreen,
-                      arguments: {
-                        "gradientColors": [AppColors.white, AppColors.white],
-                        "title": 'Related Products'.tr,
-                      });
-                },
-                child: Text(
-                  AppKeys.viewAll.tr,
-                  style: AppFonts.bodyText.copyWith(
-                      color: AppColors.primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.pushNamed(context, AppRoutes.productsScreen,
+              //         arguments: {
+              //           "gradientColors": [AppColors.white, AppColors.white],
+              //           "title": 'Related Products'.tr,
+              //         });
+              //   },
+              //   child: Text(
+              //     AppKeys.viewAll.tr,
+              //     style: AppFonts.bodyText.copyWith(
+              //         color: AppColors.primary,
+              //         fontSize: 14,
+              //         fontWeight: FontWeight.w500),
+              //   ),
+              // ),
             ],
           ),
           SizedBox(

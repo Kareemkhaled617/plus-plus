@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
+import 'package:plus/app/modules/home_screen/widgets/contact_us.dart';
 import 'package:plus/app/modules/home_screen/widgets/section_page.dart';
 import 'package:plus/app/modules/home_screen/widgets/product_section.dart';
 import 'package:plus/app/modules/home_screen/widgets/category_page.dart';
@@ -17,6 +18,7 @@ import '../../core/theme/app_fonts.dart';
 import '../../core/utils/size_config.dart';
 import '../../core/widgets/category_item.dart';
 import '../../core/widgets/disclaimer_box.dart';
+import '../account_screen/controller/business_settings_controller.dart';
 import '../brands_screen/brands_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,6 +26,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BusinessSettingsController businessSettingsController =
+        Get.find<BusinessSettingsController>();
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background,
@@ -135,44 +139,55 @@ class HomeScreen extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: Container(
-                width: 128,
-                margin: EdgeInsets.only(bottom: 10),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      // Soft shadow
-                      blurRadius: 13,
-                      // Smooth blur effect
-                      offset: Offset(8, 16),
-                      // Moves shadow slightly down and right
-                      spreadRadius: 2, // Optional: Makes shadow larger
+              child: InkWell(
+                onTap: businessSettingsController.isLoading.value
+                    ? null
+                    : () {
+                        showContactDialog(
+                            context,
+                            businessSettingsController
+                                .settings.value!.phoneNumber,
+                            businessSettingsController.settings.value!.address);
+                      },
+                child: Container(
+                  width: 128,
+                  margin: EdgeInsets.only(bottom: 10),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      bottomLeft: Radius.circular(16),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      AppKeys.contactUs.tr,
-                      style: AppFonts.bodyText.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        // Soft shadow
+                        blurRadius: 13,
+                        // Smooth blur effect
+                        offset: Offset(8, 16),
+                        // Moves shadow slightly down and right
+                        spreadRadius: 2, // Optional: Makes shadow larger
                       ),
-                    ),
-                    SizedBox(width: 10),
-                    Image(
-                      image: AssetImage(Assets.iconsWhatsapp),
-                      width: 30,
-                      height: 30,
-                    ),
-                  ],
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        AppKeys.contactUs.tr,
+                        style: AppFonts.bodyText.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Image(
+                        image: AssetImage(Assets.iconsWhatsapp),
+                        width: 30,
+                        height: 30,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )

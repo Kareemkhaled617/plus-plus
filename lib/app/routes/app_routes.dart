@@ -23,4 +23,5 @@ class AppRoutes {
   static const accessLocationScreen = '/AccessLocationScreen';
   static const prescriptionCompletedScreen = '/prescriptionCompletedScreen';
   static const orderDetailsScreen = '/OrderDetailsScreen';
+  static const checkOutScreen = '/CheckOutScreen';
 }

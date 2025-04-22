@@ -15,8 +15,10 @@ import '../../../domain/entities/product_entity.dart';
 
 class CartListItem extends StatelessWidget {
   final ProductEntity product;
+  final bool fromCart;
 
-  const CartListItem({super.key, required this.product});
+  const CartListItem(
+      {super.key, required this.product, required this.fromCart});
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +47,8 @@ class CartListItem extends StatelessWidget {
                 child: CachedImage(
                   imageUrl: product.imageUrl,
                   width: 100,
-                  height: 144,
-                  fit: BoxFit.contain,
+                  height: 104,
+                  fit: BoxFit.cover,
                 ),
               ),
               SizedBox(width: 20),
@@ -97,43 +99,47 @@ class CartListItem extends StatelessWidget {
                       ],
                     );
                   }),
-                  SizedBox(height: 10),
-                  ProductCounterSection(
-                    plusIconSize: 16,
-                    controller: cartController,
-                    productEntity: product,
-                    isSelected: product.isSelected,
-                  )
+                  fromCart ? SizedBox(height: 10) : Container(),
+                  fromCart
+                      ? ProductCounterSection(
+                          plusIconSize: 16,
+                          controller: cartController,
+                          productEntity: product,
+                          isSelected: product.isSelected,
+                        )
+                      : Container()
                 ],
               )
             ],
           ),
         ),
-        Positioned(
-          top: 0,
-          right: 0,
-          child: GestureDetector(
-            onTap: () {
-              showCustomBottomSheet(context,
-                  buildDeleteItemDialogContent(cartController, product));
-            },
-            child: Container(
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadiusDirectional.only(
-                  topEnd: Radius.circular(10),
-                  bottomStart: Radius.circular(10),
+        fromCart
+            ? Positioned(
+                top: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    showCustomBottomSheet(context,
+                        buildDeleteItemDialogContent(cartController, product));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadiusDirectional.only(
+                        topEnd: Radius.circular(10),
+                        bottomStart: Radius.circular(10),
+                      ),
+                      color: AppColors.primary,
+                    ),
+                    child: Icon(
+                      Icons.delete_outline_rounded,
+                      color: AppColors.white,
+                      size: 24,
+                    ),
+                  ),
                 ),
-                color: AppColors.primary,
-              ),
-              child: Icon(
-                Icons.delete_outline_rounded,
-                color: AppColors.white,
-                size: 24,
-              ),
-            ),
-          ),
-        ),
+              )
+            : Container(),
         Positioned(
           top: 0,
           left: 0,

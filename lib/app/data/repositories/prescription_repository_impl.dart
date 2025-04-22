@@ -25,6 +25,7 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
                   filename: filePath.split('/').last)
             ],
             'about_image': aboutImage,
+            'image_type': 'image',
             'order_product_names': orderProductNames,
           })
         : FormData.fromMap({

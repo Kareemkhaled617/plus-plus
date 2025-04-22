@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:get/get.dart';
 import '../../core/network/api_service.dart';
 import '../../core/errors/failure.dart';
 import '../../domain/entities/product_entity.dart';
@@ -97,8 +98,10 @@ class ProductRepositoryImpl implements ProductRepository {
       return Left(Failure("An error occurred while fetching products"));
     }
   }
+
   @override
-  Future<Either<Failure, List<ProductEntity>>> searchProducts(String query) async {
+  Future<Either<Failure, List<ProductEntity>>> searchProducts(
+      String query) async {
     try {
       final response = await apiService.getRequest('/search?search=$query');
 
@@ -110,6 +113,24 @@ class ProductRepositoryImpl implements ProductRepository {
       }
     } catch (e) {
       return Left(Failure("An error occurred while searching"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getDiscountProducts() async {
+    try {
+      final response = await apiService.getRequest('/discounts/products');
+      if (response.success) {
+        final List products = response.data['data']['products'];
+        final result =
+            products.map((item) => ProductModel.fromJson(item)).toList();
+        return Right(result);
+      } else {
+        return Left(
+            Failure(response.message ?? 'Failed to load discount products'.tr));
+      }
+    } catch (e) {
+      return Left(Failure('Unexpected error occurred'.tr));
     }
   }
 }

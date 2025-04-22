@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
-import '../../controller/favorite_controller.dart';
 import '../../domain/entities/product_entity.dart';
 import '../../modules/cart/cart_screen.dart';
 import '../../modules/cart/controller/cart_controller.dart';
-import '../../modules/favourite_screen/controller/favourite_controller.dart';
+import '../../modules/favourite_screen/controller/favorite_controller.dart';
 import '../../routes/app_routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
@@ -39,8 +38,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FavoriteController favoriteController = Get.find<FavoriteController>();
-    final controller = Get.find<FavouriteController>();
+
+    final controller = Get.find<FavoriteController>();
     CartController cartController = Get.find<CartController>();
 
     return InkWell(
@@ -184,6 +183,7 @@ class ProductCard extends StatelessWidget {
                             } else {
                               cartController.addToCart(productEntity,
                                   isSelect: false);
+                              cartController.addToCartApi();
                             }
                           },
                     label: Icon(
@@ -237,7 +237,7 @@ class ProductCard extends StatelessWidget {
                         children: [
                           productEntity.stock == 0
                               ? Text(
-                                  'Unavailable',
+                                  'Unavailable'.tr,
                                   style: AppFonts.bodyText.copyWith(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w800,
@@ -257,12 +257,12 @@ class ProductCard extends StatelessWidget {
                           ),
                           IconButton(
                             icon: Icon(
-                                favoriteController.isProductFavorite(id)
+                                controller.isProductFavorite(id)
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border,
                                 color: Colors.red),
                             onPressed: () {
-                              favoriteController.addProductToFavorites(id);
+                              controller.addProductToFavorites(id);
                               controller.fetchFavourites();
                             },
                           ),
@@ -298,12 +298,12 @@ class ProductCard extends StatelessWidget {
                           ),
                           IconButton(
                             icon: Icon(
-                                favoriteController.isProductFavorite(id)
+                                controller.isProductFavorite(id)
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border,
                                 color: Colors.red),
                             onPressed: () {
-                              favoriteController.addProductToFavorites(id);
+                              controller.addProductToFavorites(id);
                               controller.fetchFavourites();
                             },
                           ),

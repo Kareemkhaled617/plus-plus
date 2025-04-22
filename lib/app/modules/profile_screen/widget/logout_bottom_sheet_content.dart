@@ -38,7 +38,7 @@ class LogoutBottomSheetContent extends StatelessWidget {
             Expanded(
               child: CustomButton(
                 onPressed: () async {
-                 await SecureStorageHelper().clearAll();
+                  await SecureStorageHelper().clearAll();
                   Get.offAllNamed(AppRoutes.login);
                 },
                 text: AppKeys.logout.tr,

@@ -1,3 +1,4 @@
+import '../../domain/entities/cart_request_entity.dart';
 import '../../domain/entities/product_entity.dart';
 import 'package_type_model.dart';
 
@@ -144,6 +145,34 @@ class ProductModel extends ProductEntity {
   static List<ProductEntity> fromJsonList(List<dynamic> jsonList) {
     return jsonList.map((json) => ProductModel.fromJson(json)).toList();
   }
+  factory ProductModel.fromCartEntity(CartRequestEntity entity) {
+    final product = entity.product;
+
+    return ProductModel(
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      benefits: product.benefits,
+      price: product.price,
+      stock: product.stock,
+      imageUrl: product.imageUrl,
+      bodyImages: product.bodyImages,
+      brandId: product.brandId,
+      brandName: product.brandName,
+      brandImage: product.brandImage,
+      categories: product.categories,
+      packageTypes: product.packageTypes,
+      discountType: product.discountType,
+      discountValue: product.discountValue,
+      discountEndDate: product.discountEndDate,
+      discountId: product.discountId,
+      offerId: product.offerId,
+      offerType: product.offerType,
+      offerDiscountPercentage: product.offerDiscountPercentage,
+      isSelected: false, // يمكن تعديله حسب الحالة
+    );
+  }
+
 }
 
 class CategoryModel {

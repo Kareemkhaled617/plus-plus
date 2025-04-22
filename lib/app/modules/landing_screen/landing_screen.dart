@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_colors.dart';
 import 'package:plus/generated/assets.dart';
 
+import '../../binding/app_binding.dart';
 import '../../core/utils/app_keys.dart';
 import '../cart/cart_screen.dart';
+import '../home_screen/controller/banner_controller.dart';
+import '../home_screen/controller/category_controller.dart';
+import '../home_screen/controller/section_controller.dart';
 import '../home_screen/home_screen.dart';
 import '../offers_screen/offers_screen.dart';
 import '../profile_screen/profile_screen.dart';
@@ -19,6 +23,11 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   int selectedIndex = 0;
+
+  final BannerController bannerController = Get.find<BannerController>();
+  final CategoryController categoryController = Get.find<CategoryController>();
+  final SectionController sectionController = Get.find<SectionController>();
+
   final screens = [
     HomeScreen(),
     SearchScreen(),
@@ -30,15 +39,28 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[selectedIndex],
+      body: selectedIndex == 0
+          ? RefreshIndicator(
+              onRefresh: () async {
+                await _refreshHomeContent();
+              },
+              child: screens[selectedIndex],
+            )
+          : screens[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
         onTap: (value) {
-          selectedIndex = value;
-          setState(() {});
+          setState(() {
+            selectedIndex = value;
+
+            // Optional: Auto-refresh when navigating to Home tab
+            if (selectedIndex == 0) {
+              _refreshHomeContent();
+            }
+          });
         },
         items: [
           BottomNavigationBarItem(
@@ -53,9 +75,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   height: 24,
                   color: AppColors.primary,
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(height: 2),
                 Container(
                   width: 6,
                   height: 6,
@@ -78,9 +98,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   height: 24,
                   color: AppColors.primary,
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(height: 2),
                 Container(
                   width: 6,
                   height: 6,
@@ -103,9 +121,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   height: 24,
                   color: AppColors.primary,
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(height: 2),
                 Container(
                   width: 6,
                   height: 6,
@@ -129,9 +145,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   height: 24,
                   color: AppColors.primary,
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(height: 2),
                 Container(
                   width: 6,
                   height: 6,
@@ -156,9 +170,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   fit: BoxFit.contain,
                   color: AppColors.primary,
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(height: 2),
                 Container(
                   width: 6,
                   height: 6,
@@ -172,5 +184,14 @@ class _LandingScreenState extends State<LandingScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _refreshHomeContent() async {
+    print('Refreshing home content...');
+    await Future.wait<void>([
+      bannerController.fetchBanners(),
+      categoryController.fetchCategories(),
+      sectionController.fetchSections(),
+    ]);
   }
 }

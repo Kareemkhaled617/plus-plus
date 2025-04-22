@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_fonts.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
+import 'package:plus/app/domain/entities/prescription_entity.dart';
 import 'package:plus/app/modules/all_prescription/controller/prescription_controller.dart';
 import 'widget/prescription_card.dart';
 import '../../core/utils/app_keys.dart';
@@ -37,10 +38,13 @@ class AllPrescriptionScreen extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           itemCount: controller.prescriptions.length,
           itemBuilder: (context, index) {
-            return PrescriptionCard(prescription: controller.prescriptions[index]);
+            return PrescriptionCard(
+                prescription: controller.prescriptions[index]);
           },
         );
       }),
     );
   }
+
+
 }

@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import '../../core/errors/failure.dart';
 import '../../core/network/api_service.dart';
 import '../../domain/entities/cart_entity.dart';
+import '../../domain/entities/cart_request_entity.dart';
 import '../../domain/repositories/cart_repository.dart';
 import '../models/cart_model.dart';
+import '../models/cart_request_model.dart';
 
 class CartRepositoryImpl implements CartRepository {
   final ApiService apiService;
@@ -50,6 +52,23 @@ class CartRepositoryImpl implements CartRepository {
         return const Right(true);
       } else {
         return Left(Failure(response.message ?? 'Failed to remove from cart'));
+      }
+    } catch (e) {
+      return Left(Failure('Unexpected error occurred'.tr));
+    }
+  }
+  @override
+  Future<Either<Failure, List<CartRequestEntity>>> getCart() async {
+    try {
+      final response = await apiService.getRequest('/cart');
+      if (response.success) {
+        final List data = response.data['data'];
+        final List<CartRequestEntity> cartItems = data
+            .map((item) => CartRequestModel.fromJson(item))
+            .toList();
+        return Right(cartItems);
+      } else {
+        return Left(Failure(response.message ?? 'Failed to fetch cart'.tr));
       }
     } catch (e) {
       return Left(Failure('Unexpected error occurred'.tr));

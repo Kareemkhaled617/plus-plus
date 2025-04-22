@@ -5,6 +5,7 @@ class AppKeys {
 
   static const newText = "New";
   static const next = "Next";
+  static const pay = "Pay Now !";
   static const yes = "Yes";
   static const no = "No";
   static const howCanHelpYou = "How can we help you?";
@@ -44,6 +45,8 @@ class AppKeys {
   static const viewAll = "View All";
 
   static const cartProducts = "Cart Products";
+  static const orderSummary = "Order Summary";
+  static const selectPayment = "Select Payment";
   static const peace = "Peace";
 
   static const checkout = "Checkout";
@@ -91,6 +94,7 @@ class AppKeys {
   static const delivered = "Delivered";
   static const cancelOrder = "Cancel Order";
   static const discount = "Discount";
+  static const couponDiscount = "Coupon Discount";
   static const exclusiveOffers = "Exclusive offers from ";
   static const returnText = "Return";
   static const noOffersAtMoment = "There are no offers to show at the moment.";
@@ -156,6 +160,7 @@ class AppKeys {
   static var shareApp = "Share Application";
 
   static var appEvaluation = "App Evaluation";
+  static var appliedCoupon = "Applied Coupon";
 
   static var myPrescriptions = "My Prescriptions";
 
@@ -165,7 +170,7 @@ class AppKeys {
 
   static var verifyOtp = "Nice! let’s verify your mobile number";
 
-  static var otpCodeSent = "   OTP Code Sent On Your Mobile Number.";
+  static var otpCodeSent = "OTP Code Sent On Your Mobile Number.";
 
   static var resendCode = "Resend Activation Code";
 

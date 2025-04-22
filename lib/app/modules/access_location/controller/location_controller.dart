@@ -16,11 +16,11 @@ class LocationController extends GetxController {
   LocationResult? locationResult;
 
   // Text controllers for user input
-  TextEditingController addressController = TextEditingController();
-  TextEditingController streetController = TextEditingController();
-  TextEditingController buildingController = TextEditingController();
-  TextEditingController floorController = TextEditingController();
-  TextEditingController apartmentController = TextEditingController();
+  TextEditingController addressController = TextEditingController(text: '');
+  TextEditingController streetController = TextEditingController(text: '');
+  TextEditingController buildingController = TextEditingController(text: '');
+  TextEditingController floorController = TextEditingController(text: '');
+  TextEditingController apartmentController = TextEditingController(text: '0');
 
   // Selected option for address type
   RxString selectedOption = "home".obs;
@@ -112,23 +112,24 @@ class LocationController extends GetxController {
       "department": apartmentController.text,
       "floor": floorController.text,
     };
-
+    print(data);
     try {
       var response = await Dio().patch(
         'https://plusp.msarweb.net/api/addresses/update-address',
         options: Options(headers: headers),
         data: data,
       );
+      print('response.statusCode');
       print(response.statusCode);
       print(response.data);
       if (response.statusCode == 200) {
         Get.back();
-
         Get.snackbar("Success".tr, "Address updated successfully!".tr);
       } else {
         Get.snackbar("Error".tr, "Failed to update address.".tr);
       }
     } catch (e) {
+      print('e.toString()');
       print(e.toString());
       Get.snackbar("Error".tr, "Something went wrong!".tr);
     } finally {

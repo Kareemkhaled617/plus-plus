@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_colors.dart';
+import '../../privacy_policy/privacy_policy_screen.dart';
 import '../controller/auth_controller.dart';
 import '../../../core/utils/app_keys.dart';
 
@@ -24,9 +25,11 @@ class TermsAndConditionsWidget extends StatelessWidget {
         Text(AppKeys.iAgreeTo.tr),
         const SizedBox(width: 6),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            showPrivacyPolicyBottomSheet(context);
+          },
           child: Text(
-            AppKeys.terms,
+            AppKeys.terms.tr,
             style: const TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.bold,
@@ -39,7 +42,7 @@ class TermsAndConditionsWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {},
           child: Text(
-            AppKeys.conditions,
+            AppKeys.conditions.tr,
             style: const TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.bold,

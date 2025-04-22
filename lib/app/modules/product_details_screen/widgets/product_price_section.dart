@@ -37,7 +37,7 @@ class ProductPriceSection extends StatelessWidget {
                 controller.isSelected.value
                     ? Text.rich(TextSpan(children: [
                         TextSpan(
-                            text: "${AppKeys.price}:  ",
+                            text: "${AppKeys.price.tr}:  ",
                             style: AppFonts.heading3,
                             children: [
                               TextSpan(
@@ -108,7 +108,7 @@ class ProductPriceSection extends StatelessWidget {
                           )
                         : Text.rich(TextSpan(children: [
                             TextSpan(
-                                text: "${AppKeys.price}:  ",
+                                text: "${AppKeys.price.tr}:  ",
                                 style: AppFonts.heading3,
                                 children: [
                                   TextSpan(

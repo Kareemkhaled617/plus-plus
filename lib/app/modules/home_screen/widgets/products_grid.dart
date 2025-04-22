@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/product_item.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
-import '../../../controller/favorite_controller.dart';
 import '../../../domain/entities/favorite_entity.dart';
 import '../../../domain/entities/product_entity.dart';
 
@@ -22,7 +21,7 @@ class ProductsGrid extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
-          childAspectRatio: .7,
+          childAspectRatio: .8,
         ),
         itemCount: products.length,
         itemBuilder: (context, index) {

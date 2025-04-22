@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../core/errors/failure.dart';
 import '../entities/cart_entity.dart';
+import '../entities/cart_request_entity.dart';
 
 abstract class CartRepository {
   Future<Either<Failure, CartEntity>> addToCart({
@@ -10,4 +11,5 @@ abstract class CartRepository {
     String? couponCode,
   });
   Future<Either<Failure, bool>> removeFromCart(int productId);
+  Future<Either<Failure, List<CartRequestEntity>>> getCart();
 }

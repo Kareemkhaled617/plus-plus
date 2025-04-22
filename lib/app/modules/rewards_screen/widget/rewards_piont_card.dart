@@ -55,7 +55,9 @@ class RewardsPointsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "${AppKeys.pointsExpiryDate.tr} ${controller.pointsList.last.date}",
+                  controller.pointsList.isNotEmpty
+                      ? "${AppKeys.pointsExpiryDate.tr} ${controller.pointsList.last.date}"
+                      : '',
                   style: AppFonts.bodyText.copyWith(
                       color: AppColors.black,
                       fontSize: 12,

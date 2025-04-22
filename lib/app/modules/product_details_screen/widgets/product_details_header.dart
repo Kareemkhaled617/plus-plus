@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/modules/product_details_screen/controller/product_controller.dart';
 
-import '../../../controller/favorite_controller.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/widgets/app_bar_back_button.dart';
 import '../../../core/widgets/offers_percent_widget.dart';
+import '../../favourite_screen/controller/favorite_controller.dart';
 
 class ProductDetailsHeader extends StatelessWidget {
   const ProductDetailsHeader({super.key, required this.controller});

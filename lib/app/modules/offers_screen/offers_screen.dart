@@ -26,10 +26,8 @@ class OffersScreen extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       text: "${AppKeys.exclusiveOffers.tr} ",
-                      style: AppFonts.heading3.copyWith(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18
-                      ),
+                      style: AppFonts.heading3
+                          .copyWith(fontWeight: FontWeight.w700, fontSize: 18),
                       children: [
                         TextSpan(
                           text: "PLUS PLUS   🔥",
@@ -65,13 +63,13 @@ class OffersScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text(
-                            AppKeys.viewAll.tr,
-                            style: AppFonts.bodyText.copyWith(
-                                fontWeight: FontWeight.w800,
-                                color: AppColors.primary,
-                                fontSize: 14),
-                          ),
+                          // Text(
+                          //   AppKeys.viewAll.tr,
+                          //   style: AppFonts.bodyText.copyWith(
+                          //       fontWeight: FontWeight.w800,
+                          //       color: AppColors.primary,
+                          //       fontSize: 14),
+                          // ),
                         ],
                       ),
                       SizedBox(

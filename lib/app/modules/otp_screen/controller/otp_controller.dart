@@ -5,6 +5,8 @@ import '../../../domain/usecases/verify_otp_usecase.dart';
 import '../../../core/errors/failure.dart';
 import '../../../routes/app_routes.dart';
 import '../../../core/storage/secure_storage_helper.dart';
+import '../../cart/controller/cart_controller.dart';
+import '../../favourite_screen/controller/favorite_controller.dart';
 import '../../login_screen/controller/auth_controller.dart';
 
 class OTPController extends GetxController {
@@ -45,6 +47,30 @@ class OTPController extends GetxController {
     isButtonEnabled.value = otp.length == 4;
   }
 
+  // Future<void> verifyOtp() async {
+  //   if (otpTextController.text.isEmpty || otpTextController.text.length < 4) {
+  //     Get.snackbar("Error".tr, "Invalid OTP Code!".tr);
+  //     return;
+  //   }
+  //
+  //   isLoading.value = true;
+  //
+  //   final result =
+  //   await verifyOtpUseCase(phoneNumber.value, otpTextController.text);
+  //
+  //   result.fold(
+  //         (Failure failure) {
+  //       Get.snackbar("Error".tr, failure.message);
+  //     },
+  //         (String token) async {
+  //       await SecureStorageHelper().saveData("auth_token", token);
+  //       Get.snackbar("Success".tr, "OTP verified successfully!".tr);
+  //       Get.offAllNamed(AppRoutes.landingScreen);
+  //     },
+  //   );
+  //
+  //   isLoading.value = false;
+  // }
   Future<void> verifyOtp() async {
     if (otpTextController.text.isEmpty || otpTextController.text.length < 4) {
       Get.snackbar("Error".tr, "Invalid OTP Code!".tr);
@@ -54,15 +80,22 @@ class OTPController extends GetxController {
     isLoading.value = true;
 
     final result =
-    await verifyOtpUseCase(phoneNumber.value, otpTextController.text);
+        await verifyOtpUseCase(phoneNumber.value, otpTextController.text);
 
     result.fold(
-          (Failure failure) {
+      (Failure failure) {
         Get.snackbar("Error".tr, failure.message);
       },
-          (String token) async {
+      (String token) async {
         await SecureStorageHelper().saveData("auth_token", token);
         Get.snackbar("Success".tr, "OTP verified successfully!".tr);
+        // ✅ جلب بيانات السلة بعد التحقق من OTP
+        final favController = Get.find<FavoriteController>();
+        favController.fetchFavourites();
+        final cartController = Get.find<CartController>();
+        await cartController.fetchCart();
+
+
         Get.offAllNamed(AppRoutes.landingScreen);
       },
     );

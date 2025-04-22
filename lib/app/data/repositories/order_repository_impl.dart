@@ -1,10 +1,14 @@
+import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
+import '../../core/errors/failure.dart';
 import '../../core/network/api_service.dart';
 import '../../core/network/api_response.dart';
 import '../../domain/entities/order_entity.dart';
+import '../../domain/entities/order_request_entity.dart';
 import '../../domain/repositories/order_repository.dart';
 import '../models/order_model.dart';
+import '../models/order_request_model.dart';
 
 class OrderRepositoryImpl extends OrderRepository {
   final ApiService apiService;
@@ -39,6 +43,34 @@ class OrderRepositoryImpl extends OrderRepository {
       return true;
     } else {
       throw Exception(response.message ?? "Failed to cancel order.".tr);
+    }
+  }
+
+  @override
+  Future<Either<Failure, OrderRequestEntity>> createOrder({
+    required int userAddressId,
+    required String paymentMethod,
+    required int userPoints,
+  }) async {
+    try {
+      final model = OrderRequestModel(
+        userAddressId: userAddressId,
+        paymentMethod: paymentMethod,
+        userPoints: userPoints,
+      );
+
+      final response =
+          await apiService.postRequest('/orders', model.toFormData());
+
+      if (response.success) {
+        return Right(OrderRequestEntity(
+            isSuccess: true,
+            message: response.message ?? 'Order created successfully'.tr));
+      } else {
+        return Left(Failure(response.message ?? 'Failed to create order'.tr));
+      }
+    } catch (e) {
+      return Left(Failure('Unexpected error occurred'.tr));
     }
   }
 }

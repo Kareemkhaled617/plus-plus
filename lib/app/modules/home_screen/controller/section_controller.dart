@@ -18,7 +18,7 @@ class SectionController extends GetxController {
     super.onInit();
   }
 
-  void fetchSections() async {
+  Future<void> fetchSections() async {
     isLoading.value = true;
     final result = await getSectionsUseCase();
 
