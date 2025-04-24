@@ -53,33 +53,33 @@ class AccountScreen extends StatelessWidget {
                 SizedBox(
                   height: 21,
                 ),
-                Text(
-                  AppKeys.phoneNumber.tr,
-                  style: AppFonts.heading2.copyWith(
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                IntlPhoneField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    suffixIcon: Icon(
-                      Icons.edit_document,
-                      color: AppColors.red,
-                    ),
-                    fillColor: Colors.blue.shade50.withOpacity(.3),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  initialCountryCode: 'EG',
-                  onChanged: (phone) {
-                    log(phone.completeNumber);
-                  },
-                ),
+                // Text(
+                //   AppKeys.phoneNumber.tr,
+                //   style: AppFonts.heading2.copyWith(
+                //     fontSize: 14,
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                // IntlPhoneField(
+                //   decoration: InputDecoration(
+                //     filled: true,
+                //     suffixIcon: Icon(
+                //       Icons.edit_document,
+                //       color: AppColors.red,
+                //     ),
+                //     fillColor: Colors.blue.shade50.withOpacity(.3),
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(12),
+                //       borderSide: BorderSide.none,
+                //     ),
+                //   ),
+                //   initialCountryCode: 'EG',
+                //   onChanged: (phone) {
+                //     log(phone.completeNumber);
+                //   },
+                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .3,
                 ),

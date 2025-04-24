@@ -7,7 +7,7 @@ class VerifyOtpUseCase {
 
   VerifyOtpUseCase(this.repository);
 
-  Future<Either<Failure, String>> call(String phone, String otp) {
-    return repository.verifyOtp(phone, otp);
+  Future<Either<Failure, String>> call(String phone, String otp,String fcm) {
+    return repository.verifyOtp(phone, otp,fcm);
   }
 }

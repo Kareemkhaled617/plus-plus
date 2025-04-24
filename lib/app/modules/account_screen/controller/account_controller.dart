@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/routes/app_routes.dart';
 import '../../../domain/entities/point_entity.dart';
 import '../../../domain/usecases/change_language_usecase.dart';
 import '../../../domain/usecases/get_account_points_usecase.dart';
@@ -32,8 +33,13 @@ class AccountController extends GetxController {
     isLoading.value = false;
 
     if (result) {
-      Get.back();
-      Get.snackbar("Success".tr, "Updated successfully!".tr);
+      if (Get.arguments['from_login']) {
+        Get.toNamed(AppRoutes.landingScreen);
+        Get.snackbar("Success".tr, "Updated successfully!".tr);
+      } else {
+        Get.back();
+        Get.snackbar("Success".tr, "Updated successfully!".tr);
+      }
     } else {
       Get.snackbar("Error".tr, "An error occurred while updating.".tr);
     }

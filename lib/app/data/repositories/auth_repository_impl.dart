@@ -31,10 +31,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> verifyOtp(String phone, String otp) async {
+  Future<Either<Failure, String>> verifyOtp(
+      String phone, String otp, String fcm) async {
     final response = await apiService.postRequest(
       'auth/verify-otp',
-      {'phone': phone, 'code': otp},
+      {'phone': phone, 'code': otp, "fcm_token": fcm},
     );
 
     if (response.success) {

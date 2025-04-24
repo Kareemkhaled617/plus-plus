@@ -29,7 +29,19 @@ class ProfileAllProperties extends StatelessWidget {
           icon: Icons.person_2_rounded,
           iconColor: AppColors.black,
           onTap: () {
-            Get.toNamed(AppRoutes.accountScreen);
+            Get.toNamed(AppRoutes.accountScreen,
+                arguments: {'from_login': false});
+          },
+        ),
+        ProfilePropertyCard(
+          title: AppKeys.phoneNumber.tr,
+          subtitle: AppKeys.phoneNumber.tr,
+          icon: Icons.phone,
+          iconColor: AppColors.black,
+          onTap: () {
+            Get.toNamed(
+              AppRoutes.changePhoneScreen,
+            );
           },
         ),
         ProfilePropertyCard(

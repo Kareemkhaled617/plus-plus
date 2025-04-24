@@ -67,7 +67,10 @@ class AuthController extends GetxController {
     Get.snackbar("Success".tr, " ${user.message}");
     // await accountController.changeLanguage('en');
     if (isLogin) {
-      Get.toNamed(AppRoutes.otp, arguments: {"phone": phoneController.text});
+      Get.toNamed(AppRoutes.otp, arguments: {
+        "phone": phoneController.text,
+        'is_new_user': user.newUser
+      });
     }
   }
 

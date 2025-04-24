@@ -4,5 +4,5 @@ import '../../core/errors/failure.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> login(String phone);
-  Future<Either<Failure, String>> verifyOtp(String phone, String otp);
+  Future<Either<Failure, String>> verifyOtp(String phone, String otp,String fcm);
 }

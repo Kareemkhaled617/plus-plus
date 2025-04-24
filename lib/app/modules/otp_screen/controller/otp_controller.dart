@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/usecases/verify_otp_usecase.dart';
@@ -22,6 +23,14 @@ class OTPController extends GetxController {
   var isLoading = false.obs;
   var countdown = 60.obs;
   Timer? _timer;
+  String token = '';
+
+  Future getToken() async {
+    return await FirebaseMessaging.instance.getToken().then((value) {
+      token = value!;
+      return null;
+    });
+  }
 
   @override
   void onInit() {
@@ -72,6 +81,8 @@ class OTPController extends GetxController {
   //   isLoading.value = false;
   // }
   Future<void> verifyOtp() async {
+    await getToken();
+
     if (otpTextController.text.isEmpty || otpTextController.text.length < 4) {
       Get.snackbar("Error".tr, "Invalid OTP Code!".tr);
       return;
@@ -79,8 +90,8 @@ class OTPController extends GetxController {
 
     isLoading.value = true;
 
-    final result =
-        await verifyOtpUseCase(phoneNumber.value, otpTextController.text);
+    final result = await verifyOtpUseCase(
+        phoneNumber.value, otpTextController.text, token!);
 
     result.fold(
       (Failure failure) {
@@ -94,9 +105,13 @@ class OTPController extends GetxController {
         favController.fetchFavourites();
         final cartController = Get.find<CartController>();
         await cartController.fetchCart();
-
-
-        Get.offAllNamed(AppRoutes.landingScreen);
+        print(Get.arguments['is_new_user']);
+        if (Get.arguments['is_new_user']) {
+          Get.offAllNamed(AppRoutes.accountScreen,
+              arguments: {'from_login': true});
+        } else {
+          Get.offAllNamed(AppRoutes.landingScreen);
+        }
       },
     );
 

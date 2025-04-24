@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core:
+  firebase_auth:
+  firebase_messaging:
   get: ^4.7.2
   permission_handler:
   intl_phone_field:
@@ -51,6 +54,7 @@ dependencies:
   intl:
   shimmer:
   url_launcher:
+  flutter_local_notifications:
 dev_dependencies:
   flutter_test:
     sdk: flutter

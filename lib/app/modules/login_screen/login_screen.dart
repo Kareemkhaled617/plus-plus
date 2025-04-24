@@ -19,25 +19,27 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
 
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const LoginLogoWidget(),
-            const LoginTitleWidget(),
-            const LoginSubtitleWidget(),
-            PhoneInputWidget(
-              authController: authController,
-            ),
-            const SizedBox(height: 20),
-            SubmitButtonWidget(
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const LoginLogoWidget(),
+              const LoginTitleWidget(),
+              const LoginSubtitleWidget(),
+              PhoneInputWidget(
                 authController: authController,
-                phoneController: authController.phoneController),
-            const Spacer(),
-            const TermsAndConditionsWidget(),
-          ],
+              ),
+              const SizedBox(height: 20),
+              SubmitButtonWidget(
+                  authController: authController,
+                  phoneController: authController.phoneController),
+              const Spacer(),
+              const TermsAndConditionsWidget(),
+            ],
+          ),
         ),
       ),
     );

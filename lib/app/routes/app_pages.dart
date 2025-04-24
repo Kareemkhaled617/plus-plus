@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:plus/app/modules/change_phone_number/change_phone_number.dart';
 import 'package:plus/app/modules/favourite_screen/binding/favourite_binding.dart';
 import 'package:plus/app/modules/login_screen/binding/auth_binding.dart';
 
@@ -17,6 +18,7 @@ import '../modules/brands_screen/brands_screen.dart';
 
 import '../modules/cart/binding/cart_binding.dart';
 import '../modules/cart/cart_screen.dart';
+import '../modules/change_phone_number/binding/change_phone_binding.dart';
 import '../modules/check_out_screen/binding/order_request_binding.dart';
 import '../modules/check_out_screen/check_out_screen.dart';
 import '../modules/favourite_screen/favourite_screen.dart';
@@ -72,7 +74,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-      bindings: [AuthBinding(),PrivacyPolicyBinding()],
+      bindings: [AuthBinding(), PrivacyPolicyBinding()],
     ),
     GetPage(
       name: AppRoutes.home,
@@ -130,7 +132,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.otp,
       page: () => OTPVerificationScreen(),
-      bindings: [OTPBinding(), CartBinding(),FavoriteBinding()],
+      bindings: [OTPBinding(), AuthBinding(), CartBinding(), FavoriteBinding()],
     ),
     GetPage(
         name: AppRoutes.prescription,
@@ -172,5 +174,9 @@ class AppPages {
         name: AppRoutes.checkOutScreen,
         page: () => CheckOutScreen(),
         binding: CheckoutBinding()),
+    GetPage(
+        name: AppRoutes.changePhoneScreen,
+        page: () => ChangePhoneScreen(),
+        binding: ChangePhoneBinding()),
   ];
 }

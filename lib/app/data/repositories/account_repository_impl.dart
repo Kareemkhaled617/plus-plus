@@ -1,9 +1,12 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-
+import '../../core/errors/failure.dart';
 import '../../core/network/api_service.dart';
 import '../../domain/entities/point_entity.dart';
+import '../../domain/entities/update_phone_entity.dart';
 import '../../domain/repositories/account_repository.dart';
 import '../models/point_model.dart';
+import '../models/update_phone_model.dart';
 
 class AccountRepositoryImpl extends AccountRepository {
   final ApiService apiService;
@@ -25,11 +28,33 @@ class AccountRepositoryImpl extends AccountRepository {
     return PointDataModel.fromJson(response.data['data']);
   }
 
+  @override
   Future<bool> changeLanguage(String locale) async {
     final response = await apiService.postFormDataRequest(
       'account/change-language',
       FormData.fromMap({'locale': locale}),
     );
     return response.success && response.statusCode == 200;
+  }
+
+  @override
+  Future<Either<Failure, UpdatePhoneEntity>> updatePhoneNumber(
+      String phoneNumber) async {
+    try {
+      final response = await apiService.postRequest(
+        '/account/update-phone',
+        {'temporal_phone_number': phoneNumber},
+      );
+
+      if (response.success) {
+        final model = UpdatePhoneModel.fromJson(response.data);
+        return Right(model);
+      } else {
+        return Left(
+            Failure(response.message ?? "Failed to update phone number"));
+      }
+    } catch (e) {
+      return Left(Failure("Unexpected error occurred"));
+    }
   }
 }

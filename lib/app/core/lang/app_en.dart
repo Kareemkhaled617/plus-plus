@@ -255,5 +255,7 @@ const Map<String, String> enUS = {
   "policy": "It is not possible to purchase using points, but the equivalent value of the points will be deducted from the total bill.",
   "   OTP Code Sent On Your Mobile Number.":"   OTP Code Sent On Your Mobile Number.",
   "No Privacy Policy Found":"No Privacy Policy Found",
+  "Please enter a valid phone number": "Please enter a valid phone number",
+  "otp have been sent to your phone number": "otp have been sent to your phone number"
 
 };

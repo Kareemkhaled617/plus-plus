@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "609286292915",
+    "project_id": "plus-6b5f5",
+    "storage_bucket": "plus-6b5f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609286292915:android:665ea4d14fc5a12898b7c6",
+        "android_client_info": {
+          "package_name": "com.msar.plus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfl_wM6Zydb57cwYIZOsofCjE9iqjotPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

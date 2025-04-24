@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/binding/app_binding.dart';
 import 'app/core/service/localization_service.dart';
+import 'app/core/service/notification_services.dart';
 import 'app/core/storage/secure_storage_helper.dart';
 import 'app/core/theme/app_colors.dart';
 import 'app/core/utils/size_config.dart';
@@ -10,9 +12,14 @@ import 'app/modules/home_screen/shimmer/HomePageShimmer.dart';
 import 'app/modules/splash_screen/splash_screen.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await NotificationService().initNotification();
   String? savedLang = await SecureStorageHelper().getData("language");
 
   runApp(MyApp(
