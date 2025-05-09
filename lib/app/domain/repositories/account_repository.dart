@@ -9,5 +9,7 @@ abstract class AccountRepository {
   Future<PointDataEntity> getAccountPoints();
   Future<bool> changeLanguage(String locale); // Add this
   Future<Either<Failure, UpdatePhoneEntity>> updatePhoneNumber(String phoneNumber);
+  Future<Either<Failure, String>> verifyPhone(String code);
+
 
 }

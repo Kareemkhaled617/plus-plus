@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../generated/assets.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/widgets/cached_image.dart';
 import '../../../routes/app_routes.dart';
@@ -15,17 +14,20 @@ class ProductBrandItem extends StatelessWidget {
     final controller = Get.find<ProductDetailsController>();
 
     return ListTile(
-      onTap: () {
-        Navigator.pushNamed(context, AppRoutes.productsScreen, arguments: {
-          "gradientColors": [
-            Colors.white,
-            Colors.white,
-          ],
-          "title": controller.product.value!.brandName,
-          "id": controller.product.value!.brandId,
-          'isSection': false,
-        });
-      },
+      onTap: controller.product.value!.brandName != 'Unknown Brand'
+          ? () {
+              Navigator.pushNamed(context, AppRoutes.productsScreen,
+                  arguments: {
+                    "gradientColors": [
+                      Colors.white,
+                      Colors.white,
+                    ],
+                    "title": controller.product.value!.brandName,
+                    "id": controller.product.value!.brandId,
+                    'isSection': false,
+                  });
+            }
+          : null,
       leading: CircleAvatar(
         radius: 25,
         backgroundColor: Colors.white,

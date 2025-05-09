@@ -47,29 +47,32 @@ class OTPVerificationScreen extends StatelessWidget {
             const SizedBox(height: 30),
 
             /// **OTP Input**
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30),
-              child: PinCodeTextField(
-                length: 4,
-                obscureText: false,
-                animationType: AnimationType.fade,
-                controller: controller.otpTextController,
-                keyboardType: TextInputType.number,
-                pinTheme: PinTheme(
-                  shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(12),
-                  fieldHeight: 50,
-                  fieldWidth: 50,
-                  activeFillColor: Colors.white,
-                  inactiveColor: Colors.grey,
-                  selectedColor: Colors.blue,
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30),
+                child: PinCodeTextField(
+                  length: 4,
+                  obscureText: false,
+                  animationType: AnimationType.fade,
+                  controller: controller.otpTextController,
+                  keyboardType: TextInputType.number,
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(12),
+                    fieldHeight: 50,
+                    fieldWidth: 50,
+                    activeFillColor: Colors.white,
+                    inactiveColor: Colors.grey,
+                    selectedColor: Colors.blue,
+                  ),
+                  animationDuration: const Duration(milliseconds: 300),
+                  onChanged: (value) {
+                    controller.validateOTP(value);
+                  },
+                  appContext: context,
                 ),
-                animationDuration: const Duration(milliseconds: 300),
-                onChanged: (value) {
-                  controller.validateOTP(value);
-                },
-                appContext: context,
               ),
             ),
             const SizedBox(height: 30),
@@ -90,7 +93,9 @@ class OTPVerificationScreen extends StatelessWidget {
                       ),
                       onPressed: controller.isButtonEnabled.value &&
                               controller.isLoading.value == false
-                          ? () => controller.verifyOtp()
+                          ? () => Get.arguments['change_phone']
+                              ? controller.verifyPhone()
+                              : controller.verifyOtp()
                           : null,
                       child: controller.isLoading.value
                           ? const CircularProgressIndicator(color: Colors.white)

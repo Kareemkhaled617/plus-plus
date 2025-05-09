@@ -38,7 +38,6 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final controller = Get.find<FavoriteController>();
     CartController cartController = Get.find<CartController>();
 
@@ -239,7 +238,7 @@ class ProductCard extends StatelessWidget {
                               ? Text(
                                   'Unavailable'.tr,
                                   style: AppFonts.bodyText.copyWith(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w800,
                                       color: AppColors.red),
                                 )
@@ -272,7 +271,7 @@ class ProductCard extends StatelessWidget {
                   )
                 : Positioned(
                     top: -14,
-                    right: -12,
+                    right: -14,
                     child: Obx(() {
                       return Row(
                         children: [
@@ -280,7 +279,7 @@ class ProductCard extends StatelessWidget {
                               ? Text(
                                   'Unavailable',
                                   style: AppFonts.bodyText.copyWith(
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w800,
                                       color: AppColors.red),
                                 )
@@ -294,7 +293,7 @@ class ProductCard extends StatelessWidget {
                                     )
                                   : Container(),
                           SizedBox(
-                            width: getProportionateScreenWidth(50),
+                            width: getProportionateScreenWidth(40),
                           ),
                           IconButton(
                             icon: Icon(

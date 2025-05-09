@@ -40,12 +40,12 @@ class BrandsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Column(
           children: [
-            CustomTextFormField(
-              hintText: AppKeys.searchForBrand.tr,
-              controller: TextEditingController(),
-              keyboardType: TextInputType.text,
-              prefixIcon: Image.asset(Assets.iconsSearch),
-            ),
+            // CustomTextFormField(
+            //   hintText: AppKeys.searchForBrand.tr,
+            //   controller: TextEditingController(),
+            //   keyboardType: TextInputType.text,
+            //   prefixIcon: Image.asset(Assets.iconsSearch),
+            // ),
             SizedBox(
               height: 12,
             ),

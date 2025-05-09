@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-import '../../core/network/api_service.dart';
+
 import '../../core/errors/failure.dart';
+import '../../core/network/api_service.dart';
+import '../../domain/entities/point_request_entity.dart';
 import '../../domain/entities/product_entity.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../models/product_model.dart';
@@ -131,6 +133,20 @@ class ProductRepositoryImpl implements ProductRepository {
       }
     } catch (e) {
       return Left(Failure('Unexpected error occurred'.tr));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> requestPoint(PointRequestEntity entity) async {
+    try {
+      final data = {'product_id': entity.productId.toString()};
+      final response =
+          await apiService.postRequest('/products/point-request', data);
+      return response.success
+          ? const Right(null)
+          : Left(Failure(response.message ?? "Failed to request points"));
+    } catch (e) {
+      return Left(Failure("Unexpected error: $e"));
     }
   }
 }

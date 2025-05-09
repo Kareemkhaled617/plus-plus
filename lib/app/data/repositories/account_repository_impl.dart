@@ -57,4 +57,20 @@ class AccountRepositoryImpl extends AccountRepository {
       return Left(Failure("Unexpected error occurred"));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> verifyPhone(String code) async {
+    try {
+      final response =
+          await apiService.postRequest('/account/verify-phone', {'code': code});
+
+      if (response.success) {
+        return Right(response.message ?? "Updated successfully!");
+      } else {
+        return Left(Failure(response.message ?? "Verification failed"));
+      }
+    } catch (e) {
+      return Left(Failure("Unexpected error occurred"));
+    }
+  }
 }

@@ -16,11 +16,6 @@ class AccessLocationScreen extends StatelessWidget {
     final args = Get.arguments ?? {};
     final isEdit = args['edit'] ?? false;
     final address = args['address'] ?? {};
-    print(isEdit);
-    print(isEdit);
-    print(isEdit);
-    print(address);
-    print(address);
     final initialLatLng = isEdit
         ? LatLng(
             double.tryParse(address['lat'].toString()) ?? 0.0,

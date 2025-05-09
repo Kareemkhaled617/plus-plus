@@ -69,7 +69,8 @@ class AuthController extends GetxController {
     if (isLogin) {
       Get.toNamed(AppRoutes.otp, arguments: {
         "phone": phoneController.text,
-        'is_new_user': user.newUser
+        'is_new_user': user.newUser,
+        'change_phone': false,
       });
     }
   }

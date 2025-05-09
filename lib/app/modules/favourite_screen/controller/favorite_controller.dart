@@ -50,7 +50,7 @@ class FavoriteController extends GetxController {
   /// **Add product to favorites (API + Cache)**
   Future<void> addProductToFavorites(int productId) async {
     isLoading.value = true;
-    toggleFavorite(productId); // ✅ Cache favorite product
+
     final result = await addToFavoritesUseCase(productId);
 
     result.fold(
@@ -60,7 +60,7 @@ class FavoriteController extends GetxController {
       },
       (FavouriteEntity? entity) {
         favoriteProduct.value = entity;
-        // toggleFavorite(productId); // ✅ Cache favorite product
+         toggleFavorite(productId); // ✅ Cache favorite product
       },
     );
 

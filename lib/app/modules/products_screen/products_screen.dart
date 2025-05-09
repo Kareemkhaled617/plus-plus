@@ -31,16 +31,24 @@ class ProductsScreen extends StatelessWidget {
     final ProductController controller = Get.find<ProductController>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            gradientColors.isEmpty ? Colors.white : gradientColors[0],
+        backgroundColor: Colors.transparent,
+        // Let flexibleSpace handle it
         title: Text(
           title,
           style: AppFonts.heading1.copyWith(fontSize: 18),
         ),
         leading: AppBarBackButton(),
-        flexibleSpace: Container(
-          color: AppColors.white,
-        ),
+        flexibleSpace: gradientColors.isEmpty
+            ? Container(color: Colors.white)
+            : Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: gradientColors,
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                ),
+              ),
         elevation: 0,
       ),
       body: Container(

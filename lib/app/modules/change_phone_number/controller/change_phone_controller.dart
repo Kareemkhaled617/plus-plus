@@ -31,8 +31,11 @@ class ChangePhoneController extends GetxController {
       (failure) => Get.snackbar("Error".tr, failure.message),
       (entity) {
         Get.snackbar("Success".tr, entity.message);
-        Get.toNamed(AppRoutes.otp,
-            arguments: {"phone": phoneNumber.value, 'is_new_user': false});
+        Get.toNamed(AppRoutes.otp, arguments: {
+          "phone": phoneNumber.value,
+          'is_new_user': false,
+          "change_phone": true
+        });
       },
     );
 

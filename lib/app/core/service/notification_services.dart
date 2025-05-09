@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:get/get.dart';
 import '../../../firebase_options.dart';
 
@@ -8,62 +9,58 @@ class NotificationService extends GetxService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
+  final FirebaseInAppMessaging _inAppMessaging = FirebaseInAppMessaging.instance;
 
-  // To store received notification messages
   var notificationMessages = <RemoteMessage>[].obs;
 
   Future<void> initNotification() async {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
     getToken();
 
-    // Request permission for iOS
     await _firebaseMessaging.requestPermission(
       alert: true,
-      announcement: true,
       badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
       sound: true,
     );
 
-    // iOS Initialization using Darwin settings
-    const DarwinInitializationSettings iosInitSettings =
-    DarwinInitializationSettings(
-      requestSoundPermission: true,
-      requestBadgePermission: true,
-      requestAlertPermission: true,
-    );
-
-    // Android Initialization
+    const DarwinInitializationSettings iosInitSettings = DarwinInitializationSettings();
     const AndroidInitializationSettings androidInitSettings =
     AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    // Combine settings
     const InitializationSettings initSettings = InitializationSettings(
       android: androidInitSettings,
       iOS: iosInitSettings,
     );
 
-    // Initialize local notifications
     await _flutterLocalNotificationsPlugin.initialize(initSettings);
 
-    // Handle foreground messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print(message.notification?.body);
       _showNotification(message);
-      notificationMessages.add(message); // Add to observable list
+      notificationMessages.add(message);
     });
 
-    // Handle background messages
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    // 🔥 Enable Firebase In-App Messaging
+    _initializeInAppMessaging();
   }
 
-  // Display the notification
+  Future<void> _initializeInAppMessaging() async {
+    // Enable automatic data collection for In-App Messaging
+    await _inAppMessaging.setAutomaticDataCollectionEnabled(true);
+
+    // Optionally trigger test messages during development
+    await _inAppMessaging.triggerEvent('app_open');
+    print('-------------------------------------------------------------------------------------------------3-0id');
+    // You can trigger custom events as needed
+  }
+
   Future<void> _showNotification(RemoteMessage message) async {
-    const AndroidNotificationDetails androidDetails =
-    AndroidNotificationDetails(
-      'channel_id', // Channel ID
-      'channel_name', // Channel Name
+    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
       importance: Importance.max,
       priority: Priority.high,
     );
@@ -81,20 +78,13 @@ class NotificationService extends GetxService {
     );
   }
 
-  // Background message handler
-  static Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    // Handle background notification
+  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     print('Handling a background message: ${message.messageId}');
   }
 
-  // Fetch the FCM token
   Future<void> getToken() async {
     String? token = await _firebaseMessaging.getToken();
     print("FCM Token: $token");
-
   }
 }

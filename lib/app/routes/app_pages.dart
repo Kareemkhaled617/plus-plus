@@ -38,6 +38,7 @@ import '../modules/prescription_screen/binding/prescription_binding.dart';
 import '../modules/prescription_screen/prescription_screen.dart';
 import '../modules/privacy_policy/binding/privacy_policy_binding.dart';
 import '../modules/product_details_screen/binding/product_binding.dart';
+import '../modules/product_details_screen/binding/product_point_binding.dart';
 import '../modules/product_details_screen/product_details_screen.dart';
 import '../modules/products_screen/binding/all_product_binding.dart';
 import '../modules/products_screen/products_screen.dart';
@@ -127,7 +128,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.productDetails,
       page: () => ProductDetailsScreen(),
-      binding: ProductDetailsBinding(),
+      bindings: [ProductDetailsBinding(), ProductPointBinding()],
     ),
     GetPage(
       name: AppRoutes.otp,

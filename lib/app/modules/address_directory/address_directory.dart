@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/loader.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
-import '../../core/widgets/app_bar_back_button.dart';
 import '../../core/utils/app_keys.dart';
+import '../../core/widgets/app_bar_back_button.dart';
 import '../../routes/app_routes.dart';
 import 'address_card.dart';
 import 'controllor/address_controller.dart';
@@ -37,34 +38,40 @@ class _AddressDirectoryState extends State<AddressDirectory> {
         title: Text(AppKeys.addressDirectory.tr, style: AppFonts.heading1),
       ),
       body: Obx(() {
-        if (controller.isLoading.value) {
-          return Center(child: AppLoader());
-        }
-        if (controller.addresses.isEmpty) {
-          return Center(child: Text("No addresses found".tr));
-        }
-        return ListView.separated(
-          padding: const EdgeInsets.all(12),
-          itemCount: controller.addresses.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            final address = controller.addresses[index];
-            return AddressCard(address: address);
+        return RefreshIndicator(
+          onRefresh: () async {
+            controller.fetchAddresses();
           },
+          child: controller.isLoading.value
+              ? const Center(child: AppLoader())
+              : controller.addresses.isEmpty
+              ? ListView( // must be scrollable
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: [
+              const SizedBox(height: 200),
+              Center(child: Text("No addresses found".tr)),
+            ],
+          )
+              : ListView.separated(
+            padding: const EdgeInsets.all(12),
+            itemCount: controller.addresses.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 12),
+            itemBuilder: (context, index) {
+              final address = controller.addresses[index];
+              return AddressCard(address: address);
+            },
+          ),
         );
       }),
       floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () {
-          Get.toNamed(AppRoutes.accessLocationScreen,
-              arguments: {'edit': false});
+          Get.toNamed(AppRoutes.accessLocationScreen, arguments: {'edit': false});
         },
         backgroundColor: AppColors.primary,
-        child: Icon(
-          Icons.add,
-          color: AppColors.white,
-        ),
+        child: const Icon(Icons.add, color: AppColors.white),
       ),
     );
   }
+
 }

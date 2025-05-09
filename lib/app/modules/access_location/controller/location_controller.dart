@@ -124,7 +124,7 @@ class LocationController extends GetxController {
       print(response.data);
       if (response.statusCode == 200) {
         Get.back();
-        Get.snackbar("Success".tr, "Address updated successfully!".tr);
+        // Get.snackbar("Success".tr, "Address updated successfully!".tr);
       } else {
         Get.snackbar("Error".tr, "Failed to update address.".tr);
       }

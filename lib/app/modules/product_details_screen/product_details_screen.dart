@@ -11,11 +11,10 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
 import '../../core/utils/size_config.dart';
-import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/loader.dart';
 import '../cart/controller/cart_controller.dart';
-import '../profile_screen/widget/change_lang_bottom_sheet.dart';
 import 'controller/product_controller.dart';
+import 'controller/product_point_controller.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -24,6 +23,7 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<ProductDetailsController>();
     CartController cartController = Get.find<CartController>();
+    final controller1 = Get.find<ProductPointController>();
     return Scaffold(
         backgroundColor: AppColors.white,
         body: SafeArea(
@@ -62,7 +62,9 @@ class ProductDetailsScreen extends StatelessWidget {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    showUnAvailableBottomSheet();
+                                    showUnAvailableBottomSheet(
+                                        controller.product.value!.id,
+                                        controller1);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.symmetric(vertical: 15),
@@ -184,5 +186,73 @@ class ProductDetailsScreen extends StatelessWidget {
             );
           }),
         ));
+  }
+
+  void showUnAvailableBottomSheet(int id, ProductPointController controller1) {
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              AppKeys.communicate.tr,
+              style: AppFonts.heading2,
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      controller1.requestPoint(id);
+                      Get.back();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      AppKeys.yes.tr,
+                      style: AppFonts.bodyText.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Get.back(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      AppKeys.no.tr,
+                      style: AppFonts.bodyText.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
+      isDismissible: true,
+    );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/usecases/verify_otp_usecase.dart';
 import '../../../core/errors/failure.dart';
+import '../../../domain/usecases/verify_phone_use_case.dart';
 import '../../../routes/app_routes.dart';
 import '../../../core/storage/secure_storage_helper.dart';
 import '../../cart/controller/cart_controller.dart';
@@ -12,15 +13,16 @@ import '../../login_screen/controller/auth_controller.dart';
 
 class OTPController extends GetxController {
   final VerifyOtpUseCase verifyOtpUseCase;
+  final VerifyPhoneUseCase verifyPhoneUseCase;
 
-  OTPController(this.verifyOtpUseCase);
+  OTPController(this.verifyOtpUseCase, this.verifyPhoneUseCase);
 
   final authController = Get.find<AuthController>();
 
+  var isLoading = false.obs;
   final otpTextController = TextEditingController();
   var phoneNumber = ''.obs;
   var isButtonEnabled = false.obs;
-  var isLoading = false.obs;
   var countdown = 60.obs;
   Timer? _timer;
   String token = '';
@@ -82,7 +84,8 @@ class OTPController extends GetxController {
   // }
   Future<void> verifyOtp() async {
     await getToken();
-
+    print('-=-=p=-=-=-=--=-=-=-=-=-==============-===');
+    print(phoneNumber.value);
     if (otpTextController.text.isEmpty || otpTextController.text.length < 4) {
       Get.snackbar("Error".tr, "Invalid OTP Code!".tr);
       return;
@@ -91,7 +94,7 @@ class OTPController extends GetxController {
     isLoading.value = true;
 
     final result = await verifyOtpUseCase(
-        phoneNumber.value, otpTextController.text, token!);
+        phoneNumber.value.replaceFirst('+', ''), otpTextController.text, token);
 
     result.fold(
       (Failure failure) {
@@ -112,6 +115,29 @@ class OTPController extends GetxController {
         } else {
           Get.offAllNamed(AppRoutes.landingScreen);
         }
+      },
+    );
+
+    isLoading.value = false;
+  }
+
+  Future<void> verifyPhone() async {
+    if (otpTextController.text.isEmpty) {
+      Get.snackbar("Error".tr, "Please enter verification code".tr);
+      return;
+    }
+
+    isLoading.value = true;
+
+    final result = await verifyPhoneUseCase(otpTextController.text);
+
+    result.fold(
+      (Failure failure) {
+        Get.snackbar("Error".tr, failure.message);
+      },
+      (String message) {
+        Get.offAllNamed(AppRoutes.landingScreen);
+        Get.snackbar("Success".tr, message);
       },
     );
 

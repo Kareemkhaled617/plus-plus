@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../entities/point_request_entity.dart';
 import '../entities/product_entity.dart';
 import '../../core/errors/failure.dart';
 
@@ -12,7 +13,7 @@ abstract class ProductRepository {
   Future<Either<Failure, List<ProductEntity>>> getDiscountProducts();
 
 
-
+  Future<Either<Failure, void>> requestPoint(PointRequestEntity entity);
 
 
 }
