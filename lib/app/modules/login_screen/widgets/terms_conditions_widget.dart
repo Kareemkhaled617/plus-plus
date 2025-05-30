@@ -40,7 +40,9 @@ class TermsAndConditionsWidget extends StatelessWidget {
         Text(AppKeys.and.tr),
         const SizedBox(width: 6),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            showPrivacyPolicyBottomSheet(context);
+          },
           child: Text(
             AppKeys.conditions.tr,
             style: const TextStyle(

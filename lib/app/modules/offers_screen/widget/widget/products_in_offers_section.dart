@@ -22,7 +22,7 @@ class ProductsInOffersSection extends StatelessWidget {
         return Container();
       }
       return SizedBox(
-        height: 240,
+        height: 244,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,

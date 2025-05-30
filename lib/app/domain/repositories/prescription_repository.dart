@@ -5,6 +5,7 @@ import '../entities/prescription_entity.dart';
 abstract class PrescriptionRepository {
   Future<Either<Failure, PrescriptionEntity>> uploadPrescription({
     required String filePath,
+    required String filetype,
     required String aboutImage,
     required String orderProductNames,
   });

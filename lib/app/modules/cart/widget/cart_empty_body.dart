@@ -31,14 +31,17 @@ class CartEmptyBody extends StatelessWidget {
               Assets.imagesCart,
               width: 180,
             ),
+            SizedBox(height: 20,),
             Text(
               AppKeys.noProducts.tr,
-              style: AppFonts.heading3,
+              style: AppFonts.heading2,
             ),
+            SizedBox(height: 20,),
             Text(
               AppKeys.goFindProducts.tr,
               style: AppFonts.bodyText.copyWith(
                 fontSize: 12,
+                fontWeight: FontWeight.w800,
                 color: AppColors.greyWithShade.withOpacity(.5),
               ),
             )

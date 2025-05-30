@@ -6,6 +6,7 @@ import 'package:plus/app/modules/offers_screen/widget/widget/products_in_offers_
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
+import '../../routes/app_routes.dart';
 
 class OffersScreen extends StatelessWidget {
   const OffersScreen({super.key});
@@ -60,16 +61,20 @@ class OffersScreen extends StatelessWidget {
                           Text(
                             "${AppKeys.discount.tr} 💯",
                             style: AppFonts.bodyText.copyWith(
-                              fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w800, fontSize: 20),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.allDiscountProductsScreen);
+                            },
+                            child: Text(
+                              AppKeys.viewAll.tr,
+                              style: AppFonts.bodyText.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.primary,
+                                  fontSize: 14),
                             ),
                           ),
-                          // Text(
-                          //   AppKeys.viewAll.tr,
-                          //   style: AppFonts.bodyText.copyWith(
-                          //       fontWeight: FontWeight.w800,
-                          //       color: AppColors.primary,
-                          //       fontSize: 14),
-                          // ),
                         ],
                       ),
                       SizedBox(

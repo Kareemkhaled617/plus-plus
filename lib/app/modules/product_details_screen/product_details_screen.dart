@@ -119,73 +119,74 @@ class ProductDetailsScreen extends StatelessWidget {
                         height: 20,
                       ),
                       ProductDescriptionAndBrandSection(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Obx(() {
-                          return ElevatedButton.icon(
-                            onPressed: controller.product.value!.stock == 0
-                                ? null
-                                : () {
-                                    if (cartController.isProductInCart(
-                                        controller.product.value!.id)) {
-                                      cartController.removeAllProductFromCart(
-                                          controller.product.value!.id);
-                                    } else {
-                                      cartController.addToCart(
-                                          controller.product.value!,
-                                          isSelect:
-                                              controller.isSelected.value);
-                                    }
-                                  },
-                            label: Icon(
-                              cartController.isProductInCart(
-                                      controller.product.value!.id)
-                                  ? Icons.delete_outline_rounded
-                                  : Icons.shopping_cart_outlined,
-                              size: 24,
-                              color: Colors.white,
-                            ),
-                            icon: cartController.isProductInCart(
-                                    controller.product.value!.id)
-                                ? Text(
-                                    AppKeys.removeToCart.tr,
-                                    style: AppFonts.bodyText.copyWith(
-                                      color: Colors.white,
-                                      fontSize: getResponsiveFontSize(14),
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                                : Text(
-                                    AppKeys.addToCart.tr,
-                                    style: AppFonts.bodyText.copyWith(
-                                      color: Colors.white,
-                                      fontSize: getResponsiveFontSize(14),
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: cartController.isProductInCart(
-                                      controller.product.value!.id)
-                                  ? AppColors.red
-                                  : AppColors.primary,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 20),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                    ]),
-              ),
-            );
-          }),
-        ));
+                  ]),
+            ),
+          );
+        }),
+      ),
+      bottomNavigationBar: Obx(() {
+        return controller.isLoading.value
+            ? Container()
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 18.0, horizontal: 90),
+                child: ElevatedButton.icon(
+                  onPressed: controller.product.value!.stock == 0
+                      ? null
+                      : () {
+                          if (cartController
+                              .isProductInCart(controller.product.value!.id)) {
+                            cartController.removeAllProductFromCart(
+                                controller.product.value!.id);
+                          } else {
+                            cartController.addToCart(controller.product.value!,
+                                isSelect: controller.isSelected.value);
+                          }
+                        },
+                  label: Icon(
+                    cartController.isProductInCart(controller.product.value!.id)
+                        ? Icons.delete_outline_rounded
+                        : Icons.shopping_cart_outlined,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  icon: cartController
+                          .isProductInCart(controller.product.value!.id)
+                      ? Text(
+                          AppKeys.removeToCart.tr,
+                          style: AppFonts.bodyText.copyWith(
+                            color: Colors.white,
+                            fontSize: getResponsiveFontSize(14),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : Text(
+                          AppKeys.addToCart.tr,
+                          style: AppFonts.bodyText.copyWith(
+                            color: Colors.white,
+                            fontSize: getResponsiveFontSize(14),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: cartController
+                            .isProductInCart(controller.product.value!.id)
+                        ? AppColors.red
+                        : AppColors.primary,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              );
+      }),
+    );
   }
 
   void showUnAvailableBottomSheet(int id, ProductPointController controller1) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/utils/size_config.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
@@ -35,7 +36,7 @@ class PaymentOptionsSection extends StatelessWidget {
                     color: Colors.white,
                     border: Border.all(
                       color:
-                          isSelected ? Colors.deepPurple : Colors.grey.shade300,
+                          isSelected ? AppColors.primary : Colors.transparent,
                     ),
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -49,10 +50,9 @@ class PaymentOptionsSection extends StatelessWidget {
                         onChanged: (val) => controller.selectOption(index),
                         activeColor: Colors.deepPurple,
                       ),
-                      Icon(
-                        _getIcon(index),
-                        size: 28,
-                        color: AppColors.primary,
+                      Image.asset(
+                        controller.images[index],
+                        width: getProportionateScreenWidth(30),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -61,7 +61,7 @@ class PaymentOptionsSection extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: isSelected ? Colors.black : Colors.grey,
+                            color: isSelected ? AppColors.primary : AppColors.grey,
                           ),
                         ),
                       ),
@@ -122,16 +122,5 @@ class PaymentOptionsSection extends StatelessWidget {
   //   );
   // }
 
-  IconData _getIcon(int index) {
-    switch (index) {
-      case 0:
-        return Icons.credit_card;
-      case 1:
-        return Icons.phone_android;
-      case 2:
-        return Icons.credit_score;
-      default:
-        return Icons.payment;
-    }
-  }
+
 }

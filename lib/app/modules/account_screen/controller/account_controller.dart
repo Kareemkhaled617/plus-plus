@@ -1,26 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/routes/app_routes.dart';
+
 import '../../../domain/entities/point_entity.dart';
+import '../../../domain/entities/user_profile_entity.dart';
 import '../../../domain/usecases/change_language_usecase.dart';
 import '../../../domain/usecases/get_account_points_usecase.dart';
+import '../../../domain/usecases/get_user_profile_usecase.dart';
 import '../../../domain/usecases/update_account_usecase.dart';
 
 class AccountController extends GetxController {
   final UpdateAccountUseCase updateAccountUseCase;
   final GetAccountPointsUseCase getAccountPointsUseCase;
   final ChangeLanguageUseCase changeLanguageUseCase;
+  final GetUserProfileUseCase getUserProfileUseCase;
 
   AccountController(this.updateAccountUseCase, this.getAccountPointsUseCase,
-      this.changeLanguageUseCase);
+      this.changeLanguageUseCase, this.getUserProfileUseCase);
 
   final isLoading = false.obs;
   final isLoadingP = false.obs;
   final points = 0.obs;
   RxBool isChangingLang = false.obs;
+  var isLoadingGetProfile = true.obs;
+  var profile = Rxn<UserProfileEntity>();
   TextEditingController nameController = TextEditingController();
 
   RxList<PointEntity> pointsList = <PointEntity>[].obs;
+
+  @override
+  void onInit() {
+    fetchUserProfile();
+    super.onInit();
+  }
 
   Future<void> updateAccount() async {
     if (nameController.text.isEmpty) {
@@ -65,5 +77,18 @@ class AccountController extends GetxController {
     } else {
       Get.snackbar("Error".tr, "Failed to update language.".tr);
     }
+  }
+
+  Future<void> fetchUserProfile() async {
+    isLoadingGetProfile.value = true;
+    final result = await getUserProfileUseCase();
+    result.fold(
+      (failure) => Get.snackbar("Error", failure.message),
+      (userData) {
+        profile.value = userData;
+        nameController.text = userData.name;
+      },
+    );
+    isLoadingGetProfile.value = false;
   }
 }

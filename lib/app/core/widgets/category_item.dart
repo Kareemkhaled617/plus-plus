@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/utils/size_config.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
 import '../../domain/entities/category_entity.dart';
-import '../../modules/sub_category/sub_category_screen.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 import 'cached_image.dart';
@@ -83,11 +81,11 @@ class CategoryGrid extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 20.0,
           crossAxisSpacing: 16.0,
-          childAspectRatio: 1.7,
+          childAspectRatio: 1.26 ,
         ),
         itemCount: categories.length,
         itemBuilder: (context, index) {
@@ -107,23 +105,26 @@ class CategoryGrid extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: AppColors.categoryBackground,
+                    color: AppColors.whiteSmoke,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(14.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 20),
                     child: CachedImage(
                       imageUrl: category.imageUrl,
-                      fit: BoxFit.fill,
-                      height: 60,
+                      fit: BoxFit.cover,
+                      height: 68,
                       // Optional if you want rounded corners
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(
+                  height: 4,
+                ),
                 Text(
                   category.name,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppFonts.bodyText.copyWith(
                     fontSize: 12,

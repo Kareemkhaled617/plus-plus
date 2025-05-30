@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plus/app/modules/address_directory/controllor/address_controller.dart';
 import 'package:plus/app/modules/cart/controller/cart_controller.dart';
 import 'package:plus/generated/assets.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
@@ -109,7 +110,6 @@ class CartDeliverySection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // عنوان القسم
                   Text(
                     "Choose your delivery address".tr,
                     style: const TextStyle(
@@ -128,9 +128,32 @@ class CartDeliverySection extends StatelessWidget {
 
                       if (addressController.addresses.isEmpty) {
                         return Center(
-                          child: Text(
-                            "No addresses found".tr,
-                            style: const TextStyle(color: Colors.grey),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Spacer(),
+                              Text(
+                                "No addresses found".tr,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                            Spacer(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FloatingActionButton(
+                                    shape: const CircleBorder(),
+                                    onPressed: () {
+                                      Get.toNamed(AppRoutes.accessLocationScreen,
+                                          arguments: {'edit': false});
+                                    },
+                                    backgroundColor: AppColors.primary,
+                                    child: const Icon(Icons.add,
+                                        color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+
+                            ],
                           ),
                         );
                       }

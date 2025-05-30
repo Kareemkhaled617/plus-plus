@@ -19,6 +19,11 @@ class CheckoutController extends GetxController {
     "Visa on delivery",
     "Pay with your card /credit card"
   ];
+  final List<String> images = [
+    "assets/icons/cash.png",
+    "assets/icons/visas.png",
+    "assets/icons/credit.png"
+  ];
 
   String mapPaymentOptionToApiValue(String option) {
     switch (option.toLowerCase()) {

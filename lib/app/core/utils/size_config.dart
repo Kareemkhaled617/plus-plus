@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class SizeConfig {
@@ -32,4 +33,5 @@ double getResponsiveFontSize(double fontSize) {
   double screenWidth = SizeConfig.screenWidth;
   return (fontSize / 375.0) * screenWidth;
 }
+
 

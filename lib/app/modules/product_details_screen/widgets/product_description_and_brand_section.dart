@@ -4,7 +4,6 @@ import 'package:plus/app/modules/product_details_screen/widgets/product_brand_it
 import 'package:plus/app/modules/product_details_screen/widgets/product_description_tab.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../controller/product_controller.dart';
 
 class ProductDescriptionAndBrandSection extends StatefulWidget {
   const ProductDescriptionAndBrandSection(
@@ -51,7 +50,7 @@ class _ProductTabsState extends State<ProductDescriptionAndBrandSection>
         ),
         SizedBox(height: 16),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.33,
+          height: MediaQuery.of(context).size.height * 0.43,
           child: TabBarView(
             controller: _tabController,
             children: [

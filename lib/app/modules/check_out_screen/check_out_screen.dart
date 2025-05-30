@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/loader.dart';
-import 'package:plus/app/modules/cart/widget/cart_empty_body.dart';
 import 'package:plus/app/modules/cart/widget/cart_list_item.dart';
 import 'package:plus/app/modules/cart/widget/checkout_summary.dart';
-import 'package:plus/app/modules/cart/widget/related_products_list.dart';
 import 'package:plus/app/modules/check_out_screen/widget/payment_options_section.dart';
 import 'package:plus/app/modules/check_out_screen/widget/point_widget.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
@@ -91,7 +90,7 @@ class CheckOutScreen extends StatelessWidget {
                               child: AppLoader(),
                             )
                           : Text(
-                              AppKeys.pay.tr,
+                              AppKeys.placeOrder.tr,
                               style: AppFonts.heading3.copyWith(
                                 color: AppColors.white,
                                 fontSize: 16,

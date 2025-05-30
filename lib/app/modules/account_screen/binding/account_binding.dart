@@ -6,6 +6,7 @@ import '../../../data/repositories/account_repository_impl.dart';
 import '../../../domain/repositories/account_repository.dart';
 import '../../../domain/usecases/change_language_usecase.dart';
 import '../../../domain/usecases/get_account_points_usecase.dart';
+import '../../../domain/usecases/get_user_profile_usecase.dart';
 import '../../../domain/usecases/update_account_usecase.dart'; // 👈 UseCase
 
 class AccountBinding extends Bindings {
@@ -19,10 +20,13 @@ class AccountBinding extends Bindings {
     Get.lazyPut<GetAccountPointsUseCase>(
         () => GetAccountPointsUseCase(Get.find()));
     Get.lazyPut<ChangeLanguageUseCase>(() => ChangeLanguageUseCase(Get.find()));
+    Get.lazyPut<GetUserProfileUseCase>(() => GetUserProfileUseCase(Get.find()));
     // ✅ Inject UseCase into Controller
     Get.lazyPut(() => AccountController(
         Get.find<UpdateAccountUseCase>(),
         Get.find<GetAccountPointsUseCase>(),
-        Get.find<ChangeLanguageUseCase>()));
+          Get.find<ChangeLanguageUseCase>(),
+          Get.find<GetUserProfileUseCase>(),
+        ));
   }
 }

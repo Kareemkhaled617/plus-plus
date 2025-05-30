@@ -57,7 +57,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
         filled: true,
         suffixIcon: suffixIcon,
-        fillColor: fillColor ?? AppColors.categoryBackground,
+        fillColor: fillColor ?? AppColors.lightBlue.withOpacity(.3),
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

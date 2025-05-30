@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
-import '../../../generated/assets.dart';
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
-import '../../core/utils/common_widgets.dart';
 import '../../core/widgets/product_item.dart';
-import '../product_details_screen/product_details_screen.dart';
 import 'controller/product_controller.dart';
 
 class ProductsScreen extends StatelessWidget {

@@ -69,11 +69,11 @@ class ProfileAllProperties extends StatelessWidget {
           icon: Icons.share_outlined,
           onTap: () {},
         ),
-        ProfilePropertyCard(
-          title: AppKeys.termsAndConditions.tr,
-          icon: Icons.security_rounded,
-          onTap: () {},
-        ),
+        // ProfilePropertyCard(
+        //   title: AppKeys.termsAndConditions.tr,
+        //   icon: Icons.security_rounded,
+        //   onTap: () {},
+        // ),
         ProfilePropertyCard(
           title: AppKeys.privacyPolicy.tr,
           icon: Icons.privacy_tip_outlined,

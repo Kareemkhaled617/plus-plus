@@ -34,11 +34,11 @@ class ProductDetailsHeader extends StatelessWidget {
                     style: AppFonts.heading1.copyWith(fontSize: 17),
                   ),
                 ),
-                Text(
+                controller.product.value!.categories.isNotEmpty?Text(
                   controller.product.value!.categories[0].name,
                   style: AppFonts.heading1
                       .copyWith(fontSize: 15, color: AppColors.primary),
-                ),
+                ):Container(),
               ],
             ),
             controller.product.value!.discountType == "discount"

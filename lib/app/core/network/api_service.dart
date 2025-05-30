@@ -18,6 +18,8 @@ class ApiService {
 
     try {
       final response = await _client.dio.get(url, queryParameters: queryParams);
+      print(response.data);
+      print(response.statusCode);
       return ApiResponse.success(response.data);
     } on DioException catch (e) {
       return ApiResponse.fromDioError(e);

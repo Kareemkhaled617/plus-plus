@@ -62,7 +62,7 @@ class CartScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.center,
-                          child: ElevatedButton.icon(
+                          child: ElevatedButton(
                             onPressed: () {
                               if (cartController.selectedAddress.value != null) {
                                 Get.toNamed(AppRoutes.checkOutScreen);
@@ -72,26 +72,22 @@ class CartScreen extends StatelessWidget {
                                     colorText: Colors.black);
                               }
                             },
-                            label: Icon(
-                              Icons.shopping_cart_outlined,
-                              size: 26,
-                              color: AppColors.white,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 70),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
-                            icon: Text(
+
+                            child: Text(
                               AppKeys.checkout.tr,
-                              style: AppFonts.heading3.copyWith(
+                              style: AppFonts.heading1.copyWith(
                                 color: AppColors.white,
                                 fontSize: 16,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
                             ),
                           ),
                         ),

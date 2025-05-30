@@ -25,7 +25,7 @@ class BrandsScreen extends StatelessWidget {
         backgroundColor: AppColors.white,
         title: Text(
           AppKeys.brands.tr,
-          style: AppFonts.heading3,
+          style: AppFonts.heading1,
         ),
         leading: InkWell(
           onTap: () => Get.back(),

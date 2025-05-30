@@ -15,9 +15,12 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
   @override
   Future<Either<Failure, PrescriptionEntity>> uploadPrescription({
     required String filePath,
+    required String filetype,
     required String aboutImage,
     required String orderProductNames,
   }) async {
+    print(filetype);
+    print(filePath);
     final formData = filePath.isNotEmpty
         ? FormData.fromMap({
             'image': [
@@ -25,7 +28,7 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
                   filename: filePath.split('/').last)
             ],
             'about_image': aboutImage,
-            'image_type': 'image',
+            'image_type': filetype,
             'order_product_names': orderProductNames,
           })
         : FormData.fromMap({

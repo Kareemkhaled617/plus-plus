@@ -31,7 +31,7 @@ const Map<String, String> enUS = {
   "View All": "View All",
   "Cart Products": "Cart Products",
   "Peace": "Peace",
-  "Checkout": "Checkout",
+  "Checkout": "Check out",
   "Home": "Home",
   "Delivery to :": "Delivery to :",
   "Add": "Add",
@@ -247,7 +247,7 @@ const Map<String, String> enUS = {
   "Contact Information": "Contact Information",
   "No address available":"No address available",
   'Unavailable':'Unavailable',
-  "Product In cart":"Product In cart",
+  "Product In cart": "In cart",
   "howToEarnPoints": "How to earn points",
   "intro": "Points are the currency of the rewards program. In terms of how to obtain them, they are through two methods.",
   "online": "The first is online, which is through purchasing from the application. With every product you buy, you get points.",
@@ -256,6 +256,14 @@ const Map<String, String> enUS = {
   "   OTP Code Sent On Your Mobile Number.":"   OTP Code Sent On Your Mobile Number.",
   "No Privacy Policy Found":"No Privacy Policy Found",
   "Please enter a valid phone number": "Please enter a valid phone number",
-  "otp have been sent to your phone number": "otp have been sent to your phone number"
-
+  "otp have been sent to your phone number":
+      "otp have been sent to your phone number",
+  "PDF file selected": "PDF file selected",
+  "Place Order": "Place Order",
+  "add_address_info": "Add Address Info",
+  "order_received": "Order Received",
+  "preparing_order": "Preparing Order",
+  "out_for_delivery": "Out for Delivery",
+  "delivered_to_you": "Delivered to You",
+  "order_completed": "Order Completed"
 };

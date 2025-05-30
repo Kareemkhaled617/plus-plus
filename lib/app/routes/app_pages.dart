@@ -15,7 +15,6 @@ import '../modules/all_prescription/all_prescription_screen.dart';
 import '../modules/all_prescription/bindind/prescription_binding.dart';
 import '../modules/brands_screen/binding/brand_binding.dart';
 import '../modules/brands_screen/brands_screen.dart';
-
 import '../modules/cart/binding/cart_binding.dart';
 import '../modules/cart/cart_screen.dart';
 import '../modules/change_phone_number/binding/change_phone_binding.dart';
@@ -27,6 +26,7 @@ import '../modules/landing_screen/landing_screen.dart';
 import '../modules/login_screen/login_screen.dart';
 import '../modules/notification_screen/binding/notification_binding.dart';
 import '../modules/notification_screen/notifications_screen.dart';
+import '../modules/offers_screen/widget/widget/all_discount_product.dart';
 import '../modules/order_details_screen/bindings/order_details_binding.dart';
 import '../modules/order_details_screen/order_details_screen.dart';
 import '../modules/order_history_screen/binding/order_binding.dart';
@@ -179,5 +179,9 @@ class AppPages {
         name: AppRoutes.changePhoneScreen,
         page: () => ChangePhoneScreen(),
         binding: ChangePhoneBinding()),
+    GetPage(
+      name: AppRoutes.allDiscountProductsScreen,
+      page: () => AllDiscountProductsScreen(),
+    ),
   ];
 }

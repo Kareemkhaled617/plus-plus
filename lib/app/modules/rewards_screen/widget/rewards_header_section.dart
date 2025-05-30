@@ -28,7 +28,7 @@ class RewardsHeaderSection extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: "PLUS PLUS ",
+                    text: " PLUS PLUS ",
                     style: AppFonts.heading3.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.bold,

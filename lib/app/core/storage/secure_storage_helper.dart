@@ -26,6 +26,9 @@ class SecureStorageHelper {
 
   /// Clear all secure storage data
   Future<void> clearAll() async {
-    await _storage.deleteAll();
+    // await _storage.deleteAll();
+    await deleteData('auth_token');
+    await deleteData('favorite_products');
+    await deleteData('cart_data');
   }
 }

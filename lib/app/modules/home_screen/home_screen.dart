@@ -66,17 +66,17 @@ class HomeScreen extends StatelessWidget {
                             height: 10,
                           ),
                           CircularImageSlider(),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          DisclaimerBox(
-                            message: AppKeys.pharmacyPartnerInfo.tr,
-                            highlightedText: ' El Lewaa Elteby  ',
-                            onHighlightTap: () {},
-                            message1:
-                                "Pharmacy and under its full medical supervision."
-                                    .tr,
-                          ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          // DisclaimerBox(
+                          //   message: AppKeys.pharmacyPartnerInfo.tr,
+                          //   highlightedText: ' El Lewaa Elteby  ',
+                          //   onHighlightTap: () {},
+                          //   message1:
+                          //       "Pharmacy and under its full medical supervision."
+                          //           .tr,
+                          // ),
                           SizedBox(
                             height: 20,
                           ),

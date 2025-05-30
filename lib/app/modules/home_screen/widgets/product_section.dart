@@ -1,18 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/core/utils/color_helper.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
-import '../../../../generated/assets.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/size_config.dart';
 import '../../../core/widgets/product_item.dart';
 import '../../../domain/entities/section_entity.dart';
-import '../../product_details_screen/product_details_screen.dart';
-import '../../products_screen/products_screen.dart';
 
 class ProductSection extends StatelessWidget {
   const ProductSection({super.key, required this.section});
@@ -101,9 +96,7 @@ class ProductSection extends StatelessWidget {
             ),
           )
         : Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            width: 100,
-            height: 200,
+
           );
   }
 }

@@ -3,13 +3,10 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/sub_category/widgets/category_tabs.dart';
 
-import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/widgets/app_bar_back_button.dart';
 import '../../core/widgets/product_item.dart';
-import '../../routes/app_routes.dart';
-import '../product_details_screen/product_details_screen.dart';
 import 'controller/product_controller.dart';
 import 'controller/sup_category_controller.dart';
 
@@ -78,7 +75,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             const SizedBox(height: 10),
             Obx(() {
               if (controller.isLoadingSup.value) {
-                return SizedBox(height: 70, child: AppLoader());
+                return Center(child: CircularProgressIndicator());
               }
               if (controller.errorMessage.isNotEmpty) {
                 return Center(child: Text(controller.errorMessage.value));

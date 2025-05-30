@@ -61,14 +61,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                 .toList(),
                             searchQuery: searchQuery,
                             onHintSelected: (selected) {
-
                               setState(() {
                                 searchQuery = selected;
                                 searchController.text = selected;
                                 showResults = true;
                                 isSearching = false;
-                                controller.searchProducts(
-                                    searchQuery); // 🔄 Trigger search
+                                controller.searchProducts(searchQuery);
                               });
                             },
                             onChanged: (value) {

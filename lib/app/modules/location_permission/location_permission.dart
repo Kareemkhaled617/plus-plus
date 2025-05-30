@@ -62,7 +62,7 @@ class LocationScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(Assets.imagesLocationEnabled, height: 200),
+                  Image.asset(Assets.imagesLocation, height: 200),
                   SizedBox(height: AppSizes.paddingMedium(context)),
                   Text(
                     AppKeys.locatingLocation.tr,
@@ -81,7 +81,7 @@ class LocationScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset( Assets.imagesLocationDisabled),
+                Image.asset( Assets.imagesLocation),
                 SizedBox(height: AppSizes.paddingMedium(context)),
                 Text(
                   "Enable Location Services".tr,

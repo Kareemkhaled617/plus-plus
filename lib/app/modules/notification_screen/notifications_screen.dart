@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/core/widgets/loader.dart';
+import 'package:plus/app/modules/notification_screen/widgets/no_notification.dart';
 import 'package:plus/app/modules/notification_screen/widgets/notifications_list_item.dart';
 import 'package:plus/app/modules/notification_screen/widgets/notifications_section.dart';
 
@@ -20,6 +21,7 @@ class NotificationScreen extends StatelessWidget {
         Get.find<NotificationController>();
 
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text(
           AppKeys.notification.tr,
@@ -56,7 +58,7 @@ class NotificationScreen extends StatelessWidget {
         } else if (controller.errorMessage.isNotEmpty) {
           return Center(child: Text(controller.errorMessage.value));
         } else if (controller.notifications.isEmpty) {
-          return Center(child: Text('No notifications available.'.tr));
+          return NoFoundNotificationScreen();
         } else {
           final groupedNotifications =
               groupNotificationsByDate(controller.notifications);

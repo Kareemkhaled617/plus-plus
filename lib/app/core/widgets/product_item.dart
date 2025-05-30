@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
+
 import '../../domain/entities/product_entity.dart';
-import '../../modules/cart/cart_screen.dart';
 import '../../modules/cart/controller/cart_controller.dart';
 import '../../modules/favourite_screen/controller/favorite_controller.dart';
 import '../../routes/app_routes.dart';
@@ -10,7 +10,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 import '../utils/size_config.dart';
 import 'cached_image.dart';
-import 'offers_percent_widget.dart';
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;
@@ -50,8 +49,8 @@ class ProductCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
         margin: const EdgeInsets.symmetric(horizontal: 4),
-        width: getProportionateScreenWidth(170),
-        height: getProportionateScreenHeight(230),
+        width: getProportionateScreenWidth(160),
+        // height: getProportionateScreenHeight(220),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -167,7 +166,7 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 14),
+                SizedBox(height: getProportionateScreenHeight(14)),
 
                 /// **Add To Cart Button**
                 Obx(() {
@@ -189,7 +188,7 @@ class ProductCard extends StatelessWidget {
                       cartController.isProductInCart(id)
                           ? Icons.shopping_cart_rounded
                           : Icons.shopping_cart_outlined,
-                      size: 24,
+                      size: 22,
                       color: Colors.white,
                     ),
                     icon: cartController.isProductInCart(id)
@@ -217,8 +216,9 @@ class ProductCard extends StatelessWidget {
                       backgroundColor: cartController.isProductInCart(id)
                           ? AppColors.primary.withOpacity(.2)
                           : AppColors.primary,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 10),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: getProportionateScreenWidth(16)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -255,14 +255,18 @@ class ProductCard extends StatelessWidget {
                             width: getProportionateScreenWidth(50),
                           ),
                           IconButton(
-                            icon: Icon(
-                                controller.isProductFavorite(id)
-                                    ? Icons.favorite_rounded
+                            icon: controller.isLoading.value
+                                ? Container()
+                                : Icon(
+                                    controller.isProductFavorite(id)
+                                        ? Icons.favorite_rounded
                                     : Icons.favorite_border,
                                 color: Colors.red),
-                            onPressed: () {
-                              controller.addProductToFavorites(id);
-                              controller.fetchFavourites();
+                            onPressed: controller.isLoading.value
+                                ? null
+                                : () {
+                                    controller.addProductToFavorites(id);
+                                    controller.fetchFavourites();
                             },
                           ),
                         ],
@@ -296,13 +300,17 @@ class ProductCard extends StatelessWidget {
                             width: getProportionateScreenWidth(40),
                           ),
                           IconButton(
-                            icon: Icon(
-                                controller.isProductFavorite(id)
+                            icon: controller.isLoading.value
+                                ? Container()
+                                : Icon(
+                                    controller.isProductFavorite(id)
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border,
                                 color: Colors.red),
-                            onPressed: () {
-                              controller.addProductToFavorites(id);
+                            onPressed: controller.isLoading.value
+                                ? null
+                                : () {
+                                    controller.addProductToFavorites(id);
                               controller.fetchFavourites();
                             },
                           ),

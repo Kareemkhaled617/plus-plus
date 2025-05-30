@@ -59,7 +59,7 @@ class RelatedProductsList extends StatelessWidget {
             height: 16,
           ),
           SizedBox(
-            height: 230,
+            height: 250,
             child: ListView.builder(
                 itemCount: controller.relatedProducts.length,
                 scrollDirection: Axis.horizontal,

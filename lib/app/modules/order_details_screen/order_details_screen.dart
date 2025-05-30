@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/modules/order_details_screen/controller/order_details_controller.dart';
 import 'package:plus/app/modules/order_details_screen/widget/general_info_section.dart';
@@ -8,7 +6,6 @@ import 'package:plus/app/modules/order_details_screen/widget/order_tracking_sect
 import 'package:plus/app/modules/order_details_screen/widget/payment_info_section.dart';
 import 'package:plus/app/modules/order_details_screen/widget/rewards_section.dart';
 import 'package:plus/app/modules/order_details_screen/widget/shipping_details_section.dart';
-import 'package:plus/generated/assets.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
@@ -61,7 +58,9 @@ class OrderDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
 
-                  PaymentInfoSection(  orderEntity: order,),
+                  PaymentInfoSection(
+                    orderEntity: order,
+                  ),
                   SizedBox(
                     height: 20,
                   ),

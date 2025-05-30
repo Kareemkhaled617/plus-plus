@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/cached_image.dart';
 
+import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/shimmer.dart';
 import '../../../core/utils/url_helper.dart';
-import '../../../domain/entities/banner_entity.dart';
 import '../controller/banner_controller.dart';
 import '../controller/home_scontroller.dart';
-import '../../../core/theme/app_colors.dart';
 
 class CircularImageSlider extends StatelessWidget {
   CircularImageSlider({super.key});
@@ -34,7 +33,7 @@ class CircularImageSlider extends StatelessWidget {
                 ),
                 CarouselSlider(
                   options: CarouselOptions(
-                    height: 150.0,
+                    height: 160.0,
                     autoPlay: true,
                     enlargeCenterPage: true,
                     viewportFraction: 0.8,
@@ -115,7 +114,7 @@ class CircularImageSlider1 extends StatelessWidget {
                 ),
                 CarouselSlider(
                   options: CarouselOptions(
-                    height: 150.0,
+                    height: 170.0,
                     autoPlay: true,
                     enlargeCenterPage: true,
                     viewportFraction: 0.8,

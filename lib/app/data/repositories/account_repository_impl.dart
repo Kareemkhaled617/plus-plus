@@ -4,9 +4,11 @@ import '../../core/errors/failure.dart';
 import '../../core/network/api_service.dart';
 import '../../domain/entities/point_entity.dart';
 import '../../domain/entities/update_phone_entity.dart';
+import '../../domain/entities/user_profile_entity.dart';
 import '../../domain/repositories/account_repository.dart';
 import '../models/point_model.dart';
 import '../models/update_phone_model.dart';
+import '../models/user_profile_model.dart';
 
 class AccountRepositoryImpl extends AccountRepository {
   final ApiService apiService;
@@ -68,6 +70,19 @@ class AccountRepositoryImpl extends AccountRepository {
         return Right(response.message ?? "Updated successfully!");
       } else {
         return Left(Failure(response.message ?? "Verification failed"));
+      }
+    } catch (e) {
+      return Left(Failure("Unexpected error occurred"));
+    }
+  }
+  @override
+  Future<Either<Failure, UserProfileEntity>> getUserProfile() async {
+    try {
+      final response = await apiService.getRequest('/account/profile');
+      if (response.success) {
+        return Right(UserProfileModel.fromJson(response.data['data']));
+      } else {
+        return Left(Failure(response.message ?? 'Failed to fetch profile'));
       }
     } catch (e) {
       return Left(Failure("Unexpected error occurred"));

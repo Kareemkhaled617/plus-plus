@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_colors.dart';
 import 'package:plus/generated/assets.dart';
 
-import '../../binding/app_binding.dart';
 import '../../core/utils/app_keys.dart';
 import '../cart/cart_screen.dart';
+import '../cart/controller/cart_controller.dart';
 import '../home_screen/controller/banner_controller.dart';
 import '../home_screen/controller/category_controller.dart';
 import '../home_screen/controller/section_controller.dart';
@@ -38,6 +38,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<CartController>();
     return Scaffold(
       body: selectedIndex == 0
           ? RefreshIndicator(
@@ -88,13 +89,13 @@ class _LandingScreenState extends State<LandingScreen> {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              Assets.iconsUnSelectedSearch,
+              Assets.iconsUnselectedSearch,
               height: 24,
             ),
             activeIcon: Column(
               children: [
                 Image.asset(
-                  Assets.iconsUnSelectedSearch,
+                  Assets.iconsUnselectedSearch,
                   height: 24,
                   color: AppColors.primary,
                 ),
@@ -110,17 +111,83 @@ class _LandingScreenState extends State<LandingScreen> {
             label: AppKeys.search.tr,
           ),
           BottomNavigationBarItem(
-            icon: Image.asset(
-              Assets.iconsUnselectedCart,
-              height: 24,
-            ),
+            icon: Obx(() {
+              int cartCount = controller.itemCounts.length;
+
+              return Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Image.asset(
+                    Assets.iconsUnselectedCart,
+                    height: 24,
+                  ),
+                  if (cartCount > 0)
+                    Positioned(
+                      top: -6,
+                      right: -6,
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints:
+                            BoxConstraints(minWidth: 20, minHeight: 20),
+                        child: Center(
+                          child: Text(
+                            '$cartCount',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            }),
             activeIcon: Column(
               children: [
-                Image.asset(
-                  Assets.iconsSelectedCart,
-                  height: 24,
-                  color: AppColors.primary,
-                ),
+                Obx(() {
+                  int cartCount = controller.itemCounts.length;
+
+                  return Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Image.asset(
+                        Assets.iconsSelectedCart,
+                        height: 24,
+                        color: AppColors.primary,
+                      ),
+                      if (cartCount > 0)
+                        Positioned(
+                          top: -6,
+                          right: -6,
+                          child: Container(
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            constraints:
+                                BoxConstraints(minWidth: 20, minHeight: 20),
+                            child: Center(
+                              child: Text(
+                                '$cartCount',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                }),
                 SizedBox(height: 2),
                 Container(
                   width: 6,

@@ -234,7 +234,7 @@ const Map<String, String> arEG = {
   "Contact Information": "معلومات التواصل",
   "No address available": "لا يوجد عنوان متاح",
   'Unavailable': "غير متوفر",
-  "Product In cart": "المنتج في السلة",
+  "Product In cart": "في السلة",
   "howToEarnPoints": "كيفية كسب النقاط",
   "intro":
       "النقاط هي عملة برنامج المكافآت. من حيث كيفية الحصول عليها، فهناك طريقتان.",
@@ -245,5 +245,14 @@ const Map<String, String> arEG = {
   "policy":
       "لا يمكن الشراء باستخدام النقاط، ولكن سيتم خصم القيمة المقابلة للنقاط من إجمالي الفاتورة.",
   "Please enter a valid phone number": "يرجى إدخال رقم هاتف صحيح",
-  "otp have been sent to your phone number": "تم إرسال رمز التحقق إلى رقم هاتفك"
+  "otp have been sent to your phone number": "تم إرسال رمز التحقق إلى رقم هاتفك",
+  "PDF file selected": "تم اختيار ملف PDF",
+  "Place Order":"تأكيد الطلب",
+  "add_address_info": "أضف معلومات العنوان",
+  "order_received": "تم استلام الطلب",
+  "preparing_order": "جاري تجهيز الطلب",
+  "out_for_delivery": "قيد التوصيل",
+  "delivered_to_you": "تم التوصيل",
+  "order_completed": "تم اكتمال الطلب"
+
 };

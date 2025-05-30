@@ -20,6 +20,7 @@ class AppKeys {
       "Upload a photo of your Prescription or product";
   static const aboutThePhoto = "     About the photo ......";
   static const or = "or";
+  static const placeOrder = "Place Order";
   static const typeYourOrder = "Type your order";
   static const typeYourOrderHint =
       "Type here the medicine name or the product name that you want to order";
@@ -247,4 +248,10 @@ class AppKeys {
   static var floor = "Floor";
 
   static var theApartment = "The Apartment";
+  static var addAddressInfo = 'add_address_info';
+  static var orderReceived = 'order_received';
+  static var preparingOrder = 'preparing_order';
+  static var outForDelivery = 'out_for_delivery';
+  static var deliveredToYou = 'delivered_to_you';
+  static var orderCompleted = 'order_completed';
 }

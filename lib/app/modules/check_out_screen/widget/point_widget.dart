@@ -3,6 +3,11 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_fonts.dart';
 import 'package:plus/app/modules/cart/controller/cart_controller.dart';
 
+import '../../../../generated/assets.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/size_config.dart';
+import '../../../routes/app_routes.dart';
+import '../../account_screen/controller/account_controller.dart';
 import '../controller/check_out_controller.dart';
 
 class UsePointSection extends StatefulWidget {
@@ -18,7 +23,7 @@ class _UsePointSectionState extends State<UsePointSection> {
   @override
   Widget build(BuildContext context) {
     final checkoutController = Get.find<CheckoutController>();
-
+    AccountController controller = Get.find<AccountController>();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
@@ -83,9 +88,52 @@ class _UsePointSectionState extends State<UsePointSection> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Insert number of point".tr,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  Row(
+                    children: [
+                      Text(
+                        "Insert number of point".tr,
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.rewards);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: AppColors.white,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image(
+                                image: AssetImage(Assets.iconsStar),
+                                width: getProportionateScreenHeight(22),
+                                height: getProportionateScreenHeight(22),
+                              ),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              FutureBuilder(
+                                  future: controller.fetchPoints(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Text(controller.points.value.toString(),
+                                          style: AppFonts.bodyText.copyWith(
+                                            color: AppColors.black,
+                                          ));
+                                    } else {
+                                      return Container();
+                                    }
+                                  })
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -104,23 +152,7 @@ class _UsePointSectionState extends State<UsePointSection> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF4A26D7),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                        ),
-                        child: Text(
-                          "Use".tr,
-                          style:
-                              AppFonts.bodyText.copyWith(color: Colors.white),
-                        ),
-                      )
+
                     ],
                   ),
                 ],

@@ -21,11 +21,11 @@ class ProductDescriptionTab extends StatelessWidget {
             controller.product.value!.name,
             style: AppFonts.heading1.copyWith(fontSize: 14),
           ),
-          Text(
+          controller.product.value!.categories.isNotEmpty? Text(
             controller.product.value!.categories[0].name,
             style: AppFonts.heading1
                 .copyWith(fontSize: 14, color: AppColors.primary),
-          ),
+          ): Container(),
           SizedBox(height: 8),
           // Description
 

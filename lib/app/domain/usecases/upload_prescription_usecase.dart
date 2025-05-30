@@ -10,11 +10,13 @@ class UploadPrescriptionUseCase {
 
   Future<Either<Failure, PrescriptionEntity>> call({
     required String filePath,
+    required String filetype,
     required String aboutImage,
     required String orderProductNames,
   }) {
     return repository.uploadPrescription(
       filePath: filePath,
+      filetype: filetype,
       aboutImage: aboutImage,
       orderProductNames: orderProductNames,
     );

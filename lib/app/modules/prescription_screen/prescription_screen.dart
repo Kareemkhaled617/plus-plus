@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/modules/prescription_screen/widgets/upload_prescription_widget.dart';
@@ -9,8 +11,6 @@ import '../../core/utils/app_keys.dart';
 import '../../core/widgets/app_bar_back_button.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/custom_text_form_field.dart';
-import '../../core/widgets/loader.dart';
-
 import 'controller/prescription_controller.dart';
 
 class PrescriptionScreen extends StatelessWidget {
@@ -44,7 +44,8 @@ class PrescriptionScreen extends StatelessWidget {
                   const SizedBox(height: 25),
                   Image.asset(Assets.iconsPrescription, width: 124),
                   const SizedBox(height: 30),
-                  UploadPrescriptionWidget(onTap: controller.pickImage),
+
+                  UploadPrescriptionWidget(onTap: controller.showPickOptions),
                   const SizedBox(height: 20),
                   CustomTextFormField(
                     hintText: AppKeys.aboutThePhoto.tr,
@@ -58,14 +59,14 @@ class PrescriptionScreen extends StatelessWidget {
                       }
                       return null;
                     },
-                    fillColor: Colors.grey.withOpacity(0.1),
+                    fillColor: AppColors.lightBlue.withOpacity(.3),
                   ),
                   const SizedBox(height: 20),
                   _buildDividerWithOr(),
                   const SizedBox(height: 20),
                   CircleAvatar(
                     radius: 26,
-                    backgroundColor: AppColors.primary.withOpacity(0.1),
+                    backgroundColor: AppColors.lightBlue.withOpacity(.3),
                     child: Image.asset(Assets.iconsPin, width: 18),
                   ),
                   const SizedBox(height: 18),
@@ -104,7 +105,7 @@ class PrescriptionScreen extends StatelessWidget {
         Expanded(child: Divider(color: Colors.grey.shade300, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(AppKeys.or.tr),
+          child: Text(AppKeys.or.tr,style: AppFonts.heading2.copyWith(color: AppColors.grey),),
         ),
         Expanded(child: Divider(color: Colors.grey.shade300, thickness: 1)),
       ],

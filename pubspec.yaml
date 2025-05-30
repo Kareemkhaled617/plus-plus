@@ -56,6 +56,10 @@ dependencies:
   shimmer:
   url_launcher:
   flutter_local_notifications:
+  file_picker:
+  dotted_border:
+  easy_stepper: ^0.8.5+1
+  geocoding:
 dev_dependencies:
   flutter_test:
     sdk: flutter
