@@ -127,9 +127,9 @@ class ProductDetailsScreen extends StatelessWidget {
       bottomNavigationBar: Obx(() {
         return controller.isLoading.value
             ? Container()
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 18.0, horizontal: 90),
+            : controller.product.value != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 90),
                 child: ElevatedButton.icon(
                   onPressed: controller.product.value!.stock == 0
                       ? null
@@ -184,7 +184,8 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              );
+                  )
+                : Container();
       }),
     );
   }

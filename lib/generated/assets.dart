@@ -34,6 +34,7 @@ class Assets {
   static const String iconsSelectedSearch = 'assets/icons/selected_search.png';
   static const String iconsShare = 'assets/icons/share.png';
   static const String iconsStar = 'assets/icons/star.png';
+  static const String iconsTimer = 'assets/icons/timer.png';
   static const String iconsUnselectedCart = 'assets/icons/unselected_cart.png';
   static const String iconsUnselectedHome = 'assets/icons/unselected_home.png';
   static const String iconsUnselectedOffers = 'assets/icons/unselected_offers.png';

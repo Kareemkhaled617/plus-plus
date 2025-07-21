@@ -69,7 +69,7 @@ class ProductsScreen extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 12,
-                  childAspectRatio: .8,
+                  childAspectRatio: .74,
                 ),
                 itemCount: controller.products.length,
                 // Adjust count dynamically

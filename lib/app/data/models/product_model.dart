@@ -38,7 +38,7 @@ class ProductModel extends ProductEntity {
       benefits:
           (json['description']?['benefits'] as String?)?.split(" - ") ?? [],
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
-      stock: json['stock'] ?? 0,
+      stock: json['stock'] ?? 1,
       imageUrl: json['image'] ?? "",
       bodyImages: (json['body-images'] as List<dynamic>?)
               ?.map((img) => img.toString())

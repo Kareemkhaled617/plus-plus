@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
         margin: const EdgeInsets.symmetric(horizontal: 4),
         width: getProportionateScreenWidth(160),
         // height: getProportionateScreenHeight(220),
@@ -67,50 +67,22 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: getProportionateScreenHeight(30),
+                  height: getProportionateScreenHeight(20),
                 ),
                 CachedImage(
-                  height: 60,
+                  height: getProportionateScreenHeight(70),
+                  width: getProportionateScreenWidth(200),
                   fit: BoxFit.contain,
                   imageUrl: imageUrl,
                 ),
 
                 SizedBox(height: getProportionateScreenHeight(10)),
-
-                /// **Price & Stock (Space Between)**
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                productEntity.discountType == 'discount'
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            title,
-                            style: AppFonts.heading1.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: getResponsiveFontSize(16),
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            stockInfo,
-                            style: AppFonts.bodyText.copyWith(
-                                fontSize: getResponsiveFontSize(13),
-                                color: AppColors.brown,
-                                fontWeight: FontWeight.w700),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                    ),
-                    productEntity.discountType == 'discount'
-                        ? Column(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Stack(
                                 alignment: Alignment.center,
@@ -126,7 +98,6 @@ class ProductCard extends StatelessWidget {
                                   ),
                                   Transform.rotate(
                                     angle: 45 * (3.14159265359 / 180),
-                                    // Convert degrees to radians
                                     child: Container(
                                       height: 2,
                                       width: 30,
@@ -154,15 +125,110 @@ class ProductCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
-                          )
-                        : Text(
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
                             price,
+                            textAlign: TextAlign.end,
                             style: AppFonts.bodyText.copyWith(
                                 fontSize: getResponsiveFontSize(13),
                                 fontWeight: FontWeight.w700),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
+                        ],
+                      ),
+                SizedBox(height: getProportionateScreenHeight(10)),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: AppFonts.heading1.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54,
+                              fontSize: getResponsiveFontSize(13),
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.start,
+                          ),
+                          // Text(
+                          //   stockInfo,
+                          //   style: AppFonts.bodyText.copyWith(
+                          //       fontSize: getResponsiveFontSize(13),
+                          //       color: AppColors.brown,
+                          //       fontWeight: FontWeight.w700),
+                          //   maxLines: 1,
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
+                        ],
+                      ),
+                    ),
+                    // productEntity.discountType == 'discount'
+                    //     ? Column(
+                    //         children: [
+                    //           Stack(
+                    //             alignment: Alignment.center,
+                    //             children: [
+                    //               Text(
+                    //                 price,
+                    //                 style: AppFonts.bodyText.copyWith(
+                    //                     fontSize: getResponsiveFontSize(10),
+                    //                     color: AppColors.red,
+                    //                     fontWeight: FontWeight.w700),
+                    //                 maxLines: 1,
+                    //                 overflow: TextOverflow.ellipsis,
+                    //               ),
+                    //               Transform.rotate(
+                    //                 angle: 45 * (3.14159265359 / 180),
+                    //                 child: Container(
+                    //                   height: 2,
+                    //                   width: 30,
+                    //                   decoration: BoxDecoration(
+                    //                     borderRadius: BorderRadius.circular(20),
+                    //                     color: AppColors.red,
+                    //                   ),
+                    //                 ),
+                    //               )
+                    //             ],
+                    //           ),
+                    //           SizedBox(
+                    //             height: 2,
+                    //           ),
+                    //           Text(
+                    //             (productEntity.price -
+                    //                     (productEntity.price *
+                    //                         (productEntity.discountValue /
+                    //                             100)))
+                    //                 .toStringAsFixed(2),
+                    //             style: AppFonts.bodyText.copyWith(
+                    //                 fontSize: getResponsiveFontSize(13),
+                    //                 fontWeight: FontWeight.w700),
+                    //             maxLines: 1,
+                    //             overflow: TextOverflow.ellipsis,
+                    //           ),
+                    //         ],
+                    //       )
+                    //     : Text(
+                    //         price,
+                    //         style: AppFonts.bodyText.copyWith(
+                    //             fontSize: getResponsiveFontSize(13),
+                    //             fontWeight: FontWeight.w700),
+                    //         maxLines: 1,
+                    //         overflow: TextOverflow.ellipsis,
+                    //       ),
                   ],
                 ),
 

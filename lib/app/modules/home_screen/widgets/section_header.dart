@@ -1,11 +1,12 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
+import '../../../core/utils/app_keys.dart';
 import '../../../core/utils/size_config.dart';
 import '../../account_screen/controller/account_controller.dart';
 import '../../address_directory/controllor/address_controller.dart';
@@ -26,7 +27,7 @@ class SectionHeader extends StatelessWidget {
     final notificationController = Get.find<NotificationController>();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,107 +36,150 @@ class SectionHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              // Obx(() {
-              //   return controller.isLoadingGetProfile.value
-              //       ? Container()
-              //       : Text(
-              //           '${AppKeys.welcome.tr} ${controller.profile.value!.name} ! ',
-              //           style: AppFonts.heading1.copyWith(
-              //               color: isProfileSection
-              //                   ? AppColors.black
-              //                   : AppColors.white,
-              //               fontSize: 21));
-              // }),
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    color: isProfileSection ? AppColors.black : AppColors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  // Obx(() {
-                  //   if (addressController.isLoading.value) {
-                  //     return Center(child: CircularProgressIndicator());
-                  //   } else if (addressController.address.value != null) {
-                  //     final address = addressController.address.value!;
-                  //     return Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       mainAxisAlignment: MainAxisAlignment.start,
-                  //       children: [
-                  //         SizedBox(
-                  //           width: Get.width - 80,
-                  //           child: Text(
-                  //             address.address.address,
-                  //             maxLines: 3,
-                  //             style: AppFonts.bodyText.copyWith(
-                  //                 color: isProfileSection
-                  //                     ? AppColors.black
-                  //                     : AppColors.white,
-                  //                 fontSize: isProfileSection ? 12 : 14,
-                  //                 fontWeight: FontWeight.w800),
-                  //           ),
-                  //         ),
-                  //         if (!isProfileSection)
-                  //           address.availableForDelivery
-                  //               ? Container()
-                  //               : Text(
-                  //                   AppKeys.weDontHaveDeliveryHere.tr,
-                  //                   style: AppFonts.bodyText.copyWith(
-                  //                     color: AppColors.yellowAccent,
-                  //                     fontSize: 16,
-                  //                   ),
-                  //                 ),
-                  //       ],
-                  //     );
-                  //   } else {
-                  //     return InkWell(
-                  //       onTap: () {
-                  //         Get.toNamed(AppRoutes.accessLocationScreen,
-                  //             arguments: {'edit': false});
-                  //       },
-                  //       child: Center(
-                  //           child: Text('No address available'.tr,
-                  //               style: AppFonts.bodyText
-                  //                   .copyWith(color: Colors.white))),
-                  //     );
-                  //   }
-                  // }),
-                  FutureBuilder(
-                      future: addressController.getAddressFromCoordinates(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                  Obx(() {
+                    return controller.isLoadingGetProfile.value
+                        ? Container()
+                        : Row(
                             children: [
                               Text(
-                                snapshot.data!,
-                                maxLines: 1,
-                                style: AppFonts.bodyText.copyWith(
+                                  '${AppKeys.welcome.tr} ${controller.profile.value!.name} ! ',
+                                  style: AppFonts.heading1.copyWith(
+                                      color: isProfileSection
+                                          ? AppColors.black
+                                          : AppColors.white,
+                                      fontSize: 21)),
+                              SizedBox(width: 4,),
+                              Image(
+                                image: AssetImage(Assets.iconsHi),
+                                width: 26,
+                              )
+                            ],
+                          );
+                  }),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: isProfileSection
+                            ? AppColors.black
+                            : AppColors.white,
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      // Obx(() {
+                      //   if (addressController.isLoading.value) {
+                      //     return Center(child: CircularProgressIndicator());
+                      //   } else if (addressController.address.value != null) {
+                      //     final address = addressController.address.value!;
+                      //     return Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //       children: [
+                      //         SizedBox(
+                      //           width: Get.width - 80,
+                      //           child: Text(
+                      //             address.address.address,
+                      //             maxLines: 3,
+                      //             style: AppFonts.bodyText.copyWith(
+                      //                 color: isProfileSection
+                      //                     ? AppColors.black
+                      //                     : AppColors.white,
+                      //                 fontSize: isProfileSection ? 12 : 14,
+                      //                 fontWeight: FontWeight.w800),
+                      //           ),
+                      //         ),
+                      //         if (!isProfileSection)
+                      //           address.availableForDelivery
+                      //               ? Container()
+                      //               : Text(
+                      //                   AppKeys.weDontHaveDeliveryHere.tr,
+                      //                   style: AppFonts.bodyText.copyWith(
+                      //                     color: AppColors.yellowAccent,
+                      //                     fontSize: 16,
+                      //                   ),
+                      //                 ),
+                      //       ],
+                      //     );
+                      //   } else {
+                      //     return InkWell(
+                      //       onTap: () {
+                      //         Get.toNamed(AppRoutes.accessLocationScreen,
+                      //             arguments: {'edit': false});
+                      //       },
+                      //       child: Center(
+                      //           child: Text('No address available'.tr,
+                      //               style: AppFonts.bodyText
+                      //                   .copyWith(color: Colors.white))),
+                      //     );
+                      //   }
+                      // }),
+                      FutureBuilder(
+                          future: addressController.getAddressFromCoordinates(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    snapshot.data!,
+                                    maxLines: 1,
+                                    style: AppFonts.bodyText.copyWith(
+                                        color: isProfileSection
+                                            ? AppColors.black
+                                            : AppColors.white,
+                                        fontSize: isProfileSection
+                                            ? getResponsiveFontSize(15)
+                                            : getResponsiveFontSize(15),
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                                  // if (!isProfileSection)
+                                  //   address.availableForDelivery
+                                  //       ? Container()
+                                  //       : Text(
+                                  //           AppKeys.weDontHaveDeliveryHere.tr,
+                                  //           style: AppFonts.bodyText.copyWith(
+                                  //             color: AppColors.yellowAccent,
+                                  //             fontSize: 16,
+                                  //           ),
+                                  //         ),
+                                ],
+                              );
+                            } else {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: DefaultTextStyle(
+                                  style: AppFonts.bodyText.copyWith(
+                                    fontSize: getResponsiveFontSize(14),
                                     color: isProfileSection
                                         ? AppColors.black
                                         : AppColors.white,
-                                    fontSize: isProfileSection ? 12 : 14,
-                                    fontWeight: FontWeight.w800),
-                              ),
-                              // if (!isProfileSection)
-                              //   address.availableForDelivery
-                              //       ? Container()
-                              //       : Text(
-                              //           AppKeys.weDontHaveDeliveryHere.tr,
-                              //           style: AppFonts.bodyText.copyWith(
-                              //             color: AppColors.yellowAccent,
-                              //             fontSize: 16,
-                              //           ),
-                              //         ),
-                            ],
-                          );
-                        } else {
-                          return Container();
-                        }
-                      })
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  child: AnimatedTextKit(
+                                    animatedTexts: [
+                                      TyperAnimatedText(
+                                          'Detecting Your Location...'.tr),
+                                    ],
+                                    isRepeatingAnimation: true,
+                                    repeatForever: true,
+                                    pause: Duration(milliseconds: 1000),
+                                  ),
+                                ),
+                              );
+                            }
+                          })
+                    ],
+                  ),
                 ],
               ),
               Spacer(),
@@ -177,55 +221,55 @@ class SectionHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 12,
-              ),
-              Obx(() {
-                int unreadCount = notificationController.notifications
-                    .where((noti) => !noti.readed)
-                    .length;
-
-                return Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.notification);
-                      },
-                      child: Icon(
-                        Icons.notifications_none_rounded,
-                        color: isProfileSection
-                            ? AppColors.primary
-                            : AppColors.white,
-                        size: 30,
-                      ),
-                    ),
-                    Positioned(
-                      top: -6,
-                      right: -6,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        constraints:
-                            BoxConstraints(minWidth: 20, minHeight: 20),
-                        child: Center(
-                          child: Text(
-                            '$unreadCount',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }),
+              // SizedBox(
+              //   width: 4,
+              // ),
+              // Obx(() {
+              //   int unreadCount = notificationController.notifications
+              //       .where((noti) => !noti.readed)
+              //       .length;
+              //
+              //   return Stack(
+              //     clipBehavior: Clip.none,
+              //     children: [
+              //       InkWell(
+              //         onTap: () {
+              //           Navigator.pushNamed(context, AppRoutes.notification);
+              //         },
+              //         child: Icon(
+              //           Icons.notifications_none_rounded,
+              //           color: isProfileSection
+              //               ? AppColors.primary
+              //               : AppColors.white,
+              //           size: 30,
+              //         ),
+              //       ),
+              //       Positioned(
+              //         top: -6,
+              //         right: -6,
+              //         child: Container(
+              //           padding: EdgeInsets.all(4),
+              //           decoration: BoxDecoration(
+              //             color: Colors.red,
+              //             shape: BoxShape.circle,
+              //           ),
+              //           constraints:
+              //               BoxConstraints(minWidth: 20, minHeight: 20),
+              //           child: Center(
+              //             child: Text(
+              //               '$unreadCount',
+              //               style: TextStyle(
+              //                 color: Colors.white,
+              //                 fontSize: 11,
+              //                 fontWeight: FontWeight.bold,
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   );
+              // }),
             ],
           ),
           SizedBox(

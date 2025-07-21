@@ -133,14 +133,14 @@ const Map<String, String> enUS = {
   "Locating your location...": "Locating your location...",
   "Here": "Here",
   "You can order the prescription by uploading a picture or listing your needs from the pharmacy":
-      "You can order the prescription by uploading a picture or listing your needs from the pharmacy",
+      "Upload your prescription& let the pharmacy pick the products for you !",
   "Ready for winter?": "Ready for winter?",
   "Welcome": "Welcome",
   "We don’t deliver here !": "We don’t deliver here !",
   "Contact Us": "Contact Us",
   "Special Brands": "Special Brands",
-  "Add your prescription here": "Add your prescription here",
-  "Categories": "Categories",
+  "Add your prescription here": "prescription",
+  "Categories": "Shop By Category",
   "Are you sure you want to delete item ?":
       "Are you sure you want to delete item ?",
   "Sure": "Sure",
@@ -159,7 +159,7 @@ const Map<String, String> enUS = {
       "Products are displayed, sold and delivered on behalf of our pharmacy partner",
   "Pharmacy and under its full medical supervision.":
       "Pharmacy and under its full medical supervision.",
-  "PLUS PLUS Offers": "PLUS PLUS Offers",
+  "El lewaa Offers": "El lewaa Offers",
   "No recent searches available": "No recent searches available",
   'No notifications available.': 'No notifications available.',
   'Success': 'Success',
@@ -265,5 +265,19 @@ const Map<String, String> enUS = {
   "preparing_order": "Preparing Order",
   "out_for_delivery": "Out for Delivery",
   "delivered_to_you": "Delivered to You",
-  "order_completed": "Order Completed"
+  "order_completed": "Order Completed",
+  "No internet connection. Please check your network.": "No internet connection. Please check your network.",
+  "An unexpected error occurred. Please try again.": "An unexpected error occurred. Please try again.",
+  "Connection timed out. Please try again.": "Connection timed out. Please try again.",
+  "Failed to connect. Please check your internet.": "Failed to connect. Please check your internet.",
+  "Request was cancelled.": "Request was cancelled.",
+  "Invalid request": "Invalid request",
+  "You are not authorized": "You are not authorized",
+  "Access is forbidden": "Access is forbidden",
+  "Data not found": "Data not found",
+  "Missing or invalid input": "Missing or invalid input",
+  "Server error. Please try again later": "Server error. Please try again later",
+  "Something went wrong. Please try again": "Something went wrong. Please try again",
+  "Detecting Your Location...": "Detecting Your Location...",
+  "Point Exchange":"النقاط المستبدله"
 };

@@ -60,7 +60,7 @@ class AppKeys {
   static const addCoupon = "Add the coupon";
 
   static const offers = "Offers";
-  static const pOffers = "PLUS PLUS Offers";
+  static const pOffers = "El lewaa Offers";
   static const profile = "Profile";
 
   static const favourite = "Favourite";
@@ -95,6 +95,7 @@ class AppKeys {
   static const delivered = "Delivered";
   static const cancelOrder = "Cancel Order";
   static const discount = "Discount";
+  static const pointExchange = "Point Exchange";
   static const couponDiscount = "Coupon Discount";
   static const exclusiveOffers = "Exclusive offers from ";
   static const returnText = "Return";

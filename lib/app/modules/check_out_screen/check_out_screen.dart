@@ -69,8 +69,8 @@ class CheckOutScreen extends StatelessWidget {
                           ? null
                           : () {
                               checkoutController.createOrder(
-                                  userAddressId:
-                                      cartController.selectedAddress.value!.id,
+                                  userAddress:
+                                      cartController.selectedAddress.value!,
                                   paymentMethod: checkoutController
                                       .mapPaymentOptionToApiValue(
                                           checkoutController.options[

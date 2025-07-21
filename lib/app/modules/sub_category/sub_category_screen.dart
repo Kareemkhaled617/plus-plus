@@ -77,9 +77,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
               if (controller.isLoadingSup.value) {
                 return Center(child: CircularProgressIndicator());
               }
-              if (controller.errorMessage.isNotEmpty) {
-                return Center(child: Text(controller.errorMessage.value));
-              }
+              // if (controller.errorMessage.isNotEmpty) {
+              //   return Center(child: Text(controller.errorMessage.value));
+              // }
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -114,7 +114,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 8,
-                      childAspectRatio: .8,
+                      childAspectRatio: .77,
                     ),
                     itemCount: productController.products.length,
                     itemBuilder: (context, index) {

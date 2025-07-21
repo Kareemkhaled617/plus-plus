@@ -5,7 +5,6 @@ import 'package:plus/app/modules/cart/controller/cart_controller.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
-import '../controller/product_controller.dart';
 
 class ProductCounterSection extends StatefulWidget {
   const ProductCounterSection(

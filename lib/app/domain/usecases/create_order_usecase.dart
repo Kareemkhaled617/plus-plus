@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../core/errors/failure.dart';
+import '../entities/address_entity.dart';
 import '../entities/order_entity.dart';
 import '../entities/order_request_entity.dart';
 import '../repositories/order_repository.dart';
@@ -10,12 +11,12 @@ class CreateOrderUseCase {
   CreateOrderUseCase(this.repository);
 
   Future<Either<Failure, OrderRequestEntity>> call({
-    required int userAddressId,
+    required AddressEntity userAddress,
     required String paymentMethod,
     required int userPoints,
   }) {
     return repository.createOrder(
-      userAddressId: userAddressId,
+      userAddress: userAddress,
       paymentMethod: paymentMethod,
       userPoints: userPoints,
     );

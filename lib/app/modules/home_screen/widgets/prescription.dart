@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/routes/app_routes.dart';
-import '../../../../generated/assets.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/size_config.dart';
@@ -19,11 +19,15 @@ class Prescription extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(Get.locale!.languageCode == 'en'
-                  ? Assets.imagesPrescription
-                  : Assets.imagesPrescriptionAr),
-              fit: BoxFit.fill)),
+          border: Border.all(color: AppColors.whiteSmoke),
+          borderRadius: BorderRadius.circular(26)
+
+          // image: DecorationImage(
+          //     image: AssetImage(Get.locale!.languageCode == 'en'
+          //         ? Assets.imagesPrescription
+          //         : Assets.imagesPrescriptionAr),
+          //     fit: BoxFit.fill)
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

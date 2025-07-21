@@ -13,7 +13,9 @@ class AddressController extends GetxController {
   var addresses = <AddressEntity>[].obs;
   var isLoading = false.obs;
   var isLoadingLocation = false.obs;
-
+  Position? position;
+  String? currentAddress;
+  Placemark? place;
   final GetDefaultAddressUseCase getDefaultAddressUseCase;
 
   AddressController(this.getDefaultAddressUseCase, this.getAddressesUseCase);
@@ -31,10 +33,23 @@ class AddressController extends GetxController {
 
   void fetchAddresses() async {
     isLoading.value = true;
+    await getAddressFromCoordinates();
     final result = await getAddressesUseCase();
     result.fold(
       (failure) => Get.snackbar("Error".tr, failure.message),
-      (data) => addresses.assignAll(data),
+      (data) => addresses.assignAll([
+        ...data,
+        AddressEntity(
+            id: 1,
+            lat: position!.latitude.toString(),
+            lng: position!.longitude.toString(),
+            street: place!.street!,
+            address: place!.thoroughfare!,
+            building: place!.street!,
+            floor: 'floor',
+            department: 'department',
+            setAs: 'current')
+      ]),
     );
     isLoading.value = false;
   }
@@ -46,7 +61,6 @@ class AddressController extends GetxController {
 
     result.fold(
       (failure) {
-        // Handle failure case (optional: show error message)
         address.value = null;
       },
       (defaultAddress) {
@@ -95,17 +109,16 @@ class AddressController extends GetxController {
   }
 
   Future<String?> getAddressFromCoordinates() async {
-
-    Position? position = await getCurrentPosition();
+    position = await getCurrentPosition();
     if (position == null) {
       return null;
     } else {
       try {
         List<Placemark> placemarks = await placemarkFromCoordinates(
-            position.latitude, position.longitude);
+            position!.latitude, position!.longitude);
         if (placemarks.isNotEmpty) {
-          Placemark place = placemarks.first;
-          return "${place.locality}, ${place.country}";
+          place = placemarks.first;
+          return "${place!.thoroughfare}";
         }
         return null;
       } catch (e) {

@@ -20,8 +20,10 @@ class FavoriteBinding extends Bindings {
             () => AddToFavoritesUseCase(Get.find<FavoriteRepository>()));
     Get.lazyPut<GetFavouritesUseCase>(
             () => GetFavouritesUseCase(Get.find<FavoriteRepository>()));
+    Get.put<FavoriteController>(
+      FavoriteController(Get.find<AddToFavoritesUseCase>(), Get.find()),
+      permanent: true,
 
-    Get.lazyPut<FavoriteController>(() =>
-        FavoriteController(Get.find<AddToFavoritesUseCase>(), Get.find()));
+    );
   }
 }

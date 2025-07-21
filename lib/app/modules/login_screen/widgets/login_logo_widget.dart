@@ -6,10 +6,16 @@ class LoginLogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      Assets.imagesLogo,
-      height: 200,
-      fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          Assets.imagesLogo,
+          height: 100,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

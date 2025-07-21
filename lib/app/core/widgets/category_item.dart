@@ -5,6 +5,7 @@ import 'package:plus/app/routes/app_routes.dart';
 import '../../domain/entities/category_entity.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
+import '../utils/size_config.dart';
 import 'cached_image.dart';
 
 class CategoryGrid extends StatelessWidget {
@@ -15,7 +16,7 @@ class CategoryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280,
+      height: 400,
       width: double.infinity,
       alignment: Alignment.center,
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -82,10 +83,10 @@ class CategoryGrid extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           mainAxisSpacing: 20.0,
           crossAxisSpacing: 16.0,
-          childAspectRatio: 1.26 ,
+          childAspectRatio: 1.6,
         ),
         itemCount: categories.length,
         itemBuilder: (context, index) {
@@ -110,11 +111,11 @@ class CategoryGrid extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 20),
+                        vertical: 10.0, horizontal: 20),
                     child: CachedImage(
                       imageUrl: category.imageUrl,
                       fit: BoxFit.cover,
-                      height: 68,
+                      height: getProportionateScreenHeight(60),
                       // Optional if you want rounded corners
                     ),
                   ),
@@ -122,16 +123,19 @@ class CategoryGrid extends StatelessWidget {
                 SizedBox(
                   height: 4,
                 ),
-                Text(
-                  category.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppFonts.bodyText.copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.primary,
+                SizedBox(
+                  height: 30,
+                  child: Text(
+                    category.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppFonts.bodyText.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.black,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ],
             ),

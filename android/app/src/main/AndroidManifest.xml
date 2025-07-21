@@ -24,7 +24,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="PLUS"
+        android:label="El Lewaa Store"
         android:requestLegacyExternalStorage="true">
         <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
             android:exported="false"

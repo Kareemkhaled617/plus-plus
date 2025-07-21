@@ -31,6 +31,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          color: AppColors.white,
+        ),
         title: Text(
           AppKeys.howCanHelpYou.tr,
           style: AppFonts.heading3.copyWith(
@@ -56,9 +59,11 @@ class _SearchScreenState extends State<SearchScreen> {
                         Expanded(
                           child: SearchAndSuggestionSection(
                             controller: searchController,
-                            suggestions: recentController.recentSearches
-                                .map((recent) => recent.searchTerm)
-                                .toList(),
+                            suggestions: controller.isLoading.value
+                                ? []
+                                : controller.searchResults
+                                    .map((recent) => recent.name)
+                                    .toList(),
                             searchQuery: searchQuery,
                             onHintSelected: (selected) {
                               setState(() {
@@ -72,9 +77,13 @@ class _SearchScreenState extends State<SearchScreen> {
                             onChanged: (value) {
                               setState(() {
                                 searchQuery = value;
+                                showResults = true;
                                 isSearching = value.isNotEmpty;
-                                showResults = false;
                               });
+                              // showResults = true;
+                              // isSearching = false;
+                              //
+                              controller.searchProducts(value);
                             },
                           ),
                         ),

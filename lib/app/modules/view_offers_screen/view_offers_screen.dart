@@ -117,7 +117,7 @@ class ViewOffersScreen extends StatelessWidget {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 14,
-                      childAspectRatio: .76,
+                      childAspectRatio: .7,
                     ),
                     itemCount: productOffersController.products.length,
                     itemBuilder: (context, index) {

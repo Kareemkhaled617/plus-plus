@@ -44,8 +44,8 @@ class ProfileTotalActivitiesCard extends StatelessWidget {
                   right: -50,
                   child: Image.asset(
                     image,
-                    height: 190,
-                    width: 190,
+                    height: 170,
+                    width: 170,
                   ),
                 )
               : Positioned(
@@ -53,8 +53,8 @@ class ProfileTotalActivitiesCard extends StatelessWidget {
                   left: -50,
                   child: Image.asset(
                     image,
-                    height: 190,
-                    width: 190,
+                    height: 170,
+                    width: 170,
                   ),
                 ),
         ],

@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
-import 'package:plus/app/modules/home_screen/widgets/contact_us.dart';
-import 'package:plus/app/modules/home_screen/widgets/section_page.dart';
-import 'package:plus/app/modules/home_screen/widgets/product_section.dart';
 import 'package:plus/app/modules/home_screen/widgets/category_page.dart';
 import 'package:plus/app/modules/home_screen/widgets/circular_image_slider.dart';
+import 'package:plus/app/modules/home_screen/widgets/contact_us.dart';
 import 'package:plus/app/modules/home_screen/widgets/prescription.dart';
-import 'package:plus/app/modules/home_screen/widgets/ready_for_winter.dart';
 import 'package:plus/app/modules/home_screen/widgets/section_header.dart';
-import 'package:plus/app/modules/home_screen/widgets/special_brands.dart';
-import 'package:plus/app/routes/app_routes.dart';
+import 'package:plus/app/modules/home_screen/widgets/section_page.dart';
 
 import '../../../generated/assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/size_config.dart';
-import '../../core/widgets/category_item.dart';
-import '../../core/widgets/disclaimer_box.dart';
 import '../account_screen/controller/business_settings_controller.dart';
-import '../brands_screen/brands_screen.dart';
+import 'arrival_timer/presentation/widgets/arrival_timer_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,7 +37,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -66,6 +59,11 @@ class HomeScreen extends StatelessWidget {
                             height: 10,
                           ),
                           CircularImageSlider(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          ArrivalTimerCard(),
+
                           // SizedBox(
                           //   height: 10,
                           // ),
@@ -86,8 +84,9 @@ class HomeScreen extends StatelessWidget {
                               AppKeys.categories.tr,
                               textAlign: TextAlign.start,
                               style: AppFonts.heading1.copyWith(
-                                  fontSize: getResponsiveFontSize(17),
-                                  fontWeight: FontWeight.w700),
+                                  fontSize: getResponsiveFontSize(19),
+                                 color: AppColors.primary,
+                                  fontWeight: FontWeight.w900),
                             ),
                           ),
                           SizedBox(

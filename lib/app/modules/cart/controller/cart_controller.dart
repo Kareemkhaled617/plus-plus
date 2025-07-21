@@ -1,14 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+
 import '../../../data/models/package_type_model.dart';
 import '../../../data/models/product_model.dart';
 import '../../../domain/entities/address_entity.dart';
 import '../../../domain/entities/cart_entity.dart';
+import '../../../domain/entities/cart_total_entity.dart';
 import '../../../domain/entities/product_entity.dart';
 import '../../../domain/usecases/add_to_cart_usecase.dart';
+import '../../../domain/usecases/get_cart_total_usecase.dart';
 import '../../../domain/usecases/get_cart_usecase.dart';
 import '../../../domain/usecases/remove_from_cart_usecase.dart';
 
@@ -19,17 +23,31 @@ class CartController extends GetxController {
   final AddToCartUseCase addToCartUseCase;
   final RemoveFromCartUseCase removeFromCartUseCase;
   final GetCartUseCase getCartUseCase;
-
+  final GetCartTotalUseCase getCartTotalUseCase;
   final TextEditingController copounController = TextEditingController();
   final RxString copounText = ''.obs;
   Rxn<CartEntity> updatedCart = Rxn<CartEntity>();
   Rxn<AddressEntity> selectedAddress = Rxn<AddressEntity>();
   final isLoading = true.obs;
+  var cartTotal = Rxn<CartTotalEntity>();
+  var isLoadingTotalCart = false.obs;
+
+  Future<void> fetchCartTotal(String lat, String lng) async {
+    isLoadingTotalCart.value = true;
+    final result = await getCartTotalUseCase(lat: lat, lng: lng);
+    result.fold(
+      (failure) => Get.snackbar('Error'.tr, failure.message),
+      (data) => cartTotal.value = data,
+    );
+    isLoadingTotalCart.value = false;
+  }
 
   void selectAddress(AddressEntity address) {
     selectedAddress.value = address;
   }
-  CartController(this.addToCartUseCase, this.removeFromCartUseCase, this.getCartUseCase);
+
+  CartController(this.addToCartUseCase, this.removeFromCartUseCase,
+      this.getCartUseCase, this.getCartTotalUseCase);
 
   @override
   void onInit() {
@@ -129,11 +147,35 @@ class CartController extends GetxController {
   }
 
   /// 🛒 Add product to cart (or increase count if exists)
+  // void addToCart(ProductEntity product, {bool isSelect = false}) {
+  //   if (itemCounts.containsKey(product.id)) {
+  //     itemCounts[product.id] = (itemCounts[product.id] ?? 0) + 1;
+  //   } else {
+  //     // If you want to save selection state, clone the product and assign it
+  //     if (product is ProductModel) {
+  //       cartItems.add(product.copyWith(isSelected: isSelect));
+  //     } else {
+  //       cartItems.add(product);
+  //     }
+  //     itemCounts[product.id] = 1;
+  //   }
+  //   saveCartToCache();
+  // }
   void addToCart(ProductEntity product, {bool isSelect = false}) {
+    int currentCount = itemCounts[product.id] ?? 0;
+
+    // ✅ Check if adding more exceeds stock
+    if (currentCount >= product.stock) {
+      Get.snackbar(
+        "Stock Limit".tr,
+        "You have reached the maximum available stock for this product.".tr,
+      );
+      return;
+    }
+
     if (itemCounts.containsKey(product.id)) {
-      itemCounts[product.id] = (itemCounts[product.id] ?? 0) + 1;
+      itemCounts[product.id] = currentCount + 1;
     } else {
-      // If you want to save selection state, clone the product and assign it
       if (product is ProductModel) {
         cartItems.add(product.copyWith(isSelected: isSelect));
       } else {
@@ -141,6 +183,7 @@ class CartController extends GetxController {
       }
       itemCounts[product.id] = 1;
     }
+
     saveCartToCache();
   }
 

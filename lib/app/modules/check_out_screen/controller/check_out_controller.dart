@@ -2,17 +2,48 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../core/storage/secure_storage_helper.dart';
+import '../../../domain/entities/OrderPriceEntity.dart';
+import '../../../domain/entities/address_entity.dart';
+import '../../../domain/entities/cart_total_entity.dart';
+import '../../../domain/usecases/CalculateOrderPriceUseCase.dart';
 import '../../../domain/usecases/create_order_usecase.dart';
+import '../../cart/controller/cart_controller.dart';
 import '../widget/show_order_Success_sheet.dart';
 
 class CheckoutController extends GetxController {
-  CheckoutController(this.createOrderUseCase);
+  CheckoutController(this.createOrderUseCase, this.useCase);
+
+  final CalculateOrderPriceUseCase useCase;
 
   var selectedIndex = 0.obs;
   var showCardDetails = false.obs;
   TextEditingController point = TextEditingController(text: '0');
   final CreateOrderUseCase createOrderUseCase;
   var isLoading = false.obs;
+  var isLoadingCalculate = false.obs;
+  var priceInfo = Rxn<OrderPriceEntity>();
+  CartController cartController = Get.find<CartController>();
+
+  Future<void> calculate(String userPoints) async {
+    isLoadingCalculate.value = true;
+    final result = await useCase(
+        userPoints,
+        cartController.selectedAddress.value!.lat,
+        cartController.selectedAddress.value!.lng);
+    result.fold(
+      (failure) => Get.snackbar("Error".tr, failure.message),
+      (data) {
+        priceInfo.value = data;
+        cartController.cartTotal.value = CartTotalEntity(
+            totalPrice: data.totalPrice,
+            totalDiscount: data.discountPrice,
+            couponDiscount: data.discountPrice,
+            chargePrice: data.chargePrice,
+            totalPriceAfterCharge: data.finalPrice);
+      },
+    );
+    isLoadingCalculate.value = false;
+  }
 
   final List<String> options = [
     "Cash on delivery",
@@ -39,14 +70,14 @@ class CheckoutController extends GetxController {
   }
 
   Future<void> createOrder({
-    required int userAddressId,
+    required AddressEntity userAddress,
     required String paymentMethod,
     required int userPoints,
   }) async {
     isLoading.value = true;
 
     final result = await createOrderUseCase(
-      userAddressId: userAddressId,
+      userAddress: userAddress,
       paymentMethod: paymentMethod,
       userPoints: userPoints,
     );

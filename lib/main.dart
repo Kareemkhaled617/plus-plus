@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'app/core/service/localization_service.dart';
@@ -16,6 +17,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: AppColors.primary,
+    statusBarIconBrightness: Brightness.dark,
+  ));
   await NotificationService().initNotification();
   String? savedLang = await SecureStorageHelper().getData("language");
 
@@ -36,10 +41,11 @@ class MyApp extends StatelessWidget {
     SizeConfig.init(context);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Plus Plus',
+      title: 'El Lewaa',
       initialRoute: AppRoutes.videoPlayer,
       getPages: AppPages.pages,
       locale: initialLocale,
+      // initialBinding: AppBinding(),
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
       theme: ThemeData(
@@ -48,7 +54,13 @@ class MyApp extends StatelessWidget {
             initialLocale.languageCode == 'en' ? 'Roboto' : 'NotoSansArabic',
         primaryColor: AppColors.primary,
         unselectedWidgetColor: AppColors.greyWithShade,
-      ),
+          snackBarTheme: SnackBarThemeData(
+            backgroundColor: AppColors.primary,
+            insetPadding: EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          )),
       // home: HomePageShimmer(),
     );
   }

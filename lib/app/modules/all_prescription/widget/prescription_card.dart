@@ -144,6 +144,7 @@ class PrescriptionCard extends StatelessWidget {
 
   void showPrescriptionsBottomSheet(
       BuildContext context, PrescriptionEntity prescription) {
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

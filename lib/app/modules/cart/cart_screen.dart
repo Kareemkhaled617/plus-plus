@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/widgets/custom_button.dart';
 import 'package:plus/app/modules/cart/widget/cart_empty_body.dart';
 import 'package:plus/app/modules/cart/widget/cart_list_item.dart';
 import 'package:plus/app/modules/cart/widget/checkout_summary.dart';
 import 'package:plus/app/modules/cart/widget/related_products_list.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
@@ -17,7 +19,6 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final CartController cartController = Get.find<CartController>();
 
-    /// ✅ Run after every build (render)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (cartController.cartItems.isNotEmpty) {
         cartController.addToCartApi();
@@ -62,33 +63,25 @@ class CartScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.center,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (cartController.selectedAddress.value != null) {
-                                Get.toNamed(AppRoutes.checkOutScreen);
-                              } else {
-                                Get.snackbar("Address Empty".tr, "please select address".tr,
-                                    snackPosition: SnackPosition.TOP,
-                                    colorText: Colors.black);
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 70),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-
-                            child: Text(
-                              AppKeys.checkout.tr,
-                              style: AppFonts.heading1.copyWith(
-                                color: AppColors.white,
-                                fontSize: 16,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          child: CustomButton(
+                            isEnabled: !cartController.isLoadingTotalCart.value,
+                            text: AppKeys.checkout.tr,
+                            onPressed:  () async {
+                                    if (cartController.selectedAddress.value !=
+                                        null) {
+                                      await cartController.fetchCartTotal(
+                                          cartController
+                                              .selectedAddress.value!.lat,
+                                          cartController
+                                              .selectedAddress.value!.lng);
+                                      Get.toNamed(AppRoutes.checkOutScreen);
+                                    } else {
+                                      Get.snackbar("Address Empty".tr,
+                                          "please select address".tr,
+                                          snackPosition: SnackPosition.TOP,
+                                          colorText: Colors.black);
+                                    }
+                                  },
                           ),
                         ),
                       ],

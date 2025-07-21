@@ -130,13 +130,13 @@ const Map<String, String> arEG = {
   "Locating your location...": "تحديد موقعك...",
   "Here": "هنا",
   "You can order the prescription by uploading a picture or listing your needs from the pharmacy":
-      "يمكنك طلب الوصفة الطبية بتحميل صورة أو كتابة احتياجاتك من الصيدلية",
+  "قم برفع وصفة الدواء الخاصة بك ودع الصيدلية تختار المنتجات لك!",
   "Ready for winter?": "جاهز للشتاء؟",
   "Welcome": "مرحباً",
   "We don’t deliver here !": "نحن لا نوصل إلى هذا الموقع!",
   "Contact Us": "اتصل بنا",
   "Special Brands": "علامات تجارية مميزة",
-  "Add your prescription here": "أضف وصفتك الطبية هنا",
+  "Add your prescription here": "وصفتك الطبية",
   "Categories": "التصنيفات",
   "Are you sure you want to delete item ?": "هل أنت متأكد أنك تريد حذف العنصر؟",
   "Sure": "تأكيد",
@@ -155,7 +155,7 @@ const Map<String, String> arEG = {
       "يتم عرض المنتجات وبيعها وتسليمها نيابة عن شريكنا الصيدلي",
   "Pharmacy and under its full medical supervision.":
       "الصيدلية وتحت إشرافها الطبي الكامل.",
-  "PLUS PLUS Offers": "عروض PLUS PLUS",
+  "El lewaa Offers": "عروض El lewaa",
   "No recent searches available": "لا توجد عمليات بحث حديثة متاحة",
   'No notifications available.': "لا توجد إشعارات متاحة.",
   'Success': 'نجاح',
@@ -253,6 +253,21 @@ const Map<String, String> arEG = {
   "preparing_order": "جاري تجهيز الطلب",
   "out_for_delivery": "قيد التوصيل",
   "delivered_to_you": "تم التوصيل",
-  "order_completed": "تم اكتمال الطلب"
+  "order_completed": "تم اكتمال الطلب",
+  "No internet connection. Please check your network.": "لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة.",
+  "An unexpected error occurred. Please try again.": "حدث خطأ غير متوقع. حاول مرة أخرى.",
+  "Connection timed out. Please try again.": "انتهت مهلة الاتصال. حاول مرة أخرى.",
+  "Failed to connect. Please check your internet.": "فشل الاتصال. تأكد من اتصال الإنترنت.",
+  "Request was cancelled.": "تم إلغاء الطلب.",
+  "Invalid request": "طلب غير صالح",
+  "You are not authorized": "أنت غير مصرح لك",
+  "Access is forbidden": "الوصول مرفوض",
+  "Data not found": "لم يتم العثور على البيانات",
+  "Missing or invalid input": "المدخلات مفقودة أو غير صالحة",
+  "Server error. Please try again later": "خطأ في الخادم. حاول مرة أخرى لاحقًا",
+  "Something went wrong. Please try again": "حدث خطأ ما. يرجى المحاولة مرة أخرى",
+  "Detecting Your Location...": "جارٍ تحديد موقعك...",
+  "Point Exchange":"Point Exchange"
+
 
 };

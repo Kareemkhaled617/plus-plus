@@ -31,7 +31,7 @@ class CartDeliverySection extends StatelessWidget {
           InkWell(
             onTap: fromCart
                 ? () {
-                    showAddressSelectionSheet(context); // 👈 تفتح Bottom Sheet
+                    showAddressSelectionSheet(context);
                   }
                 : null,
             borderRadius: BorderRadius.circular(10),

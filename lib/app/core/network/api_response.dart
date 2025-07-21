@@ -33,29 +33,26 @@ class ApiResponse<T> {
   factory ApiResponse.noInternet() {
     return ApiResponse._(
       success: false,
-      message: 'No internet connection',
+      message: 'No internet connection. Please check your network.'.tr,
       statusCode: 503,
     );
   }
 
   factory ApiResponse.fromDioError(DioException e) {
-    String message = "Something went wrong";
+    String message = "An unexpected error occurred. Please try again.".tr;
     int? statusCode = e.response?.statusCode;
-    print(e.type);
-    print(e.type);
-    print(e.type);
-    print(e.type);
+
     if (e.type == DioExceptionType.connectionTimeout ||
         e.type == DioExceptionType.receiveTimeout) {
-      message = "Connection timeout, please try again".tr;
+      message = "Connection timed out. Please try again.".tr;
     } else if (e.type == DioExceptionType.badResponse) {
-      message = _handleHttpError(statusCode, e.response?.data);
+      message = _handleHttpError(statusCode, e.response?.data).tr;
     } else if (e.type == DioExceptionType.connectionError) {
-      message = "Connection failed, please check your internet".tr;
+      message = "Failed to connect. Please check your internet.".tr;
     } else if (e.type == DioExceptionType.cancel) {
-      message = "Request cancelled".tr;
+      message = "Request was cancelled.".tr;
     } else {
-      message = e.message ?? "Unexpected error occurred".tr;
+      message = e.message?.tr ?? "An unexpected error occurred.".tr;
     }
 
     return ApiResponse._(
@@ -68,19 +65,19 @@ class ApiResponse<T> {
   static String _handleHttpError(int? statusCode, dynamic data) {
     switch (statusCode) {
       case 400:
-        return data['message'] ?? 'Bad request';
+        return data['message'] ?? 'Invalid request'.tr;
       case 401:
-        return 'Unauthorized request';
+        return 'You are not authorized'.tr;
       case 403:
-        return 'Forbidden';
+        return 'Access is forbidden'.tr;
       case 404:
-        return 'Resource not found';
+        return 'Data not found'.tr;
       case 422:
-        return data['message'] ?? 'Missing Data';
+        return data['message'] ?? 'Missing or invalid input'.tr;
       case 500:
-        return 'Internal server error';
+        return 'Server error. Please try again later'.tr;
       default:
-        return 'Unexpected error occurred';
+        return 'Something went wrong. Please try again'.tr;
     }
   }
 }

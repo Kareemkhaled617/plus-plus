@@ -17,10 +17,12 @@ class ProductBenefitItem extends StatelessWidget {
         children: [
           Icon(Icons.circle, size: 6, color: AppColors.greyWithShade.withOpacity(.5)),
           SizedBox(width: 8),
-          Text(text, style: AppFonts.bodyText.copyWith(
-            fontSize: 14,
-            color: AppColors.greyWithShade.withOpacity(.5)
-          )),
+          Expanded(
+            child: Text(text,
+                style: AppFonts.bodyText.copyWith(
+                    fontSize: 14,
+                    color: AppColors.greyWithShade.withOpacity(.5))),
+          ),
         ],
       ),
     ) ;

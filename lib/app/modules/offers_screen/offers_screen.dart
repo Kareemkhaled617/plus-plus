@@ -31,7 +31,7 @@ class OffersScreen extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.w700, fontSize: 18),
                       children: [
                         TextSpan(
-                          text: "PLUS PLUS   🔥",
+                          text: "El lewaa   🔥",
                           style: AppFonts.heading3.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold,

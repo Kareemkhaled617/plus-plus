@@ -15,7 +15,7 @@ class PackageTypeModel extends PackageTypeEntity {
       unitQuantity: (json['unit_quantity'] as num?)?.toInt() ?? 0,
       unitType: json['unit_type'],
       unitPrice: (json['unit_price'] as num?)?.toDouble() ?? 0.0,
-      stock: json['stock'],
+      stock: json['stock']??0,
     );
   }
 

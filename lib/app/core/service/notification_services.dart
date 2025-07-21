@@ -1,8 +1,12 @@
+import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
+
 import '../../../firebase_options.dart';
 
 class NotificationService extends GetxService {
@@ -36,39 +40,56 @@ class NotificationService extends GetxService {
     await _flutterLocalNotificationsPlugin.initialize(initSettings);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print(message.notification?.body);
+      print("📥 Notification received with image: ${message.notification?.android?.imageUrl}");
       _showNotification(message);
       notificationMessages.add(message);
     });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    // 🔥 Enable Firebase In-App Messaging
     _initializeInAppMessaging();
   }
 
   Future<void> _initializeInAppMessaging() async {
-    // Enable automatic data collection for In-App Messaging
     await _inAppMessaging.setAutomaticDataCollectionEnabled(true);
-
-    // Optionally trigger test messages during development
     await _inAppMessaging.triggerEvent('app_open');
-    print('-------------------------------------------------------------------------------------------------3-0id');
-    // You can trigger custom events as needed
+    print('🔥 In-App Messaging Initialized');
   }
 
   Future<void> _showNotification(RemoteMessage message) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+    String? imageUrl = message.notification?.android?.imageUrl ?? message.data['imageUrl'];
+
+    // Download image to display in the notification
+    BigPictureStyleInformation? bigPictureStyle;
+    if (imageUrl != null && imageUrl.isNotEmpty) {
+      try {
+        final String imagePath = await _downloadAndSaveFile(imageUrl, 'notif_image.jpg');
+        final FilePathAndroidBitmap bigPicture = FilePathAndroidBitmap(imagePath);
+
+        bigPictureStyle = BigPictureStyleInformation(
+          bigPicture,
+          contentTitle: message.notification?.title,
+          summaryText: message.notification?.body,
+        );
+      } catch (e) {
+        print("❌ Failed to load image for notification: $e");
+      }
+    }
+
+    final AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
       'channel_id',
       'channel_name',
+      styleInformation: bigPictureStyle,
       importance: Importance.max,
       priority: Priority.high,
     );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
 
-    const NotificationDetails platformDetails =
-    NotificationDetails(android: androidDetails, iOS: iosDetails);
+    final NotificationDetails platformDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
 
     await _flutterLocalNotificationsPlugin.show(
       message.hashCode,
@@ -78,13 +99,22 @@ class NotificationService extends GetxService {
     );
   }
 
+  Future<String> _downloadAndSaveFile(String url, String fileName) async {
+    final Directory directory = await getTemporaryDirectory();
+    final String filePath = '${directory.path}/$fileName';
+    final http.Response response = await http.get(Uri.parse(url));
+    final File file = File(filePath);
+    await file.writeAsBytes(response.bodyBytes);
+    return filePath;
+  }
+
   static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    print('Handling a background message: ${message.messageId}');
+    print('🕶️ Background message received: ${message.messageId}');
   }
 
   Future<void> getToken() async {
     String? token = await _firebaseMessaging.getToken();
-    print("FCM Token: $token");
+    print("🔐 FCM Token: $token");
   }
 }

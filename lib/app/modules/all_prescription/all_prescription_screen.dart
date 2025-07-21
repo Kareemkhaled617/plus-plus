@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/theme/app_colors.dart';
 import 'package:plus/app/core/theme/app_fonts.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
-import 'package:plus/app/domain/entities/prescription_entity.dart';
 import 'package:plus/app/modules/all_prescription/controller/prescription_controller.dart';
-import 'widget/prescription_card.dart';
+
 import '../../core/utils/app_keys.dart';
+import 'widget/prescription_card.dart';
 
 class AllPrescriptionScreen extends StatelessWidget {
   const AllPrescriptionScreen({super.key});
@@ -18,6 +19,9 @@ class AllPrescriptionScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        flexibleSpace: Container(
+          color: AppColors.white,
+        ),
         elevation: 0,
         leading: AppBarBackButton(),
         title: Text(

@@ -1,12 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+
 import '../../core/errors/failure.dart';
 import '../../core/network/api_service.dart';
 import '../../domain/entities/cart_entity.dart';
 import '../../domain/entities/cart_request_entity.dart';
+import '../../domain/entities/cart_total_entity.dart';
 import '../../domain/repositories/cart_repository.dart';
 import '../models/cart_model.dart';
 import '../models/cart_request_model.dart';
+import '../models/cart_total_model.dart';
 
 class CartRepositoryImpl implements CartRepository {
   final ApiService apiService;
@@ -71,6 +74,26 @@ class CartRepositoryImpl implements CartRepository {
         return Left(Failure(response.message ?? 'Failed to fetch cart'.tr));
       }
     } catch (e) {
+      return Left(Failure('Unexpected error occurred'.tr));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CartTotalEntity>> getCartTotal({
+    required String lat,
+    required String lng,
+  }) async {
+    try {
+      final response = await apiService.postRequest(
+        'cart/get-total-amount',
+        {'lat': lat, 'lng': lng},
+      );
+      print('response.data: ${response.data}');
+      print(response.data);
+      final model = CartTotalModel.fromJson(response.data['data']);
+      return Right(model);
+    } catch (e) {
+      print(e.toString());
       return Left(Failure('Unexpected error occurred'.tr));
     }
   }

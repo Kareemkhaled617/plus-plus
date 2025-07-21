@@ -15,6 +15,7 @@ class CartEmptyBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         title: Text(
           AppKeys.cart.tr,
           style: AppFonts.heading1,

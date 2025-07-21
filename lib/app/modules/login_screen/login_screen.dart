@@ -26,6 +26,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 100,),
               const LoginLogoWidget(),
               const LoginTitleWidget(),
               const LoginSubtitleWidget(),

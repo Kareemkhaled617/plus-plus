@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_fonts.dart';
-import 'package:plus/app/modules/cart/controller/cart_controller.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/size_config.dart';
+import '../../../core/widgets/custom_button.dart';
 import '../../../routes/app_routes.dart';
 import '../../account_screen/controller/account_controller.dart';
 import '../controller/check_out_controller.dart';
@@ -136,25 +137,45 @@ class _UsePointSectionState extends State<UsePointSection> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: checkoutController.point,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: '0 Point'.tr,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                  Obx(() {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: checkoutController.point,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              hintText: '0 Point'.tr,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 10),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-
-                    ],
-                  ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        SizedBox(
+                            width: 60,
+                            child: CustomButton(
+                              text: AppKeys.apply,
+                              isEnabled:
+                                  !checkoutController.isLoadingCalculate.value,
+                              onPressed: () {
+                                if (checkoutController.point.text == '0') {
+                                  Get.snackbar(
+                                      "Error".tr, "Please enter point".tr);
+                                } else {
+                                  checkoutController
+                                      .calculate(checkoutController.point.text);
+                                }
+                              },
+                            ))
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),

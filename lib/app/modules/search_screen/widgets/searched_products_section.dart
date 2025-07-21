@@ -20,7 +20,7 @@ class SearchedProductsSection extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 14,
-        childAspectRatio: .76,
+        childAspectRatio: .7,
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {

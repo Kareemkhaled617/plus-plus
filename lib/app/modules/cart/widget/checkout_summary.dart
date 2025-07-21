@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/routes/app_routes.dart';
+import 'package:plus/app/modules/check_out_screen/controller/check_out_controller.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
@@ -17,6 +18,8 @@ class CheckoutSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartController cartController = Get.find<CartController>();
+    // final CheckoutController checkoutController =
+    //     Get.find<CheckoutController>();
 
     return Obx(() {
       return Column(
@@ -36,37 +39,51 @@ class CheckoutSummary extends StatelessWidget {
                 : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} L.E",
           ),
           SizedBox(height: 10),
-          CartPriceItem(
-            title: AppKeys.delivery.tr,
-            // price: "${deliveryFee.toStringAsFixed(2)} L.E",
-            price: cartController.isLoading.value
-                ? ""
-                : "${cartController.updatedCart.value!.cartPriceData.chargePrice.toStringAsFixed(2)} L.E",
-          ),
-          SizedBox(height: 10),
-          CartPriceItem(
-            title: AppKeys.discount.tr,
-            price: cartController.isLoading.value
-                ? ""
-                : "${cartController.updatedCart.value!.cartPriceData.totalDiscount.toStringAsFixed(2)} L.E",
-            isTotal: true,
-          ),
-          SizedBox(height: 10),
-          CartPriceItem(
-            title: AppKeys.couponDiscount.tr,
-            price: cartController.isLoading.value
-                ? ""
-                : "${cartController.updatedCart.value!.cartPriceData.couponDiscount.toStringAsFixed(2)} L.E",
-            isTotal: true,
-          ),
-          SizedBox(height: 10),
-          CartPriceItem(
-            title: AppKeys.total.tr,
-            price: cartController.isLoading.value
-                ? ""
-                : "${cartController.updatedCart.value!.cartPriceData.totalPriceAfterCharge.toStringAsFixed(2)} L.E",
-            isTotal: true,
-          ),
+          fromCart
+              ? Container()
+              : Column(
+                  children: [
+                    CartPriceItem(
+                      title: AppKeys.delivery.tr,
+                      // price: "${deliveryFee.toStringAsFixed(2)} L.E",
+                      price: cartController.isLoading.value
+                          ? ""
+                          : "${cartController.cartTotal.value!.chargePrice.toStringAsFixed(2)} L.E",
+                    ),
+                    SizedBox(height: 10),
+                    CartPriceItem(
+                      title: AppKeys.discount.tr,
+                      price: cartController.isLoading.value
+                          ? ""
+                          : "${cartController.cartTotal.value!.totalDiscount.toStringAsFixed(2)} L.E",
+                      isTotal: true,
+                    ),
+                    // SizedBox(height: 10),
+                    // CartPriceItem(
+                    //   title: AppKeys.pointExchange.tr,
+                    //   price: checkoutController.isLoadingCalculate.value
+                    //       ? ""
+                    //       : "${checkoutController.priceInfo.value!.userPointsExchangeRate.toStringAsFixed(2)} L.E",
+                    //   isTotal: true,
+                    // ),
+                    SizedBox(height: 10),
+                    CartPriceItem(
+                      title: AppKeys.couponDiscount.tr,
+                      price: cartController.isLoading.value
+                          ? ""
+                          : "${cartController.cartTotal.value!.couponDiscount.toStringAsFixed(2)} L.E",
+                      isTotal: true,
+                    ),
+                    SizedBox(height: 10),
+                    CartPriceItem(
+                      title: AppKeys.total.tr,
+                      price: cartController.isLoading.value
+                          ? ""
+                          : "${cartController.cartTotal.value!.totalPriceAfterCharge.toStringAsFixed(2)} L.E",
+                      isTotal: true,
+                    ),
+                  ],
+                ),
           fromCart ? const SizedBox(height: 60) : SizedBox(height: 20),
           fromCart
               ? Obx(

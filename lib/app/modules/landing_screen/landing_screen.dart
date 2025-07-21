@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/theme/app_colors.dart';
 import 'package:plus/generated/assets.dart';
@@ -35,7 +36,14 @@ class _LandingScreenState extends State<LandingScreen> {
     OffersScreen(),
     ProfileScreen(),
   ];
-
+  @override
+  void initState() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColors.primary,
+      statusBarIconBrightness: Brightness.dark,
+    ));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<CartController>();
@@ -51,6 +59,7 @@ class _LandingScreenState extends State<LandingScreen> {
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        backgroundColor: AppColors.white,
         type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
         onTap: (value) {

@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/loader.dart';
 
-import '../../../../generated/assets.dart';
-
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../../core/widgets/product_item.dart';
-import '../../../routes/app_routes.dart';
 import '../controller/related_product_controller.dart';
 
 class RelatedProductsList extends StatelessWidget {
@@ -59,7 +55,7 @@ class RelatedProductsList extends StatelessWidget {
             height: 16,
           ),
           SizedBox(
-            height: 250,
+            height: 270,
             child: ListView.builder(
                 itemCount: controller.relatedProducts.length,
                 scrollDirection: Axis.horizontal,

@@ -2,11 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
 import '../../core/errors/failure.dart';
-import '../../core/network/api_service.dart';
 import '../../core/network/api_response.dart';
+import '../../core/network/api_service.dart';
+import '../../domain/entities/OrderPriceEntity.dart';
+import '../../domain/entities/address_entity.dart';
 import '../../domain/entities/order_entity.dart';
 import '../../domain/entities/order_request_entity.dart';
 import '../../domain/repositories/order_repository.dart';
+import '../models/OrderPriceModel.dart';
 import '../models/order_model.dart';
 import '../models/order_request_model.dart';
 
@@ -47,14 +50,33 @@ class OrderRepositoryImpl extends OrderRepository {
   }
 
   @override
+  Future<Either<Failure, OrderPriceEntity>> calculatePrice(
+      String userPoints, String lat, String lng) async {
+    ApiResponse response;
+    try {
+      response = await apiService.postRequest(
+        'orders/calculate-price',
+        {
+          'user_points': userPoints,
+          'lat': lat,
+          'lng': lng,
+        },
+      );
+      return Right(OrderPriceModel.fromJson(response.data));
+    } catch (e) {
+      return Left(Failure('The user points not valid'));
+    }
+  }
+
+  @override
   Future<Either<Failure, OrderRequestEntity>> createOrder({
-    required int userAddressId,
+    required AddressEntity userAddress,
     required String paymentMethod,
     required int userPoints,
   }) async {
     try {
       final model = OrderRequestModel(
-        userAddressId: userAddressId,
+        userAddress: userAddress,
         paymentMethod: paymentMethod,
         userPoints: userPoints,
       );
