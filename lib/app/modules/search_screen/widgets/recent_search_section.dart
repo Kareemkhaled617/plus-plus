@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/widgets/loader.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../../domain/entities/recent_search_entity.dart';
-import '../controller/recent_search_controller.dart';
 
 class RecentSearchSection extends StatelessWidget {
   const RecentSearchSection({
@@ -30,8 +28,10 @@ class RecentSearchSection extends StatelessWidget {
             children: [
               Text(
                 AppKeys.recentSearch.tr,
-                style: AppFonts.hintText
-                    .copyWith(fontSize: 14, color: AppColors.grey),
+                style: AppFonts.hintText.copyWith(
+                    fontSize: 16,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -45,7 +45,7 @@ class RecentSearchSection extends StatelessWidget {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: InkWell(

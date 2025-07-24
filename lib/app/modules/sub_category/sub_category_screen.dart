@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/loader.dart';
+import 'package:plus/app/modules/sub_category/widgets/category_main_tabs.dart';
+import 'package:plus/app/modules/sub_category/widgets/category_slider.dart';
 import 'package:plus/app/modules/sub_category/widgets/category_tabs.dart';
-
+import 'package:plus/generated/assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/widgets/app_bar_back_button.dart';
 import '../../core/widgets/product_item.dart';
+import '../home_screen/widgets/circular_image_slider.dart';
 import 'controller/product_controller.dart';
 import 'controller/sup_category_controller.dart';
 
 class SubCategoryScreen extends StatefulWidget {
-  const SubCategoryScreen({
-    super.key,
-  });
+  const SubCategoryScreen({super.key});
 
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
@@ -24,102 +26,121 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
   @override
   void initState() {
-    categoryData = Get.arguments;
     super.initState();
+    categoryData = Get.arguments;
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColors.primary,
+      statusBarIconBrightness: Brightness.dark,
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<SupCategoryController>();
     final productController = Get.find<ProductController>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: Text(
-          categoryData['title'],
-          style: AppFonts.heading1,
-        ),
-        leading: AppBarBackButton(),
-      ),
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Obx(() {
-              if (controller.isLoading.value) {
-                return Center(child: SizedBox(height: 70, child: AppLoader()));
-              }
-              if (controller.errorMessage.isNotEmpty) {
-                return Center(child: Text(controller.errorMessage.value));
-              }
+      body: Obx(() {
+        return CustomScrollView(
+          slivers: [
+            /// Sliver AppBar
+            SliverAppBar(
+              pinned: true,
+              backgroundColor: const Color(0xFFb5e8e8),
+              leading: const AppBarBackButton(),
+              title: Text(
+                categoryData['title'] ?? '',
+                style: AppFonts.heading1,
+              ),
+            ),
 
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: CategoryTabs(
-                  items: controller.subcategories,
-                  selectedIndex: controller.selectedCategory.value,
-                  onSelected: (index) async {
-                    controller.selectedCategory.value = index;
-                    controller.selectedSubcategory.value = -1;
-                    controller.fetchSubsSupCategories(
-                        controller.subcategories[index].id);
-                    productController.fetchProductsByCategory(
-                        controller.subcategories[index].id);
-                  },
+            /// Tabs and Background
+            SliverToBoxAdapter(
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.imagesBacgroundCategory),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              );
-            }),
-            const SizedBox(height: 10),
-            Obx(() {
-              if (controller.isLoadingSup.value) {
-                return Center(child: CircularProgressIndicator());
-              }
-              // if (controller.errorMessage.isNotEmpty) {
-              //   return Center(child: Text(controller.errorMessage.value));
-              // }
-
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: CategoryTabs(
-                  items: controller.supSupCategories,
-                  selectedIndex: controller.selectedSubcategory.value,
-                  onSelected: (index) {
-                    controller.selectedSubcategory.value = index;
-                    productController.fetchProductsByCategory(
-                        controller.supSupCategories[index].id);
-                  },
-                  selectedColor: Colors.white,
-                  backgroundColor: Colors.white,
-                ),
-              );
-            }),
-            SizedBox(height: 10),
-            Obx(() {
-              if (productController.isLoading.value) {
-                return AppLoader();
-              }
-              if (productController.errorMessage.isNotEmpty) {
-                return Center(
-                    child: Text(productController.errorMessage.value));
-              }
-
-              return Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: GridView.builder(
-                    cacheExtent: 20,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 8,
-                      childAspectRatio: .77,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    // Main Tabs
+                    controller.isLoading.value
+                        ? const SizedBox(height: 70, child: AppLoader())
+                        : controller.errorMessage.isNotEmpty
+                        ? Center(child: Text(controller.errorMessage.value))
+                        : Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 10),
+                      child: CategoryMainTabs(
+                        items: controller.subcategories,
+                        selectedIndex:
+                        controller.selectedCategory.value,
+                        onSelected: (index) {
+                          controller.selectedCategory.value = index;
+                          controller.selectedSubcategory.value = -1;
+                          controller.fetchSubsSupCategories(
+                            controller.subcategories[index].id,
+                          );
+                          productController.fetchProductsByCategory(
+                            controller.subcategories[index].id,
+                          );
+                        },
+                      ),
                     ),
-                    itemCount: productController.products.length,
-                    itemBuilder: (context, index) {
-                      final product = productController.products[index];
 
+                    const SizedBox(height: 10),
+
+                    // Sub Tabs
+                    controller.isLoadingSup.value
+                        ? const Center(child: CircularProgressIndicator())
+                        : Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: CategoryTabs(
+                        items: controller.supSupCategories,
+                        selectedIndex:
+                        controller.selectedSubcategory.value,
+                        onSelected: (index) {
+                          controller.selectedSubcategory.value = index;
+                          productController.fetchProductsByCategory(
+                            controller.supSupCategories[index].id,
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+                    // CircularImageSlider1()
+                  ],
+                ),
+              ),
+            ),
+
+            /// Slider
+             SliverToBoxAdapter(
+              child: AutoScrollImageRow(),
+            ),
+
+            /// Products Grid
+            if (productController.isLoading.value)
+              const SliverToBoxAdapter(child: AppLoader())
+            else if (productController.errorMessage.isNotEmpty)
+              SliverToBoxAdapter(
+                child: Center(
+                  child: Text(productController.errorMessage.value),
+                ),
+              )
+            else
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                      final product = productController.products[index];
                       return ProductCard(
                         imageUrl: product.imageUrl,
                         title: product.name,
@@ -127,16 +148,23 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         price: "${product.price} L.E",
                         onAddToCart: () {},
                         onFavorite: () {},
-                        id: product.id, productEntity: product,
+                        id: product.id,
+                        productEntity: product,
                       );
                     },
+                    childCount: productController.products.length,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: .51,
                   ),
                 ),
-              );
-            }),
+              ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }

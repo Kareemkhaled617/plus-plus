@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/utils/size_config.dart';
 import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
-import '../../../../generated/assets.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
 import '../../../core/widgets/custom_button.dart';
+import '../../../domain/entities/product_entity.dart';
 import '../../../routes/app_routes.dart';
 import '../../product_details_screen/widgets/product_counter_section.dart';
 import '../controller/cart_controller.dart';
-import '../../../domain/entities/product_entity.dart';
 
 class CartListItem extends StatelessWidget {
   final ProductEntity product;
@@ -31,12 +31,12 @@ class CartListItem extends StatelessWidget {
             color: AppColors.white,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              color: AppColors.greyWithShade.withOpacity(.3),
+              color: AppColors.whiteSmoke,
               width: 1,
             ),
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
                 onTap: () {
@@ -51,7 +51,6 @@ class CartListItem extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -64,105 +63,121 @@ class CartListItem extends StatelessWidget {
                       style: AppFonts.heading1.copyWith(fontSize: 14),
                     ),
                   ),
-                  Text(
-                    product.brandName,
-                    style: AppFonts.heading1
-                        .copyWith(fontSize: 12, color: AppColors.red),
-                  ),
-                  SizedBox(height: 12),
-                  Obx(() {
-                    return Row(
-                      children: [
-                        Text(
-                          "${cartController.getProductCount(product.id)} ${AppKeys.peace.tr}",
-                          style: AppFonts.heading1.copyWith(
-                            fontSize: 14,
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        SizedBox(width: getProportionateScreenWidth(60)),
                         product.isSelected
                             ? Text(
                                 "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
                                 style: AppFonts.heading1.copyWith(
                                     fontSize: 14,
-                                    color: AppColors.red,
+                                    color: Colors.red,
                                     fontWeight: FontWeight.w700),
                               )
                             : Text(
                                 "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
                                 style: AppFonts.heading1.copyWith(
                                     fontSize: 14,
-                                    color: AppColors.red,
+                                    color: Colors.red,
                                     fontWeight: FontWeight.w700),
                               ),
-                      ],
-                    );
-                  }),
+                  // Text(
+                  //   product.brandName,
+                  //   style: AppFonts.heading1
+                  //       .copyWith(fontSize: 12, color: AppColors.red),
+                  // ),
+                  // SizedBox(height: 12),
+                  // Obx(() {
+                  //   return Row(
+                  //     children: [
+                  //       Text(
+                  //         "${cartController.getProductCount(product.id)} ${AppKeys.peace.tr}",
+                  //         style: AppFonts.heading1.copyWith(
+                  //           fontSize: 14,
+                  //           color: AppColors.primary,
+                  //         ),
+                  //       ),
+                  //       SizedBox(width: getProportionateScreenWidth(60)),
+                  //       product.isSelected
+                  //           ? Text(
+                  //               "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                  //               style: AppFonts.heading1.copyWith(
+                  //                   fontSize: 14,
+                  //                   color: AppColors.red,
+                  //                   fontWeight: FontWeight.w700),
+                  //             )
+                  //           : Text(
+                  //               "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                  //               style: AppFonts.heading1.copyWith(
+                  //                   fontSize: 14,
+                  //                   color: AppColors.red,
+                  //                   fontWeight: FontWeight.w700),
+                  //             ),
+                  //     ],
+                  //   );
+                  // }),
                   fromCart ? SizedBox(height: 10) : Container(),
-                  fromCart
-                      ? ProductCounterSection(
-                          plusIconSize: 16,
-                          controller: cartController,
-                          productEntity: product,
-                          isSelected: product.isSelected,
-                        )
-                      : Container()
+
                 ],
+              ),
+              fromCart
+                  ? ProductCounterSection(
+                plusIconSize: 16,
+                controller: cartController,
+                productEntity: product,
+                isSelected: product.isSelected,
               )
+                  : Container()
             ],
           ),
         ),
-        fromCart
-            ? Positioned(
-                top: 0,
-                right: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    showCustomBottomSheet(context,
-                        buildDeleteItemDialogContent(cartController, product));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadiusDirectional.only(
-                        topEnd: Radius.circular(10),
-                        bottomStart: Radius.circular(10),
-                      ),
-                      color: AppColors.primary,
-                    ),
-                    child: Icon(
-                      Icons.delete_outline_rounded,
-                      color: AppColors.white,
-                      size: 24,
-                    ),
-                  ),
-                ),
-              )
-            : Container(),
-        Positioned(
-          top: 0,
-          left: 0,
-          child: Container(
-            padding: EdgeInsets.all(6),
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.only(
-                topEnd: Radius.circular(10),
-                bottomStart: Radius.circular(10),
-              ),
-            ),
-            child: Image.asset(
-              product.discountType == 'discount'
-                  ? 'assets/icons/discount.png'
-                  : product.offerType == 'buy_one_get_two'
-                      ? 'assets/icons/2by1.png'
-                      : 'assets/icons/1by1.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
+        // fromCart
+        //     ? Positioned(
+        //         top: 0,
+        //         right: 0,
+        //         child: GestureDetector(
+        //           onTap: () {
+        //             showCustomBottomSheet(context,
+        //                 buildDeleteItemDialogContent(cartController, product));
+        //           },
+        //           child: Container(
+        //             padding: EdgeInsets.all(6),
+        //             decoration: BoxDecoration(
+        //               borderRadius: BorderRadiusDirectional.only(
+        //                 topEnd: Radius.circular(10),
+        //                 bottomStart: Radius.circular(10),
+        //               ),
+        //               color: AppColors.primary,
+        //             ),
+        //             child: Icon(
+        //               Icons.delete_outline_rounded,
+        //               color: AppColors.white,
+        //               size: 24,
+        //             ),
+        //           ),
+        //         ),
+        //       )
+        //     : Container(),
+        // Positioned(
+        //   top: 0,
+        //   left: 0,
+        //   child: Container(
+        //     padding: EdgeInsets.all(6),
+        //     width: 60,
+        //     height: 60,
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadiusDirectional.only(
+        //         topEnd: Radius.circular(10),
+        //         bottomStart: Radius.circular(10),
+        //       ),
+        //     ),
+        //     child: Image.asset(
+        //       product.discountType == 'discount'
+        //           ? 'assets/icons/discount.png'
+        //           : product.offerType == 'buy_one_get_two'
+        //               ? 'assets/icons/2by1.png'
+        //               : 'assets/icons/1by1.png',
+        //       fit: BoxFit.contain,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

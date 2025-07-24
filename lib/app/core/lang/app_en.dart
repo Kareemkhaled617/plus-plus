@@ -26,7 +26,7 @@ const Map<String, String> enUS = {
   "Add to cart": "Add to cart",
   "No Products": "No Products",
   "Go find the product you like !": "Go find the product you like !",
-  "Cart": "Cart",
+  "Cart": "My Cart",
   "Related Products": "Related Products",
   "View All": "View All",
   "Cart Products": "Cart Products",
@@ -59,7 +59,7 @@ const Map<String, String> enUS = {
   "Discount is Applied": "Discount is Applied",
   "Payment Method": "Payment Method",
   "Subtotal": "Subtotal",
-  "Delivery": "Delivery",
+  "Delivery": "Delivery Fees",
   "Total": "Total",
   "L.E": "L.E",
   "Shipped from": "Shipped from",
@@ -70,7 +70,7 @@ const Map<String, String> enUS = {
   "Shipped": "Shipped",
   "Delivered": "Delivered",
   "Cancel Order": "Cancel Order",
-  "Discount": "Discount",
+  "Discount": "Your Saving !",
   "Exclusive offers from ": "Exclusive offers from",
   "Return": "Return",
   "There are no offers to show at the moment.":
@@ -95,7 +95,7 @@ const Map<String, String> enUS = {
   "Save Address": "Save Address",
   "We added your address": "We added your address",
   "Apply": "Apply",
-  "Add the coupon here": "Add the coupon here",
+  "Add the coupon here": "Enter Promo code to get offer",
   "Through two hours, Dont miss the chance !":
       "Through two hours, Dont miss the chance !",
   "Welcome to the reward program ": "Welcome to the reward program",
@@ -131,7 +131,7 @@ const Map<String, String> enUS = {
   "conditions": "conditions",
   "Sorry!": "Sorry!",
   "Locating your location...": "Locating your location...",
-  "Here": "Here",
+  "Here": "Upload prescription",
   "You can order the prescription by uploading a picture or listing your needs from the pharmacy":
       "Upload your prescription& let the pharmacy pick the products for you !",
   "Ready for winter?": "Ready for winter?",
@@ -212,7 +212,7 @@ const Map<String, String> enUS = {
       "Search for a building, street or ...",
   'searching': 'searching',
   "Unknown Location": "Unknown Location",
-  "unAvailable": "unAvailable",
+  "unAvailable": "Notify Me",
   "No": "No",
   "Yes": "Yes",
   'Failed to fetch business settings': 'Failed to fetch business settings',
@@ -259,7 +259,7 @@ const Map<String, String> enUS = {
   "otp have been sent to your phone number":
       "otp have been sent to your phone number",
   "PDF file selected": "PDF file selected",
-  "Place Order": "Place Order",
+  "Place Order": "Confirm order and pay",
   "add_address_info": "Add Address Info",
   "order_received": "Order Received",
   "preparing_order": "Preparing Order",
@@ -279,5 +279,9 @@ const Map<String, String> enUS = {
   "Server error. Please try again later": "Server error. Please try again later",
   "Something went wrong. Please try again": "Something went wrong. Please try again",
   "Detecting Your Location...": "Detecting Your Location...",
-  "Point Exchange":"النقاط المستبدله"
+
+  "Point Exchange": "Point Exchange",
+
+  "Thanks you will get notified when product is back in stock":
+  "Thanks you will get notified when product is back in stock"
 };

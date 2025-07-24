@@ -30,29 +30,34 @@ class _SearchScreenState extends State<SearchScreen> {
     final controller = Get.find<SearchProductController>();
 
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          color: AppColors.white,
-        ),
-        title: Text(
-          AppKeys.howCanHelpYou.tr,
-          style: AppFonts.heading3.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: Container(),
-      ),
+      // appBar: AppBar(
+      //   flexibleSpace: Container(
+      //     color: Color(0xFFEAF0F0),
+      //   ),
+      //   // title: Text(
+      //   //   AppKeys.howCanHelpYou.tr,
+      //   //   style: AppFonts.heading3.copyWith(
+      //   //     fontWeight: FontWeight.w700,
+      //   //   ),
+      //   // ),
+      //   leading: Container(),
+      // ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column(
-            children: [
-              Column(
+        child: Column(
+          children: [
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 6),
+              decoration:BoxDecoration(
+                color: Color(0xFFEAF0F0)
+              ),
+              child: Column(
                 children: [
+                  SizedBox(height: 60,),
                   Obx(() {
                     return Row(
                       children: [
@@ -131,23 +136,23 @@ class _SearchScreenState extends State<SearchScreen> {
                     }),
                 ],
               ),
-              if (showResults)
-                Expanded(
-                  child: Obx(() {
-                    if (controller.isLoading.value) {
-                      return const Center(child: AppLoader());
-                    }
-                    if (controller.searchResults.isEmpty) {
-                      return Container();
-                    }
+            ),
+            if (showResults)
+              Expanded(
+                child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return const Center(child: AppLoader());
+                  }
+                  if (controller.searchResults.isEmpty) {
+                    return Container();
+                  }
 
-                    return SearchedProductsSection(
-                      products: controller.searchResults,
-                    );
-                  }),
-                ),
-            ],
-          ),
+                  return SearchedProductsSection(
+                    products: controller.searchResults,
+                  );
+                }),
+              ),
+          ],
         ),
       ),
     );

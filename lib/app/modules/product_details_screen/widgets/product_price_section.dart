@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/modules/product_details_screen/widgets/product_counter_section.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
-import '../../../core/utils/size_config.dart';
+import '../../cart/controller/cart_controller.dart';
 import '../controller/product_controller.dart';
 
 class ProductPriceSection extends StatelessWidget {
@@ -14,42 +15,42 @@ class ProductPriceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Divider(color: Colors.grey.shade300.withOpacity(.5)),
-        SizedBox(
-          height: 12,
-        ),
-        Obx(
-           () {
-            return Row(
-              children: [
-                controller.product.value!.packageTypes.isNotEmpty
-                    ? Text(
-                        "${controller.product.value!.packageTypes.first.unitQuantity.toStringAsFixed(0)} ${controller.product.value!.packageTypes.first.unitType}",
-                        style: AppFonts.heading3.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    : Container(),
-                Spacer(),
-                controller.isSelected.value
-                    ? Text.rich(TextSpan(children: [
+    CartController cartController = Get.find<CartController>();
+    return Obx(() {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          controller.product.value!.packageTypes.isNotEmpty
+              ? Text(
+                  "${controller.product.value!.packageTypes.first.unitQuantity.toStringAsFixed(0)} ${controller.product.value!.packageTypes.first.unitType}",
+                  style: AppFonts.heading3.copyWith(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              : Container(),
+          // Spacer(),
+          controller.isSelected.value? SizedBox(height: 12,):SizedBox(),
+          controller.isSelected.value
+              ? Text.rich(TextSpan(children: [
+                  TextSpan(
+                      text: "${AppKeys.price.tr}:  ",
+                      style: AppFonts.heading3,
+                      children: [
                         TextSpan(
-                            text: "${AppKeys.price.tr}:  ",
-                            style: AppFonts.heading3,
-                            children: [
-                              TextSpan(
-                                text:
-                                    "${controller.product.value!.packageTypes.first.unitPrice} L.E",
-                                style: AppFonts.heading3.copyWith(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ]),
-                      ]))
-                    : controller.product.value!.discountType == 'discount'
+                          text:
+                              "${controller.product.value!.packageTypes.first.unitPrice} L.E",
+                          style: AppFonts.heading3.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ]),
+                ]))
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    controller.product.value!.discountType == 'discount'
                         ? Text.rich(
                             TextSpan(
                               children: [
@@ -112,22 +113,23 @@ class ProductPriceSection extends StatelessWidget {
                                 style: AppFonts.heading3,
                                 children: [
                                   TextSpan(
-                                    text: "${controller.product.value!.price} L.E",
+                                    text:
+                                        "${controller.product.value!.price} L.E",
                                     style: AppFonts.heading3.copyWith(
                                         color: AppColors.primary,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ]),
                           ])),
-              ],
-            );
-          }
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        Divider(color: Colors.grey.shade300.withOpacity(.5)),
-      ],
-    );
+                    ProductCounterSection(
+                      controller: cartController,
+                      productEntity: controller.product.value!,
+                      isSelected: controller.isSelected.value,
+                    ),
+                  ],
+                ),
+        ],
+      );
+    });
   }
 }

@@ -25,7 +25,7 @@ class BrandsScreen extends StatelessWidget {
         backgroundColor: AppColors.white,
         title: Text(
           AppKeys.brands.tr,
-          style: AppFonts.heading1,
+          style: AppFonts.heading2,
         ),
         leading: InkWell(
           onTap: () => Get.back(),
@@ -63,7 +63,7 @@ class BrandsScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       mainAxisSpacing: 20.0,
                       crossAxisSpacing: 30.0,
-                      childAspectRatio: 1.2,
+                      childAspectRatio: 1.4,
                     ),
                     itemCount: controller.brands.length,
                     itemBuilder: (context, index) {

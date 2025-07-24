@@ -75,7 +75,9 @@ class _SearchAndSuggestionSectionState
             widget.onChanged?.call(value);
           },
           hintText: AppKeys.search.tr,
+          hintStyle: TextStyle(color: Colors.black54),
           keyboardType: TextInputType.text,
+          fillColor: Colors.white,
           prefixIcon: Image.asset(Assets.iconsSearch),
         );
       },

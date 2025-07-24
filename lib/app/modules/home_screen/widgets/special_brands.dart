@@ -81,11 +81,12 @@ class SpecialBrand extends StatelessWidget {
                         },
                           child: Card(
                             color: Colors.white,
+                            elevation: 0,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12.0, vertical: 12),
                               child: CachedImage(
-                                fit: BoxFit.contain,
+                                fit: BoxFit.fill,
                                 imageUrl: section.brands[index].imageUrl,
                               ),
                             ),

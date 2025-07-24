@@ -31,24 +31,25 @@ class CategoryTabs extends StatelessWidget {
           (index) {
             bool isSelected = index == selectedIndex;
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               child: ChoiceChip(
                 showCheckmark: false,
+                color: WidgetStateProperty.all(
+                    isSelected ? AppColors.primary : AppColors.white),
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 label: Text(
                   items[index].name,
-                  style: AppFonts.heading3.copyWith(
+                  style: AppFonts.heading2.copyWith(
                     fontSize: 14,
                     color: isSelected
-                        ? AppColors.primary
+                        ? AppColors.white
                         : Colors.grey.withOpacity(.6),
                   ),
                 ),
                 selected: isSelected,
                 selectedColor: selectedColor,
-                backgroundColor: isSelected
-                    ? backgroundColor
-                    : AppColors.grey.withOpacity(.3),
+                backgroundColor:
+                    isSelected ? AppColors.primary : AppColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                   side: BorderSide(

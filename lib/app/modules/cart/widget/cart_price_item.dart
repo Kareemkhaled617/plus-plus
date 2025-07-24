@@ -20,7 +20,7 @@ class CartPriceItem extends StatelessWidget {
         Text(
           price,
           style: AppFonts.heading3.copyWith(
-            color: AppColors.red
+            color: AppColors.black
           ),
         ),
       ],

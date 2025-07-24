@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/widgets/custom_bottom_sheet.dart';
 import 'package:plus/app/core/widgets/custom_button.dart';
 import 'package:plus/app/core/widgets/custom_text_form_field.dart';
-import 'package:plus/generated/assets.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
@@ -17,45 +15,44 @@ class CouponSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final CartController cartController = Get.find<CartController>();
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      decoration: BoxDecoration(
-        color: AppColors.babyBlue.withOpacity(.8),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                Assets.iconsOffers,
-                width: 30,
-                height: 30,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                AppKeys.addCoupon.tr,
-                style: AppFonts.heading3,
-              ),
-            ],
-          ),
-          InkWell(
-            onTap: () {
-              // showCustomBottomSheet(context, buildCouponDialogContent(context));
-              showCouponDialog(context, cartController);
-            },
-            child: Text(
-              AppKeys.add.tr,
-              style: AppFonts.heading3.copyWith(
-                fontSize: 12,
-                color: AppColors.red,
-                fontWeight: FontWeight.bold,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Promo Code'.tr,
+          style: AppFonts.heading2,
+        ),
+        SizedBox(height: 8),
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.grey)),
+          child: CustomTextFormField(
+            hintText: AppKeys.addTheCouponHere.tr,
+            fillColor: AppColors.grey.withOpacity(.1),
+            controller: cartController.copounController,
+            prefixIcon: Icon(
+              Icons.local_offer_rounded,
+              color: AppColors.red,
+            ),
+            suffixIcon: SizedBox(
+              width: 100,
+              height: 60,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+                child: CustomButton(
+                  text: AppKeys.apply.tr,
+                  onPressed: () {
+                    cartController.addToCartApi();
+                    Get.back();
+                  },
+                ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -126,15 +123,18 @@ class CouponSection extends StatelessWidget {
                 hintText: AppKeys.addTheCouponHere.tr,
                 fillColor: AppColors.grey.withOpacity(.1),
                 controller: controller.copounController,
+                suffixIcon: SizedBox(
+                  width: 80,
+                  child: CustomButton(
+                    text: AppKeys.apply.tr,
+                    onPressed: () {
+                      controller.addToCartApi();
+                      Get.back();
+                    },
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
-              CustomButton(
-                text: AppKeys.apply.tr,
-                onPressed: () {
-                  controller.addToCartApi();
-                  Get.back();
-                },
-              ),
             ],
           ),
         );

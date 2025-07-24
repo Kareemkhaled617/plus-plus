@@ -18,9 +18,9 @@ class SearchedProductsSection extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         mainAxisSpacing: 14,
-        childAspectRatio: .7,
+        childAspectRatio: .52,
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {

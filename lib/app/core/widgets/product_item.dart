@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/utils/app_keys.dart';
+import 'package:plus/generated/assets.dart';
 
 import '../../domain/entities/product_entity.dart';
 import '../../modules/cart/controller/cart_controller.dart';
 import '../../modules/favourite_screen/controller/favorite_controller.dart';
+import '../../modules/product_details_screen/widgets/product_counter_section.dart';
 import '../../routes/app_routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
@@ -47,7 +48,7 @@ class ProductCard extends StatelessWidget {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
         margin: const EdgeInsets.symmetric(horizontal: 4),
         width: getProportionateScreenWidth(160),
         // height: getProportionateScreenHeight(220),
@@ -65,24 +66,72 @@ class ProductCard extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   height: getProportionateScreenHeight(20),
                 ),
-                CachedImage(
-                  height: getProportionateScreenHeight(70),
-                  width: getProportionateScreenWidth(200),
-                  fit: BoxFit.contain,
-                  imageUrl: imageUrl,
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    CachedImage(
+                      height: getProportionateScreenHeight(100),
+                      width: getProportionateScreenWidth(200),
+                      fit: BoxFit.contain,
+                      imageUrl: imageUrl,
+                    ),
+                    Obx(() {
+                      return cartController.isProductInCart(id)
+                          ? Align(
+                              child: ProductCounterSection(
+                                controller: Get.find<CartController>(),
+                                productEntity: productEntity,
+                              ),
+                            )
+                          : Align(
+                              alignment: Alignment.bottomRight,
+                              child: InkWell(
+                                onTap: productEntity.stock == 0
+                                    ? () {}
+                                    : () {
+                                        if (cartController.isProductInCart(
+                                            productEntity.id)) {
+                                          Get.snackbar('E Lewaa Store',
+                                              'Product already in cart'.tr);
+                                        } else {
+                                          cartController.addToCart(
+                                              productEntity,
+                                              isSelect: false);
+                                          cartController.addToCartApi();
+                                        }
+                                      },
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.primary),
+                                  child: productEntity.stock == 0
+                                      ? Icon(
+                                          Icons.notifications,
+                                          color: Colors.white,
+                                        )
+                                      : Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                ),
+                              ),
+                            );
+                    })
+                  ],
                 ),
 
                 SizedBox(height: getProportionateScreenHeight(10)),
                 productEntity.discountType == 'discount'
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                    ? Column(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Stack(
                                 alignment: Alignment.center,
@@ -90,36 +139,35 @@ class ProductCard extends StatelessWidget {
                                   Text(
                                     price,
                                     style: AppFonts.bodyText.copyWith(
-                                        fontSize: getResponsiveFontSize(10),
-                                        color: AppColors.red,
+                                        fontSize: getResponsiveFontSize(13),
+                                        color: AppColors.grey,
                                         fontWeight: FontWeight.w700),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Transform.rotate(
-                                    angle: 45 * (3.14159265359 / 180),
+                                    angle: 180 * (3.14159265359 / 180),
                                     child: Container(
                                       height: 2,
-                                      width: 30,
+                                      width: 70,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
-                                        color: AppColors.red,
+                                        color: AppColors.grey,
                                       ),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                height: 2,
-                              ),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
                               Text(
-                                (productEntity.price -
-                                        (productEntity.price *
-                                            (productEntity.discountValue /
-                                                100)))
-                                    .toStringAsFixed(2),
+                                '${(productEntity.price - (productEntity.price * (productEntity.discountValue / 100))).toStringAsFixed(2)} L.E',
                                 style: AppFonts.bodyText.copyWith(
                                     fontSize: getResponsiveFontSize(13),
+                                    color: AppColors.red,
                                     fontWeight: FontWeight.w700),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -142,7 +190,7 @@ class ProductCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                SizedBox(height: getProportionateScreenHeight(10)),
+                SizedBox(height: getProportionateScreenHeight(4)),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -232,91 +280,96 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: getProportionateScreenHeight(14)),
-
-                /// **Add To Cart Button**
-                Obx(() {
-                  return ElevatedButton.icon(
-                    onPressed: productEntity.stock == 0
-                        ? null
-                        : () {
-                            if (cartController
-                                .isProductInCart(productEntity.id)) {
-                              Get.snackbar(
-                                  'PLUS', 'Product already in cart'.tr);
-                            } else {
-                              cartController.addToCart(productEntity,
-                                  isSelect: false);
-                              cartController.addToCartApi();
-                            }
-                          },
-                    label: Icon(
-                      cartController.isProductInCart(id)
-                          ? Icons.shopping_cart_rounded
-                          : Icons.shopping_cart_outlined,
-                      size: 22,
-                      color: Colors.white,
-                    ),
-                    icon: cartController.isProductInCart(id)
-                        ? Text(
-                            AppKeys.removeToCart.tr,
-                            style: AppFonts.bodyText.copyWith(
-                              color: Colors.white,
-                              fontSize: getResponsiveFontSize(14),
-                              fontWeight: FontWeight.w700,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        : Text(
-                            AppKeys.addToCart.tr,
-                            style: AppFonts.bodyText.copyWith(
-                              color: Colors.white,
-                              fontSize: getResponsiveFontSize(14),
-                              fontWeight: FontWeight.w700,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: cartController.isProductInCart(id)
-                          ? AppColors.primary.withOpacity(.2)
-                          : AppColors.primary,
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: getProportionateScreenWidth(16)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  );
-                }),
+                SizedBox(height: getProportionateScreenHeight(4)),
+                // Obx(() {
+                //   return ElevatedButton.icon(
+                //     onPressed: productEntity.stock == 0
+                //         ? null
+                //         : () {
+                //             if (cartController
+                //                 .isProductInCart(productEntity.id)) {
+                //               Get.snackbar('E Lewaa Store',
+                //                   'Product already in cart'.tr);
+                //             } else {
+                //               cartController.addToCart(productEntity,
+                //                   isSelect: false);
+                //               cartController.addToCartApi();
+                //             }
+                //           },
+                //     label: Icon(
+                //       cartController.isProductInCart(id)
+                //           ? Icons.shopping_cart_rounded
+                //           : Icons.shopping_cart_outlined,
+                //       size: 22,
+                //       color: Colors.white,
+                //     ),
+                //     icon: cartController.isProductInCart(id)
+                //         ? Text(
+                //             AppKeys.removeToCart.tr,
+                //             style: AppFonts.bodyText.copyWith(
+                //               color: Colors.white,
+                //               fontSize: getResponsiveFontSize(14),
+                //               fontWeight: FontWeight.w700,
+                //             ),
+                //             maxLines: 1,
+                //             overflow: TextOverflow.ellipsis,
+                //           )
+                //         : Text(
+                //             AppKeys.addToCart.tr,
+                //             style: AppFonts.bodyText.copyWith(
+                //               color: Colors.white,
+                //               fontSize: getResponsiveFontSize(14),
+                //               fontWeight: FontWeight.w700,
+                //             ),
+                //             maxLines: 1,
+                //             overflow: TextOverflow.ellipsis,
+                //           ),
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor: cartController.isProductInCart(id)
+                //           ? AppColors.primary.withOpacity(.2)
+                //           : AppColors.primary,
+                //       padding: EdgeInsets.symmetric(
+                //           vertical: 10,
+                //           horizontal: getProportionateScreenWidth(16)),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(8),
+                //       ),
+                //     ),
+                //   );
+                // }),
               ],
             ),
             Get.locale == Locale('ar')
                 ? Positioned(
                     top: -14,
-                    left: -12,
+                    left: -8,
                     child: Obx(() {
                       return Row(
                         children: [
-                          productEntity.stock == 0
-                              ? Text(
-                                  'Unavailable'.tr,
-                                  style: AppFonts.bodyText.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w800,
-                                      color: AppColors.red),
+                          // productEntity.stock == 0
+                          //     ? Text(
+                          //         'Unavailable'.tr,
+                          //         style: AppFonts.bodyText.copyWith(
+                          //             fontSize: 14,
+                          //             fontWeight: FontWeight.w800,
+                          //             color: AppColors.red),
+                          //       )
+                          //     :
+                          productEntity.discountType == 'discount'
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              Assets.imagesBackgroundOffer))),
+                                  child: Text(
+                                    '${productEntity.discountValue} % OFF',
+                                    style: AppFonts.bodyText.copyWith(
+                                        fontSize: getResponsiveFontSize(12),
+                                        fontWeight: FontWeight.w800,
+                                        color: AppColors.red),
+                                  ),
                                 )
-                              : productEntity.discountType == 'discount'
-                                  ? Text(
-                                      '${productEntity.discountValue} % OFF',
-                                      style: AppFonts.bodyText.copyWith(
-                                          fontSize: getResponsiveFontSize(12),
-                                          fontWeight: FontWeight.w800,
-                                          color: AppColors.red),
-                                    )
-                                  : Container(),
+                              : Container(),
                           SizedBox(
                             width: getProportionateScreenWidth(50),
                           ),
@@ -340,30 +393,44 @@ class ProductCard extends StatelessWidget {
                     }),
                   )
                 : Positioned(
-                    top: -14,
-                    right: -14,
+                    top: -3,
+                    right: 2,
                     child: Obx(() {
                       return Row(
                         children: [
-                          productEntity.stock == 0
-                              ? Text(
-                                  'Unavailable',
-                                  style: AppFonts.bodyText.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w800,
-                                      color: AppColors.red),
+                          // productEntity.stock == 0
+                          //     ? Text(
+                          //         'Unavailable',
+                          //         style: AppFonts.bodyText.copyWith(
+                          //             fontSize: 12,
+                          //             fontWeight: FontWeight.w800,
+                          //             color: AppColors.red),
+                          //       )
+                          //     :
+                          productEntity.discountType == 'discount'
+                              ? Container(
+                                  height: 50,
+                                  width: 50,
+                                  padding: EdgeInsets.all(6),
+                                  margin: EdgeInsets.all(4),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              Assets.imagesBackgroundOffer),
+                                          fit: BoxFit.fill)),
+                                  child: Text(
+                                    '${productEntity.discountValue.toInt()} % OFF',
+                                    textAlign: TextAlign.center,
+                                    style: AppFonts.bodyText.copyWith(
+                                        fontSize: getResponsiveFontSize(12),
+                                        fontWeight: FontWeight.w800,
+                                        color: AppColors.white),
+                                  ),
                                 )
-                              : productEntity.discountType == 'discount'
-                                  ? Text(
-                                      '${productEntity.discountValue} % OFF',
-                                      style: AppFonts.bodyText.copyWith(
-                                          fontSize: getResponsiveFontSize(12),
-                                          fontWeight: FontWeight.w800,
-                                          color: AppColors.red),
-                                    )
-                                  : Container(),
+                              : Container(),
                           SizedBox(
-                            width: getProportionateScreenWidth(40),
+                            width: getProportionateScreenWidth(60),
                           ),
                           IconButton(
                             icon: controller.isLoading.value

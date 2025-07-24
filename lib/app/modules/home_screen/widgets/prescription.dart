@@ -31,44 +31,48 @@ class Prescription extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: getProportionateScreenWidth(250),
-            child: Text(
-              AppKeys.youCanOrderPrescription.tr,
-              style: AppFonts.bodyText.copyWith(
-                  color: AppColors.white, fontSize: getResponsiveFontSize(13)),
-            ),
+          Row(
+            children: [
+              Icon(Icons.file_open,color: AppColors.primary,size: 30,),
+              SizedBox(width: 8,),
+              Flexible(
+                child: Text(
+                  AppKeys.youCanOrderPrescription.tr,
+                  style: AppFonts.bodyText.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                      fontSize: getResponsiveFontSize(15)),
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: 14,
           ),
-          InkWell(
-            onTap: () {
-              Get.toNamed(AppRoutes.prescription);
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: AppColors.white,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.prescription);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppColors.primary,
+                  ),
+                  child: Text(
                     AppKeys.here.tr,
                     textAlign: TextAlign.start,
                     style: AppFonts.heading1.copyWith(
-                        color: AppColors.primary,
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w500,
                         fontSize: getResponsiveFontSize(15)),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(Icons.arrow_forward_rounded, color: AppColors.primary)
-                ],
+                ),
               ),
-            ),
+            ],
           )
         ],
       ),

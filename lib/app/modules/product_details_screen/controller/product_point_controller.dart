@@ -16,7 +16,7 @@ class ProductPointController extends GetxController {
     result.fold(
       (failure) => Get.snackbar("Error".tr, failure.message),
       (_) =>
-          Get.snackbar("Success".tr, "User point request created successfully"),
+          Get.snackbar("Success".tr, "Thanks you will get notified when product is back in stock".tr),
     );
     isLoading.value = false;
   }

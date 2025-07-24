@@ -128,7 +128,7 @@ const Map<String, String> arEG = {
   "conditions": "الأحكام",
   "Sorry!": "عذراً!",
   "Locating your location...": "تحديد موقعك...",
-  "Here": "هنا",
+  "Here": "رفع الوصفة الطبية",
   "You can order the prescription by uploading a picture or listing your needs from the pharmacy":
   "قم برفع وصفة الدواء الخاصة بك ودع الصيدلية تختار المنتجات لك!",
   "Ready for winter?": "جاهز للشتاء؟",
@@ -267,7 +267,8 @@ const Map<String, String> arEG = {
   "Server error. Please try again later": "خطأ في الخادم. حاول مرة أخرى لاحقًا",
   "Something went wrong. Please try again": "حدث خطأ ما. يرجى المحاولة مرة أخرى",
   "Detecting Your Location...": "جارٍ تحديد موقعك...",
-  "Point Exchange":"Point Exchange"
+  "Point Exchange": "النقاط المستبدله",
 
+  "Thanks you will get notified when product is back in stock":"شكرًا لك، سيتم إشعارك عندما يعود المنتج إلى المخزون."
 
 };

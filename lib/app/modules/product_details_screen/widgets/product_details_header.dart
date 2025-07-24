@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/modules/product_details_screen/controller/product_controller.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_fonts.dart';
 import '../../../core/widgets/app_bar_back_button.dart';
 import '../../../core/widgets/offers_percent_widget.dart';
 import '../../favourite_screen/controller/favorite_controller.dart';
@@ -19,34 +19,42 @@ class ProductDetailsHeader extends StatelessWidget {
 
     return Row(
       children: [
-        AppBarBackButton(),
-        SizedBox(width: 15),
+        InkWell(
+          onTap: () => Get.back(),
+          child: Container(
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(2),
+            decoration:
+            BoxDecoration(shape: BoxShape.circle, color: AppColors.white),
+            child: Icon(
+              Icons.close,
+              size: 30,
+              color: AppColors.red,
+            ),
+          ),
+        ),
         Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                CachedImage(
+                  imageUrl: controller.product.value!.brandImage,
                   width: 100,
-                  child: Text(
-                    controller.product.value!.name,
-                    maxLines: 1,
-                    style: AppFonts.heading1.copyWith(fontSize: 17),
-                  ),
                 ),
-                controller.product.value!.categories.isNotEmpty?Text(
-                  controller.product.value!.categories[0].name,
-                  style: AppFonts.heading1
-                      .copyWith(fontSize: 15, color: AppColors.primary),
-                ):Container(),
+                // controller.product.value!.categories.isNotEmpty?Text(
+                //   controller.product.value!.categories[0].name,
+                //   style: AppFonts.heading1
+                //       .copyWith(fontSize: 15, color: AppColors.primary),
+                // ):Container(),
               ],
             ),
-            controller.product.value!.discountType == "discount"
-                ? OffersPercentWidget(
-                    percent: controller.product.value!.discountValue
-                        .toStringAsFixed(0),
-                  )
-                : Container(),
+            // controller.product.value!.discountType == "discount"
+            //     ? OffersPercentWidget(
+            //         percent: controller.product.value!.discountValue
+            //             .toStringAsFixed(0),
+            //       )
+            //     : Container(),
           ],
         ),
         SizedBox(

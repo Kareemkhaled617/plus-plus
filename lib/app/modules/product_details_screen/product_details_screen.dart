@@ -12,6 +12,7 @@ import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
 import '../../core/utils/size_config.dart';
 import '../../core/widgets/loader.dart';
+import '../../core/widgets/offers_percent_widget.dart';
 import '../cart/controller/cart_controller.dart';
 import 'controller/product_controller.dart';
 import 'controller/product_point_controller.dart';
@@ -56,8 +57,32 @@ class ProductDetailsScreen extends StatelessWidget {
                       SizedBox(
                         height: 8,
                       ),
-                      controller.product.value!.stock == 0
-                          ? Row(
+                    Row(
+                      children: [
+                        Text(
+                          controller.product.value!.name,
+                          style: AppFonts.heading2,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        controller.product.value!.discountType == "discount"
+                            ? OffersPercentWidget(
+                                percent: controller.product.value!.discountValue
+                                    .toStringAsFixed(0),
+                              )
+                            : Container(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    ProductPriceSection(controller: controller),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    controller.product.value!.stock == 0
+                        ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ElevatedButton(
@@ -89,7 +114,8 @@ class ProductDetailsScreen extends StatelessWidget {
                               ],
                             )
                           : Column(
-                              children: [
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                                 Text(
                                   AppKeys.whatDoYouNeed.tr,
                                   style: AppFonts.heading2.copyWith(
@@ -98,27 +124,14 @@ class ProductDetailsScreen extends StatelessWidget {
                                 ProductTypesSection(
                                   controller: controller,
                                 ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: ProductCounterSection(
-                                    controller: cartController,
-                                    productEntity: controller.product.value!,
-                                    isSelected: controller.isSelected.value,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                ProductPriceSection(controller: controller),
-                              ],
-                            ),
+
+
+                            ],
+                          ),
                       SizedBox(
                         height: 20,
                       ),
-                      ProductDescriptionAndBrandSection(),
+                      // ProductDescriptionAndBrandSection(),
                   ]),
             ),
           );

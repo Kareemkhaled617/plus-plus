@@ -44,7 +44,9 @@ class Assets {
   static const String iconsVisas = 'assets/icons/visas.png';
   static const String iconsWhatsapp = 'assets/icons/whatsapp.png';
   static const String imagesAccessLocationDone = 'assets/images/access_location_done.png';
+  static const String imagesBacgroundCategory = 'assets/images/bacground_category.png';
   static const String imagesBackground = 'assets/images/background.png';
+  static const String imagesBackgroundOffer = 'assets/images/background_offer.png';
   static const String imagesCart = 'assets/images/cart.png';
   static const String imagesEarnedPoint = 'assets/images/earned_point.png';
   static const String imagesEmptyFavourite = 'assets/images/empty_favourite.png';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/modules/check_out_screen/controller/check_out_controller.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
@@ -8,7 +7,6 @@ import '../../../core/utils/app_keys.dart';
 import '../controller/cart_controller.dart';
 import 'cart_price_item.dart';
 import 'coupon_section.dart';
-import 'delivery_section.dart';
 
 class CheckoutSummary extends StatelessWidget {
   const CheckoutSummary({super.key, required this.fromCart});
@@ -25,68 +23,11 @@ class CheckoutSummary extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          fromCart
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18.0),
-                  child: Text("Payment details".tr, style: AppFonts.heading2),
-                ),
-          CartPriceItem(
-            title: AppKeys.subtotal.tr,
-            // price: "${subtotal.toStringAsFixed(2)} L.E",
-            price: cartController.isLoading.value
-                ? ""
-                : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} L.E",
-          ),
-          SizedBox(height: 10),
-          fromCart
-              ? Container()
-              : Column(
-                  children: [
-                    CartPriceItem(
-                      title: AppKeys.delivery.tr,
-                      // price: "${deliveryFee.toStringAsFixed(2)} L.E",
-                      price: cartController.isLoading.value
-                          ? ""
-                          : "${cartController.cartTotal.value!.chargePrice.toStringAsFixed(2)} L.E",
-                    ),
-                    SizedBox(height: 10),
-                    CartPriceItem(
-                      title: AppKeys.discount.tr,
-                      price: cartController.isLoading.value
-                          ? ""
-                          : "${cartController.cartTotal.value!.totalDiscount.toStringAsFixed(2)} L.E",
-                      isTotal: true,
-                    ),
-                    // SizedBox(height: 10),
-                    // CartPriceItem(
-                    //   title: AppKeys.pointExchange.tr,
-                    //   price: checkoutController.isLoadingCalculate.value
-                    //       ? ""
-                    //       : "${checkoutController.priceInfo.value!.userPointsExchangeRate.toStringAsFixed(2)} L.E",
-                    //   isTotal: true,
-                    // ),
-                    SizedBox(height: 10),
-                    CartPriceItem(
-                      title: AppKeys.couponDiscount.tr,
-                      price: cartController.isLoading.value
-                          ? ""
-                          : "${cartController.cartTotal.value!.couponDiscount.toStringAsFixed(2)} L.E",
-                      isTotal: true,
-                    ),
-                    SizedBox(height: 10),
-                    CartPriceItem(
-                      title: AppKeys.total.tr,
-                      price: cartController.isLoading.value
-                          ? ""
-                          : "${cartController.cartTotal.value!.totalPriceAfterCharge.toStringAsFixed(2)} L.E",
-                      isTotal: true,
-                    ),
-                  ],
-                ),
-          fromCart ? const SizedBox(height: 60) : SizedBox(height: 20),
-          fromCart
-              ? Obx(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                Obx(
                   () => cartController.copounText.value.isEmpty
                       ? CouponSection()
                       : Row(
@@ -106,10 +47,8 @@ class CheckoutSummary extends StatelessWidget {
                             ),
                           ],
                         ), // hide UI completely
-                )
-              : Container(),
-          fromCart
-              ? Obx(
+                ),
+                Obx(
                   () => cartController.copounText.value.isNotEmpty
                       ? Padding(
                           padding: const EdgeInsets.symmetric(
@@ -159,13 +98,90 @@ class CheckoutSummary extends StatelessWidget {
                           ),
                         )
                       : const SizedBox.shrink(), // hide UI completely
-                )
-              : Container(),
-          fromCart ? const SizedBox(height: 30) : Container(),
-          CartDeliverySection(
-            fromCart: fromCart,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            decoration: BoxDecoration(color: Color(0xFFFDE8E9)),
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 22),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                fromCart
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 18.0),
+                        child: Text("Bill Breakdown".tr,
+                            style: AppFonts.heading1
+                                .copyWith(color: AppColors.red)),
+                      ),
+                CartPriceItem(
+                  title: AppKeys.subtotal.tr,
+                  // price: "${subtotal.toStringAsFixed(2)} L.E",
+                  price: cartController.isLoading.value
+                      ? ""
+                      : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} L.E",
+                ),
+                SizedBox(height: 10),
+                fromCart
+                    ? Container()
+                    : Column(
+                        children: [
+                          CartPriceItem(
+                            title: AppKeys.delivery.tr,
+                            // price: "${deliveryFee.toStringAsFixed(2)} L.E",
+                            price: cartController.isLoading.value
+                                ? ""
+                                : "${cartController.cartTotal.value!.chargePrice.toStringAsFixed(2)} L.E",
+                          ),
+                          SizedBox(height: 10),
+                          CartPriceItem(
+                            title: AppKeys.discount.tr,
+                            price: cartController.isLoading.value
+                                ? ""
+                                : "${cartController.cartTotal.value!.totalDiscount.toStringAsFixed(2)} L.E",
+                            isTotal: true,
+                          ),
+                          SizedBox(height: 10),
+                          CartPriceItem(
+                            title: 'Rider Tip'.tr,
+                            price: "12 L.E",
+                            isTotal: true,
+                          ),
+                          SizedBox(height: 10),
+                          CartPriceItem(
+                            title: AppKeys.couponDiscount.tr,
+                            price: cartController.isLoading.value
+                                ? ""
+                                : "${cartController.cartTotal.value!.couponDiscount.toStringAsFixed(2)} L.E",
+                            isTotal: true,
+                          ),
+                          SizedBox(height: 10),
+                          CartPriceItem(
+                            title: AppKeys.total.tr,
+                            price: cartController.isLoading.value
+                                ? ""
+                                : "${cartController.cartTotal.value!.totalPriceAfterCharge.toStringAsFixed(2)} L.E",
+                            isTotal: true,
+                          ),
+                        ],
+                      ),
+                fromCart ? const SizedBox(height: 60) : SizedBox(height: 20),
+              ],
+            ),
           ),
 
+          SizedBox(
+            height: 30,
+          ),
+          // fromCart ? const SizedBox(height: 30) : Container(),
+          // CartDeliverySection(
+          //   fromCart: fromCart,
+          // ),
         ],
       );
     });

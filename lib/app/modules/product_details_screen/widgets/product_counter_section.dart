@@ -45,10 +45,10 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
         children: [
           InkWell(
             child: Container(
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(2),
               child: Icon(
                 Icons.remove,
-                size: 20,
+                size: 15,
               ),
             ),
             onTap: () {
@@ -57,7 +57,7 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
             },
           ),
           SizedBox(
-            width: 20,
+            width: 10,
           ),
           Obx(() {
             return Text(
@@ -68,7 +68,7 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
             );
           }),
           SizedBox(
-            width: 20,
+            width: 10,
           ),
           InkWell(
             onTap: () {
@@ -81,7 +81,7 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
               radius: widget.plusIconSize,
               child: const Icon(
                 Icons.add,
-                size: 20,
+                size: 15,
                 color: AppColors.white,
               ),
             ),

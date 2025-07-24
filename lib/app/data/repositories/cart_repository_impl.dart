@@ -97,4 +97,20 @@ class CartRepositoryImpl implements CartRepository {
       return Left(Failure('Unexpected error occurred'.tr));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> removeAllFromCart() async {
+    try {
+      final response = await apiService.deleteRequest('/cart/delete-all');
+
+      if (response.success) {
+        return const Right(true);
+      } else {
+        return Left(Failure(response.message ?? 'Failed to clear cart'));
+      }
+    } catch (e) {
+      return Left(Failure('Unexpected error occurred'.tr));
+    }
+  }
+
 }

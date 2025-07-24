@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/size_config.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_fonts.dart';
 import '../../../core/utils/app_keys.dart';
@@ -12,7 +13,6 @@ class PaymentOptionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<CheckoutController>();
-
 
     return Obx(() {
       return Column(
@@ -41,15 +41,10 @@ class PaymentOptionsSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                   child: Row(
                     children: [
-                      Radio<int>(
-                        value: index,
-                        groupValue: controller.selectedIndex.value,
-                        onChanged: (val) => controller.selectOption(index),
-                        activeColor: Colors.deepPurple,
-                      ),
+
                       Image.asset(
                         controller.images[index],
                         width: getProportionateScreenWidth(30),
@@ -61,17 +56,25 @@ class PaymentOptionsSection extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: isSelected ? AppColors.primary : AppColors.grey,
+                            color:
+                                isSelected ? AppColors.black : AppColors.grey,
                           ),
                         ),
                       ),
-                      if (index == 2)
-                        Icon(
-                          controller.showCardDetails.value
-                              ? Icons.keyboard_arrow_up
-                              : Icons.keyboard_arrow_down,
-                          color: Colors.grey,
-                        )
+                      Radio<int>(
+                        value: index,
+                        groupValue: controller.selectedIndex.value,
+                        onChanged: (val) => controller.selectOption(index),
+
+                        activeColor: Colors.deepPurple,
+                      ),
+                      // if (index == 2)
+                      //   Icon(
+                      //     controller.showCardDetails.value
+                      //         ? Icons.keyboard_arrow_up
+                      //         : Icons.keyboard_arrow_down,
+                      //     color: Colors.grey,
+                      //   )
                     ],
                   ),
                 ),
@@ -121,6 +124,4 @@ class PaymentOptionsSection extends StatelessWidget {
   //     ),
   //   );
   // }
-
-
 }

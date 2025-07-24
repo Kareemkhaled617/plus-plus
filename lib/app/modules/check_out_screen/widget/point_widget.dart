@@ -26,7 +26,7 @@ class _UsePointSectionState extends State<UsePointSection> {
     final checkoutController = Get.find<CheckoutController>();
     AccountController controller = Get.find<AccountController>();
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
         gradient: LinearGradient(
@@ -42,18 +42,19 @@ class _UsePointSectionState extends State<UsePointSection> {
       ),
       child: Column(
         children: [
-          // Header
+
           GestureDetector(
             onTap: () {
               setState(() => isExpanded = !isExpanded);
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 22),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF7D5DF6), Color(0xFF4A26D7)],
-                ),
-                borderRadius: BorderRadius.circular(14),
+                // gradient: const LinearGradient(
+                //   colors: [Color(0xFF7D5DF6), Color(0xFF4A26D7)],
+                // ),
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [

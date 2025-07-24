@@ -19,4 +19,6 @@ abstract class CartRepository {
     required String lat,
     required String lng,
   });
+  Future<Either<Failure, bool>> removeAllFromCart();
+
 }

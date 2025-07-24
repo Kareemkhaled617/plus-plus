@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +14,7 @@ import '../../../domain/entities/product_entity.dart';
 import '../../../domain/usecases/add_to_cart_usecase.dart';
 import '../../../domain/usecases/get_cart_total_usecase.dart';
 import '../../../domain/usecases/get_cart_usecase.dart';
+import '../../../domain/usecases/remove_from_cart_use_case.dart';
 import '../../../domain/usecases/remove_from_cart_usecase.dart';
 
 class CartController extends GetxController {
@@ -23,6 +24,8 @@ class CartController extends GetxController {
   final AddToCartUseCase addToCartUseCase;
   final RemoveFromCartUseCase removeFromCartUseCase;
   final GetCartUseCase getCartUseCase;
+  final RemoveAllFromCartUseCase removeAllFromCartUseCase;
+
   final GetCartTotalUseCase getCartTotalUseCase;
   final TextEditingController copounController = TextEditingController();
   final RxString copounText = ''.obs;
@@ -47,7 +50,9 @@ class CartController extends GetxController {
   }
 
   CartController(this.addToCartUseCase, this.removeFromCartUseCase,
-      this.getCartUseCase, this.getCartTotalUseCase);
+      this.getCartUseCase,
+      this.getCartTotalUseCase,
+      this.removeAllFromCartUseCase);
 
   @override
   void onInit() {
@@ -344,9 +349,39 @@ class CartController extends GetxController {
   }
 
   /// 🗑️ Clear entire cart
-  Future<void> clearCart() async {
-    cartItems.clear();
-    itemCounts.clear();
-    await _secureStorage.delete(key: 'cart_data');
+  // Future<void> clearCart() async {
+  //   cartItems.clear();
+  //   itemCounts.clear();
+  //   await _secureStorage.delete(key: 'cart_data');
+  // }
+  void clearCart() async {
+    final result = await removeAllFromCartUseCase();
+
+    result.fold(
+      (failure) {
+        Get.snackbar(
+          'Error'.tr,
+          failure.message,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+        );
+      },
+      (success) async {
+        if (success) {
+          cartItems.clear();
+          itemCounts.clear();
+          await _secureStorage.delete(key: 'cart_data');
+
+          Get.snackbar(
+            'Success'.tr,
+            'Cart cleared successfully'.tr,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+        }
+      },
+    );
   }
 }
