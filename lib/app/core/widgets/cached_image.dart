@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import 'ShimmerImageLoader.dart';
+
 class CachedImage extends StatelessWidget {
   final String imageUrl;
   final double? width;
@@ -27,9 +29,9 @@ class CachedImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
-        placeholder: (context, url) => SizedBox(
-          height: 50,
-          child: Lottie.asset('assets/animation/loading.json'),
+        placeholder: (context, url) => ShimmerImageLoader(
+          width: 100,
+          height: 100,
         ),
         errorWidget: (context, url, error) => Center(
           child: Icon(Icons.broken_image, color: Colors.red),

@@ -268,7 +268,8 @@ const Map<String, String> arEG = {
   "Something went wrong. Please try again": "حدث خطأ ما. يرجى المحاولة مرة أخرى",
   "Detecting Your Location...": "جارٍ تحديد موقعك...",
   "Point Exchange": "النقاط المستبدله",
-
-  "Thanks you will get notified when product is back in stock":"شكرًا لك، سيتم إشعارك عندما يعود المنتج إلى المخزون."
-
+  "Thanks you will get notified when product is back in stock":
+      "شكرًا لك، سيتم إشعارك عندما يعود المنتج إلى المخزون.",
+  'minutes': 'دقائق',
+  'Estimated arrival': 'الوقت المقدر للوصول'
 };

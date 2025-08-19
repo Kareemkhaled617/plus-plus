@@ -11,7 +11,8 @@ class GetCartTotalUseCase {
   Future<Either<Failure, CartTotalEntity>> call({
     required String lat,
     required String lng,
+    required String riderTip,
   }) {
-    return repository.getCartTotal(lat: lat, lng: lng);
+    return repository.getCartTotal(lat: lat, lng: lng,riderTip:riderTip);
   }
 }

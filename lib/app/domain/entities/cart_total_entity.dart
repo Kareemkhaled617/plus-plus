@@ -3,6 +3,7 @@ class CartTotalEntity {
   final double totalDiscount;
   final double couponDiscount;
   final double chargePrice;
+  final double riderTip;
   final double totalPriceAfterCharge;
 
   CartTotalEntity({
@@ -10,6 +11,7 @@ class CartTotalEntity {
     required this.totalDiscount,
     required this.couponDiscount,
     required this.chargePrice,
+    required this.riderTip,
     required this.totalPriceAfterCharge,
   });
 }

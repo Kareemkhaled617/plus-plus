@@ -149,7 +149,9 @@ class CheckoutSummary extends StatelessWidget {
                           SizedBox(height: 10),
                           CartPriceItem(
                             title: 'Rider Tip'.tr,
-                            price: "12 L.E",
+                            price: cartController.isLoading.value
+                                ? ""
+                                : "${cartController.cartTotal.value!.riderTip.toStringAsFixed(2)} L.E",
                             isTotal: true,
                           ),
                           SizedBox(height: 10),

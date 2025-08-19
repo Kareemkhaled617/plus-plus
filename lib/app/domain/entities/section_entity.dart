@@ -7,8 +7,11 @@ class SectionEntity {
   final String name;
   final String firstColor;
   final String secondColor;
+  final String backgroundColor;
   final String titleColor;
   final String sectionType;
+  final String titlePosition;
+  final String image;
   final List<ProductEntity> products;
   final List<BrandEntity> brands;
 
@@ -21,5 +24,8 @@ class SectionEntity {
     required this.sectionType,
     required this.products,
     required this.brands,
+    required this.backgroundColor,
+    required this.titlePosition,
+    required this.image,
   });
 }

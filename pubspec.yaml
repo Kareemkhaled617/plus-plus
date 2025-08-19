@@ -61,6 +61,7 @@ dependencies:
   easy_stepper: ^0.8.5+1
   geocoding:
   animated_text_kit:
+  device_preview:
 dev_dependencies:
   flutter_test:
     sdk: flutter

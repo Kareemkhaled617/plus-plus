@@ -10,6 +10,7 @@ class OrderPriceModel extends OrderPriceEntity {
     required super.totalPriceAfterPoints,
     required super.finalPrice,
     required super.couponDiscount,
+    required super.riderTip,
   });
 
   factory OrderPriceModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +25,7 @@ class OrderPriceModel extends OrderPriceEntity {
           (data['user_points_exchange_rate'] ?? 0).toDouble(),
       totalPriceAfterPoints: (data['total_price_after_points'] ?? 0).toDouble(),
       finalPrice: (data['final_price'] ?? 0).toDouble(),
+      riderTip: (data['rider_tip'] ?? 0).toDouble(),
     );
   }
 }

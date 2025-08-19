@@ -1,8 +1,6 @@
 import '../../domain/entities/section_entity.dart';
-import '../../domain/entities/product_entity.dart';
-import '../../domain/entities/brand_entity.dart';
-import 'product_model.dart';
 import 'brand_model.dart';
+import 'product_model.dart';
 
 class SectionModel extends SectionEntity {
   SectionModel({
@@ -14,16 +12,22 @@ class SectionModel extends SectionEntity {
     required super.sectionType,
     required super.products,
     required super.brands,
+    required super.backgroundColor,
+    required super.titlePosition,
+    required super.image,
   });
 
   factory SectionModel.fromJson(Map<String, dynamic> json) {
     return SectionModel(
       id: json['id'],
-      name: json['name'],
-      firstColor: json['first_color'],
-      secondColor: json['second_color'],
-      sectionType: json['section_type'],
-      titleColor: json['title_color'],
+      name: json['name']??'',
+      firstColor: json['first_color']??'',
+      secondColor: json['second_color']??"",
+      backgroundColor: json['background_image']??"",
+      titlePosition: json['title_position']??'',
+      image: json['image']??'',
+      sectionType: json['section_type']??'',
+      titleColor: json['title_color']??"",
       products: (json['products'] as List)
           .map((item) => ProductModel.fromJson(item))
           .toList(),

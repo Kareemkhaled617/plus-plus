@@ -51,6 +51,7 @@ class CartPriceDataModel extends CartPriceDataEntity {
     required super.totalPriceAfterCharge,
     required super.couponDiscount,
     required super.chargePrice,
+    required super.riderTip,
     super.coupon,
     super.couponCode,
   });
@@ -62,6 +63,7 @@ class CartPriceDataModel extends CartPriceDataEntity {
       totalPriceAfterCharge: (json['total_price_after_charge'] as num).toDouble(),
       couponDiscount: (json['coupon_discount'] as num).toDouble(),
       chargePrice: (json['charge_price'] as num).toDouble(),
+      riderTip: (json['rider_tip'] as num).toDouble(),
       coupon: json['coupon'],
       couponCode: json['coupon_code'],
     );

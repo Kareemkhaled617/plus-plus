@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
-import 'package:plus/app/core/widgets/loader.dart';
+import 'package:plus/app/core/widgets/product_shimmer.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
 import '../../core/theme/app_fonts.dart';
@@ -59,7 +59,7 @@ class ProductsScreen extends StatelessWidget {
         ),
         child: Obx(() {
           if (controller.isLoading.value) {
-            return Center(child: AppLoader());
+            return ProductShimmer();
           } else if (controller.errorMessage.isNotEmpty) {
             return Center(child: Text(controller.errorMessage.value));
           } else {
@@ -67,12 +67,11 @@ class ProductsScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: .74,
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 2,
+                  childAspectRatio: .44,
                 ),
                 itemCount: controller.products.length,
-                // Adjust count dynamically
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {

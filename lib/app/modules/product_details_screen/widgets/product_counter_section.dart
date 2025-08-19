@@ -40,8 +40,8 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
         borderRadius: BorderRadius.circular(18),
       ),
       elevation: 0,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
             child: Container(
@@ -87,7 +87,6 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
             ),
           ),
         ],
-      ),
-    );
+        ));
   }
 }

@@ -129,7 +129,7 @@ class DeliveryAddressCard extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           showAddressSelectionSheet(context);
                         },
                         child:  Text(
@@ -236,9 +236,17 @@ class DeliveryAddressCard extends StatelessWidget {
                           return RadioListTile<AddressEntity>(
                             value: address,
                             groupValue: cartController.selectedAddress.value,
-                            onChanged: (value) {
+                            onChanged: (value) async {
                               cartController.selectAddress(value!);
                               Navigator.pop(context);
+                              await cartController.fetchCartTotal(
+                                  cartController.selectedAddress.value != null
+                                      ? cartController.selectedAddress.value!.lat
+                                      : "0",
+                                  cartController.selectedAddress.value != null
+                                      ? cartController.selectedAddress.value!.lng
+                                      : "0",
+                                  cartController.selectedAmount!.value.toString());
                             },
                             title: Text(
                               address.setAs,

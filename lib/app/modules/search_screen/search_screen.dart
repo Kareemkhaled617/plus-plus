@@ -8,6 +8,7 @@ import 'package:plus/app/modules/search_screen/widgets/searched_products_section
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
 import '../../core/widgets/loader.dart';
+import '../../core/widgets/product_shimmer.dart';
 import 'controller/recent_search_controller.dart';
 import 'controller/search_controller.dart';
 
@@ -141,7 +142,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Expanded(
                 child: Obx(() {
                   if (controller.isLoading.value) {
-                    return const Center(child: AppLoader());
+                    return ProductShimmer();
                   }
                   if (controller.searchResults.isEmpty) {
                     return Container();

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
 import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/favourite_screen/widgets/favourite_empty_body.dart';
+import '../../core/widgets/product_shimmer.dart';
 import '../home_screen/widgets/products_grid.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
@@ -25,7 +26,7 @@ class FavouriteScreen extends StatelessWidget {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: AppLoader());
+          return ProductShimmer();
         }
         if (controller.errorMessage.isNotEmpty) {
           return Center(child: Text(controller.errorMessage.value));

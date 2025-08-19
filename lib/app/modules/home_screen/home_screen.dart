@@ -22,198 +22,199 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BusinessSettingsController businessSettingsController =
         Get.find<BusinessSettingsController>();
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.background,
-        body: Stack(
-          children: [
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(Assets.imagesBackground),
-                  fit: BoxFit.cover,
-                ),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Assets.imagesBackground),
+                fit: BoxFit.cover,
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SectionHeader(),
-                    SizedBox(
-                      height: 20,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  SectionHeader(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(46),
+                          topRight: Radius.circular(46)),
+                      color: AppColors.white,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(46),
-                            topRight: Radius.circular(46)),
-                        color: AppColors.white,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          CircularImageSlider(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ArrivalTimerCard(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CircularImageSlider(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ArrivalTimerCard(),
 
-                          // SizedBox(
-                          //   height: 10,
-                          // ),
-                          // DisclaimerBox(
-                          //   message: AppKeys.pharmacyPartnerInfo.tr,
-                          //   highlightedText: ' El Lewaa Elteby  ',
-                          //   onHighlightTap: () {},
-                          //   message1:
-                          //       "Pharmacy and under its full medical supervision."
-                          //           .tr,
-                          // ),
-                          SizedBox(
-                            height: 20,
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        // DisclaimerBox(
+                        //   message: AppKeys.pharmacyPartnerInfo.tr,
+                        //   highlightedText: ' El Lewaa Elteby  ',
+                        //   onHighlightTap: () {},
+                        //   message1:
+                        //       "Pharmacy and under its full medical supervision."
+                        //           .tr,
+                        // ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            AppKeys.categories.tr,
+                            textAlign: TextAlign.start,
+                            style: AppFonts.heading1.copyWith(
+                                fontSize: getResponsiveFontSize(19),
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w900),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              AppKeys.categories.tr,
-                              textAlign: TextAlign.start,
-                              style: AppFonts.heading1.copyWith(
-                                  fontSize: getResponsiveFontSize(19),
-                                 color: AppColors.primary,
-                                  fontWeight: FontWeight.w900),
-                            ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        CategoryPage(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            AppKeys.addYourPrescription.tr,
+                            textAlign: TextAlign.start,
+                            style: AppFonts.heading1.copyWith(
+                                fontSize: getResponsiveFontSize(17),
+                                fontWeight: FontWeight.w700),
                           ),
-                          SizedBox(
-                            height: 20,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Prescription(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            AppKeys.pOffers.tr,
+                            textAlign: TextAlign.start,
+                            style: AppFonts.heading1.copyWith(
+                                fontSize: getResponsiveFontSize(17),
+                                fontWeight: FontWeight.w700),
                           ),
-                          CategoryPage(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              AppKeys.addYourPrescription.tr,
-                              textAlign: TextAlign.start,
-                              style: AppFonts.heading1.copyWith(
-                                  fontSize: getResponsiveFontSize(17),
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Prescription(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              AppKeys.pOffers.tr,
-                              textAlign: TextAlign.start,
-                              style: AppFonts.heading1.copyWith(
-                                  fontSize: getResponsiveFontSize(17),
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
-                          CircularImageSlider1(),
-                          SizedBox(height: 16),
-                          SectionPage(),
-                          SizedBox(
-                            height: 40,
-                          ),
-                        ],
+                        ),
+                        CircularImageSlider1(),
+                        SizedBox(height: 16),
+                        SectionPage(),
+                        SizedBox(
+                          height: 40,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: InkWell(
+              onTap: businessSettingsController.isLoading.value
+                  ? null
+                  : () {
+                      showContactDialog(
+                          context,
+                          businessSettingsController
+                              .settings.value!.phoneNumber,
+                          businessSettingsController.settings.value!.address);
+                    },
+              child: Container(
+                width: 128,
+                margin: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      // Soft shadow
+                      blurRadius: 13,
+                      // Smooth blur effect
+                      offset: Offset(8, 16),
+                      // Moves shadow slightly down and right
+                      spreadRadius: 2, // Optional: Makes shadow larger
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      AppKeys.contactUs.tr,
+                      style: AppFonts.bodyText.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
                       ),
-                    )
+                    ),
+                    SizedBox(width: 10),
+                    Image(
+                      image: AssetImage(Assets.iconsWhatsapp),
+                      width: 30,
+                      height: 30,
+                    ),
                   ],
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: InkWell(
-                onTap: businessSettingsController.isLoading.value
-                    ? null
-                    : () {
-                        showContactDialog(
-                            context,
-                            businessSettingsController
-                                .settings.value!.phoneNumber,
-                            businessSettingsController.settings.value!.address);
-                      },
-                child: Container(
-                  width: 128,
-                  margin: EdgeInsets.only(bottom: 10),
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      bottomLeft: Radius.circular(16),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        // Soft shadow
-                        blurRadius: 13,
-                        // Smooth blur effect
-                        offset: Offset(8, 16),
-                        // Moves shadow slightly down and right
-                        spreadRadius: 2, // Optional: Makes shadow larger
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        AppKeys.contactUs.tr,
-                        style: AppFonts.bodyText.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Image(
-                        image: AssetImage(Assets.iconsWhatsapp),
-                        width: 30,
-                        height: 30,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-        // floatingActionButton: FloatingActionButton.extended(
-        //   backgroundColor: AppColors.white,
-        //   onPressed: () {},
-        //   label: Row(
-        //     children: [
-        //       Text(
-        //         AppKeys.contactUs.tr,
-        //         style: AppFonts.bodyText
-        //             .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
-        //       ),
-        //       SizedBox(
-        //         width: 10,
-        //       ),
-        //       Image(
-        //         image: AssetImage(Assets.iconsWhatsapp),
-        //         width: 50,
-        //         height: 50,
-        //       )
-        //     ],
-        //   ),
-        // ),
+          )
+        ],
       ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   backgroundColor: AppColors.white,
+      //   onPressed: () {},
+      //   label: Row(
+      //     children: [
+      //       Text(
+      //         AppKeys.contactUs.tr,
+      //         style: AppFonts.bodyText
+      //             .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+      //       ),
+      //       SizedBox(
+      //         width: 10,
+      //       ),
+      //       Image(
+      //         image: AssetImage(Assets.iconsWhatsapp),
+      //         width: 50,
+      //         height: 50,
+      //       )
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

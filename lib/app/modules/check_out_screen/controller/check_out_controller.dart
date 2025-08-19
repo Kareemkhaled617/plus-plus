@@ -39,6 +39,7 @@ class CheckoutController extends GetxController {
             totalDiscount: data.discountPrice,
             couponDiscount: data.discountPrice,
             chargePrice: data.chargePrice,
+            riderTip: data.riderTip,
             totalPriceAfterCharge: data.finalPrice);
       },
     );
@@ -72,6 +73,8 @@ class CheckoutController extends GetxController {
   Future<void> createOrder({
     required AddressEntity userAddress,
     required String paymentMethod,
+    required String couponCode,
+    required String riderTip,
     required int userPoints,
   }) async {
     isLoading.value = true;
@@ -79,6 +82,8 @@ class CheckoutController extends GetxController {
     final result = await createOrderUseCase(
       userAddress: userAddress,
       paymentMethod: paymentMethod,
+      riderTip: riderTip,
+      couponCode: couponCode,
       userPoints: userPoints,
     );
 

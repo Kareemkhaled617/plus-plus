@@ -23,7 +23,7 @@ class AllDiscountProductsScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         // Let flexibleSpace handle it
         title: Text(
-          AppKeys.discount,
+          AppKeys.discount.tr,
           style: AppFonts.heading1.copyWith(fontSize: 18),
         ),
         leading: AppBarBackButton(),
@@ -42,9 +42,9 @@ class AllDiscountProductsScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                  crossAxisCount: 3,
                   mainAxisSpacing: 12,
-                  childAspectRatio: .8,
+                  childAspectRatio: .44,
                 ),
                 itemCount: controller.discountProducts.length,
                 // Adjust count dynamically

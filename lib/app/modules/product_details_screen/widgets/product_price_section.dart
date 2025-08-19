@@ -121,8 +121,10 @@ class ProductPriceSection extends StatelessWidget {
                                   ),
                                 ]),
                           ])),
-                    ProductCounterSection(
-                      controller: cartController,
+                    controller.product.value!.stock == 0
+                        ? Container()
+                        : ProductCounterSection(
+                            controller: cartController,
                       productEntity: controller.product.value!,
                       isSelected: controller.isSelected.value,
                     ),

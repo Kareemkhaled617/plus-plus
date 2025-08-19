@@ -5,6 +5,7 @@ class OrderPriceEntity {
   final String userPoints;
   final double userPointsExchangeRate;
   final double totalPriceAfterPoints;
+  final double riderTip;
   final double finalPrice;
   final double couponDiscount;
 
@@ -16,6 +17,7 @@ class OrderPriceEntity {
     required this.userPointsExchangeRate,
     required this.totalPriceAfterPoints,
     required this.finalPrice,
+    required this.riderTip,
     required this.couponDiscount,
   });
 }

@@ -29,12 +29,13 @@ class SectionHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -272,9 +273,7 @@ class SectionHeader extends StatelessWidget {
               // }),
             ],
           ),
-          SizedBox(
-            height: 12,
-          ),
+
 
         ],
       ),

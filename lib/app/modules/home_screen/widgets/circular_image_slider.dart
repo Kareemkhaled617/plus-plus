@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/widgets/banner_shimmer.dart';
 import 'package:plus/app/core/widgets/cached_image.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -105,7 +106,7 @@ class CircularImageSlider1 extends StatelessWidget {
       return bannerController.isLoading.value
           ? Padding(
               padding: const EdgeInsets.all(16.0),
-              child: shimmerBox(height: 150, width: Get.width),
+              child: BannerShimmer(),
             )
           : Column(
               children: [

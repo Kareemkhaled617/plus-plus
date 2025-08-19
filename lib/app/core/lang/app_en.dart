@@ -283,5 +283,7 @@ const Map<String, String> enUS = {
   "Point Exchange": "Point Exchange",
 
   "Thanks you will get notified when product is back in stock":
-  "Thanks you will get notified when product is back in stock"
+  "Thanks you will get notified when product is back in stock",
+  'minutes':'minutes',
+  'Estimated arrival':'Estimated arrival'
 };

@@ -19,11 +19,21 @@ Future<void> main() async {
   );
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: AppColors.primary,
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
   ));
   await NotificationService().initNotification();
   String? savedLang = await SecureStorageHelper().getData("language");
 
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => MyApp(
+  //       initialLocale: savedLang != null
+  //           ? Locale(savedLang)
+  //           : LocalizationService.defaultLocale,
+  //     ), // Wrap your app
+  //   ),
+  // );
   runApp(MyApp(
     initialLocale: savedLang != null
         ? Locale(savedLang)

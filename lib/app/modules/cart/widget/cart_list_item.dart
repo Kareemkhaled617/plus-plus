@@ -36,7 +36,7 @@ class CartListItem extends StatelessWidget {
             ),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             children: [
               InkWell(
                 onTap: () {
@@ -46,11 +46,12 @@ class CartListItem extends StatelessWidget {
                 },
                 child: CachedImage(
                   imageUrl: product.imageUrl,
-                  width: 100,
-                  height: 104,
+                  width: 70,
+                  height: 100,
                   fit: BoxFit.cover,
                 ),
               ),
+              SizedBox(width: 6,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -117,6 +118,7 @@ class CartListItem extends StatelessWidget {
 
                 ],
               ),
+              Spacer(),
               fromCart
                   ? ProductCounterSection(
                 plusIconSize: 16,

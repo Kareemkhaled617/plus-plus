@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/loader.dart';
+import 'package:plus/app/core/widgets/product_shimmer.dart';
+import 'package:plus/app/core/widgets/sub_category_shimmer.dart';
 import 'package:plus/app/modules/sub_category/widgets/category_main_tabs.dart';
 import 'package:plus/app/modules/sub_category/widgets/category_slider.dart';
 import 'package:plus/app/modules/sub_category/widgets/category_tabs.dart';
 import 'package:plus/generated/assets.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/widgets/app_bar_back_button.dart';
 import '../../core/widgets/product_item.dart';
-import '../home_screen/widgets/circular_image_slider.dart';
 import 'controller/product_controller.dart';
 import 'controller/sup_category_controller.dart';
 
@@ -41,10 +43,11 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Obx(() {
+      body:
+      Obx(() {
         return CustomScrollView(
           slivers: [
-            /// Sliver AppBar
+
             SliverAppBar(
               pinned: true,
               backgroundColor: const Color(0xFFb5e8e8),
@@ -69,7 +72,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     const SizedBox(height: 20),
                     // Main Tabs
                     controller.isLoading.value
-                        ? const SizedBox(height: 70, child: AppLoader())
+                        ? SubCategoryShimmer()
                         : controller.errorMessage.isNotEmpty
                         ? Center(child: Text(controller.errorMessage.value))
                         : Padding(
@@ -96,7 +99,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
                     // Sub Tabs
                     controller.isLoadingSup.value
-                        ? const Center(child: CircularProgressIndicator())
+                        ? SubCategoryShimmer()
                         : Padding(
                       padding:
                       const EdgeInsets.symmetric(horizontal: 12.0),
@@ -127,7 +130,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
             /// Products Grid
             if (productController.isLoading.value)
-              const SliverToBoxAdapter(child: AppLoader())
+              const SliverToBoxAdapter(
+                  child: SizedBox(height: 200, child: ProductShimmer()))
             else if (productController.errorMessage.isNotEmpty)
               SliverToBoxAdapter(
                 child: Center(
@@ -158,7 +162,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     crossAxisCount: 3,
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
-                    childAspectRatio: .51,
+                    childAspectRatio: .44,
                   ),
                 ),
               ),

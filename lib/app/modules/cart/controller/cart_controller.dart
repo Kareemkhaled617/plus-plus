@@ -34,10 +34,20 @@ class CartController extends GetxController {
   final isLoading = true.obs;
   var cartTotal = Rxn<CartTotalEntity>();
   var isLoadingTotalCart = false.obs;
+  RxInt? selectedAmount = 0.obs;
 
-  Future<void> fetchCartTotal(String lat, String lng) async {
+  final List<int> amounts = [15, 10, 20];
+
+
+
+  Future<void> fetchCartTotal(
+    String lat,
+    String lng,
+    String riderTip,
+  ) async {
     isLoadingTotalCart.value = true;
-    final result = await getCartTotalUseCase(lat: lat, lng: lng);
+    final result =
+        await getCartTotalUseCase(lat: lat, lng: lng, riderTip: riderTip);
     result.fold(
       (failure) => Get.snackbar('Error'.tr, failure.message),
       (data) => cartTotal.value = data,

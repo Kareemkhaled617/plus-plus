@@ -13,11 +13,15 @@ class CreateOrderUseCase {
   Future<Either<Failure, OrderRequestEntity>> call({
     required AddressEntity userAddress,
     required String paymentMethod,
+    required String couponCode,
+    required String riderTip,
     required int userPoints,
   }) {
     return repository.createOrder(
       userAddress: userAddress,
       paymentMethod: paymentMethod,
+      riderTip: riderTip,
+      couponCode: couponCode,
       userPoints: userPoints,
     );
   }

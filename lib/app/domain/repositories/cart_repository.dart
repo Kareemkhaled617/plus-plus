@@ -18,6 +18,7 @@ abstract class CartRepository {
   Future<Either<Failure, CartTotalEntity>> getCartTotal({
     required String lat,
     required String lng,
+    required String riderTip,
   });
   Future<Either<Failure, bool>> removeAllFromCart();
 

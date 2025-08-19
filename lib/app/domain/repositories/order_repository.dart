@@ -17,6 +17,8 @@ abstract class OrderRepository {
   Future<Either<Failure, OrderRequestEntity>> createOrder({
     required AddressEntity userAddress,
     required String paymentMethod,
+    required String couponCode,
+    required String riderTip,
     required int userPoints,
   });
 }

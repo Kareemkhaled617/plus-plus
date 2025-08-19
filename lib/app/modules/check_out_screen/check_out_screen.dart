@@ -5,7 +5,6 @@ import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/cart/widget/checkout_summary.dart';
 import 'package:plus/app/modules/check_out_screen/widget/delivery_address_card.dart';
-import 'package:plus/app/modules/check_out_screen/widget/estimated_time_card.dart';
 import 'package:plus/app/modules/check_out_screen/widget/payment_options_section.dart';
 import 'package:plus/app/modules/check_out_screen/widget/point_widget.dart';
 import 'package:plus/app/modules/check_out_screen/widget/support_rider_card.dart';
@@ -146,8 +145,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               ),
             ),
             DeliveryAddressCard(controller: cartController),
-            EstimatedTimeCard(minutes: 60),
-
+            // EstimatedTimeCard(minutes: 60),
 
             Column(
               children: [
@@ -187,7 +185,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                   checkoutController
                                                       .selectedIndex.value]),
                                       userPoints: int.parse(
-                                          checkoutController.point.text));
+                                          checkoutController.point.text),
+                                      couponCode:
+                                          cartController.copounController.text,
+                                      riderTip: cartController.selectedAmount!.value.toString());
                                 },
                           label: Icon(
                             Icons.arrow_forward,

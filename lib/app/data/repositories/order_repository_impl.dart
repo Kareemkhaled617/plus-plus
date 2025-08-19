@@ -72,12 +72,16 @@ class OrderRepositoryImpl extends OrderRepository {
   Future<Either<Failure, OrderRequestEntity>> createOrder({
     required AddressEntity userAddress,
     required String paymentMethod,
+    required String couponCode,
+    required String riderTip,
     required int userPoints,
   }) async {
     try {
       final model = OrderRequestModel(
         userAddress: userAddress,
         paymentMethod: paymentMethod,
+        couponCode: couponCode,
+        riderTip: riderTip,
         userPoints: userPoints,
       );
 

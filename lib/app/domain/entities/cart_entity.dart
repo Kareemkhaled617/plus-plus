@@ -46,6 +46,7 @@ class CartPriceDataEntity {
   final double totalPriceAfterCharge;
   final double couponDiscount;
   final double chargePrice;
+  final double riderTip;
   final String? coupon;
   final String? couponCode;
 
@@ -55,6 +56,7 @@ class CartPriceDataEntity {
     required this.totalPriceAfterCharge,
     required this.couponDiscount,
     required this.chargePrice,
+    required this.riderTip,
     this.coupon,
     this.couponCode,
   });

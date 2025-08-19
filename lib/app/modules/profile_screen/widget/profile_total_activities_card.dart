@@ -23,9 +23,9 @@ class ProfileTotalActivitiesCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+            padding: EdgeInsets.symmetric(vertical: 40, horizontal: 16),
             decoration: BoxDecoration(
-              color: AppColors.whiteSmoke,
+              color: AppColors.grey.withOpacity(.4),
               borderRadius: BorderRadius.circular(24),
             ),
             child: Row(
@@ -41,7 +41,7 @@ class ProfileTotalActivitiesCard extends StatelessWidget {
           Get.locale!.languageCode == "en"
               ? Positioned(
                   top: -60,
-                  right: -50,
+                  right: -40,
                   child: Image.asset(
                     image,
                     height: 170,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/product_item.dart';
-import 'package:plus/app/routes/app_routes.dart';
 
 import '../../../domain/entities/favorite_entity.dart';
 import '../../../domain/entities/product_entity.dart';
@@ -19,9 +17,9 @@ class ProductsGrid extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           mainAxisSpacing: 14,
-          childAspectRatio: .77,
+          childAspectRatio: .5,
         ),
         itemCount: products.length,
         itemBuilder: (context, index) {

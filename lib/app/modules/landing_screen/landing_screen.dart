@@ -40,7 +40,7 @@ class _LandingScreenState extends State<LandingScreen> {
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.primary,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
     ));
     super.initState();
   }
@@ -65,8 +65,6 @@ class _LandingScreenState extends State<LandingScreen> {
         onTap: (value) {
           setState(() {
             selectedIndex = value;
-
-            // Optional: Auto-refresh when navigating to Home tab
             if (selectedIndex == 0) {
               _refreshHomeContent();
             }

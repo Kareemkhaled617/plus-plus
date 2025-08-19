@@ -21,13 +21,18 @@ class ProductsInOffersSection extends StatelessWidget {
       if (controller.discountProducts.isEmpty) {
         return Container();
       }
-      return SizedBox(
-        height: 244,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: 10,
-          itemBuilder: (context, index) => InkWell(
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 4,
+          childAspectRatio: .43,
+        ),
+        itemCount: controller.discountProducts.length,
+        itemBuilder: (context, index) {
+
+          return InkWell(
             onTap: () {
               Get.toNamed(AppRoutes.productDetails, arguments: {
                 'productId': controller.discountProducts[index].id,
@@ -43,9 +48,38 @@ class ProductsInOffersSection extends StatelessWidget {
               id: controller.discountProducts[index].id,
               productEntity: controller.discountProducts[index],
             ),
-          ),
-        ),
+          );
+        },
       );
+
+
+
+      //   SizedBox(
+      //   height: 244,
+      //   child: ListView.builder(
+      //     shrinkWrap: true,
+      //
+      //     scrollDirection: Axis.horizontal,
+      //     itemCount: controller.discountProducts.length,
+      //     itemBuilder: (context, index) => InkWell(
+      //       onTap: () {
+      //         Get.toNamed(AppRoutes.productDetails, arguments: {
+      //           'productId': controller.discountProducts[index].id,
+      //         });
+      //       },
+      //       child: ProductCard(
+      //         imageUrl: controller.discountProducts[index].imageUrl,
+      //         title: controller.discountProducts[index].name,
+      //         stockInfo: "${controller.discountProducts[index].stock} in stock",
+      //         price: "${controller.discountProducts[index].price} L.E",
+      //         onFavorite: () {},
+      //         onAddToCart: () {},
+      //         id: controller.discountProducts[index].id,
+      //         productEntity: controller.discountProducts[index],
+      //       ),
+      //     ),
+      //   ),
+      // );
     });
   }
 }

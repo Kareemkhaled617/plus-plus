@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/home_screen/widgets/product_section.dart';
 import 'package:plus/app/modules/home_screen/widgets/special_brands.dart';
 
-import '../../../core/utils/color_helper.dart';
 import '../../../core/utils/shimmer.dart';
 import '../controller/section_controller.dart';
 

@@ -6,6 +6,7 @@ class CartTotalModel extends CartTotalEntity {
     required super.totalDiscount,
     required super.couponDiscount,
     required super.chargePrice,
+    required super.riderTip,
     required super.totalPriceAfterCharge,
   });
 
@@ -15,6 +16,7 @@ class CartTotalModel extends CartTotalEntity {
       totalDiscount: double.tryParse(json['total_discount']?.toString() ?? '0') ?? 0.0,
       couponDiscount: double.tryParse(json['coupon_discount']?.toString() ?? '0') ?? 0.0,
       chargePrice: double.tryParse(json['charge_price']?.toString() ?? '0') ?? 0.0,
+      riderTip: double.tryParse(json['rider_tip']?.toString() ?? '0') ?? 0.0,
       totalPriceAfterCharge: double.tryParse(json['total_price_after_charge']?.toString() ?? '0') ?? 0.0,
     );
   }

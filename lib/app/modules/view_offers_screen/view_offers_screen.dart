@@ -4,11 +4,11 @@ import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/modules/view_offers_screen/widget/brands_dropdown.dart';
 import 'package:plus/generated/assets.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/widgets/loader.dart';
 import '../../core/widgets/product_item.dart';
-import '../home_screen/widgets/products_grid.dart';
 import 'controller/product_offer_controller.dart';
 
 class ViewOffersScreen extends StatelessWidget {
@@ -67,7 +67,7 @@ class ViewOffersScreen extends StatelessWidget {
                             child: Text(
                               AppKeys.dontMissOfferChance.tr,
                               style: AppFonts.bodyText.copyWith(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                           )
                         ],
@@ -86,7 +86,7 @@ class ViewOffersScreen extends StatelessWidget {
                               "Buy one product and you will get the second one free"
                                   .tr,
                               style: AppFonts.bodyText.copyWith(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                           )
                         ],
@@ -115,9 +115,9 @@ class ViewOffersScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      crossAxisCount: 3,
                       mainAxisSpacing: 14,
-                      childAspectRatio: .7,
+                      childAspectRatio: .47,
                     ),
                     itemCount: productOffersController.products.length,
                     itemBuilder: (context, index) {

@@ -55,7 +55,7 @@ class ArrivalTimerCard extends StatelessWidget {
                             fontWeight: FontWeight.w900,
                             color: Color(0xff2B2929))),
                     const SizedBox(height: 4),
-                    Text('$remainingTime minutes',
+                    Text('$remainingTime ${'minutes'.tr}',
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                   ],

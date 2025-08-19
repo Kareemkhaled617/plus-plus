@@ -82,11 +82,12 @@ class CartRepositoryImpl implements CartRepository {
   Future<Either<Failure, CartTotalEntity>> getCartTotal({
     required String lat,
     required String lng,
+    required String riderTip,
   }) async {
     try {
       final response = await apiService.postRequest(
         'cart/get-total-amount',
-        {'lat': lat, 'lng': lng},
+        {'lat': lat, 'lng': lng,'rider_tip':riderTip},
       );
       print('response.data: ${response.data}');
       print(response.data);

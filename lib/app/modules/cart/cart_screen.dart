@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/widgets/custom_button.dart';
-import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/modules/cart/widget/cart_empty_body.dart';
 import 'package:plus/app/modules/cart/widget/cart_header.dart';
 import 'package:plus/app/modules/cart/widget/cart_list_item.dart';
 import 'package:plus/app/modules/cart/widget/checkout_button.dart';
-import 'package:plus/app/modules/cart/widget/checkout_summary.dart';
 
 import '../../core/theme/app_colors.dart';
-import '../../core/utils/app_keys.dart';
 import '../../routes/app_routes.dart';
 import '../cart/controller/cart_controller.dart';
 
@@ -68,46 +64,46 @@ class CartScreen extends StatelessWidget {
                           ))
                           .toList(),
                     ),
-                    SizedBox(height: 16),
-                    CheckoutSummary(
-                      fromCart: true,
-                    ),
-                    // SizedBox(height: 16),
-                    // const SizedBox(height: 20),
-                    Stack(
-                      children: [
-                        Obx(
-                                () {
-                              return CheckoutButton(
-                                  total: cartController.isLoading.value
-                                      ? ""
-                                      : "${(cartController.updatedCart.value!
-                                      .cartPriceData.totalPrice +
-                                      cartController.updatedCart.value!
-                                          .cartPriceData.totalDiscount +
-                                      cartController.updatedCart.value!
-                                          .cartPriceData.couponDiscount)} L.E",
-                                  onPressed: cartController
-                                  .isLoadingTotalCart.value
-                                  ? ()
-                              {}: () async {
-                              await cartController.fetchCartTotal(
-                              cartController
-                                  .selectedAddress.value!.lat,
-                              cartController
-                                  .selectedAddress.value!.lng);
-                              Get.toNamed(AppRoutes.checkOutScreen);
-                              },
-                              );
-                            }
-                        ),
-                        cartController.isLoadingTotalCart.value
-                            ? AppLoader()
-                            : Container()
-                      ],
-                    ),
-                    // Align(
-                    //   alignment: Alignment.center,
+                          // CheckoutSummary(
+                          //   fromCart: true,
+                          // ),
+                          // SizedBox(height: 16),
+                          // const SizedBox(height: 20),
+
+                          // Stack(
+                          //   children: [
+                          //     Obx(
+                          //             () {
+                          //           return CheckoutButton(
+                          //               total: cartController.isLoading.value
+                          //                   ? ""
+                          //                   : "${(cartController.updatedCart.value!
+                          //                   .cartPriceData.totalPrice +
+                          //                   cartController.updatedCart.value!
+                          //                       .cartPriceData.totalDiscount +
+                          //                   cartController.updatedCart.value!
+                          //                       .cartPriceData.couponDiscount)} L.E",
+                          //               onPressed: cartController
+                          //               .isLoadingTotalCart.value
+                          //               ? ()
+                          //           {}: () async {
+                          //           await cartController.fetchCartTotal(
+                          //           cartController
+                          //               .selectedAddress.value!.lat,
+                          //           cartController
+                          //               .selectedAddress.value!.lng);
+                          //           Get.toNamed(AppRoutes.checkOutScreen);
+                          //           },
+                          //           );
+                          //         }
+                          //     ),
+                          //     cartController.isLoadingTotalCart.value
+                          //         ? AppLoader()
+                          //         : Container()
+                          //   ],
+                          // ),
+                          // Align(
+                          //   alignment: Alignment.center,
                     //   child: SizedBox(
                     //     width: double.infinity,
                     //     child: CustomButton(
@@ -139,6 +135,22 @@ class CartScreen extends StatelessWidget {
             ],
                 ),
               ),
+              bottomNavigationBar: Obx(() {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                  child: CheckoutButton(
+                    total: cartController.isLoading.value
+                        ? ""
+                        : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} L.E",
+                    onPressed: cartController.isLoadingTotalCart.value
+                        ? () {}
+                        : () async {
+                            await cartController.fetchCartTotal('0', '0', '0');
+                            Get.toNamed(AppRoutes.checkOutScreen);
+                          },
+                  ),
+                );
+              }),
             )
           : const CartEmptyBody();
     });

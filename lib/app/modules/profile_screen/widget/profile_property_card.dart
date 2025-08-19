@@ -23,9 +23,7 @@ class ProfilePropertyCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Column(children: [
-        SizedBox(
-          height: 3,
-        ),
+
         ListTile(
           title: Text(
             title,

@@ -16,7 +16,7 @@ class CategoryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: getProportionateScreenHeight(394),
       width: double.infinity,
       alignment: Alignment.center,
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -86,7 +86,7 @@ class CategoryGrid extends StatelessWidget {
           crossAxisCount: 3,
           mainAxisSpacing: 20.0,
           crossAxisSpacing: 16.0,
-          childAspectRatio: 1.6,
+          childAspectRatio: 1.67,
         ),
         itemCount: categories.length,
         itemBuilder: (context, index) {
@@ -102,42 +102,44 @@ class CategoryGrid extends StatelessWidget {
                 },
               );
             },
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.whiteSmoke,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20),
-                    child: CachedImage(
-                      imageUrl: category.imageUrl,
-                      fit: BoxFit.cover,
-                      height: getProportionateScreenHeight(60),
-                      // Optional if you want rounded corners
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.whiteSmoke,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20),
+                      child: CachedImage(
+                        imageUrl: category.imageUrl,
+                        fit: BoxFit.cover,
+                        height: getProportionateScreenHeight(60),
+                        // Optional if you want rounded corners
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                SizedBox(
-                  height: 30,
-                  child: Text(
-                    category.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppFonts.bodyText.copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.black,
-                    ),
-                    textAlign: TextAlign.center,
+                  SizedBox(
+                    height: 4,
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 36,
+                    child: Text(
+                      category.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppFonts.bodyText.copyWith(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
