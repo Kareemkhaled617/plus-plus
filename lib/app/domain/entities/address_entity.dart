@@ -6,6 +6,7 @@ class AddressEntity {
   final String address;
   final String building;
   final String floor;
+  final String phone;
   final String department;
   final String setAs;
 
@@ -17,6 +18,7 @@ class AddressEntity {
     required this.address,
     required this.building,
     required this.floor,
+    required this.phone,
     required this.department,
     required this.setAs,
   });

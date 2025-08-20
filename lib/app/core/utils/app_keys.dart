@@ -32,6 +32,7 @@ class AppKeys {
       "Your request has been received, and the medical team will contact you.";
 
   static const whatDoYouNeed = "Determine what you need ?";
+  static const goesPerfectWith  = "Goes Perfect with";
   static const price = "Price";
   static const productDescription = "Product Description";
   static const brand = "Brand";

@@ -52,7 +52,7 @@ class ProductsGrid extends StatelessWidget {
                 discountId: null,
                 offerType: '',
                 offerDiscountPercentage: null,
-                offerId: null),
+                offerId: null, perfectWith: []),
           );
         },
       ),

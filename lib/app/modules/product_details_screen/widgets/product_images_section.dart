@@ -94,7 +94,7 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
           ],
         ),
 
-        SizedBox(width: 16),
+        SizedBox(height: 10),
 
         // Indicator
         Row(

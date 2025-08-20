@@ -336,7 +336,7 @@ class CartController extends GetxController {
                               0.0
                           : 0.0,
                   offerId: item['offer']?['offer_id'] ?? 0,
-                  isSelected: item['is_selected'] ?? false,
+                  isSelected: item['is_selected'] ?? false, perfectWith: [],
                 ))
             .toList());
 

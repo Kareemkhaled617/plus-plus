@@ -25,7 +25,7 @@ class SectionHeader extends StatelessWidget {
     AccountController controller = Get.find<AccountController>();
     final addressController = Get.find<AddressController>();
     final notificationController = Get.find<NotificationController>();
-
+    controller.fetchUserProfile();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
@@ -52,7 +52,9 @@ class SectionHeader extends StatelessWidget {
                                           ? AppColors.black
                                           : AppColors.white,
                                       fontSize: 21)),
-                              SizedBox(width: 4,),
+                              SizedBox(
+                                width: 4,
+                              ),
                               Image(
                                 image: AssetImage(Assets.iconsHi),
                                 width: 26,
@@ -273,8 +275,6 @@ class SectionHeader extends StatelessWidget {
               // }),
             ],
           ),
-
-
         ],
       ),
     );

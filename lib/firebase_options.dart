@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'plus-6b5f5.firebasestorage.app',
     iosBundleId: 'com.msar.plus',
   );
+
 }

@@ -13,6 +13,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/size_config.dart';
 import '../account_screen/controller/business_settings_controller.dart';
+import 'arrival_timer/presentation/controller/orders_controller.dart';
 import 'arrival_timer/presentation/widgets/arrival_timer_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,6 +23,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BusinessSettingsController businessSettingsController =
         Get.find<BusinessSettingsController>();
+    final ordersCtrl = Get.find<OrdersController>();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
@@ -64,7 +67,16 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        ArrivalTimerCard(),
+                        Obx(() {
+                          if (ordersCtrl.isLoading.value) {
+                            return const SizedBox.shrink(); // or a shimmer
+                          }
+                          if (ordersCtrl.todayOrders.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
+                          return ArrivalTimerCard(
+                              orders: ordersCtrl.todayOrders);
+                        }),
 
                         // SizedBox(
                         //   height: 10,
@@ -115,17 +127,17 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            AppKeys.pOffers.tr,
-                            textAlign: TextAlign.start,
-                            style: AppFonts.heading1.copyWith(
-                                fontSize: getResponsiveFontSize(17),
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        CircularImageSlider1(),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 16),
+                        //   child: Text(
+                        //     AppKeys.pOffers.tr,
+                        //     textAlign: TextAlign.start,
+                        //     style: AppFonts.heading1.copyWith(
+                        //         fontSize: getResponsiveFontSize(17),
+                        //         fontWeight: FontWeight.w700),
+                        //   ),
+                        // ),
+                        // CircularImageSlider1(),
                         SizedBox(height: 16),
                         SectionPage(),
                         SizedBox(
@@ -138,60 +150,63 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: InkWell(
-              onTap: businessSettingsController.isLoading.value
-                  ? null
-                  : () {
-                      showContactDialog(
-                          context,
-                          businessSettingsController
-                              .settings.value!.phoneNumber,
-                          businessSettingsController.settings.value!.address);
-                    },
-              child: Container(
-                width: 128,
-                margin: EdgeInsets.only(bottom: 10),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      // Soft shadow
-                      blurRadius: 13,
-                      // Smooth blur effect
-                      offset: Offset(8, 16),
-                      // Moves shadow slightly down and right
-                      spreadRadius: 2, // Optional: Makes shadow larger
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      AppKeys.contactUs.tr,
-                      style: AppFonts.bodyText.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
+          businessSettingsController.isLoading.value
+              ? Container()
+              : Align(
+                  alignment: Alignment.bottomRight,
+                  child: InkWell(
+                    onTap: businessSettingsController.isLoading.value
+                        ? null
+                        : () {
+                            showContactDialog(
+                                context,
+                                businessSettingsController
+                                    .settings.value!.phoneNumber,
+                                businessSettingsController
+                                    .settings.value!.address);
+                          },
+                    child: Container(
+                      width: 128,
+                      margin: EdgeInsets.only(bottom: 10),
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          bottomLeft: Radius.circular(16),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            // Soft shadow
+                            blurRadius: 13,
+                            // Smooth blur effect
+                            offset: Offset(8, 16),
+                            // Moves shadow slightly down and right
+                            spreadRadius: 2, // Optional: Makes shadow larger
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            AppKeys.contactUs.tr,
+                            style: AppFonts.bodyText.copyWith(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Image(
+                            image: AssetImage(Assets.iconsWhatsapp),
+                            width: 30,
+                            height: 30,
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Image(
-                      image: AssetImage(Assets.iconsWhatsapp),
-                      width: 30,
-                      height: 30,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
+                  ),
+                )
         ],
       ),
       // floatingActionButton: FloatingActionButton.extended(

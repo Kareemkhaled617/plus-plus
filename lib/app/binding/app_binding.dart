@@ -8,6 +8,7 @@ import '../modules/cart/binding/cart_binding.dart';
 import '../modules/cart/binding/related_product_binding.dart';
 import '../modules/cart/controller/cart_controller.dart';
 import '../modules/favourite_screen/binding/favourite_binding.dart';
+import '../modules/home_screen/arrival_timer/presentation/binding/binding.dart';
 import '../modules/home_screen/bindiing/banner_binding.dart';
 import '../modules/notification_screen/binding/notification_binding.dart';
 import '../modules/offers_screen/binding/discount_binding.dart';
@@ -33,6 +34,7 @@ class AppBinding extends Bindings {
     BusinessSettingsBinding().dependencies();
     RelatedProductBinding ().dependencies();
     BannerBinding ().dependencies();
+    EstimationTimeBinding ().dependencies();
     SearchBinding().dependencies();
     FavoriteBinding().dependencies();
     LanguageBinding().dependencies();

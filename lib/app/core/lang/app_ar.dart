@@ -271,5 +271,6 @@ const Map<String, String> arEG = {
   "Thanks you will get notified when product is back in stock":
       "شكرًا لك، سيتم إشعارك عندما يعود المنتج إلى المخزون.",
   'minutes': 'دقائق',
-  'Estimated arrival': 'الوقت المقدر للوصول'
+  'Estimated arrival': 'الوقت المقدر للوصول',
+  "Goes Perfect with":"يتناسب تمامًا مع"
 };

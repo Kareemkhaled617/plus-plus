@@ -77,6 +77,13 @@ class AddressDetailsBottomSheet extends StatelessWidget {
                 fillColor: AppColors.babyBlue),
             SizedBox(height: 12),
 
+            CustomTextFormField(
+              hintText: AppKeys.phoneNumber.tr,
+              fillColor: AppColors.babyBlue,
+              keyboardType: TextInputType.phone,
+              controller: locationController.phoneController,
+            ),
+            SizedBox(height: 12),
             /// Destination Selection
             DestinationSelection(),
             SizedBox(height: 21),

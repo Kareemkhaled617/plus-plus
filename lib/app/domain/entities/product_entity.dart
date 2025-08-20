@@ -15,6 +15,7 @@ class ProductEntity {
   final String brandImage;
   final List<CategoryModel> categories;
   final List<PackageTypeModel> packageTypes;
+  final List<ProductEntity> perfectWith;
   final String discountType;
   final double discountValue;
   final String? discountEndDate;
@@ -40,6 +41,7 @@ class ProductEntity {
     required this.brandImage,
     required this.categories,
     required this.packageTypes,
+    required this.perfectWith,
     required this.discountType,
     required this.discountValue,
     required this.discountEndDate,

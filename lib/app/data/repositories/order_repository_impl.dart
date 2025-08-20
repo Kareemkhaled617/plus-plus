@@ -17,7 +17,22 @@ class OrderRepositoryImpl extends OrderRepository {
   final ApiService apiService;
 
   OrderRepositoryImpl(this.apiService);
+  @override
+  Future<Either<Failure, List<OrderEntity>>> getOrders() async {
+    try {
+      final res = await apiService.getRequest('/orders');
+      if (!res.success) {
+        return Left(Failure(res.message ?? 'Failed to fetch orders'));
+      }
 
+      // API returns data.order (not data.orders)
+      final List list = (res.data['data']['order'] as List? ?? []);
+      final items = list.map((e) => OrderModel.fromJson(e)).toList();
+      return Right(items);
+    } catch (_) {
+      return Left(Failure('Unexpected error occurred'));
+    }
+  }
   @override
   Future<List<OrderEntity>> getOrdersByStatus(String status) async {
     final ApiResponse response = await apiService.getRequest(

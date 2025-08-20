@@ -7,6 +7,8 @@ import '../entities/order_entity.dart';
 import '../entities/order_request_entity.dart';
 
 abstract class OrderRepository {
+  Future<Either<Failure, List<OrderEntity>>> getOrders();
+
   Future<List<OrderEntity>> getOrdersByStatus(String status);
 
   Future<OrderEntity> getOrderDetails(int orderId);

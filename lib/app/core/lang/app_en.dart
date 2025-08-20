@@ -285,5 +285,6 @@ const Map<String, String> enUS = {
   "Thanks you will get notified when product is back in stock":
   "Thanks you will get notified when product is back in stock",
   'minutes':'minutes',
-  'Estimated arrival':'Estimated arrival'
+  'Estimated arrival':'Estimated arrival',
+  "Goes Perfect with":"Goes Perfect with"
 };

@@ -26,7 +26,7 @@ class AddressModel extends AddressEntity {
     required super.building,
     required super.floor,
     required super.department,
-    required super.setAs,
+    required super.setAs, required super.phone,
   });
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +37,7 @@ class AddressModel extends AddressEntity {
       address: json['address'],
       street: json['street'],
       building: json['building'],
+      phone: json['phone'],
       floor: json['floor'],
       department: json['department'],
       setAs: json['set_as'],

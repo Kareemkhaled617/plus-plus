@@ -380,47 +380,30 @@ class ProductCard extends StatelessWidget {
 
             Get.locale == Locale('ar')
                 ? Positioned(
-                    top: -14,
-                    left: -8,
-                    child: Obx(() {
-                      return Row(
-                        children: [
-                          productEntity.discountType == 'discount'
-                              ? Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              Assets.imagesBackgroundOffer))),
-                                  child: Text(
-                                    '${productEntity.discountValue} % OFF',
-                                    style: AppFonts.bodyText.copyWith(
-                                        fontSize: getResponsiveFontSize(12),
-                                        fontWeight: FontWeight.w800,
-                                        color: AppColors.red),
-                                  ),
-                                )
-                              : Container(),
-                          SizedBox(
-                            width: getProportionateScreenWidth(50),
-                          ),
-                          IconButton(
-                            icon: controller.isLoading.value
-                                ? Container()
-                                : Icon(
-                                    controller.isProductFavorite(id)
-                                        ? Icons.favorite_rounded
-                                        : Icons.favorite_border,
-                                    color: Colors.red),
-                            onPressed: controller.isLoading.value
-                                ? null
-                                : () {
-                                    controller.addProductToFavorites(id);
-                                    controller.fetchFavourites();
-                                  },
-                          ),
-                        ],
-                      );
-                    }),
+                    top: -3,
+                    right: -8,
+                    child: productEntity.discountType == 'discount'
+                        ? Container(
+                      height: 50,
+                      width: 50,
+                      padding: EdgeInsets.all(6),
+                      margin: EdgeInsets.all(4),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  Assets.imagesBackgroundOffer),
+                              fit: BoxFit.fill)),
+                      child: Text(
+                        '${productEntity.discountValue.toInt()} % OFF',
+                        textAlign: TextAlign.center,
+                        style: AppFonts.bodyText.copyWith(
+                            fontSize: getResponsiveFontSize(12),
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.white),
+                      ),
+                    )
+                        : Container(),
                   )
                 : Positioned(
                     top: -3,
@@ -451,54 +434,23 @@ class ProductCard extends StatelessWidget {
 
             Get.locale == Locale('ar')
                 ? Positioned(
-                    top: -14,
-                    left: -8,
+                    top: -3,
+                    left: -5,
                     child: Obx(() {
-                      return Row(
-                        children: [
-                          // productEntity.stock == 0
-                          //     ? Text(
-                          //         'Unavailable'.tr,
-                          //         style: AppFonts.bodyText.copyWith(
-                          //             fontSize: 14,
-                          //             fontWeight: FontWeight.w800,
-                          //             color: AppColors.red),
-                          //       )
-                          //     :
-                          productEntity.discountType == 'discount'
-                              ? Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              Assets.imagesBackgroundOffer))),
-                                  child: Text(
-                                    '${productEntity.discountValue} % OFF',
-                                    style: AppFonts.bodyText.copyWith(
-                                        fontSize: getResponsiveFontSize(12),
-                                        fontWeight: FontWeight.w800,
-                                        color: AppColors.red),
-                                  ),
-                                )
-                              : Container(),
-                          SizedBox(
-                            width: getProportionateScreenWidth(50),
-                          ),
-                          IconButton(
-                            icon: controller.isLoading.value
-                                ? Container()
-                                : Icon(
-                                    controller.isProductFavorite(id)
-                                        ? Icons.favorite_rounded
-                                        : Icons.favorite_border,
-                                    color: Colors.red),
-                            onPressed: controller.isLoading.value
-                                ? null
-                                : () {
-                                    controller.addProductToFavorites(id);
-                                    controller.fetchFavourites();
-                                  },
-                          ),
-                        ],
+                      return IconButton(
+                        icon: controller.isLoading.value
+                            ? Container()
+                            : Icon(
+                            controller.isProductFavorite(id)
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border,
+                            color: Colors.red),
+                        onPressed: controller.isLoading.value
+                            ? null
+                            : () {
+                          controller.addProductToFavorites(id);
+                          controller.fetchFavourites();
+                        },
                       );
                     }),
                   )

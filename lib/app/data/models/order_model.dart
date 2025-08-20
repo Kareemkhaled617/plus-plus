@@ -16,6 +16,9 @@ class OrderModel extends OrderEntity {
     required super.orderProducts,
     required super.createdAt,
     required super.userPointsEarned,
+    required super.riderTip,
+    required super.estimatedDeliveryRange,
+    required super.estimatedDeliveryTime,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -38,6 +41,9 @@ class OrderModel extends OrderEntity {
           .map((e) => OrderProductModel.fromJson(e))
           .toList(),
       createdAt: json['created_at'],
+      riderTip: json['rider_tip'],
+      estimatedDeliveryTime: json['estimated_delivery_time'],
+      estimatedDeliveryRange: json['estimated_delivery_range'],
     );
   }
 }

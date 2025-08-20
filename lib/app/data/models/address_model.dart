@@ -9,6 +9,7 @@ class AddressModel extends AddressEntity {
     required super.address,
     required super.building,
     required super.floor,
+    required super.phone,
     required super.department,
     required super.setAs,
   });
@@ -22,6 +23,7 @@ class AddressModel extends AddressEntity {
       address: json['address'],
       building: json['building'],
       floor: json['floor'],
+      phone: json['phone'],
       department: json['department'],
       setAs: json['set_as'],
     );

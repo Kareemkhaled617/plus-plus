@@ -28,7 +28,6 @@ class AddressController extends GetxController {
     super.onInit();
     fetchAddresses();
     fetchDefaultAddress();
-
   }
 
   void fetchAddresses() async {
@@ -48,7 +47,8 @@ class AddressController extends GetxController {
             building: place!.street!,
             floor: 'floor',
             department: 'department',
-            setAs: 'current')
+            setAs: 'current',
+            phone: '0')
       ]),
     );
     isLoading.value = false;

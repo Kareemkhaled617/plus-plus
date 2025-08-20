@@ -41,7 +41,9 @@ class ProductDetailsHeader extends StatelessWidget {
                 CachedImage(
                   imageUrl: controller.product.value!.brandImage,
                   width: 100,
+                  height: 50,
                 ),
+
                 // controller.product.value!.categories.isNotEmpty?Text(
                 //   controller.product.value!.categories[0].name,
                 //   style: AppFonts.heading1

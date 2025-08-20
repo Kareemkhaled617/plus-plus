@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:plus/app/core/theme/app_colors.dart';
+import 'package:plus/app/core/utils/app_keys.dart';
 
 import '../../../domain/entities/address_entity.dart';
 import '../../../routes/app_routes.dart';
@@ -121,9 +122,10 @@ class DeliveryAddressCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: Text(
-                          'Mobile number 01157446858',
+                          '${AppKeys.phoneNumber.tr} ${address?.phone??''}',
                           style: TextStyle(
                             fontSize: 14,
+                            fontWeight: FontWeight.w600,
                             color: Colors.grey.shade600,
                           ),
                         ),

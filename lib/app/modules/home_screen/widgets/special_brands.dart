@@ -26,6 +26,7 @@ class SpecialBrand extends StatelessWidget {
             // margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
+
                 SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),

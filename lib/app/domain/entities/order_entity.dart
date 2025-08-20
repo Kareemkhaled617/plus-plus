@@ -14,6 +14,9 @@ class OrderEntity {
   final UserAddressEntity userAddress;
   final List<OrderProductEntity> orderProducts;
   final String createdAt;
+  final String estimatedDeliveryRange;
+  final String estimatedDeliveryTime;
+  final String riderTip;
 
   OrderEntity({
     required this.id,
@@ -29,6 +32,9 @@ class OrderEntity {
     required this.userAddress,
     required this.orderProducts,
     required this.createdAt,
+    required this.riderTip,
+    required this.estimatedDeliveryRange,
+    required this.estimatedDeliveryTime,
   });
 }
 

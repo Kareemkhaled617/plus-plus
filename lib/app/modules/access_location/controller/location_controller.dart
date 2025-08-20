@@ -17,6 +17,7 @@ class LocationController extends GetxController {
 
   // Text controllers for user input
   TextEditingController addressController = TextEditingController(text: '');
+  TextEditingController phoneController = TextEditingController(text: '0');
   TextEditingController streetController = TextEditingController(text: '');
   TextEditingController buildingController = TextEditingController(text: '');
   TextEditingController floorController = TextEditingController(text: '');
@@ -111,17 +112,15 @@ class LocationController extends GetxController {
       "building": buildingController.text,
       "department": apartmentController.text,
       "floor": floorController.text,
+      "phone": phoneController.text,
     };
-    print(data);
+
     try {
       var response = await Dio().patch(
         'https://plusp.msarweb.net/api/addresses/update-address',
         options: Options(headers: headers),
         data: data,
       );
-      print('response.statusCode');
-      print(response.statusCode);
-      print(response.data);
       if (response.statusCode == 200) {
         Get.back();
         // Get.snackbar("Success".tr, "Address updated successfully!".tr);

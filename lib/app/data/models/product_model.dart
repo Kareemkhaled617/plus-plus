@@ -21,6 +21,7 @@ class ProductModel extends ProductEntity {
     required super.packageTypes,
     required super.discountType,
     required super.discountValue,
+    required super.perfectWith,
     required super.discountEndDate,
     required super.discountId,
     required super.offerType,
@@ -49,6 +50,10 @@ class ProductModel extends ProductEntity {
       brandImage: json['brand']?['image'] ?? "",
       categories: (json['categories'] as List<dynamic>?)
               ?.map((cat) => CategoryModel.fromJson(cat))
+              .toList() ??
+          [],
+      perfectWith: (json['perfect_with'] as List<dynamic>?)
+              ?.map((product) => ProductModel.fromJson(product))
               .toList() ??
           [],
       packageTypes: (json['package_types'] as List<dynamic>?)
@@ -122,6 +127,7 @@ class ProductModel extends ProductEntity {
       name: name,
       description: description,
       benefits: benefits,
+      perfectWith: perfectWith,
       price: price,
       stock: stock,
       imageUrl: imageUrl,
@@ -145,12 +151,14 @@ class ProductModel extends ProductEntity {
   static List<ProductEntity> fromJsonList(List<dynamic> jsonList) {
     return jsonList.map((json) => ProductModel.fromJson(json)).toList();
   }
+
   factory ProductModel.fromCartEntity(CartRequestEntity entity) {
     final product = entity.product;
 
     return ProductModel(
       id: product.id,
       name: product.name,
+      perfectWith: product.perfectWith,
       description: product.description,
       benefits: product.benefits,
       price: product.price,
@@ -172,7 +180,6 @@ class ProductModel extends ProductEntity {
       isSelected: false, // يمكن تعديله حسب الحالة
     );
   }
-
 }
 
 class CategoryModel {
