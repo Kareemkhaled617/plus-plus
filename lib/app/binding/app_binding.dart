@@ -14,6 +14,7 @@ import '../modules/notification_screen/binding/notification_binding.dart';
 import '../modules/offers_screen/binding/discount_binding.dart';
 import '../modules/offers_screen/binding/offer_binding.dart';
 import '../modules/privacy_policy/binding/privacy_policy_binding.dart';
+import '../modules/product_details_screen/binding/product_point_binding.dart';
 import '../modules/profile_screen/bindind/language_binding.dart';
 import '../modules/search_screen/binding/recent_search_binding.dart';
 import '../modules/search_screen/binding/search_binding.dart';
@@ -26,6 +27,7 @@ class AppBinding extends Bindings {
     CategoryBinding().dependencies();
     NotificationBinding().dependencies();
     FavoriteBinding().dependencies();
+    ProductPointBinding().dependencies();
     OfferBinding().dependencies();
     DiscountBinding().dependencies();
     SectionBinding().dependencies();

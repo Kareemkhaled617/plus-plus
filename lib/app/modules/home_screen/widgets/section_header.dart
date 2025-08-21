@@ -224,55 +224,55 @@ class SectionHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   width: 4,
-              // ),
-              // Obx(() {
-              //   int unreadCount = notificationController.notifications
-              //       .where((noti) => !noti.readed)
-              //       .length;
-              //
-              //   return Stack(
-              //     clipBehavior: Clip.none,
-              //     children: [
-              //       InkWell(
-              //         onTap: () {
-              //           Navigator.pushNamed(context, AppRoutes.notification);
-              //         },
-              //         child: Icon(
-              //           Icons.notifications_none_rounded,
-              //           color: isProfileSection
-              //               ? AppColors.primary
-              //               : AppColors.white,
-              //           size: 30,
-              //         ),
-              //       ),
-              //       Positioned(
-              //         top: -6,
-              //         right: -6,
-              //         child: Container(
-              //           padding: EdgeInsets.all(4),
-              //           decoration: BoxDecoration(
-              //             color: Colors.red,
-              //             shape: BoxShape.circle,
-              //           ),
-              //           constraints:
-              //               BoxConstraints(minWidth: 20, minHeight: 20),
-              //           child: Center(
-              //             child: Text(
-              //               '$unreadCount',
-              //               style: TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 11,
-              //                 fontWeight: FontWeight.bold,
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   );
-              // }),
+              SizedBox(
+                width: 4,
+              ),
+              isProfileSection?  Obx(() {
+                int unreadCount = notificationController.notifications
+                    .where((noti) => !noti.readed)
+                    .length;
+
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.notification);
+                      },
+                      child: Icon(
+                        Icons.notifications_none_rounded,
+                        color: isProfileSection
+                            ? AppColors.primary
+                            : AppColors.white,
+                        size: 30,
+                      ),
+                    ),
+                    Positioned(
+                      top: -6,
+                      right: -6,
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints:
+                            BoxConstraints(minWidth: 20, minHeight: 20),
+                        child: Center(
+                          child: Text(
+                            '$unreadCount',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }):Container(),
             ],
           ),
         ],

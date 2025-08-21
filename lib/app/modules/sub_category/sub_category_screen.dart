@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/widgets/loader.dart';
 import 'package:plus/app/core/widgets/product_shimmer.dart';
 import 'package:plus/app/core/widgets/sub_category_shimmer.dart';
 import 'package:plus/app/modules/sub_category/widgets/category_main_tabs.dart';
@@ -125,7 +124,11 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
             /// Slider
              SliverToBoxAdapter(
-              child: AutoScrollImageRow(),
+              child: Obx(() {
+                return productController.categoryBanner.value != ''? AutoScrollImageRow(
+                  image: productController.categoryBanner.value,
+                ):Container();
+              }),
             ),
 
             /// Products Grid

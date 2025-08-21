@@ -4,7 +4,7 @@ import '../entities/product_entity.dart';
 import '../../core/errors/failure.dart';
 
 abstract class ProductRepository {
-  Future<Either<Failure, List<ProductEntity>>> getProductsByCategory(int categoryId);
+  Future<Either<Failure, Map<String, dynamic>>> getProductsByCategory(int categoryId);
   Future<Either<Failure, List<ProductEntity>>> getProductsByBrand(int brandId);
   Future<Either<Failure, List<ProductEntity>>> getProductsBySection(int sectionId);
   Future<Either<Failure, ProductEntity>> getProductDetails(int productId);

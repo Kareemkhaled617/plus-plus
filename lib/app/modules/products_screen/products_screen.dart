@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/app_bar_back_button.dart';
+import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/core/widgets/product_shimmer.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
@@ -14,25 +15,46 @@ class ProductsScreen extends StatelessWidget {
     required this.gradientColors,
     this.category,
     required this.title,
+    required this.image,
   });
 
   final List<Color> gradientColors;
 
   final dynamic category;
   final String title;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     final ProductController controller = Get.find<ProductController>();
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.transparent,
-        // Let flexibleSpace handle it
-        title: Text(
-          title,
-          style: AppFonts.heading1.copyWith(fontSize: 18),
+        toolbarHeight: 100,
+        centerTitle: false,
+        leading: const AppBarBackButton(),
+        titleSpacing: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppFonts.heading1.copyWith(fontSize: 20), // a bit bigger
+              ),
+            ),
+            image != '' ? CachedImage(imageUrl: image) : Container(),
+            SizedBox(
+              width: 10,
+            ),
+          ],
         ),
-        leading: AppBarBackButton(),
         flexibleSpace: gradientColors.isEmpty
             ? Container(color: Colors.white)
             : Container(
@@ -44,19 +66,18 @@ class ProductsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-        elevation: 0,
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          gradient: gradientColors.isEmpty
-              ? null
-              : LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: gradientColors,
-                ),
-        ),
+        decoration: BoxDecoration(color: Colors.white
+            // gradient: gradientColors.isEmpty
+            //     ? null
+            //     : LinearGradient(
+            //         begin: Alignment.topCenter,
+            //         end: Alignment.bottomCenter,
+            //         colors: gradientColors,
+            //       ),
+            ),
         child: Obx(() {
           if (controller.isLoading.value) {
             return ProductShimmer();

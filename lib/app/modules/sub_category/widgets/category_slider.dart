@@ -1,9 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:plus/app/core/widgets/cached_image.dart';
 
 class AutoScrollImageRow extends StatefulWidget {
-  const AutoScrollImageRow({super.key});
+  const AutoScrollImageRow({super.key, required this.image});
 
+  final String image;
   @override
   State<AutoScrollImageRow> createState() => _AutoScrollImageRowState();
 }
@@ -58,11 +61,7 @@ class _AutoScrollImageRowState extends State<AutoScrollImageRow> {
             margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                'assets/temp/large_banner.png', // your image path
-                width: 300,
-                fit: BoxFit.cover,
-              ),
+              child: CachedImage(imageUrl: widget.image),
             ),
           );
         },

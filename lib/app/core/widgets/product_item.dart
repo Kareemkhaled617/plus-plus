@@ -5,10 +5,12 @@ import 'package:plus/generated/assets.dart';
 import '../../domain/entities/product_entity.dart';
 import '../../modules/cart/controller/cart_controller.dart';
 import '../../modules/favourite_screen/controller/favorite_controller.dart';
+import '../../modules/product_details_screen/controller/product_point_controller.dart';
 import '../../modules/product_details_screen/widgets/product_counter_section.dart';
 import '../../routes/app_routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
+import '../utils/app_keys.dart';
 import '../utils/size_config.dart';
 import 'cached_image.dart';
 
@@ -40,7 +42,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<FavoriteController>();
     CartController cartController = Get.find<CartController>();
-
+    final controller1 = Get.find<ProductPointController>();
     return InkWell(
       onTap: () {
         Get.toNamed(AppRoutes.productDetails, arguments: {
@@ -92,7 +94,11 @@ class ProductCard extends StatelessWidget {
                               alignment: Alignment.bottomRight,
                               child: InkWell(
                                 onTap: productEntity.stock == 0
-                                    ? () {}
+                                    ? () {
+                                  showUnAvailableBottomSheet(
+                                      productEntity.id,
+                                      controller1);
+                                }
                                     : () {
                                         if (cartController.isProductInCart(
                                             productEntity.id)) {
@@ -478,6 +484,74 @@ class ProductCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void showUnAvailableBottomSheet(int id, ProductPointController controller1) {
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              AppKeys.communicate.tr,
+              style: AppFonts.heading2,
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      controller1.requestPoint(id);
+                      Get.back();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      AppKeys.yes.tr,
+                      style: AppFonts.bodyText.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Get.back(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      AppKeys.no.tr,
+                      style: AppFonts.bodyText.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
+      isDismissible: true,
     );
   }
 }

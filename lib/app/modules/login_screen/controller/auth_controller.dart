@@ -24,7 +24,9 @@ class AuthController extends GetxController {
   /// **Handles Phone Number Validation**
   void validatePhoneNumber(String phone) {
     phoneNumber.value = phone;
-    isButtonEnabled.value = phone.length >= 10;
+    print( phone.length >= 10);
+    print( phone.length);
+    isButtonEnabled.value = phone.length >= 13;
   }
 
   /// **Handles Login Request**

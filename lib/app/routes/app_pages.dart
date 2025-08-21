@@ -117,6 +117,7 @@ class AppPages {
       page: () => ProductsScreen(
         gradientColors: Get.arguments?['gradientColors'] ?? [],
         title: Get.arguments?['title'] ?? '',
+        image: Get.arguments?['image'] ?? '',
       ),
       binding: AllProductBinding(),
     ),

@@ -77,6 +77,7 @@ class SpecialBrand extends StatelessWidget {
                                 "gradientColors": [Colors.white, Colors.white],
                                 "title": section.brands[index].name,
                                 "id": section.brands[index].id,
+                                'image':'',
                                 'isSection': false,
                               });
                         },

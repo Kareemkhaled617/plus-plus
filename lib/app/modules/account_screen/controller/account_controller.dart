@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/routes/app_routes.dart';
 
+import '../../../core/widgets/pupup_dialog.dart';
 import '../../../domain/entities/point_entity.dart';
 import '../../../domain/entities/user_profile_entity.dart';
 import '../../../domain/usecases/change_language_usecase.dart';
@@ -24,19 +25,32 @@ class AccountController extends GetxController {
   RxBool isChangingLang = false.obs;
   var isLoadingGetProfile = true.obs;
   var profile = Rxn<UserProfileEntity>();
-  TextEditingController nameController = TextEditingController();
+  TextEditingController nameController = TextEditingController(text: '');
 
   RxList<PointEntity> pointsList = <PointEntity>[].obs;
 
   @override
   void onInit() {
+    // if (!Get.arguments['from_login']) {
     fetchUserProfile();
+    // }
+
     super.onInit();
   }
 
   Future<void> updateAccount() async {
     if (nameController.text.isEmpty) {
-      Get.snackbar("Error".tr, "Please enter your name.".tr);
+      // Get.snackbar("Error".tr, "Please enter your name.".tr);
+      AppPopup.show(
+        Get.context!,
+        type: AppPopupType.error,
+        title: "Error".tr,
+
+        message: "Please enter your name.".tr,
+        primaryText: 'Retry',
+        onPrimary: () => Get.back(),
+        onSecondary: () => Get.back(),
+      );
       return;
     }
 
@@ -85,8 +99,9 @@ class AccountController extends GetxController {
     result.fold(
       (failure) => Get.snackbar("Error", failure.message),
       (userData) {
+
         profile.value = userData;
-        nameController.text = userData.name;
+        nameController.text = userData.name == "N/A" ? '' : userData.name;
       },
     );
     isLoadingGetProfile.value = false;

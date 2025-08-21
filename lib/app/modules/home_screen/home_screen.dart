@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/utils/app_keys.dart';
 import 'package:plus/app/modules/home_screen/widgets/category_page.dart';
@@ -16,9 +17,23 @@ import '../account_screen/controller/business_settings_controller.dart';
 import 'arrival_timer/presentation/controller/orders_controller.dart';
 import 'arrival_timer/presentation/widgets/arrival_timer_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColors.primary,
+      statusBarIconBrightness: Brightness.light,
+    ));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     BusinessSettingsController businessSettingsController =
@@ -116,7 +131,8 @@ class HomeScreen extends StatelessWidget {
                             AppKeys.addYourPrescription.tr,
                             textAlign: TextAlign.start,
                             style: AppFonts.heading1.copyWith(
-                                fontSize: getResponsiveFontSize(17),
+                              height: 1.2,
+                                fontSize: getResponsiveFontSize(16),
                                 fontWeight: FontWeight.w700),
                           ),
                         ),

@@ -27,13 +27,14 @@ class ProductSection extends StatelessWidget {
                     )
                   : Container(),
               Container(
-                padding: EdgeInsets.all(14),
-                margin: EdgeInsets.only(left: 8, top: 18, right: 8),
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 2),
+                margin: EdgeInsets.only(left: 0, top: 18, right: 0),
                 decoration: section.backgroundColor != ''
                     ? BoxDecoration(
+                        borderRadius: BorderRadius.circular(26),
                         image: DecorationImage(
                             image: NetworkImage(section.backgroundColor),
-                            fit: BoxFit.cover))
+                            fit: BoxFit.fill))
                     : BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
@@ -45,7 +46,7 @@ class ProductSection extends StatelessWidget {
                             HexColor(section.secondColor),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(26),
                       ),
                 child: Column(
                   children: [
@@ -64,8 +65,9 @@ class ProductSection extends StatelessWidget {
                         ),
                         section.image != ''
                             ? Container(
-                                height: 70,
-                                width: 70,
+                                height: getProportionateScreenHeight(80),
+                                width: getProportionateScreenWidth(160),
+                                margin: EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: NetworkImage(section.image),
@@ -111,12 +113,13 @@ class ProductSection extends StatelessWidget {
                                       ],
                                       "title": section.name,
                                       "id": section.id,
+                                      'image': section.image,
                                       'isSection': true
                                     });
                               },
                               child: Container(
-                                width: getProportionateScreenWidth(250),
-                                height: getProportionateScreenHeight(70),
+                                width: getProportionateScreenWidth(264),
+                                height: getProportionateScreenHeight(60),
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.all(12),
                                 decoration: BoxDecoration(

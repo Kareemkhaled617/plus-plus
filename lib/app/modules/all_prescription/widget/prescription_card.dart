@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -142,123 +143,328 @@ class PrescriptionCard extends StatelessWidget {
     );
   }
 
+
+
   void showPrescriptionsBottomSheet(
-      BuildContext context, PrescriptionEntity prescription) {
+      BuildContext context,
+      PrescriptionEntity prescription, {
+        VoidCallback? onView,        // open full screen viewer / PDF
+        VoidCallback? onReorder,     // trigger reorder flow
+        VoidCallback? onDelete,      // optional delete
+      }) {
+    final isPdf = prescription.imageType.toLowerCase() == 'pdf';
+    final status = prescription.status.toLowerCase();
+
+    Color statusColor() {
+      if (status.contains('pending')) return const Color(0xFFF59E0B); // amber
+      if (status.contains('rejected') || status.contains('cancel')) {
+        return const Color(0xFFEF4444); // red
+      }
+      return const Color(0xFF10B981); // green
+    }
+
+    String statusLabel() {
+      return prescription.status; // already localized by your layer if needed
+    }
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+      backgroundColor: Colors.transparent,
       builder: (_) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.5,
-          maxChildSize: 0.9,
+          initialChildSize: 0.6,
+          maxChildSize: 0.95,
+          minChildSize: 0.45,
           builder: (context, scrollController) {
-            return SingleChildScrollView(
-              controller: scrollController,
-              padding: const EdgeInsets.all(16),
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(.10),
+                    blurRadius: 20,
+                    offset: const Offset(0, -6),
+                  ),
+                ],
+              ),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
+                  const SizedBox(height: 10),
+                  // drag handle
                   Container(
-                    height: 4,
-                    width: 40,
-                    margin: const EdgeInsets.only(bottom: 20),
+                    width: 44,
+                    height: 5,
                     decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      prescription.imageType == 'pdf'
-                          ? Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Colors.red.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Icon(Icons.picture_as_pdf,
-                                  color: Colors.red, size: 40),
-                            )
-                          : ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                prescription.image,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
+                  const SizedBox(height: 12),
+
+                  // Header with soft gradient
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      gradient: LinearGradient(
+                        colors: [const Color(0xFFF9FAFB), Colors.grey.shade50],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      border: Border.all(color: Colors.grey.shade200),
+                    ),
+                    child: Row(
+                      children: [
+                        // preview
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: isPdf
+                              ? Container(
+                            width: 72,
+                            height: 72,
+                            color: Colors.red.withOpacity(.08),
+                            alignment: Alignment.center,
+                            child: const Icon(Icons.picture_as_pdf,
+                                color: Colors.red, size: 38),
+                          )
+                              : CachedNetworkImage(
+                            imageUrl: prescription.image,
+                            width: 72,
+                            height: 72,
+                            fit: BoxFit.cover,
+                            placeholder: (context, _) => Container(
+                              width: 72,
+                              height: 72,
+                              color: Colors.grey.shade200,
                             ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              prescription.aboutImage,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            errorWidget: (_, __, ___) => Container(
+                              width: 72,
+                              height: 72,
+                              color: Colors.grey.shade200,
+                              alignment: Alignment.center,
+                              child: const Icon(Icons.broken_image_outlined,
+                                  color: Colors.grey),
                             ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Icon(Icons.list_alt, size: 18),
-                                const SizedBox(width: 6),
-                                Flexible(
-                                  child: Text(
-                                    prescription.orderProductNames,
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        // title + status chip
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                prescription.aboutImage,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF111827),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                const Icon(Icons.date_range, size: 18),
-                                const SizedBox(width: 6),
-                                Text(
-                                  prescription.createdAt,
-                                  style: const TextStyle(fontSize: 14),
+                              ),
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: statusColor().withOpacity(.12),
+                                  borderRadius: BorderRadius.circular(999),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                const Icon(Icons.info_outline, size: 18),
-                                const SizedBox(width: 6),
-                                Text(
-                                  "Status: ${prescription.status}",
+                                child: Text(
+                                  statusLabel(),
                                   style: TextStyle(
-                                    fontSize: 14,
-                                    color: prescription.status.toLowerCase() ==
-                                            'pending'
-                                        ? Colors.orange
-                                        : Colors.green,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: statusColor(),
                                   ),
                                 ),
-                              ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Scroll content
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      padding: const EdgeInsets.symmetric(horizontal: 16)
+                          .copyWith(bottom: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 8),
+                          _InfoRow(
+                            icon: Icons.list_alt_outlined,
+                            label: 'Items',
+                            value: prescription.orderProductNames,
+                          ),
+                          const SizedBox(height: 10),
+                          _InfoRow(
+                            icon: Icons.schedule_outlined,
+                            label: 'Created at',
+                            value: prescription.createdAt,
+                          ),
+                          const SizedBox(height: 10),
+                          _InfoRow(
+                            icon: Icons.description_outlined,
+                            label: 'Type',
+                            value: isPdf ? 'PDF' : 'Image',
+                          ),
+
+                          // Optional long preview area (tap to view)
+                          if (!isPdf) ...[
+                            const SizedBox(height: 16),
+                            GestureDetector(
+                              onTap: onView,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: CachedNetworkImage(
+                                  imageUrl: prescription.image,
+                                  fit: BoxFit.cover,
+                                  height: 180,
+                                  width: double.infinity,
+                                  placeholder: (context, _) => Container(
+                                    height: 180,
+                                    color: Colors.grey.shade200,
+                                  ),
+                                  errorWidget: (_, __, ___) => Container(
+                                    height: 180,
+                                    color: Colors.grey.shade200,
+                                    alignment: Alignment.center,
+                                    child: const Icon(Icons.broken_image_outlined),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
+
+                  // sticky actions
+                  // SafeArea(
+                  //   top: false,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  //     child: Row(
+                  //       children: [
+                  //         Expanded(
+                  //           child: OutlinedButton.icon(
+                  //             onPressed: onReorder,
+                  //             style: OutlinedButton.styleFrom(
+                  //               padding: const EdgeInsets.symmetric(vertical: 14),
+                  //               side: BorderSide(color: Colors.indigo.shade700),
+                  //               shape: RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(12)),
+                  //             ),
+                  //             icon: Icon(Icons.shopping_bag_outlined,
+                  //                 color: Colors.indigo.shade700),
+                  //             label: Text(
+                  //               'Re‑order',
+                  //               style: TextStyle(
+                  //                   color: Colors.indigo.shade700,
+                  //                   fontWeight: FontWeight.w600),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         const SizedBox(width: 12),
+                  //         Expanded(
+                  //           child: ElevatedButton.icon(
+                  //             onPressed: onView,
+                  //             style: ElevatedButton.styleFrom(
+                  //               backgroundColor: const Color(0xFF27328C),
+                  //               padding: const EdgeInsets.symmetric(vertical: 14),
+                  //               shape: RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(12)),
+                  //               elevation: 0,
+                  //             ),
+                  //             icon: const Icon(Icons.visibility_outlined,
+                  //                 color: Colors.white),
+                  //             label: const Text(
+                  //               'View',
+                  //               style: TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.w600),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         if (onDelete != null) ...[
+                  //           const SizedBox(width: 12),
+                  //           IconButton(
+                  //             onPressed: onDelete,
+                  //             style: IconButton.styleFrom(
+                  //               backgroundColor: Colors.red.withOpacity(.08),
+                  //               shape: RoundedRectangleBorder(
+                  //                 borderRadius: BorderRadius.circular(12),
+                  //               ),
+                  //             ),
+                  //             icon: const Icon(Icons.delete_outline,
+                  //                 color: Colors.red),
+                  //           ),
+                  //         ],
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             );
           },
         );
       },
+    );
+  }
+
+
+
+}
+class _InfoRow extends StatelessWidget {
+  const _InfoRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 20, color: Colors.grey.shade700),
+        const SizedBox(width: 10),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: const TextStyle(color: Color(0xFF111827), fontSize: 14),
+              children: [
+                TextSpan(
+                  text: '$label: ',
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                TextSpan(
+                  text: value,
+                  style: const TextStyle(fontWeight: FontWeight.w400),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

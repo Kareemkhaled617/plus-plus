@@ -21,7 +21,7 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        leading: AppBarBackButton(),
+        // leading: AppBarBackButton(),
         backgroundColor: AppColors.white,
         title: Text(
           AppKeys.account.tr,

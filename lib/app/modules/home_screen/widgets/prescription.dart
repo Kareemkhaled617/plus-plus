@@ -30,6 +30,7 @@ class Prescription extends StatelessWidget {
           ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -40,8 +41,9 @@ class Prescription extends StatelessWidget {
                   AppKeys.youCanOrderPrescription.tr,
                   style: AppFonts.bodyText.copyWith(
                       fontWeight: FontWeight.w500,
+                      height: 1.5,
                       color: AppColors.black,
-                      fontSize: getResponsiveFontSize(15)),
+                      fontSize: getResponsiveFontSize(14)),
                 ),
               ),
             ],

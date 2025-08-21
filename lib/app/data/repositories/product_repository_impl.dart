@@ -14,20 +14,39 @@ class ProductRepositoryImpl implements ProductRepository {
   ProductRepositoryImpl(this.apiService);
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getProductsByCategory(
+  Future<Either<Failure, Map<String, dynamic>>> getProductsByCategory(
       int categoryId) async {
     final response =
-        await apiService.getRequest('products/category/$categoryId');
+    await apiService.getRequest('products/category/$categoryId');
 
     if (response.success) {
-      final List productsJson = response.data['data']['products'];
-      final products = ProductModel.fromJsonList(productsJson);
-      return Right(products);
+      try {
+        final data = response.data['data'];
+
+        // extract products
+        final List productsJson = data['products'] ?? [];
+        final products = ProductModel.fromJsonList(productsJson);
+
+        // extract banner
+        final String? categoryBanner = data['category_banner'];
+
+        return Right({
+          "products": products,
+          "category_banner": categoryBanner,
+        });
+      } catch (e) {
+        return Left(Failure("Parsing error: $e"));
+      }
     } else {
-      return Left(Failure(response.message ?? "Failed to load products",
-          statusCode: response.statusCode));
+      return Left(
+        Failure(
+          response.message ?? "Failed to load products",
+          statusCode: response.statusCode,
+        ),
+      );
     }
   }
+
 
   @override
   Future<Either<Failure, List<ProductEntity>>> getProductsByBrand(

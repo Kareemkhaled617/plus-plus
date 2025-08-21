@@ -1,15 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/widgets/banner_shimmer.dart';
 import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/domain/entities/banner_entity.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_fonts.dart';
-import '../../../core/utils/app_keys.dart';
 import '../../../core/utils/shimmer.dart';
-import '../../../core/utils/size_config.dart';
 import '../../../core/utils/url_helper.dart';
 import '../controller/banner_controller.dart';
 import '../controller/home_scontroller.dart';
@@ -31,9 +27,14 @@ class CircularImageSlider extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: shimmerBox(height: 150, width: Get.width),
             )
-          : Column(
-              children: [
-                SizedBox(
+          : bannerController.banners
+                  .where((banner) => (banner.position == "intro" &&
+                      banner.actionType == "external"))
+                  .toList()
+                  .isNotEmpty
+              ? Column(
+                  children: [
+                    SizedBox(
                   height: 20,
                 ),
                 CarouselSlider(
@@ -93,7 +94,8 @@ class CircularImageSlider extends StatelessWidget {
                   ),
                 )
               ],
-            );
+                )
+              : Container();
     });
   }
 }
