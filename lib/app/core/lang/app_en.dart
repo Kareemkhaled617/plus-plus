@@ -61,7 +61,7 @@ const Map<String, String> enUS = {
   "Subtotal": "Subtotal",
   "Delivery": "Delivery Fees",
   "Total": "Total",
-  "L.E": "L.E",
+  "EGP": "EGP",
   "Shipped from": "Shipped from",
   "Delivery expected within": "Delivery expected within",
   "hours": "hours",
@@ -286,5 +286,8 @@ const Map<String, String> enUS = {
   "Thanks you will get notified when product is back in stock",
   'minutes':'minutes',
   'Estimated arrival':'Estimated arrival',
-  "Goes Perfect with":"Goes Perfect with"
+  "Goes Perfect with":"Goes Perfect with",
+  'OK':'OK',
+  'Kindly complete all required fields before proceeding.':'Kindly complete all required fields before proceeding.',
+  'Missing Information':'Missing Information',
 };

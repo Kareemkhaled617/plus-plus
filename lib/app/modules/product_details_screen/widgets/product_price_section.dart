@@ -40,7 +40,7 @@ class ProductPriceSection extends StatelessWidget {
                       children: [
                         TextSpan(
                           text:
-                              "${controller.product.value!.packageTypes.first.unitPrice} L.E",
+                              "${controller.product.value!.packageTypes.first.unitPrice} ${'EGP'.tr}",
                           style: AppFonts.heading3.copyWith(
                               color: AppColors.primary,
                               fontWeight: FontWeight.bold),
@@ -76,7 +76,7 @@ class ProductPriceSection extends StatelessWidget {
                                         alignment: Alignment.center,
                                         children: [
                                           Text(
-                                            "  ${controller.product.value!.price} L.E  ",
+                                            "  ${controller.product.value!.price} ${'EGP'.tr}  ",
                                             style: AppFonts.heading3.copyWith(
                                               color: AppColors.red,
                                               fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class ProductPriceSection extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                     text:
-                                        "${controller.product.value!.price} L.E",
+                                        "${controller.product.value!.price} ${'EGP'.tr}",
                                     style: AppFonts.heading3.copyWith(
                                         color: AppColors.primary,
                                         fontWeight: FontWeight.bold),

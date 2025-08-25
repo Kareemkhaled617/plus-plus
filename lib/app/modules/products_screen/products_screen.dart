@@ -49,7 +49,14 @@ class ProductsScreen extends StatelessWidget {
                 style: AppFonts.heading1.copyWith(fontSize: 20), // a bit bigger
               ),
             ),
-            image != '' ? CachedImage(imageUrl: image) : Container(),
+            image != ''
+                ? CachedImage(
+                    imageUrl: image,
+                    fit: BoxFit.contain,
+                    width: 120,
+                    height: 100,
+                  )
+                : Container(),
             SizedBox(
               width: 10,
             ),

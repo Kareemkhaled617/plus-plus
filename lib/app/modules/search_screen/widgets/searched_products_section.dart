@@ -29,7 +29,7 @@ class SearchedProductsSection extends StatelessWidget {
           imageUrl: product.imageUrl,
           title: product.name,
           stockInfo: "${product.stock} in stock",
-          price: "${product.price} L.E",
+          price: "${product.price}",
           onFavorite: () {},
           onAddToCart: () {},
           id: product.id, productEntity: product,

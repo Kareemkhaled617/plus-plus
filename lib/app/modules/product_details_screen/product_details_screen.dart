@@ -157,7 +157,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               stockInfo:
                                   "${controller.product.value!.perfectWith[index].stock} in stock",
                               price:
-                                  "${controller.product.value!.perfectWith[index].price} L.E",
+                                  "${controller.product.value!.perfectWith[index].price}",
                               onFavorite: () {},
                               onAddToCart: () {},
                               id: controller

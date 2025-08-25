@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/generated/assets.dart';
+import 'package:plus/app/core/widgets/price_widgets.dart';
 
 import '../../domain/entities/product_entity.dart';
 import '../../modules/cart/controller/cart_controller.dart';
@@ -53,7 +53,7 @@ class ProductCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
         margin: const EdgeInsets.symmetric(horizontal: 1),
         width: getProportionateScreenWidth(140),
-        height: getProportionateScreenHeight(260),
+        height: getProportionateScreenHeight(210),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -65,13 +65,14 @@ class ProductCard extends StatelessWidget {
           // ],
         ),
         child: Stack(
+          alignment: AlignmentDirectional.topStart,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  height: getProportionateScreenHeight(20),
+                  height: getProportionateScreenHeight(4),
                 ),
                 Stack(
                   alignment: Alignment.bottomRight,
@@ -132,85 +133,102 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: getProportionateScreenHeight(20)),
-                productEntity.discountType == 'discount'
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Text(
-                                    price,
-                                    style: AppFonts.bodyText.copyWith(
-                                        fontSize: getResponsiveFontSize(13),
-                                        color: AppColors.grey,
-                                        fontWeight: FontWeight.w700),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Transform.rotate(
-                                    angle: 180 * (3.14159265359 / 180),
-                                    child: Container(
-                                      height: 2,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: AppColors.grey,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '${(productEntity.price - (productEntity.price * (productEntity.discountValue / 100))).toStringAsFixed(2)} L.E',
-                                style: AppFonts.bodyText.copyWith(
-                                    fontSize: getResponsiveFontSize(13),
-                                    color: AppColors.red,
-                                    fontWeight: FontWeight.w700),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            price,
-                            textAlign: TextAlign.end,
-                            style: AppFonts.bodyText.copyWith(
-                                fontSize: getResponsiveFontSize(13),
-                                fontWeight: FontWeight.w700),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                SizedBox(height: getProportionateScreenHeight(4)),
+                // productEntity.discountType == 'discount'
+                //     ? Column(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Row(
+                //             crossAxisAlignment: CrossAxisAlignment.end,
+                //             children: [
+                //               Container(
+                //                 padding: EdgeInsets.all(4),
+                //                 decoration: BoxDecoration(
+                //                     color: AppColors.primary.withOpacity(.3),
+                //                     borderRadius: BorderRadius.circular(4)),
+                //                 child: Text(
+                //                   '${(productEntity.price -
+                //                       (productEntity.price *
+                //                           (productEntity.discountValue / 100)))
+                //                       .toStringAsFixed(2)} EGP',
+                //                   style: AppFonts.bodyText.copyWith(
+                //                       fontSize: getResponsiveFontSize(13),
+                //                       color: AppColors.red,
+                //                       fontWeight: FontWeight.w700),
+                //                   maxLines: 1,
+                //                   overflow: TextOverflow.ellipsis,
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //           Row(
+                //             mainAxisAlignment: MainAxisAlignment.end,
+                //             children: [
+                //               Stack(
+                //                 alignment: Alignment.center,
+                //                 children: [
+                //                   Text(
+                //                     price,
+                //                     style: AppFonts.bodyText.copyWith(
+                //                         fontSize: getResponsiveFontSize(13),
+                //                         color: AppColors.grey,
+                //                         fontWeight: FontWeight.w700),
+                //                     maxLines: 1,
+                //                     overflow: TextOverflow.ellipsis,
+                //                   ),
+                //                   Transform.rotate(
+                //                     angle: 180 * (3.14159265359 / 180),
+                //                     child: Container(
+                //                       height: 2,
+                //                       width: 70,
+                //                       decoration: BoxDecoration(
+                //                         borderRadius: BorderRadius.circular(20),
+                //                         color: AppColors.grey,
+                //                       ),
+                //                     ),
+                //                   )
+                //                 ],
+                //               ),
+                //             ],
+                //           ),
+                //         ],
+                //       )
+                //     : Row(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             price,
+                //             textAlign: TextAlign.end,
+                //             style: AppFonts.bodyText.copyWith(
+                //                 fontSize: getResponsiveFontSize(13),
+                //                 color: AppColors.black,
+                //                 fontWeight: FontWeight.w900),
+                //             maxLines: 1,
+                //             overflow: TextOverflow.ellipsis,
+                //           ),
+                //         ],
+                //       ),
 
-                SizedBox(
-                  height: 60,
-                  child: Text(
-                    title,
-                    style: AppFonts.heading1.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black54,
-                      fontSize: getResponsiveFontSize(13),
-                    ),
-                    maxLines: 3,
-                    textAlign: TextAlign.start,
+                PriceRow(
+                  currency: 'EGP',
+                  price: num.parse((productEntity.price -
+                          (productEntity.price *
+                              (productEntity.discountValue / 100)))
+                      .toStringAsFixed(2)),
+                  oldPrice: productEntity.discountType == 'discount'
+                      ? num.parse(price)
+                      : null,
+                ),
+
+                Text(
+                  title,
+                  style: AppFonts.heading1.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: Colors.black87.withOpacity(.8),
+                    fontSize: getResponsiveFontSize(13),
+                    height: 1.2,
                   ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
 
                 // Obx(() {
@@ -383,55 +401,51 @@ class ProductCard extends StatelessWidget {
             //           );
             //         }),
             //       ),
-
-            Get.locale == Locale('ar')
-                ? Positioned(
-                    top: -3,
-                    right: -8,
-                    child: productEntity.discountType == 'discount'
-                        ? Container(
-                      height: 50,
-                      width: 50,
-                      padding: EdgeInsets.all(6),
-                      margin: EdgeInsets.all(4),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  Assets.imagesBackgroundOffer),
-                              fit: BoxFit.fill)),
-                      child: Text(
-                        '${productEntity.discountValue.toInt()} % OFF',
-                        textAlign: TextAlign.center,
-                        style: AppFonts.bodyText.copyWith(
-                            fontSize: getResponsiveFontSize(12),
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.white),
-                      ),
-                    )
-                        : Container(),
+            if (productEntity.discountValue > 0)
+              Get.locale == Locale('ar')
+                  ? Positioned(
+                      top: -3,
+                      right: -3,
+                      child: productEntity.discountType == 'discount'
+                          ? Container(
+                              padding: EdgeInsets.all(6),
+                              margin: EdgeInsets.all(4),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColors.red,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12),
+                                      bottomLeft: Radius.circular(20))),
+                              child: Text(
+                                '${productEntity.discountValue.toInt()} % OFF',
+                                textAlign: TextAlign.center,
+                                style: AppFonts.bodyText.copyWith(
+                                    fontSize: getResponsiveFontSize(10),
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.white),
+                              ),
+                            )
+                          : Container(),
                   )
                 : Positioned(
-                    top: -3,
-                    left: -5,
-                    child: productEntity.discountType == 'discount'
-                        ? Container(
-                            height: 50,
-                            width: 50,
-                            padding: EdgeInsets.all(6),
-                            margin: EdgeInsets.all(4),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        Assets.imagesBackgroundOffer),
-                                    fit: BoxFit.fill)),
-                            child: Text(
-                              '${productEntity.discountValue.toInt()} % OFF',
-                              textAlign: TextAlign.center,
-                              style: AppFonts.bodyText.copyWith(
-                                  fontSize: getResponsiveFontSize(12),
-                                  fontWeight: FontWeight.w800,
+                      top: -5,
+                      left: -2,
+                      child: productEntity.discountType == 'discount'
+                          ? Container(
+                              padding: EdgeInsets.all(6),
+                              margin: EdgeInsets.all(4),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColors.red,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(12),
+                                      bottomRight: Radius.circular(20))),
+                              child: Text(
+                                '${productEntity.discountValue.toInt()} % OFF',
+                                textAlign: TextAlign.center,
+                                style: AppFonts.bodyText.copyWith(
+                                    fontSize: getResponsiveFontSize(10),
+                                    fontWeight: FontWeight.w800,
                                   color: AppColors.white),
                             ),
                           )
@@ -440,7 +454,7 @@ class ProductCard extends StatelessWidget {
 
             Get.locale == Locale('ar')
                 ? Positioned(
-                    top: -3,
+                    top: -10,
                     left: -5,
                     child: Obx(() {
                       return IconButton(
@@ -450,7 +464,9 @@ class ProductCard extends StatelessWidget {
                             controller.isProductFavorite(id)
                                 ? Icons.favorite_rounded
                                 : Icons.favorite_border,
-                            color: Colors.red),
+                                color: controller.isProductFavorite(id)
+                                    ? Colors.red
+                                    : AppColors.grey),
                         onPressed: controller.isLoading.value
                             ? null
                             : () {
@@ -461,7 +477,7 @@ class ProductCard extends StatelessWidget {
                     }),
                   )
                 : Positioned(
-                    top: -3,
+                    top: -5,
                     right: -5,
                     child: Obx(() {
                       return IconButton(
@@ -471,7 +487,9 @@ class ProductCard extends StatelessWidget {
                                 controller.isProductFavorite(id)
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border,
-                                color: Colors.red),
+                                color: controller.isProductFavorite(id)
+                                    ? Colors.red
+                                    : AppColors.grey),
                         onPressed: controller.isLoading.value
                             ? null
                             : () {

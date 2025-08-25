@@ -86,7 +86,7 @@ class AppKeys {
   static const subtotal = "Subtotal";
   static const delivery = "Delivery";
   static const total = "Total";
-  static const le = "L.E";
+  static const le = "EGP";
   static const shippedFrom = "Shipped from";
   static const deliveryExpected = "Delivery expected within";
   static const hours = "hours";

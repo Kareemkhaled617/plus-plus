@@ -121,10 +121,10 @@ class CheckoutSummary extends StatelessWidget {
                       ),
                 CartPriceItem(
                   title: AppKeys.subtotal.tr,
-                  // price: "${subtotal.toStringAsFixed(2)} L.E",
+                  // price: "${subtotal.toStringAsFixed(2)} EGP",
                   price: cartController.isLoading.value
                       ? ""
-                      : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} L.E",
+                      : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} ${'EGP'.tr}",
                 ),
                 SizedBox(height: 10),
                 fromCart
@@ -133,17 +133,17 @@ class CheckoutSummary extends StatelessWidget {
                         children: [
                           CartPriceItem(
                             title: AppKeys.delivery.tr,
-                            // price: "${deliveryFee.toStringAsFixed(2)} L.E",
+                            // price: "${deliveryFee.toStringAsFixed(2)} EGP",
                             price: cartController.isLoading.value
                                 ? ""
-                                : "${cartController.cartTotal.value!.chargePrice.toStringAsFixed(2)} L.E",
+                                : "${cartController.cartTotal.value!.chargePrice.toStringAsFixed(2)} ${'EGP'.tr}",
                           ),
                           SizedBox(height: 10),
                           CartPriceItem(
                             title: AppKeys.discount.tr,
                             price: cartController.isLoading.value
                                 ? ""
-                                : "${cartController.cartTotal.value!.totalDiscount.toStringAsFixed(2)} L.E",
+                                : "${cartController.cartTotal.value!.totalDiscount.toStringAsFixed(2)} ${'EGP'.tr}",
                             isTotal: true,
                           ),
                           SizedBox(height: 10),
@@ -151,7 +151,7 @@ class CheckoutSummary extends StatelessWidget {
                             title: 'Rider Tip'.tr,
                             price: cartController.isLoading.value
                                 ? ""
-                                : "${cartController.cartTotal.value!.riderTip.toStringAsFixed(2)} L.E",
+                                : "${cartController.cartTotal.value!.riderTip.toStringAsFixed(2)} ${'EGP'.tr}",
                             isTotal: true,
                           ),
                           SizedBox(height: 10),
@@ -159,7 +159,7 @@ class CheckoutSummary extends StatelessWidget {
                             title: AppKeys.couponDiscount.tr,
                             price: cartController.isLoading.value
                                 ? ""
-                                : "${cartController.cartTotal.value!.couponDiscount.toStringAsFixed(2)} L.E",
+                                : "${cartController.cartTotal.value!.couponDiscount.toStringAsFixed(2)} ${'EGP'.tr}",
                             isTotal: true,
                           ),
                           SizedBox(height: 10),
@@ -167,7 +167,7 @@ class CheckoutSummary extends StatelessWidget {
                             title: AppKeys.total.tr,
                             price: cartController.isLoading.value
                                 ? ""
-                                : "${cartController.cartTotal.value!.totalPriceAfterCharge.toStringAsFixed(2)} L.E",
+                                : "${cartController.cartTotal.value!.totalPriceAfterCharge.toStringAsFixed(2)} ${'EGP'.tr}",
                             isTotal: true,
                           ),
                         ],

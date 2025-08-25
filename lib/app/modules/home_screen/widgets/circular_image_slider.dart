@@ -40,10 +40,19 @@ class CircularImageSlider extends StatelessWidget {
                 CarouselSlider(
                   options: CarouselOptions(
                     height: 160.0,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    viewportFraction: 0.8,
-                    onPageChanged: (index, reason) {
+                    enlargeFactor: 0,
+                        autoPlay: bannerController.banners
+                                    .where((banner) =>
+                                        (banner.position == "intro" &&
+                                            banner.actionType == "external"))
+                                    .toList()
+                                    .length >
+                                1
+                            ? true
+                            : false,
+                        enlargeCenterPage: false,
+                        viewportFraction: .99,
+                        onPageChanged: (index, reason) {
                       _sliderController.updateIndex(index);
                     },
                   ),
@@ -52,21 +61,24 @@ class CircularImageSlider extends StatelessWidget {
                           banner.actionType == "external"))
                       .toList()
                       .map((banner) {
-                    return InkWell(
-                      onTap: () async {
-                        await handleBannerTap(
-                            urlType: banner.urlType,
-                            url: banner.url.toString(),
-                            bannerUrlType: banner.bannerUrlType);
-                      },
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: CachedImage(
-                            imageUrl: banner.image,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          )),
-                    );
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: InkWell(
+                            onTap: () async {
+                              await handleBannerTap(
+                                  urlType: banner.urlType,
+                                  url: banner.url.toString(),
+                                  bannerUrlType: banner.bannerUrlType);
+                            },
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: CachedImage(
+                                  imageUrl: banner.image,
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                )),
+                          ),
+                        );
                   }).toList(),
                 ),
                 const SizedBox(height: 10),
@@ -92,8 +104,11 @@ class CircularImageSlider extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
-              ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 )
               : Container();
     });
@@ -129,56 +144,60 @@ class CircularImageSlider1 extends StatelessWidget {
         // ),
         CarouselSlider(
           options: CarouselOptions(
+            enlargeFactor: 0,
+            enlargeCenterPage: false,
+            viewportFraction: .99,
             height: 170.0,
-            autoPlay: true,
-            enlargeCenterPage: true,
-            viewportFraction: 0.8,
+            autoPlay:banners.length>1? true:false,
             onPageChanged: (index, reason) {
               _sliderController.updateIndex1(index);
             },
           ),
           items: banners.toList().map((banner) {
-            return InkWell(
-              onTap: () async {
-                await handleBannerTap(
-                    urlType: banner.urlType,
-                    url: banner.url.toString(),
-                    bannerUrlType: banner.bannerUrlType);
-              },
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedImage(
-                    imageUrl: 'https://plusp.msarweb.net/storage/${banner.image}',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  )),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: InkWell(
+                onTap: () async {
+                  await handleBannerTap(
+                      urlType: banner.urlType,
+                      url: banner.url.toString(),
+                      bannerUrlType: banner.bannerUrlType);
+                },
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedImage(
+                      imageUrl: 'https://plusp.msarweb.net/storage/${banner.image}',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    )),
+              ),
             );
           }).toList(),
         ),
         const SizedBox(height: 10),
-        Obx(() => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                banners.toList().length,
-                (index) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  height: 8.0,
-                  width: _sliderController.currentIndex1.value == index
-                      ? 16.0
-                      : 8.0,
-                  decoration: BoxDecoration(
-                    color: _sliderController.currentIndex1.value == index
-                        ? AppColors.primary
-                        : AppColors.grey,
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                ),
-              ),
-            )),
-        SizedBox(
-          height: 10,
-        ),
+        // Obx(() => Row(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: List.generate(
+        //         banners.toList().length,
+        //         (index) => AnimatedContainer(
+        //           duration: const Duration(milliseconds: 300),
+        //           margin: const EdgeInsets.symmetric(horizontal: 4.0),
+        //           height: 8.0,
+        //           width: _sliderController.currentIndex1.value == index
+        //               ? 16.0
+        //               : 8.0,
+        //           decoration: BoxDecoration(
+        //             color: _sliderController.currentIndex1.value == index
+        //                 ? AppColors.primary
+        //                 : AppColors.grey,
+        //             borderRadius: BorderRadius.circular(4.0),
+        //           ),
+        //         ),
+        //       ),
+        //     )),
+        // SizedBox(
+        //   height: 10,
+        // ),
       ],
     );
   }

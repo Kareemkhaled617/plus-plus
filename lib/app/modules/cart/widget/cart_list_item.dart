@@ -66,14 +66,14 @@ class CartListItem extends StatelessWidget {
                   ),
                         product.isSelected
                             ? Text(
-                                "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                                "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} ${'EGP'.tr}",
                                 style: AppFonts.heading1.copyWith(
                                     fontSize: 14,
                                     color: Colors.red,
                                     fontWeight: FontWeight.w700),
                               )
                             : Text(
-                                "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                                "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} ${'EGP'.tr}",
                                 style: AppFonts.heading1.copyWith(
                                     fontSize: 14,
                                     color: Colors.red,
@@ -98,14 +98,14 @@ class CartListItem extends StatelessWidget {
                   //       SizedBox(width: getProportionateScreenWidth(60)),
                   //       product.isSelected
                   //           ? Text(
-                  //               "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                  //               "${((product.packageTypes.first.unitPrice) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} EGP",
                   //               style: AppFonts.heading1.copyWith(
                   //                   fontSize: 14,
                   //                   color: AppColors.red,
                   //                   fontWeight: FontWeight.w700),
                   //             )
                   //           : Text(
-                  //               "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} L.E",
+                  //               "${((product.discountType == 'discount' ? (product.price - (product.price * (product.discountValue / 100))) : product.price) * (cartController.getProductCount(product.id))).toStringAsFixed(2)} EGP",
                   //               style: AppFonts.heading1.copyWith(
                   //                   fontSize: 14,
                   //                   color: AppColors.red,

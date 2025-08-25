@@ -73,7 +73,7 @@ class _SupportRiderCardState extends State<SupportRiderCard> {
                       ),
                       elevation: 0,
                     ),
-                    child: Text('$amount L.E'),
+                    child: Text('$amount ${'EGP'.tr}'),
                   ),
                 );
               }).toList(),

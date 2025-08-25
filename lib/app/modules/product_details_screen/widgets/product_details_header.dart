@@ -4,8 +4,6 @@ import 'package:plus/app/core/widgets/cached_image.dart';
 import 'package:plus/app/modules/product_details_screen/controller/product_controller.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/widgets/app_bar_back_button.dart';
-import '../../../core/widgets/offers_percent_widget.dart';
 import '../../favourite_screen/controller/favorite_controller.dart';
 
 class ProductDetailsHeader extends StatelessWidget {
@@ -22,14 +20,13 @@ class ProductDetailsHeader extends StatelessWidget {
         InkWell(
           onTap: () => Get.back(),
           child: Container(
-            margin: EdgeInsets.all(8),
             padding: EdgeInsets.all(2),
             decoration:
             BoxDecoration(shape: BoxShape.circle, color: AppColors.white),
             child: Icon(
-              Icons.close,
-              size: 30,
-              color: AppColors.red,
+              Icons.arrow_back_ios_new,
+              size: 25,
+              color: AppColors.black,
             ),
           ),
         ),
@@ -86,7 +83,9 @@ class ProductDetailsHeader extends StatelessWidget {
                             .isProductFavorite(controller.product.value!.id)
                         ? Icons.favorite_rounded
                         : Icons.favorite_border,
-                    color: Colors.red),
+                    color: favoriteController
+                        .isProductFavorite(controller.product.value!.id)
+                        ? Colors.red : AppColors.grey),
               ),
             ),
           );

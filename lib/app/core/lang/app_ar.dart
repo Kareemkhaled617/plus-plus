@@ -60,7 +60,7 @@ const Map<String, String> arEG = {
   "Subtotal": "المجموع الفرعي",
   "Delivery": "التوصيل",
   "Total": "الإجمالي",
-  "L.E": "ج.م",
+  "EGP": "ج.م",
   "Shipped from": "تم الشحن من",
   "Delivery expected within": "التوصيل متوقع خلال",
   "hours": "ساعات",
@@ -272,5 +272,9 @@ const Map<String, String> arEG = {
       "شكرًا لك، سيتم إشعارك عندما يعود المنتج إلى المخزون.",
   'minutes': 'دقائق',
   'Estimated arrival': 'الوقت المقدر للوصول',
-  "Goes Perfect with":"يتناسب تمامًا مع"
+  "Goes Perfect with":"يتناسب تمامًا مع",
+  'OK': 'حسناً',
+  'Kindly complete all required fields before proceeding.': 'يرجى إكمال جميع الحقول المطلوبة قبل المتابعة.',
+  'Missing Information': 'معلومات ناقصة',
+
 };

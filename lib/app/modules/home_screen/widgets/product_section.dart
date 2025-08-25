@@ -49,35 +49,40 @@ class ProductSection extends StatelessWidget {
                         borderRadius: BorderRadius.circular(26),
                       ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: Text(
-                            section.name,
-                            maxLines: 1,
-                            style: AppFonts.heading2.copyWith(
-                                color: HexColor(section.titleColor),
-                                fontWeight: FontWeight.w700,
-                                fontSize: getResponsiveFontSize(17)),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Text(
+                              section.name,
+                              maxLines: 2,
+                              style: AppFonts.heading2.copyWith(
+                                  color: HexColor(section.titleColor),
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: getResponsiveFontSize(20)),
+                            ),
                           ),
                         ),
                         section.image != ''
                             ? Container(
-                                height: getProportionateScreenHeight(80),
-                                width: getProportionateScreenWidth(160),
+                                height: getProportionateScreenHeight(50),
+                                width: getProportionateScreenWidth(90),
                                 margin: EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: NetworkImage(section.image),
-                                        fit: BoxFit.cover)),
+                                        fit: BoxFit.contain)),
                               )
                             : Container()
                       ],
                     ),
                     SizedBox(
-                      height: 16,
+                      height: 40,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -85,16 +90,21 @@ class ProductSection extends StatelessWidget {
                         children: [
                           ...List.generate(
                             section.products.length,
-                            (index) => ProductCard(
-                              imageUrl: section.products[index].imageUrl,
-                              title: section.products[index].name,
-                              stockInfo:
-                                  "${section.products[index].stock} in stock",
-                              price: "${section.products[index].price} L.E",
-                              onFavorite: () {},
-                              onAddToCart: () {},
-                              id: section.products[index].id,
-                              productEntity: section.products[index],
+                            (index) => Container(
+                              width: getProportionateScreenWidth(124),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: ProductCard(
+                                imageUrl: section.products[index].imageUrl,
+                                title: section.products[index].name,
+                                stockInfo:
+                                    "${section.products[index].stock} in stock",
+                                price: "${section.products[index].price}",
+                                onFavorite: () {},
+                                onAddToCart: () {},
+                                id: section.products[index].id,
+                                productEntity: section.products[index],
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -118,7 +128,7 @@ class ProductSection extends StatelessWidget {
                                     });
                               },
                               child: Container(
-                                width: getProportionateScreenWidth(264),
+                                width: getProportionateScreenWidth(216),
                                 height: getProportionateScreenHeight(60),
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.all(12),

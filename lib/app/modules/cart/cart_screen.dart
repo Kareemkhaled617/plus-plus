@@ -82,7 +82,7 @@ class CartScreen extends StatelessWidget {
                           //                   cartController.updatedCart.value!
                           //                       .cartPriceData.totalDiscount +
                           //                   cartController.updatedCart.value!
-                          //                       .cartPriceData.couponDiscount)} L.E",
+                          //                       .cartPriceData.couponDiscount)} EGP",
                           //               onPressed: cartController
                           //               .isLoadingTotalCart.value
                           //               ? ()
@@ -141,7 +141,7 @@ class CartScreen extends StatelessWidget {
                   child: CheckoutButton(
                     total: cartController.isLoading.value
                         ? ""
-                        : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} L.E",
+                        : "${(cartController.updatedCart.value!.cartPriceData.totalPrice + cartController.updatedCart.value!.cartPriceData.totalDiscount + cartController.updatedCart.value!.cartPriceData.couponDiscount)} ${'EGP'.tr}",
                     onPressed: cartController.isLoadingTotalCart.value
                         ? () {}
                         : () async {

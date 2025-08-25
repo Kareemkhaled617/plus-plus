@@ -65,11 +65,12 @@ class _SearchScreenState extends State<SearchScreen> {
                         Expanded(
                           child: SearchAndSuggestionSection(
                             controller: searchController,
-                            suggestions: controller.isLoading.value
-                                ? []
-                                : controller.searchResults
-                                    .map((recent) => recent.name)
-                                    .toList(),
+                            // suggestions: controller.isLoading.value
+                            //     ? []
+                            //     : controller.searchResults
+                            //         .map((recent) => recent.name)
+                            //         .toList(),
+                            suggestions: [],
                             searchQuery: searchQuery,
                             onHintSelected: (selected) {
                               setState(() {

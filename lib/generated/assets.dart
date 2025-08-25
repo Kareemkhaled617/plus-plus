@@ -56,6 +56,7 @@ class Assets {
   static const String imagesLocation = 'assets/images/location.png';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesNoNotification = 'assets/images/no_notification.png';
+  static const String imagesNotiScreen = 'assets/images/noti_screen.png';
   static const String imagesOrderTracking = 'assets/images/order_tracking.png';
   static const String imagesPointsCardBg = 'assets/images/points_card_bg.png';
   static const String imagesPrescription = 'assets/images/prescription.png';

@@ -81,7 +81,7 @@ class ReadyForWinter extends StatelessWidget {
           //             imageUrl: Assets.tempDsd,
           //             title: "Evy Baby",
           //             stockInfo: "68 in stock",
-          //             price: "45 L.E",
+          //             price: "45 EGP",
           //             onFavorite: () {}, id: 1,
           //           ),
           //         ),

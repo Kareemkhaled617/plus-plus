@@ -75,13 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
+
                         CircularImageSlider(),
-                        SizedBox(
-                          height: 20,
-                        ),
+                      
                         Obx(() {
                           if (ordersCtrl.isLoading.value) {
                             return const SizedBox.shrink(); // or a shimmer

@@ -152,7 +152,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         imageUrl: product.imageUrl,
                         title: product.name,
                         stockInfo: "${product.stock} ${'in stock'.tr}",
-                        price: "${product.price} L.E",
+                        price: "${product.price}",
                         onAddToCart: () {},
                         onFavorite: () {},
                         id: product.id,

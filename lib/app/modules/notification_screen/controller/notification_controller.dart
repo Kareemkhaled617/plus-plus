@@ -24,6 +24,7 @@ class NotificationController extends GetxController {
   var notifications = <NotificationEntity>[].obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
+  var notificationsBySection = <String, List<NotificationEntity>>{}.obs;
 
   @override
   void onInit() {
@@ -34,17 +35,18 @@ class NotificationController extends GetxController {
   /// Fetch notifications from the API
   Future<void> fetchNotifications() async {
     isLoading.value = true;
-    final Either<Failure, List<NotificationEntity>> result =
-        await getNotificationsUseCase();
+    final result = await getNotificationsUseCase();
 
     result.fold(
-      (failure) => errorMessage.value = failure.message,
-      (data) {
-        notifications.value = data;
-        errorMessage.value = '';
+          (failure) => errorMessage.value = failure.message,
+          (data) {
+        notificationsBySection.clear();
+        for (var noti in data) {
+          notificationsBySection.putIfAbsent(noti.section, () => []);
+          notificationsBySection[noti.section]!.add(noti);
+        }
       },
     );
-
     isLoading.value = false;
   }
 

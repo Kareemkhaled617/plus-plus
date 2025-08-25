@@ -4,7 +4,13 @@ import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:place_picker_google/place_picker_google.dart';
+import '../../../../generated/assets.dart';
 import '../../../core/storage/secure_storage_helper.dart';
+import '../../../core/theme/app_fonts.dart';
+import '../../../core/utils/app_keys.dart';
+import '../../../core/widgets/custom_bottom_sheet.dart';
+import '../../../core/widgets/custom_button.dart';
+import '../../../core/widgets/pupup_dialog.dart';
 import '../../address_directory/address_directory.dart';
 
 class LocationController extends GetxController {
@@ -17,11 +23,11 @@ class LocationController extends GetxController {
 
   // Text controllers for user input
   TextEditingController addressController = TextEditingController(text: '');
-  TextEditingController phoneController = TextEditingController(text: '0');
+  TextEditingController phoneController = TextEditingController(text: '');
   TextEditingController streetController = TextEditingController(text: '');
   TextEditingController buildingController = TextEditingController(text: '');
   TextEditingController floorController = TextEditingController(text: '');
-  TextEditingController apartmentController = TextEditingController(text: '0');
+  TextEditingController apartmentController = TextEditingController(text: '');
 
   // Selected option for address type
   RxString selectedOption = "home".obs;
@@ -91,9 +97,6 @@ class LocationController extends GetxController {
 
   /// **Save address to API**
   Future<void> updateAddress() async {
-    print('===================================');
-    print(selectedAddress.value);
-
     isLoadingUpdate.value = true;
 
     String? token = await SecureStorageHelper().getData("auth_token");
@@ -123,14 +126,60 @@ class LocationController extends GetxController {
       );
       if (response.statusCode == 200) {
         Get.back();
-        // Get.snackbar("Success".tr, "Address updated successfully!".tr);
+        showCustomBottomSheet(
+            Get.context!,
+            Column(
+              children: [
+                Image.asset(
+                  Assets.imagesAccessLocationDone,
+                  height: 200,
+                  width: 180,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  AppKeys.thankYou.tr,
+                  style: AppFonts.heading3.copyWith(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  AppKeys.weAddedYourAddress.tr,
+                  style: AppFonts.heading3.copyWith(
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomButton(
+                  text: AppKeys.addressDirectory.tr,
+                  onPressed: () {
+                    Get.back();
+                    Get.back();
+                  },
+                )
+              ],
+            ));
       } else {
         Get.snackbar("Error".tr, "Failed to update address.".tr);
+
       }
     } catch (e) {
       print('e.toString()');
       print(e.toString());
-      Get.snackbar("Error".tr, "Something went wrong!".tr);
+      // Get.snackbar("Error".tr, "Something went wrong!".tr);
+      AppPopup.show(
+        Get.context!,
+        type: AppPopupType.warning,
+        title: 'Missing Information'.tr,
+        message: 'Kindly complete all required fields before proceeding.'.tr,
+        primaryText: 'OK'.tr,
+        onPrimary: () => Get.back(),
+      );
+
     } finally {
       isLoadingUpdate.value = false;
     }

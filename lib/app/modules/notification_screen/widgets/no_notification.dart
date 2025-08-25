@@ -17,7 +17,7 @@ class NoFoundNotificationScreen extends StatelessWidget {
           SizedBox(height: 30,),
           Text(
             'No notifications available.'.tr,
-            style: AppFonts.bodyText,
+            style: AppFonts.heading3.copyWith(fontWeight: FontWeight.w700),
           ),
         ],
       ),

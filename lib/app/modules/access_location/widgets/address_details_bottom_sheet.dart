@@ -74,6 +74,7 @@ class AddressDetailsBottomSheet extends StatelessWidget {
             CustomTextFormField(
                 hintText: AppKeys.theApartment.tr,
                 controller: locationController.apartmentController,
+                keyboardType: TextInputType.number,
                 fillColor: AppColors.babyBlue),
             SizedBox(height: 12),
 
@@ -97,43 +98,7 @@ class AddressDetailsBottomSheet extends StatelessWidget {
                   isEnabled: !locationController.isLoadingUpdate.value,
                   onPressed: () async {
                     await locationController.updateAddress();
-                    showCustomBottomSheet(
-                        context,
-                        Column(
-                          children: [
-                            Image.asset(
-                              Assets.imagesAccessLocationDone,
-                              height: 200,
-                              width: 180,
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Text(
-                              AppKeys.thankYou.tr,
-                              style: AppFonts.heading3.copyWith(fontSize: 18),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              AppKeys.weAddedYourAddress.tr,
-                              style: AppFonts.heading3.copyWith(
-                                fontSize: 18,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            CustomButton(
-                              text: AppKeys.addressDirectory.tr,
-                              onPressed: () {
-                                Get.back();
-                                Get.back();
-                              },
-                            )
-                          ],
-                        ));
+
                   },
                 );
               }),

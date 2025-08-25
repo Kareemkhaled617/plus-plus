@@ -46,7 +46,7 @@ class RewardsScreen extends StatelessWidget {
                                 color: Colors.red, size: 20),
                             SizedBox(width: 4),
                             Text(
-                              "Every ${pointController.settings.value!.pointsExchange.toStringAsFixed(0)} point = ${pointController.settings.value!.priceExchange.toStringAsFixed(0)} EGP",
+                              "Every ${pointController.settings.value!.pointsExchange.toStringAsFixed(0)} point = ${pointController.settings.value!.priceExchange.toStringAsFixed(0)} ${'EGP'.tr}",
                               style: AppFonts.bodyText.copyWith(fontSize: 12),
                             ),
                           ],

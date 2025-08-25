@@ -16,17 +16,26 @@ class NotificationRepositoryImpl implements NotificationRepository {
     final response = await apiService.getRequest("notifications");
 
     if (response.success) {
-      final List notificationsJson = response.data['data'];
-      final notifications = notificationsJson
-          .map((json) => NotificationModel.fromJson(json))
-          .toList();
+      final sections = response.data['data']['sections'] as Map<String, dynamic>;
+
+      final List<NotificationEntity> notifications = [];
+
+      sections.forEach((key, value) {
+        final List list = value as List;
+        notifications.addAll(
+          list.map((json) => NotificationModel.fromJson(json)).toList(),
+        );
+      });
 
       return Right(notifications);
     } else {
-      return Left(Failure(response.message ?? "Failed to load notifications",
-          statusCode: response.statusCode));
+      return Left(
+        Failure(response.message ?? "Failed to load notifications",
+            statusCode: response.statusCode),
+      );
     }
   }
+
 
   @override
   Future<Either<Failure, void>> markNotificationAsRead(

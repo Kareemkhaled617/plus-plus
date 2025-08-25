@@ -64,7 +64,7 @@ class RelatedProductsList extends StatelessWidget {
                       title: controller.relatedProducts[index].name,
                       stockInfo:
                           "${controller.relatedProducts[index].stock} in stock",
-                      price: "${controller.relatedProducts[index].price} L.E",
+                      price: "${controller.relatedProducts[index].price}",
                       onAddToCart: () {},
                       onFavorite: () {},
                       id: controller.relatedProducts[index].id,
