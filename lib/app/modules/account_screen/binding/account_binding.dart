@@ -7,26 +7,37 @@ import '../../../domain/repositories/account_repository.dart';
 import '../../../domain/usecases/change_language_usecase.dart';
 import '../../../domain/usecases/get_account_points_usecase.dart';
 import '../../../domain/usecases/get_user_profile_usecase.dart';
-import '../../../domain/usecases/update_account_usecase.dart'; // 👈 UseCase
+import '../../../domain/usecases/update_account_usecase.dart';
 
 class AccountBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ApiService>(() => ApiService());
-    Get.lazyPut<AccountRepository>(() => AccountRepositoryImpl(Get.find()));
+    // ApiService is async now → use putAsync
+    Get.putAsync<ApiService>(() async => await ApiService.create());
 
-    // ✅ Add the UseCase binding
-    Get.lazyPut(() => UpdateAccountUseCase(Get.find()));
+    // Repos & usecases (they resolve ApiService lazily from Get.find())
+    Get.lazyPut<AccountRepository>(() => AccountRepositoryImpl(Get.find()),
+        fenix: true);
+
+    Get.lazyPut<UpdateAccountUseCase>(() => UpdateAccountUseCase(Get.find()),
+        fenix: true);
     Get.lazyPut<GetAccountPointsUseCase>(
-        () => GetAccountPointsUseCase(Get.find()));
-    Get.lazyPut<ChangeLanguageUseCase>(() => ChangeLanguageUseCase(Get.find()));
-    Get.lazyPut<GetUserProfileUseCase>(() => GetUserProfileUseCase(Get.find()));
-    // ✅ Inject UseCase into Controller
-    Get.lazyPut(() => AccountController(
+        () => GetAccountPointsUseCase(Get.find()),
+        fenix: true);
+    Get.lazyPut<ChangeLanguageUseCase>(() => ChangeLanguageUseCase(Get.find()),
+        fenix: true);
+    Get.lazyPut<GetUserProfileUseCase>(() => GetUserProfileUseCase(Get.find()),
+        fenix: true);
+
+    // Controller
+    Get.lazyPut(
+      () => AccountController(
         Get.find<UpdateAccountUseCase>(),
         Get.find<GetAccountPointsUseCase>(),
-          Get.find<ChangeLanguageUseCase>(),
-          Get.find<GetUserProfileUseCase>(),
-        ));
+        Get.find<ChangeLanguageUseCase>(),
+        Get.find<GetUserProfileUseCase>(),
+      ),
+      fenix: true,
+    );
   }
 }

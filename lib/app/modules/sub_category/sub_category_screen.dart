@@ -58,66 +58,76 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             ),
 
             /// Tabs and Background
-            SliverToBoxAdapter(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(Assets.imagesBacgroundCategory),
-                    fit: BoxFit.cover,
+            SliverPersistentHeader(
+              pinned: true, // <- keeps it visible while you scroll
+              delegate: _TabsHeaderDelegate(
+                height: 130, // tune as needed to fit your content
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(Assets.imagesBacgroundCategory),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    // Main Tabs
-                    controller.isLoading.value
-                        ? SubCategoryShimmer()
-                        : controller.errorMessage.isNotEmpty
-                        ? Center(child: Text(controller.errorMessage.value))
-                        : Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 10),
-                      child: CategoryMainTabs(
-                        items: controller.subcategories,
-                        selectedIndex:
-                        controller.selectedCategory.value,
-                        onSelected: (index) {
-                          controller.selectedCategory.value = index;
-                          controller.selectedSubcategory.value = -1;
-                          controller.fetchSubsSupCategories(
-                            controller.subcategories[index].id,
-                          );
-                          productController.fetchProductsByCategory(
-                            controller.subcategories[index].id,
-                          );
-                        },
-                      ),
-                    ),
+                  child: Obx(() {
+                    // we keep the same content you already have
+                    return Column(
+                      children: [
+                        const SizedBox(height: 20),
 
-                    const SizedBox(height: 10),
+                        // Main Tabs
+                        controller.isLoading.value
+                            ? const SubCategoryShimmer()
+                            : controller.errorMessage.isNotEmpty
+                                ? Center(
+                                    child: Text(controller.errorMessage.value))
+                                : Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: CategoryMainTabs(
+                                      items: controller.subcategories,
+                                      selectedIndex:
+                                          controller.selectedCategory.value,
+                                      onSelected: (index) {
+                                        controller.selectedCategory.value =
+                                            index;
+                                        controller.selectedSubcategory.value =
+                                            -1;
+                                        controller.fetchSubsSupCategories(
+                                          controller.subcategories[index].id,
+                                        );
+                                        productController
+                                            .fetchProductsByCategory(
+                                          controller.subcategories[index].id,
+                                        );
+                                      },
+                                    ),
+                                  ),
 
-                    // Sub Tabs
-                    controller.isLoadingSup.value
-                        ? SubCategoryShimmer()
-                        : Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: CategoryTabs(
-                        items: controller.supSupCategories,
-                        selectedIndex:
-                        controller.selectedSubcategory.value,
-                        onSelected: (index) {
-                          controller.selectedSubcategory.value = index;
-                          productController.fetchProductsByCategory(
-                            controller.supSupCategories[index].id,
-                          );
-                        },
-                      ),
-                    ),
+                        const SizedBox(height: 10),
 
-                    const SizedBox(height: 10),
-                    // CircularImageSlider1()
-                  ],
+                        // Sub Tabs
+                        controller.isLoadingSup.value
+                            ? const SubCategoryShimmer()
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0),
+                                child: CategoryTabs(
+                                  items: controller.supSupCategories,
+                                  selectedIndex:
+                                      controller.selectedSubcategory.value,
+                                  onSelected: (index) {
+                                    controller.selectedSubcategory.value =
+                                        index;
+                                    productController.fetchProductsByCategory(
+                                      controller.supSupCategories[index].id,
+                                    );
+                                  },
+                                ),
+                              ),
+                      ],
+                    );
+                  }),
                 ),
               ),
             ),
@@ -174,4 +184,27 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       }),
     );
   }
+}
+
+class _TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double height;
+
+  _TabsHeaderDelegate({required this.child, required this.height});
+
+  @override
+  double get minExtent => height;
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child; // keep it simple; it stays the same size
+  }
+
+  @override
+  bool shouldRebuild(_TabsHeaderDelegate oldDelegate) =>
+      oldDelegate.child != child || oldDelegate.height != height;
 }

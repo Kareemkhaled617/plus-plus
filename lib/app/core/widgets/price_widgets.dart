@@ -92,7 +92,7 @@ class PriceRow extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w800,
-                    fontSize: 18,
+                    fontSize: 14,
                   ),
                 ),
                 WidgetSpan(

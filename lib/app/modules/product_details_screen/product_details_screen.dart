@@ -71,7 +71,9 @@ class ProductDetailsScreen extends StatelessWidget {
                           width: 10,
                         ),
                         controller.product.value!.discountType == "discount"
-                            ? OffersPercentWidget(
+                            ? controller.product.value!.discountValue == 0
+                            ? Container()
+                            : OffersPercentWidget(
                                 percent: controller.product.value!.discountValue
                                     .toStringAsFixed(0),
                               )

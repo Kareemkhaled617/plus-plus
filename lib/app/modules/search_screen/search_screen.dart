@@ -59,83 +59,132 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Column(
                 children: [
                   SizedBox(height: 60,),
-                  Obx(() {
-                    return Row(
-                      children: [
-                        Expanded(
-                          child: SearchAndSuggestionSection(
-                            controller: searchController,
-                            // suggestions: controller.isLoading.value
-                            //     ? []
-                            //     : controller.searchResults
-                            //         .map((recent) => recent.name)
-                            //         .toList(),
-                            suggestions: [],
-                            searchQuery: searchQuery,
-                            onHintSelected: (selected) {
-                              setState(() {
-                                searchQuery = selected;
-                                searchController.text = selected;
-                                showResults = true;
-                                isSearching = false;
-                                controller.searchProducts(searchQuery);
-                              });
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                searchQuery = value;
-                                showResults = true;
-                                isSearching = value.isNotEmpty;
-                              });
-                              // showResults = true;
-                              // isSearching = false;
-                              //
-                              controller.searchProducts(value);
-                            },
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: AppColors.primary,
-                          ),
-                          onPressed: () {
-                            showResults = true;
-                            isSearching = false;
-
-                            controller.searchProducts(searchQuery);
-                            setState(() {});
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SearchAndSuggestionSection(
+                          controller: searchController,
+                          // suggestions: controller.isLoading.value
+                          //     ? []
+                          //     : controller.searchResults
+                          //         .map((recent) => recent.name)
+                          //         .toList(),
+                          suggestions: [],
+                          searchQuery: searchQuery,
+                          onHintSelected: (selected) {
+                            setState(() {
+                              searchQuery = selected;
+                              searchController.text = selected;
+                              showResults = true;
+                              isSearching = false;
+                              controller.searchProducts(searchQuery);
+                            });
                           },
-                        )
-                      ],
-                    );
-                  }),
-                  const SizedBox(height: 20),
-                  if (!isSearching && searchQuery.isEmpty)
-                    Obx(() {
-                      if (controller.isLoading.value) {
-                        return const Center(child: AppLoader());
-                      }
+                          onChanged: (value) {
+                            setState(() {
+                              searchQuery = value;
+                              showResults = true;
+                              isSearching = value.isNotEmpty;
+                            });
+                            // showResults = true;
+                            // isSearching = false;
+                            //
+                            controller.searchProducts(value);
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.search,
+                          color: AppColors.primary,
+                        ),
+                        onPressed: () {
+                          showResults = true;
+                          isSearching = false;
 
-                      if (recentController.recentSearches.isEmpty) {
-                        return Center(
-                            child: Text("No recent searches available".tr));
-                      }
-
-                      return RecentSearchSection(
-                        recentSearches: recentController.recentSearches,
-                        onTap: (search ) {
-                          setState(() {
-                            searchQuery = search;
-                            searchController =
-                                TextEditingController(text: search);
-                            showResults = true;
-                            controller.searchProducts(
-                                searchQuery); // 🔄 Trigger search
-                          });
+                          controller.searchProducts(searchQuery);
+                          setState(() {});
                         },
-                      );
-                    }),
+                      )
+                    ],
+                  ),
+                  // Obx(() {
+                  //   return Row(
+                  //     children: [
+                  //       Expanded(
+                  //         child: SearchAndSuggestionSection(
+                  //           controller: searchController,
+                  //           // suggestions: controller.isLoading.value
+                  //           //     ? []
+                  //           //     : controller.searchResults
+                  //           //         .map((recent) => recent.name)
+                  //           //         .toList(),
+                  //           suggestions: [],
+                  //           searchQuery: searchQuery,
+                  //           onHintSelected: (selected) {
+                  //             setState(() {
+                  //               searchQuery = selected;
+                  //               searchController.text = selected;
+                  //               showResults = true;
+                  //               isSearching = false;
+                  //               controller.searchProducts(searchQuery);
+                  //             });
+                  //           },
+                  //           onChanged: (value) {
+                  //             setState(() {
+                  //               searchQuery = value;
+                  //               showResults = true;
+                  //               isSearching = value.isNotEmpty;
+                  //             });
+                  //             // showResults = true;
+                  //             // isSearching = false;
+                  //             //
+                  //             controller.searchProducts(value);
+                  //           },
+                  //         ),
+                  //       ),
+                  //       IconButton(
+                  //         icon: Icon(
+                  //           Icons.search,
+                  //           color: AppColors.primary,
+                  //         ),
+                  //         onPressed: () {
+                  //           showResults = true;
+                  //           isSearching = false;
+                  //
+                  //           controller.searchProducts(searchQuery);
+                  //           setState(() {});
+                  //         },
+                  //       )
+                  //     ],
+                  //   );
+                  // }),
+                  const SizedBox(height: 20),
+                  // if (!isSearching && searchQuery.isEmpty)
+                  //   Obx(() {
+                  //     if (controller.isLoading.value) {
+                  //       return const Center(child: AppLoader());
+                  //     }
+                  //
+                  //     if (recentController.recentSearches.isEmpty) {
+                  //       return Center(
+                  //           child: Text("No recent searches available".tr));
+                  //     }
+                  //
+                  //     return RecentSearchSection(
+                  //       recentSearches: recentController.recentSearches,
+                  //       onTap: (search ) {
+                  //         setState(() {
+                  //           searchQuery = search;
+                  //           searchController =
+                  //               TextEditingController(text: search);
+                  //           showResults = true;
+                  //           controller.searchProducts(
+                  //               searchQuery); // 🔄 Trigger search
+                  //         });
+                  //       },
+                  //     );
+                  //   }),
                 ],
               ),
             ),
