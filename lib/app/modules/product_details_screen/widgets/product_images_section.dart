@@ -44,53 +44,53 @@ class _ProductImagesSectionState extends State<ProductImagesSection> {
                 ),
               ),
             ),
-            Column(
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Image.asset(Assets.iconsShare, width: 35),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    widget.controller.product.value!.bodyImages.length,
-                    (index) => GestureDetector(
-                      onTap: () {
-                        _pageController.animateToPage(
-                          index,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Container(
-                          padding: EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: selectedIndex == index
-                                  ? AppColors.blue
-                                  : AppColors.greyWithShade.withOpacity(0),
-                              width: selectedIndex == index ? 2 : 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: CachedImage(
-                            height: 50,
-                            width: 50,
-                            imageUrl: widget
-                                .controller.product.value!.bodyImages[index],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Column(
+            //   children: [
+            //     InkWell(
+            //       onTap: () {},
+            //       child: Image.asset(Assets.iconsShare, width: 35),
+            //     ),
+            //     SizedBox(
+            //       height: 30,
+            //     ),
+            //     Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: List.generate(
+            //         widget.controller.product.value!.bodyImages.length,
+            //         (index) => GestureDetector(
+            //           onTap: () {
+            //             _pageController.animateToPage(
+            //               index,
+            //               duration: Duration(milliseconds: 300),
+            //               curve: Curves.easeInOut,
+            //             );
+            //           },
+            //           child: Padding(
+            //             padding: const EdgeInsets.symmetric(vertical: 4),
+            //             child: Container(
+            //               padding: EdgeInsets.all(2),
+            //               decoration: BoxDecoration(
+            //                 border: Border.all(
+            //                   color: selectedIndex == index
+            //                       ? AppColors.blue
+            //                       : AppColors.greyWithShade.withOpacity(0),
+            //                   width: selectedIndex == index ? 2 : 1,
+            //                 ),
+            //                 borderRadius: BorderRadius.circular(8),
+            //               ),
+            //               child: CachedImage(
+            //                 height: 50,
+            //                 width: 50,
+            //                 imageUrl: widget
+            //                     .controller.product.value!.bodyImages[index],
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
 

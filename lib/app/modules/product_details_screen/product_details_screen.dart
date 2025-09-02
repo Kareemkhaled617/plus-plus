@@ -8,13 +8,10 @@ import 'package:plus/app/modules/product_details_screen/widgets/product_types_se
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../../core/utils/app_keys.dart';
-import '../../core/utils/color_helper.dart';
 import '../../core/utils/size_config.dart';
 import '../../core/widgets/loader.dart';
 import '../../core/widgets/offers_percent_widget.dart';
 import '../../core/widgets/product_item.dart';
-import '../../routes/app_routes.dart';
-import '../cart/controller/cart_controller.dart';
 import 'controller/product_controller.dart';
 import 'controller/product_point_controller.dart';
 
@@ -152,6 +149,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           ...List.generate(
                             controller.product.value!.perfectWith.length,
                             (index) => ProductCard(
+                              controller2: controller,
                               imageUrl: controller
                                   .product.value!.perfectWith[index].imageUrl,
                               title: controller
@@ -161,7 +159,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               price:
                                   "${controller.product.value!.perfectWith[index].price}",
                               onFavorite: () {},
-                              onAddToCart: () {},
+                              onAddToCart: null,
                               id: controller
                                   .product.value!.perfectWith[index].id,
                               productEntity:

@@ -290,4 +290,6 @@ const Map<String, String> enUS = {
   'OK':'OK',
   'Kindly complete all required fields before proceeding.':'Kindly complete all required fields before proceeding.',
   'Missing Information':'Missing Information',
+  'Thanks you will get notified when product\nis back':'Thanks you will get notified when product\nis back',
+  'Browse Product':'Browse Product',
 };

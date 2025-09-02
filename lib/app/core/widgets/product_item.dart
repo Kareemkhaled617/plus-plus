@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus/app/core/widgets/price_widgets.dart';
+import 'package:plus/app/modules/product_details_screen/controller/product_controller.dart';
 
 import '../../domain/entities/product_entity.dart';
 import '../../modules/cart/controller/cart_controller.dart';
@@ -24,6 +25,7 @@ class ProductCard extends StatelessWidget {
   final VoidCallback? onAddToCart;
   final VoidCallback onFavorite;
   final bool isOffer;
+  final ProductDetailsController? controller2;
 
   const ProductCard({
     required this.imageUrl,
@@ -36,6 +38,7 @@ class ProductCard extends StatelessWidget {
     this.isOffer = false,
     super.key,
     required this.productEntity,
+    this.controller2,
   });
 
   @override
@@ -45,9 +48,17 @@ class ProductCard extends StatelessWidget {
     final controller1 = Get.find<ProductPointController>();
     return InkWell(
       onTap: () {
-        Get.toNamed(AppRoutes.productDetails, arguments: {
-          'productId': id,
-        });
+        if (onAddToCart != null) {
+          Get.toNamed(
+            AppRoutes.productDetails,
+            arguments: {
+              'productId': id,
+            },
+            preventDuplicates: false,
+          );
+        } else {
+          controller2!.fetchProduct(id);
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
@@ -96,10 +107,12 @@ class ProductCard extends StatelessWidget {
                               child: InkWell(
                                 onTap: productEntity.stock == 0
                                     ? () {
-                                  showUnAvailableBottomSheet(
-                                      productEntity.id,
-                                      controller1);
-                                }
+                                        controller1
+                                            .requestPoint(productEntity.id);
+                                        // showUnAvailableBottomSheet(
+                                        //     productEntity.id,
+                                        //     controller1);
+                                      }
                                     : () {
                                         if (cartController.isProductInCart(
                                             productEntity.id)) {
@@ -121,9 +134,11 @@ class ProductCard extends StatelessWidget {
                                       ? Icon(
                                           Icons.notifications,
                                           color: Colors.white,
+                                          size: 18,
                                         )
                                       : Icon(
                                           Icons.add,
+                                          size: 18,
                                           color: Colors.white,
                                         ),
                                 ),

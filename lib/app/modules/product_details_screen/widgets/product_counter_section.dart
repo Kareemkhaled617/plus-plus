@@ -34,59 +34,79 @@ class _ProductCounterSectionState extends State<ProductCounterSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.lightLavender,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-      ),
-      elevation: 0,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-        children: [
-          InkWell(
-            child: Container(
-              padding: EdgeInsets.all(2),
-              child: Icon(
-                Icons.remove,
-                size: 15,
-              ),
-            ),
-            onTap: () {
-              widget.controller.removeFromCart(widget.productEntity.id);
-              widget.controller.addToCartApi();
-            },
+    return Obx(() {
+      return Card(
+          color: AppColors.lightLavender,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
           ),
-          SizedBox(
-            width: 10,
-          ),
-          Obx(() {
-            return Text(
-              widget.controller
-                  .getProductCount(widget.productEntity.id)
-                  .toString(),
-              style: AppFonts.heading2,
-            );
-          }),
-          SizedBox(
-            width: 10,
-          ),
-          InkWell(
-            onTap: () {
-              widget.controller.addToCart(widget.productEntity,
-                  isSelect: widget.isSelected!);
-              widget.controller.addToCartApi();
-            },
-            child: CircleAvatar(
-              backgroundColor: AppColors.primary,
-              radius: widget.plusIconSize,
-              child: const Icon(
-                Icons.add,
-                size: 15,
-                color: AppColors.white,
-              ),
-            ),
-          ),
-        ],
-        ));
+          elevation: 0,
+          child: widget.controller.getProductCount(widget.productEntity.id) == 0
+              ? InkWell(
+                  onTap: () {
+                    widget.controller.addToCart(widget.productEntity,
+                        isSelect: widget.isSelected!);
+                    widget.controller.addToCartApi();
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.primary,
+                    radius: widget.plusIconSize,
+                    child: const Icon(
+                      Icons.add,
+                      size: 15,
+                      color: AppColors.white,
+                    ),
+                  ),
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        child: Icon(
+                          Icons.remove,
+                          size: 15,
+                        ),
+                      ),
+                      onTap: () {
+                        widget.controller
+                            .removeFromCart(widget.productEntity.id);
+                        widget.controller.addToCartApi();
+                      },
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Obx(() {
+                      return Text(
+                        widget.controller
+                            .getProductCount(widget.productEntity.id)
+                            .toString(),
+                        style: AppFonts.heading2,
+                      );
+                    }),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        widget.controller.addToCart(widget.productEntity,
+                            isSelect: widget.isSelected!);
+                        widget.controller.addToCartApi();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.primary,
+                        radius: widget.plusIconSize,
+                        child: const Icon(
+                          Icons.add,
+                          size: 15,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ));
+    });
   }
 }

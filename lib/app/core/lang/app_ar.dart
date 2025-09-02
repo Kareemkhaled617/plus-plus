@@ -276,5 +276,8 @@ const Map<String, String> arEG = {
   'OK': 'حسناً',
   'Kindly complete all required fields before proceeding.': 'يرجى إكمال جميع الحقول المطلوبة قبل المتابعة.',
   'Missing Information': 'معلومات ناقصة',
+  'Thanks you will get notified when product\nis back':'شكرًا لك، سيتم إشعارك عند توفر المنتج مرة أخرى',
+  'Browse Product': 'تصفح المنتجات',
+
 
 };

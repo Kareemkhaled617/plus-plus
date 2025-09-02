@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus/app/core/widgets/custom_button.dart';
 
 
 import '../../../../generated/assets.dart';
@@ -45,7 +46,12 @@ class CartEmptyBody extends StatelessWidget {
                 fontWeight: FontWeight.w800,
                 color: AppColors.greyWithShade.withOpacity(.5),
               ),
-            )
+            ),
+            // SizedBox(height: 20,),
+            // CustomButton(text: 'Browse Product'.tr, onPressed: (){
+            //
+            // })
+            
           ],
         ),
       ),

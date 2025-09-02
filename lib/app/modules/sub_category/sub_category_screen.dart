@@ -61,7 +61,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             SliverPersistentHeader(
               pinned: true, // <- keeps it visible while you scroll
               delegate: _TabsHeaderDelegate(
-                height: 130, // tune as needed to fit your content
+                height: 110, // tune as needed to fit your content
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -73,7 +73,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     // we keep the same content you already have
                     return Column(
                       children: [
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
 
                         // Main Tabs
                         controller.isLoading.value
@@ -83,7 +83,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                     child: Text(controller.errorMessage.value))
                                 : Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
+                                        horizontal: 4),
                                     child: CategoryMainTabs(
                                       items: controller.subcategories,
                                       selectedIndex:
@@ -104,9 +104,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                     ),
                                   ),
 
-                        const SizedBox(height: 10),
-
-                        // Sub Tabs
                         controller.isLoadingSup.value
                             ? const SubCategoryShimmer()
                             : Padding(

@@ -66,9 +66,8 @@ class CircularImageSlider extends StatelessWidget {
                           child: InkWell(
                             onTap: () async {
                               await handleBannerTap(
-                                  urlType: banner.urlType,
-                                  url: banner.url.toString(),
-                                  bannerUrlType: banner.bannerUrlType);
+                                  url: banner.targetValue!,
+                                  bannerUrlType: banner.targetType);
                             },
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
@@ -159,9 +158,8 @@ class CircularImageSlider1 extends StatelessWidget {
               child: InkWell(
                 onTap: () async {
                   await handleBannerTap(
-                      urlType: banner.urlType,
-                      url: banner.url.toString(),
-                      bannerUrlType: banner.bannerUrlType);
+                      url: banner.targetValue!,
+                      bannerUrlType: banner.targetType);
                 },
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),

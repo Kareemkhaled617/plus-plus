@@ -26,6 +26,7 @@ class Assets {
   static const String iconsOffersPercent = 'assets/icons/offers_percent.png';
   static const String iconsPin = 'assets/icons/pin.png';
   static const String iconsPrescription = 'assets/icons/prescription.png';
+  static const String iconsProductNoti = 'assets/icons/product_noti.png';
   static const String iconsSearch = 'assets/icons/search.png';
   static const String iconsSelectedCart = 'assets/icons/selected_cart.png';
   static const String iconsSelectedHome = 'assets/icons/selected_home.png';
