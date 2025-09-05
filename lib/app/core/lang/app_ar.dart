@@ -278,6 +278,12 @@ const Map<String, String> arEG = {
   'Missing Information': 'معلومات ناقصة',
   'Thanks you will get notified when product\nis back':'شكرًا لك، سيتم إشعارك عند توفر المنتج مرة أخرى',
   'Browse Product': 'تصفح المنتجات',
+  "Clear": "مسح",
+
+  "Are you sure you want to remove all items from your cart?": "هل أنت متأكد أنك تريد إزالة جميع العناصر من سلة التسوق؟",
+
+  "Clear Cart ?": "مسح السلة؟"
+
 
 
 };

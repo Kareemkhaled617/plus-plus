@@ -6,6 +6,7 @@ import 'package:plus/app/modules/cart/widget/cart_list_item.dart';
 import 'package:plus/app/modules/cart/widget/checkout_button.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_fonts.dart';
 import '../../routes/app_routes.dart';
 import '../cart/controller/cart_controller.dart';
 
@@ -35,7 +36,9 @@ class CartScreen extends StatelessWidget {
                     ? MyCartHeader(
                   itemCount: cartController.cartItems.length,
                   onClear: () {
-                   cartController.clearCart();
+                    showConfirmClearCartDialog(
+                      onConfirm: () => cartController.clearCart(),
+                    );
                   },
                 )
                     : Container();
@@ -155,4 +158,89 @@ class CartScreen extends StatelessWidget {
           : const CartEmptyBody();
     });
   }
+
+
+  Future<void> showConfirmClearCartDialog({
+    required VoidCallback onConfirm,
+  }) async {
+    Get.dialog(
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.warning_amber_rounded,
+                  color: AppColors.red, size: 50),
+              const SizedBox(height: 16),
+              Text(
+                "Clear Cart ?".tr,
+                style: AppFonts.heading2.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "Are you sure you want to remove all items from your cart?".tr,
+                style: AppFonts.bodyText.copyWith(color: Colors.black54),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Get.back(),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: AppColors.grey),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      child: Text(
+                        "Cancel".tr,
+                        style: AppFonts.bodyText.copyWith(
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.back();
+                        onConfirm();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      child: Text(
+                        "Clear".tr,
+                        style: AppFonts.bodyText.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: true,
+    );
+  }
+
 }

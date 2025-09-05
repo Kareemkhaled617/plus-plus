@@ -1,271 +1,199 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/theme/app_colors.dart';
 import 'package:plus/generated/assets.dart';
 
+import '../../core/theme/app_colors.dart';
 import '../../core/utils/app_keys.dart';
 import '../cart/cart_screen.dart';
 import '../cart/controller/cart_controller.dart';
-import '../home_screen/controller/banner_controller.dart';
-import '../home_screen/controller/category_controller.dart';
-import '../home_screen/controller/section_controller.dart';
 import '../home_screen/home_screen.dart';
 import '../offers_screen/offers_screen.dart';
 import '../profile_screen/profile_screen.dart';
 import '../search_screen/search_screen.dart';
+import 'controller/landing_controller.dart';
 
-class LandingScreen extends StatefulWidget {
+
+class LandingScreen extends GetView<LandingController> {
   const LandingScreen({super.key});
 
-  @override
-  State<LandingScreen> createState() => _LandingScreenState();
-}
-
-class _LandingScreenState extends State<LandingScreen> {
-  int selectedIndex = 0;
-
-  final BannerController bannerController = Get.find<BannerController>();
-  final CategoryController categoryController = Get.find<CategoryController>();
-  final SectionController sectionController = Get.find<SectionController>();
-
-  final screens = [
+  List<Widget> get _screens => const [
     HomeScreen(),
     SearchScreen(),
     CartScreen(),
     OffersScreen(),
     ProfileScreen(),
   ];
-  @override
-  void initState() {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.primary,
-      statusBarIconBrightness: Brightness.light,
-    ));
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<CartController>();
-    return Scaffold(
-      body: selectedIndex == 0
-          ? RefreshIndicator(
-              onRefresh: () async {
-                await _refreshHomeContent();
-              },
-              child: screens[selectedIndex],
-            )
-          : screens[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: AppColors.white,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: selectedIndex,
-        onTap: (value) {
-          setState(() {
-            selectedIndex = value;
-            if (selectedIndex == 0) {
-              _refreshHomeContent();
-            }
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              Assets.iconsUnselectedHome,
-              height: 24,
-            ),
-            activeIcon: Column(
-              children: [
-                Image.asset(
-                  Assets.iconsUnselectedHome,
-                  height: 24,
-                  color: AppColors.primary,
-                ),
-                SizedBox(height: 2),
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
-                )
-              ],
-            ),
-            label: AppKeys.home.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              Assets.iconsUnselectedSearch,
-              height: 24,
-            ),
-            activeIcon: Column(
-              children: [
-                Image.asset(
-                  Assets.iconsUnselectedSearch,
-                  height: 24,
-                  color: AppColors.primary,
-                ),
-                SizedBox(height: 2),
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
-                )
-              ],
-            ),
-            label: AppKeys.search.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Obx(() {
-              int cartCount = controller.itemCounts.length;
+    final cartController = Get.find<CartController>();
 
-              return Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Image.asset(
-                    Assets.iconsUnselectedCart,
-                    height: 24,
-                  ),
-                  if (cartCount > 0)
-                    Positioned(
-                      top: -6,
-                      right: -6,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        constraints:
-                            BoxConstraints(minWidth: 20, minHeight: 20),
-                        child: Center(
-                          child: Text(
-                            '$cartCount',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              );
-            }),
-            activeIcon: Column(
-              children: [
-                Obx(() {
-                  int cartCount = controller.itemCounts.length;
+    return WillPopScope(
+      onWillPop: controller.onWillPop,
+      child: Obx(() {
+        final idx = controller.currentIndex.value;
 
-                  return Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Image.asset(
-                        Assets.iconsSelectedCart,
-                        height: 24,
-                        color: AppColors.primary,
-                      ),
-                      if (cartCount > 0)
-                        Positioned(
-                          top: -6,
-                          right: -6,
-                          child: Container(
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                            constraints:
-                                BoxConstraints(minWidth: 20, minHeight: 20),
-                            child: Center(
-                              child: Text(
-                                '$cartCount',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
+        return Scaffold(
+          body: IndexedStack(
+            index: idx,
+            children: [
+              // Keep Home wrapped with RefreshIndicator only
+              RefreshIndicator(
+                onRefresh: controller.refreshHomeContent,
+                child: _screens[0],
+              ),
+              _screens[1],
+              _screens[2],
+              _screens[3],
+              _screens[4],
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            backgroundColor: AppColors.white,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: idx,
+            onTap: controller.setIndex,
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(Assets.iconsUnselectedHome, height: 24),
+                activeIcon: _ActiveIcon(Assets.iconsUnselectedHome),
+                label: AppKeys.home.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(Assets.iconsUnselectedSearch, height: 24),
+                activeIcon: _ActiveIcon(Assets.iconsUnselectedSearch),
+                label: AppKeys.search.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Obx(() {
+                  final cartCount = cartController.itemCounts.length;
+                  return _CartIcon(
+                    asset: Assets.iconsUnselectedCart,
+                    count: cartCount,
                   );
                 }),
-                SizedBox(height: 2),
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
-                )
-              ],
-            ),
-            label: AppKeys.cart.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              Assets.iconsUnselectedOffers,
-              height: 30,
-              fit: BoxFit.contain,
-            ),
-            activeIcon: Column(
-              children: [
-                Image.asset(
-                  Assets.iconsSelectedOffers,
-                  height: 24,
-                  color: AppColors.primary,
+                activeIcon: Column(
+                  children: [
+                    Obx(() {
+                      final cartCount = cartController.itemCounts.length;
+                      return _CartIcon(
+                        asset: Assets.iconsSelectedCart,
+                        count: cartCount,
+                        tintPrimary: true,
+                      );
+                    }),
+                    const SizedBox(height: 2),
+                    _Dot(),
+                  ],
                 ),
-                SizedBox(height: 2),
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
-                )
-              ],
-            ),
-            label: AppKeys.offers.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              Assets.iconsUnselectedProfile,
-              height: 24,
-              fit: BoxFit.contain,
-            ),
-            activeIcon: Column(
-              children: [
-                Image.asset(
-                  Assets.iconsSelectedProfile,
+                label: AppKeys.cart.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  Assets.iconsUnselectedOffers,
+                  height: 30,
+                  fit: BoxFit.contain,
+                ),
+                activeIcon: _ActiveIcon(Assets.iconsSelectedOffers),
+                label: AppKeys.offers.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  Assets.iconsUnselectedProfile,
                   height: 24,
                   fit: BoxFit.contain,
-                  color: AppColors.primary,
                 ),
-                SizedBox(height: 2),
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
-                )
-              ],
-            ),
-            label: AppKeys.profile.tr,
+                activeIcon: _ActiveIcon(
+                  Assets.iconsSelectedProfile,
+                  fit: BoxFit.contain,
+                ),
+                label: AppKeys.profile.tr,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      }),
     );
   }
+}
 
-  Future<void> _refreshHomeContent() async {
-    print('Refreshing home content...');
-    await Future.wait<void>([
-      bannerController.fetchBanners(),
-      categoryController.fetchCategories(),
-      sectionController.fetchSections(),
-    ]);
+/// Small helper for active icon with primary tint and a dot under it
+class _ActiveIcon extends StatelessWidget {
+  const _ActiveIcon(this.asset, {this.fit});
+  final String asset;
+  final BoxFit? fit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image.asset(asset, height: 24, color: AppColors.primary, fit: fit),
+        const SizedBox(height: 2),
+        _Dot(),
+      ],
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 6,
+      height: 6,
+      decoration:
+      const BoxDecoration(shape: BoxShape.circle, color: AppColors.primary),
+    );
+  }
+}
+
+class _CartIcon extends StatelessWidget {
+  const _CartIcon({
+    required this.asset,
+    required this.count,
+    this.tintPrimary = false,
+  });
+
+  final String asset;
+  final int count;
+  final bool tintPrimary;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Image.asset(
+          asset,
+          height: 24,
+          color: tintPrimary ? AppColors.primary : null,
+        ),
+        if (count > 0)
+          Positioned(
+            top: -6,
+            right: -6,
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
+              child: Center(
+                child: Text(
+                  '$count',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 }

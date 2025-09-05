@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus/app/core/theme/app_colors.dart';
-import 'package:plus/app/modules/search_screen/widgets/recent_search_section.dart';
 import 'package:plus/app/modules/search_screen/widgets/search_and_suggestion_section.dart';
 import 'package:plus/app/modules/search_screen/widgets/searched_products_section.dart';
 
-import '../../core/theme/app_fonts.dart';
-import '../../core/utils/app_keys.dart';
-import '../../core/widgets/loader.dart';
 import '../../core/widgets/product_shimmer.dart';
 import 'controller/recent_search_controller.dart';
 import 'controller/search_controller.dart';
@@ -93,19 +88,22 @@ class _SearchScreenState extends State<SearchScreen> {
                           },
                         ),
                       ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.search,
-                          color: AppColors.primary,
-                        ),
-                        onPressed: () {
-                          showResults = true;
-                          isSearching = false;
-
-                          controller.searchProducts(searchQuery);
-                          setState(() {});
-                        },
-                      )
+                      // IconButton(
+                      //   icon: const Icon(
+                      //     Icons.close,
+                      //     color: AppColors.primary,
+                      //   ),
+                      //   onPressed: () {
+                      //     searchController;
+                      //     setState(() {
+                      //       searchQuery = '';
+                      //       showResults = false;   // ⬅️ يخفي نتائج البحث
+                      //       isSearching = false;   // ⬅️ يرجع حالة البحث عادي
+                      //     });
+                      //
+                      //     controller.searchResults.clear();
+                      //   },
+                      // )
                     ],
                   ),
                   // Obx(() {

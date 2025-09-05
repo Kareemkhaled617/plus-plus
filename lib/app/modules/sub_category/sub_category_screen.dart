@@ -46,7 +46,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       Obx(() {
         return CustomScrollView(
           slivers: [
-
             SliverAppBar(
               pinned: true,
               backgroundColor: const Color(0xFFb5e8e8),
@@ -57,7 +56,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
               ),
             ),
 
-            /// Tabs and Background
+
             SliverPersistentHeader(
               pinned: true, // <- keeps it visible while you scroll
               delegate: _TabsHeaderDelegate(
@@ -74,8 +73,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     return Column(
                       children: [
                         const SizedBox(height: 10),
-
-                        // Main Tabs
                         controller.isLoading.value
                             ? const SubCategoryShimmer()
                             : controller.errorMessage.isNotEmpty

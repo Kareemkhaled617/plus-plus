@@ -10,6 +10,7 @@ import '../modules/cart/controller/cart_controller.dart';
 import '../modules/favourite_screen/binding/favourite_binding.dart';
 import '../modules/home_screen/arrival_timer/presentation/binding/binding.dart';
 import '../modules/home_screen/bindiing/banner_binding.dart';
+import '../modules/landing_screen/landing_binding.dart';
 import '../modules/notification_screen/binding/notification_binding.dart';
 import '../modules/offers_screen/binding/discount_binding.dart';
 import '../modules/offers_screen/binding/offer_binding.dart';
@@ -24,6 +25,9 @@ class AppBinding extends Bindings {
   @override
   void dependencies() {
     print('AppBinding dependencies');
+
+    LandingBinding().dependencies();
+    Get.lazyPut<SecureStorageHelper>(() => SecureStorageHelper());
     CategoryBinding().dependencies();
     NotificationBinding().dependencies();
     FavoriteBinding().dependencies();
@@ -43,7 +47,7 @@ class AppBinding extends Bindings {
     PrivacyPolicyBinding().dependencies();
     CartBinding().dependencies();
     AddressBinding().dependencies();
-    Get.lazyPut<SecureStorageHelper>(() => SecureStorageHelper());
+
 
   }
 }

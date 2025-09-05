@@ -292,4 +292,8 @@ const Map<String, String> enUS = {
   'Missing Information':'Missing Information',
   'Thanks you will get notified when product\nis back':'Thanks you will get notified when product\nis back',
   'Browse Product':'Browse Product',
+  "Clear": "Clear",
+
+  "Are you sure you want to remove all items from your cart?": "Are you sure you want to remove all items from your cart?",
+  "Clear Cart ?": "Clear Cart ?",
 };

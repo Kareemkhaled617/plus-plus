@@ -37,6 +37,7 @@ class ProductsScreen extends StatelessWidget {
         titleSpacing: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               width: 10,
@@ -44,9 +45,10 @@ class ProductsScreen extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: AppFonts.heading1.copyWith(fontSize: 20), // a bit bigger
+                style: AppFonts.heading1.copyWith(
+                    fontSize: 20, color: Colors.white), // a bit bigger
               ),
             ),
             image != ''

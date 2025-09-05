@@ -85,13 +85,11 @@ class SpecialBrand extends StatelessWidget {
                             color: Colors.white,
                             elevation: 1,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                                side: BorderSide(color: Colors.grey)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 20),
+                                borderRadius: BorderRadius.circular(40)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
                               child: CachedImage(
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 imageUrl: section.brands[index].imageUrl,
                                 height: 40,
                               ),
